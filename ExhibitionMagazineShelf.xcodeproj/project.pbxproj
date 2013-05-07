@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C035550172A576800B9F781 /* Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03554F172A576800B9F781 /* Shadow.m */; };
+		3C0A57411737757A00B19737 /* SqliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0A57401737757A00B19737 /* SqliteService.m */; };
 		3C1691D21726623A009E4B07 /* ShelfSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691D11726623A009E4B07 /* ShelfSecondViewController.xib */; };
 		3C1691D417266367009E4B07 /* ShelfFourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */; };
 		3C1691D9172663D0009E4B07 /* ShelfFivethViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1691D7172663D0009E4B07 /* ShelfFivethViewController.m */; };
@@ -68,6 +69,8 @@
 /* Begin PBXFileReference section */
 		3C03554E172A576800B9F781 /* Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shadow.h; sourceTree = "<group>"; };
 		3C03554F172A576800B9F781 /* Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shadow.m; sourceTree = "<group>"; };
+		3C0A573F1737757A00B19737 /* SqliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteService.h; sourceTree = "<group>"; };
+		3C0A57401737757A00B19737 /* SqliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteService.m; sourceTree = "<group>"; };
 		3C1691D11726623A009E4B07 /* ShelfSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfSecondViewController.xib; sourceTree = "<group>"; };
 		3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfFourthViewController.xib; sourceTree = "<group>"; };
 		3C1691D6172663D0009E4B07 /* ShelfFivethViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfFivethViewController.h; sourceTree = "<group>"; };
@@ -173,6 +176,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C0A573B1737750A00B19737 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				3C0A573F1737757A00B19737 /* SqliteService.h */,
+				3C0A57401737757A00B19737 /* SqliteService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
 		3C1691CC17265E75009E4B07 /* FirstCoverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +381,7 @@
 		3C69F6DA16F9A5F200A8250C /* ExhibitionMagazineShelf */ = {
 			isa = PBXGroup;
 			children = (
+				3C0A573B1737750A00B19737 /* Service */,
 				3C58994816FA9BE500624CE9 /* Resource */,
 				3C58994716FA9BBF00624CE9 /* Controller */,
 				3C58994616FA9BBA00624CE9 /* View */,
@@ -557,6 +570,7 @@
 				3C035550172A576800B9F781 /* Shadow.m in Sources */,
 				3C58496A1732553D00C3B7C6 /* AHAlertView.m in Sources */,
 				3C58497E1732735100C3B7C6 /* Reachability.m in Sources */,
+				3C0A57411737757A00B19737 /* SqliteService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +655,7 @@
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "数字美术馆";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -653,6 +668,7 @@
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "数字美术馆";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

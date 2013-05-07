@@ -11,7 +11,6 @@
 #import "ExhibitionStore.h"
 #import "ThirdCoverView.h"
 @interface ShelfThirdViewController ()
--(void)selectDB;
 @end
 @implementation ShelfThirdViewController
 @synthesize exhibitionStore = _exhibitionStore;
@@ -30,12 +29,11 @@
     return self;
 }
 
-- (void)viewDidLoad    //Called after the view has been loaded. For view controllers created in code, this is after -loadView. For          view controllers unarchived from a nib, this is after the view is set.
+- (void)viewDidLoad    //Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
+
 {
     [super viewDidLoad];
-    
-    [self selectDB];
-    
+
     /***************************************load View****************************************/
     
     //load background
@@ -45,8 +43,6 @@
     
     _containerView.contentSize = CGSizeMake(0, 1024);
     _containerView.showsVerticalScrollIndicator = NO;
-    
-//    exhibitionDownloadedArray = [[NSMutableArray alloc]init];
     
 }
 
@@ -91,79 +87,11 @@
         return NO;
 }
 
-#pragma mark - Private
--(void)selectDB
-{
-    //according db create a table contacet(id dbTitle dbPathCoverImg dbPathFile)
-    NSString *docDir;//db path
-    NSArray *pathsDir;//document directory
-    
-    pathsDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docDir = [pathsDir objectAtIndex:0];
-    
-    //build the path to the database file
-    _databasePath = [[NSString alloc] initWithString:[docDir stringByAppendingPathComponent:@"exhibition.db"]];
-    const char *dbpath = [_databasePath UTF8String];
-    sqlite3_stmt *statement;
-    
-    if(sqlite3_open(dbpath, &exhibitionDB)==SQLITE_OK){
-        
-        //        NSString *countString;//data count
-        NSString *title;//data title
-        NSString *image;//data image path
-        NSString *file;//data file path
-        
-        //caculate count that save to exhibition
-        //        NSString *countSQL = [NSString stringWithFormat:@"SELECT COUNT(*) from exhibition"];
-        //        const char *query_stmt_count =[countSQL UTF8String];
-        //        if(sqlite3_prepare_v2(exhibitionDB, query_stmt_count, -1, &statement, NULL) == SQLITE_OK){
-        //            if(sqlite3_step(statement) == SQLITE_ROW){
-        //                 countString = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
-        //            }
-        //        }
-        
-        //select title\image\file from exhibition
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT title,image,file from exhibition"];
-        const char *query_stmt_select = [querySQL UTF8String];
-        if(sqlite3_prepare_v2(exhibitionDB, query_stmt_select, -1, &statement, NULL) == SQLITE_OK){
-            
-            int i = 0;
-            int j = 0;
-            
-            while (sqlite3_step(statement) == SQLITE_ROW) {
-                
-                ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
-                title = [[NSString alloc] initWithUTF8String:(const char*)sqlite3_column_text(statement, 0)];NSLog(@"%@",title);
-                cover.title.text = title;
-                
-                image = [[NSString alloc] initWithUTF8String:(const char*)sqlite3_column_text(statement, 1)];NSLog(@"%@",image);
-                cover.cover.image = [UIImage imageWithContentsOfFile:image];
-                
-                file = [[NSString alloc] initWithUTF8String:(const char*)sqlite3_column_text(statement, 2)];NSLog(@"%@",file);
-                
-                cover.delegate = self;
-                cover.exhibitionID = [NSString stringWithFormat:@"%d",i++];
-                
-                NSInteger row = j/2;
-                NSInteger col = j%2;
-                j++;
-                CGRect coverFrame = cover.frame;
-                coverFrame.origin = CGPointMake(col * CGRectGetWidth(coverFrame),CGRectGetHeight(coverFrame)*row);
-                cover.frame = coverFrame;
-                [_containerView addSubview:cover];
-            }
-            
-        }
-        sqlite3_finalize(statement);
-        sqlite3_close(exhibitionDB);
-        
-    }
-
-}
 
 #pragma mark - ShelfViewControllerProtocol implementation
 
 -(void)coverSelected:(ThirdCoverView *)cover {
+    NSLog(@"Selected !!!!!!");
     NSString *selectedExhibitionID = cover.exhibitionID;
     Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
     if(!selectedExhibition) {
@@ -172,6 +100,11 @@
     }
     [self openZip:selectedExhibition];
 
+}
+
+-(void)coverDeleted:(ThirdCoverView *)cover
+{
+    NSLog(@"Deleted !!!!!");
 }
 
 #pragma mark - Actions

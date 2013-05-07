@@ -8,12 +8,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExhibitionMagazineShelf/ShelfFirstViewController.m"
-         timestampString = "389250369.068518"
+         timestampString = "389611153.114033"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "181"
-         endingLineNumber = "181"
-         landmarkName = "-updateShelf"
+         startingLineNumber = "183"
+         endingLineNumber = "183"
+         landmarkName = "@implementation ShelfFirstViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ExhibitionMagazineShelf/ShelfThirdViewController.h"
+         timestampString = "389509096.601703"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
+         landmarkName = "@interface ShelfThirdViewController"
+         landmarkType = "2">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ExhibitionMagazineShelf/ShelfThirdViewController.m"
+         timestampString = "389509627.910777"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "167"
+         endingLineNumber = "167"
+         landmarkName = "-coverSelected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ExhibitionMagazineShelf/SqliteService.m"
+         timestampString = "389512930.463417"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "23"
+         endingLineNumber = "23"
+         landmarkName = "-dataFilePath"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

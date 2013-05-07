@@ -7,38 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <sqlite3.h>
 #import "ShelfFirstViewController.h"
+#import "SqliteService.h"
 #define EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION @"ExhibitionEndOfDownload"
 #define EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION @"ExhibitionFailedDownload"
 
 @interface Exhibition : NSObject<NSURLConnectionDataDelegate>{
     NSMutableData *downloadData;//receive downloadData
     NSInteger expectedLength;//expect total downloadData
-
-//------------------------------DataBase Property--------------------------------------//
-    sqlite3 *exhibitionDB;
-    
-    NSString *dbTitle;
-    NSString *dbPathCoverImg;
-    NSString *dbPathFile;
 }
-
-//-------------------------------DataBase Property-------------------------------------//
-@property (retain,nonatomic)NSString *databasePath;
 
 //-------------------------------Exhibition Property-----------------------------------//
 
-//exhibition id
+//exhibition id(file name)
 @property (nonatomic,copy)NSString *exhibitionID;
 
 //exhibition title
 @property (nonatomic,copy)NSString *title;
 
-//exhibition cover path
+//exhibition cover net path 
 @property (nonatomic,copy)NSString *coverURL;
 
-//exhibition download path
+//exhibition download net path
 @property (nonatomic,copy)NSString *downloadURL;
 
 //exhibition progress
@@ -47,11 +37,15 @@
 //exhibition status download id
 @property(nonatomic,readonly,getter = isDownloading) BOOL downloading;
 
-//exhibition downloaded path
+//public method : exhibition file local path
 -(NSURL *)contentURL;
 
-//exhibition cover image path
--(UIImage *)coverImage;
+@property (nonatomic,copy)NSString *image;
+//public method : exhibition cover local path
+-(NSString *)exhibitionImagePath;
+@property (nonatomic,copy)NSString *file;
+//public method : exhibition dir local path
+-(NSString *)exhibitionFilePath;
 
 //exhibition downloaded return boolean read or open
 -(BOOL)isExhibitionAvailibleForRead;

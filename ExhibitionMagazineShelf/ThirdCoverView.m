@@ -11,8 +11,12 @@
 @implementation ThirdCoverView
 @synthesize exhibitionID = _exhibitionID;
 @synthesize cover = _cover;
-@synthesize button = _button;
+@synthesize deleteButton = _deleteButton;
+@synthesize viewButton = _viewButton;
 @synthesize title = _title;
+
+@synthesize delegateSelected = _delegateSelected;
+@synthesize delegateDeleted = _delegateDeleted;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -36,20 +40,23 @@
         CALayer *layer = [_cover layer];
         [layer setMasksToBounds:YES];
         [layer setCornerRadius:10.0];
-        //add image border
-        //        layer.borderColor = [[UIColor blackColor]CGColor];
-        //        layer.borderWidth = 5.0f;
-        // progress
-        // button
-        _button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
-        [_button addTarget:self action:@selector(buttonCallback:) forControlEvents:UIControlEventTouchUpInside];
-        [_button setTitle:@"观看" forState:UIControlStateNormal];
-        _button.frame=CGRectMake(272, 166, 76, 26);
+        //delete button
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_deleteButton setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"]forState:UIControlStateNormal];
+        [_deleteButton addTarget:self action:@selector(deleteEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+        _deleteButton.frame = CGRectMake(358, 166, 76, 26);
+        // view button
+        _viewButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_viewButton setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
+        [_viewButton addTarget:self action:@selector(buttonCallback:) forControlEvents:UIControlEventTouchUpInside];
+        [_viewButton setTitle:@"观看" forState:UIControlStateNormal];
+        _viewButton.frame=CGRectMake(272, 166, 76, 26);
         
         [self addSubview:_title];
         [self addSubview:_cover];
-        [self addSubview:_button];
+        [self addSubview:_viewButton];
+        [self addSubview:_deleteButton];
 
 
     }
@@ -60,7 +67,13 @@
 
 -(void)buttonCallback:(id)sender {
     
-    [_delegate coverSelected:self];
+    [_delegateSelected coverSelected:self];
+}
+
+#pragma mark - delegate event,ShelfViewControllerProtocol,update view over delegate
+
+-(void)deleteEvent:(id)sender {
+    [_delegateDeleted coverDeleted:self];
 }
 
 

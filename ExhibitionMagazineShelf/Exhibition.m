@@ -24,7 +24,8 @@
 @synthesize downloadProgress = _downloadProgress;
 @synthesize downloading = _downloading;
 
-@synthesize databasePath = _databasePath;
+@synthesize image = _image;
+@synthesize file = _file;
 
 #pragma mark - Public methods
 -(NSURL *)contentURL {
@@ -40,17 +41,19 @@
     return theURL;
 }
 
--(UIImage *)coverImage
+-(NSString *)exhibitionImagePath
 {
-    // get imagePath
-    NSString *imagePath = [[[self contentURL] URLByAppendingPathComponent:@"cover.png"] path];
-    UIImage *theImage = [UIImage imageWithContentsOfFile:imagePath];
-    return theImage;
+    // get image cover path
+    return[[[self contentURL] URLByAppendingPathComponent:@"cover.png"] path];
+}
+
+-(NSString *)exhibitionFilePath{
+    //get exhibition dir path
+    return [[[self contentURL] URLByAppendingPathComponent:@"exhibition"]path];
 }
 
 -(BOOL)isExhibitionAvailibleForRead
 {
-    // get contentPath
     NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:contentPath];
     NSLog(@"Checking for path: %@ ==> %d",contentPath,fileExists);
@@ -103,51 +106,34 @@
     [downloadData writeToURL:finalURL atomically:YES];
     
     NSString *zipPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"]path];
-    NSString *documentPath = [[[self contentURL]URLByAppendingPathComponent:@"exhibition"]path];
     
-/************************************************Zip operate********************************************************/    
+/**************************************Zip operate*******************************************/    
     ZipArchive *zip = [[ZipArchive alloc] init];
     if([zip UnzipOpenFile:zipPath]){
         NSLog(@"open");
-        BOOL ret = [zip UnzipFileTo:documentPath overWrite:YES];
-        if(ret)NSLog(@"unzip success");
+        BOOL ret = [zip UnzipFileTo:[self exhibitionFilePath] overWrite:YES];
+        if(ret){
+            NSLog(@"unzip success");
+            
+            //init SqlService
+            SqliteService *sqlService = [[SqliteService alloc] init];
+            //packaging exhibition
+            _image = [self exhibitionImagePath];
+            _file = [self exhibitionFilePath];
+            [sqlService insertToDB:self];
+            //send end of download notification
+            [self sendEndOfDownloadNotification];
+        }
         else{
             //delete incomplement UnzipFile
             [self alertView];
         }
-
-
-        [zip UnzipCloseFile];
-    }
-    
-/************************************************DB operate********************************************************/
-    NSString *docDir;//db path
-    NSArray *pathsDir;//document directory
-    pathsDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docDir = [pathsDir objectAtIndex:0];
-    NSString *imagePath = [[[self contentURL] URLByAppendingPathComponent:@"cover.png"] path];
-    
-    sqlite3_stmt *statement;
-    _databasePath = [[NSString alloc] initWithString:[docDir stringByAppendingPathComponent:@"exhibition.db"]];
-    const char *dbpath = [_databasePath UTF8String];
-    if(sqlite3_open(dbpath, &exhibitionDB)==SQLITE_OK){
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO EXHIBITION(title,image,file) VALUES(\"%@\",\"%@\",\"%@\")",_title,imagePath,documentPath];
-        const char *insert_stmt = [insertSQL UTF8String];
-        sqlite3_prepare_v2(exhibitionDB, insert_stmt, -1, &statement, NULL);
-        if(sqlite3_step(statement)==SQLITE_DONE) {
-            NSLog(@"has been saved to db !!!!!!");
-            [self sendEndOfDownloadNotification];
-        }else {
-            NSLog(@"save to db fail !!!!!!!!");
-            [self alertView];
-        }
-        sqlite3_finalize(statement);
-        sqlite3_close(exhibitionDB);
         
+        [zip UnzipCloseFile];
     }
        
 }
-//Unzip \ save to db fail alertView
+//fail alertView
 -(void)alertView
 {
     UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"呀吼！下载出错了请在再试一次!" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];

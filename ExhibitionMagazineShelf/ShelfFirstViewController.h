@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "ExhibitionViewController.h"
-#import <sqlite3.h>
 @class FirstCoverView;
 @class ExhibitionStore;
 
@@ -19,9 +18,6 @@
 @end
 
 @interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate>{
-    
-//------------------------------DataBase Property------------------------------------//
-    sqlite3 *exhibitionDB;
 
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *containerView;
@@ -29,7 +25,5 @@
 @property (strong,nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong,nonatomic) MBProgressHUD *progressHUD;
 
-//------------------------------DataBase Property------------------------------------//
-@property (retain,nonatomic)NSString *databasePath;
-
+@property (nonatomic,retain)NSArray *listData;
 @end

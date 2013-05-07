@@ -22,8 +22,8 @@
     webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 50, 1024, 768 - 80)];
     
     if(webView != nil){
+        NSLog(@"_str = %@",_str);
         NSURL *htmlUrl = [NSURL fileURLWithPath:_str];
-        NSLog(@"%@",_str);
         [webView loadRequest:[NSURLRequest requestWithURL:htmlUrl]];
     }
     [self.view addSubview:webView];
@@ -34,11 +34,11 @@
     [self.view addSubview:navigationBar];
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backOnClick)];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action:@selector(shareOnClock)];
+//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"观看网页版" style:UIBarButtonItemStylePlain target:self action:@selector(openSafari)];
     
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
     navItem.leftBarButtonItem = leftButton;
-    navItem.rightBarButtonItem = rightButton;
+//    navItem.rightBarButtonItem = rightButton;
     navItem.title = navigationBarTitle;
     
     [navigationBar pushNavigationItem:navItem animated:YES];
@@ -58,12 +58,6 @@
         return YES;
     else
         return NO;
-}
-
-//share
--(void)shareOnClick
-{
-    return;
 }
 
 @end

@@ -15,7 +15,6 @@
 @interface ShelfFirstViewController ()
 -(void)showShelf;
 -(void)updateShelf;
--(void)createDB;
 //load exhibitionStore startup
 -(void)resourceRequest;
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover;
@@ -29,7 +28,7 @@
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize progressHUD = _progressHUD;
 
-@synthesize databasePath = _databasePath;
+@synthesize listData = _listData;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,8 +45,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self createDB];
     
     /***************************************load View****************************************/
     //load background
@@ -66,7 +63,7 @@
     //NSThread
     [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
     
-    /***************************************Reachability****************************************/
+    /************************************Reachability****************************************/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
@@ -118,40 +115,6 @@
     [self showShelf];
 }
 
-#pragma mark - View display private methods
-
--(void)createDB
-{
-    
-    //according db create a table contacet(id dbTitle dbPathCoverImg dbPathFile)
-    NSString *docDir;//db path
-    NSArray *pathsDir;//document directory
-    
-    pathsDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docDir = [pathsDir objectAtIndex:0];
-    
-    //build the path to the database file
-    _databasePath = [[NSString alloc] initWithString:[docDir stringByAppendingPathComponent:@"exhibition.db"]];
-    NSFileManager *filemgr = [NSFileManager defaultManager];
-    
-    if([filemgr fileExistsAtPath:_databasePath] == NO)
-    {
-        const char *dbpath = [_databasePath UTF8String];
-        if(sqlite3_open(dbpath,&exhibitionDB) == SQLITE_OK)
-        {
-            char *errMsg;
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS EXHIBITION(ID INTEGER PRIMARY KEY AUTOINCREMENT,TITLE TEXT,IMAGE TEXT,FILE TEXT)";
-            if(sqlite3_exec(exhibitionDB, sql_stmt, NULL, NULL, &errMsg)==SQLITE_OK){
-                NSLog(@"create table sucess");
-            }
-        }
-        else{
-            NSLog(@"create/open db fail");
-        }
-    }
-    
-}
-
 -(void)showShelf {
     if([_exhibitionStore isExhibitionReady]) {
         _containerView.contentSize = CGSizeMake(0, 1024);
@@ -172,10 +135,10 @@
     for(NSInteger i = 0;i < exhibitionCount;i++) {
         Exhibition *anExhibition = [_exhibitionStore exhibitionAtIndex:i];
         FirstCoverView *cover = [[FirstCoverView alloc] initWithFrame:CGRectZero];
-        cover.exhibitionID=anExhibition.exhibitionID;
+        cover.exhibitionID = anExhibition.exhibitionID;
         cover.delegate = self;
-        cover.title.text=anExhibition.title;
-        cover.cover.image=[anExhibition coverImage];
+        cover.title.text = anExhibition.title;
+        cover.cover.image = [UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]];
         if([anExhibition isExhibitionAvailibleForRead]) {
             [cover.button setTitle:@"观看" forState:UIControlStateNormal];
             [cover.button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];

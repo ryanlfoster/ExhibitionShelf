@@ -11,9 +11,10 @@
 #import "ShelfThirdViewController.h"
 @interface ThirdCoverView : UIView
 @property (nonatomic,copy) NSString *exhibitionID;
-@property (nonatomic,assign) id<ShelfThirdViewControllerProtocol> delegate;
+@property (nonatomic,assign) id<ShelfThirdViewControllerSelectedProtocol> delegateSelected;
+@property (nonatomic,assign) id<ShelfThirdViewControllerDeletedProtocol> delegateDeleted;
 @property (nonatomic,strong) UIImageView *cover;
-@property (nonatomic,strong) UIButton *button;
-@property (nonatomic,strong) UIProgressView *progress;
+@property (nonatomic,strong) UIButton *viewButton;
+@property (nonatomic,strong) UIButton *deleteButton;
 @property (nonatomic,strong) UILabel *title;
 @end

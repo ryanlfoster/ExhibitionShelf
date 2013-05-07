@@ -104,11 +104,11 @@
                 anExhibition.downloadURL=[exhibitionDictionary objectForKey:@"Download URL"];
                 [exhibitionArray addObject:anExhibition];
                 // dispatch cover loading
-                if(![anExhibition coverImage]) {
+                if(![UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]]) {
                     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:anExhibition.coverURL]];
                         if(imgData) {
-                            [imgData writeToURL:[anExhibition.contentURL URLByAppendingPathComponent:@"cover.png"] atomically:YES];
+                            [imgData writeToFile:[anExhibition exhibitionImagePath] atomically:YES];
                         }
                     });
                 }

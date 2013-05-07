@@ -8,16 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "ExhibitionViewController.h"
-#import <sqlite3.h>
+#import "SqliteService.h"
 @class ThirdCoverView;
 @class ExhibitionStore;
 
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
-@protocol ShelfThirdViewControllerProtocol
+@protocol ShelfThirdViewControllerSelectedProtocol
 -(void)coverSelected:(ThirdCoverView *)cover;
 @end
 
-@interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerProtocol>{
+/* delegate protocol to pass actions from the CoverView to the Shelf controller */
+@protocol ShelfThirdViewControllerDeletedProtocol
+-(void)coverDeleted:(ThirdCoverView *)cover;
+@end
+
+@interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol>{
 //------------------------------DataBase Property------------------------------------//
     sqlite3 *exhibitionDB;
 //------------------------------store exhibition downloaded--------------------------//
