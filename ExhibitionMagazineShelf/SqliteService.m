@@ -32,7 +32,6 @@
     BOOL find = [fileManager fileExistsAtPath:path];
     //if return true, open sqlite
     if(find){
-        NSLog(@"Database file have already existed.");
         if(sqlite3_open([path UTF8String],&_database) !=SQLITE_OK){
             //if fail to open db , so shut down db
             sqlite3_close(_database);
@@ -62,7 +61,7 @@
 -(void)createTable
 {
     sqlite3_stmt *statement;
-    const char *sql_stmt = "CREATE TABLE IF NOT EXISTS EXHIBITION(ID INTEGER PRIMARY KEY AUTOINCREMENT,TITLE TEXT,IMAGE TEXT,FILE TEXT)";
+    const char *sql_stmt = "CREATE TABLE IF NOT EXISTS EXHIBITION(ID INTEGER PRIMARY KEY AUTOINCREMENT,EXHIBITIONID TEXT,TITLE TEXT,IMAGE TEXT,FILE TEXT)";
     NSInteger sqlReturn = sqlite3_prepare_v2(_database,sql_stmt,-1,&statement,nil);
     
     //if sql sentense analysis error return
@@ -87,7 +86,7 @@
     if([self openDB]){
         
         sqlite3_stmt *statement;
-        const char *insert_stmt = "INSERT INTO EXHIBITION(title,image,file) values(?,?,?)";
+        const char *insert_stmt = "INSERT INTO EXHIBITION(exhibitionid,title,image,file) values(?,?,?,?)";
         int success = sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         
         if (success != SQLITE_OK) {
@@ -96,9 +95,10 @@
         }
         
         //execute insert operate
-        sqlite3_bind_text(statement, 1, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 2, [[exhibition exhibitionImagePath] UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 3, [[exhibition exhibitionFilePath] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 1, [exhibition.exhibitionID UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 2, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 3, [[exhibition exhibitionImagePath] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 4, [[exhibition exhibitionFilePath] UTF8String], -1, SQLITE_TRANSIENT);
         
         //execute insert sentense
         success = sqlite3_step(statement);
@@ -122,16 +122,17 @@
 {
     if([self openDB]){
         sqlite3_stmt *statement;
-        const char *update_stmt = "UPDATE EXHIBITION set title = ?,image = ?,path = ?";
+        const char *update_stmt = "UPDATE EXHIBITION set exhibitionid = ?,title = ?,image = ?,path = ?";
         int success = sqlite3_prepare_v2(_database, update_stmt, -1, &statement, NULL);
         if(success != SQLITE_OK){
             NSLog(@"Error: failed to update !!!!");
             sqlite3_close(_database);
         }
         
-        sqlite3_bind_text(statement, 1, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 2, [[exhibition exhibitionImagePath] UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 3, [[exhibition exhibitionFilePath] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 1, [exhibition.exhibitionID UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 2, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 3, [[exhibition exhibitionImagePath] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 4, [[exhibition exhibitionFilePath] UTF8String], -1, SQLITE_TRANSIENT);
         
         //execute sql sentense , update db
         success = sqlite3_step(statement);
@@ -152,25 +153,22 @@
     return NO;
 }
 //delete data
--(BOOL)deleteToDB:(Exhibition *)exhibition
+-(BOOL)deleteToDB:(NSString *)exhibitionID
 {
     if([self openDB]){
-        
+        NSLog(@"I'm here !!!!");
         sqlite3_stmt *statement;
-        const char *delete_stmt = "DELETE from EXHIBITION where title = ?";
+        const char *delete_stmt = "DELETE from EXHIBITION where EXHIBITIONID = ?";
         
         int success = sqlite3_prepare_v2(_database, delete_stmt, -1, &statement, NULL);
         if(success != SQLITE_OK){
-            NSLog(@"Error: failed to delete:testTable");
+            NSLog(@"Error: failed to delete");
 			sqlite3_close(_database);
 			return NO;
         }
         
-        sqlite3_bind_text(statement, 1, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 2, [[exhibition exhibitionImagePath] UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 3, [[exhibition exhibitionFilePath] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 1, [exhibitionID UTF8String], -1, SQLITE_TRANSIENT);
             
-
         //execute sql sentense,update db
         success = sqlite3_step(statement);
         //release db
@@ -198,7 +196,7 @@
     //first judge db open
     if([self openDB]){
         sqlite3_stmt *statement;
-        const char *get_statement = "SELECT TITLE,IMAGE,FILE FROM EXHIBITION";
+        const char *get_statement = "SELECT EXHIBITIONID,TITLE,IMAGE,FILE FROM EXHIBITION";
         
         if(sqlite3_prepare_v2(_database, get_statement, -1, &statement, NULL) != SQLITE_OK){
             NSLog(@"Error: failed to get date");
@@ -206,9 +204,10 @@
             //enumaration all 
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 Exhibition *exhibition  = [[Exhibition alloc]init];
-                exhibition.title = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
-                exhibition.image = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
-                exhibition.file = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                exhibition.exhibitionID = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
+                exhibition.title = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                exhibition.image = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                exhibition.file = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];         
                 [array addObject:exhibition];
                 
             }

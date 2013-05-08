@@ -86,7 +86,6 @@
 #pragma mark - Startup(private)
 -(void)downloadStoreExhibition
 {
-    self.status = ExhibitionStatusDownloading;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSArray *_list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/exhibition.plist"]];
         if(!_list){

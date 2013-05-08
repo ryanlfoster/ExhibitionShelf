@@ -17,7 +17,7 @@
 -(void)createTable;//create db
 -(void)insertToDB:(Exhibition *)exhibition;//insert data to db
 -(BOOL)updateToDB:(Exhibition *)exhibition;//update db
--(BOOL)deleteToDB:(Exhibition *)exhibition;//delete acorrding to id
+-(BOOL)deleteToDB:(NSString *)exhibitionID;//delete acorrding to id
 
 -(NSMutableArray *)getAllDateFromTable;//get all date 
 @end

@@ -102,6 +102,7 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    
     NSURL *finalURL = [[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"];
     [downloadData writeToURL:finalURL atomically:YES];
     

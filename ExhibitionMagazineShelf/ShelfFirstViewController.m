@@ -10,13 +10,9 @@
 #import <QuickLook/QuickLook.h>
 #import "Exhibition.h"
 #import "ExhibitionStore.h"
-#import "FirstCoverView.h"
 #import "Reachability.h"
 @interface ShelfFirstViewController ()
 -(void)showShelf;
--(void)updateShelf;
-//load exhibitionStore startup
--(void)resourceRequest;
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover;
 //reachabilityChanged
 -(void)reachabilityChanged:(NSNotification *)note;
@@ -46,6 +42,9 @@
 {
     [super viewDidLoad];
     
+    //NSThread
+    [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
+    
     /***************************************load View****************************************/
     //load background
     UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
@@ -59,9 +58,6 @@
     _progressHUD.delegate = self;
     self.progressHUD.labelText = @"努力加载中";
     [_progressHUD show:YES];
-    
-    //NSThread
-    [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
     
     /************************************Reachability****************************************/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
@@ -103,16 +99,9 @@
     [_exhibitionStore startup];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(exhibitionDidChangeStatusNotification:)
+                                             selector:@selector(showShelf)
                                                  name:EXHIBITION_CHANGED_STATUS_NOTIFICATION
                                                object:nil];
-    
-    NSLog(@"Exhibition status: %d",_exhibitionStore.status);
-}
-
--(void)exhibitionDidChangeStatusNotification:(NSNotification *)not {
-    NSLog(@"Exhibition changed status to %d",_exhibitionStore.status);
-    [self showShelf];
 }
 
 -(void)showShelf {
@@ -202,16 +191,15 @@
 }
 
 #pragma mark - Actions
--(void)openZip:(Exhibition *)exhibition{
+-(void)openZip:(Exhibition *)selectedExhibition{
     
     ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
-    NSString *documentPath = [[[exhibition contentURL]URLByAppendingPathComponent:@"exhibition"]path];
-    NSLog(@"documentPath:%@",documentPath);
-    
+    NSString *documentPath = [[[selectedExhibition contentURL]URLByAppendingPathComponent:@"exhibition"]path];
+    NSLog(@"documentPath = %@",documentPath);
     NSBundle *myBundle = [NSBundle bundleWithPath:documentPath];
-    NSLog(@"myBundle:%@",myBundle);
+    NSLog(@"myBundle = %@",myBundle);
     viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
-    viewController.navigationBarTitle = exhibition.title;
+    viewController.navigationBarTitle = selectedExhibition.title;
     //turn view
     if(viewController.str != nil){
         [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];

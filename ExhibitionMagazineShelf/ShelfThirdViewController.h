@@ -25,15 +25,13 @@
 @interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol>{
 //------------------------------DataBase Property------------------------------------//
     sqlite3 *exhibitionDB;
-//------------------------------store exhibition downloaded--------------------------//
-//    NSMutableArray *exhibitionDownloadedArray;
 }
 //------------------------------View-------------------------------------------------//
-@property(nonatomic,strong)ExhibitionStore *exhibitionStore;
+@property (nonatomic, strong)ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) IBOutlet UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
-//------------------------------DataBase Property------------------------------------//
-@property (retain,nonatomic)NSString *databasePath;
+@property (nonatomic, retain) SqliteService *sqliteService;
+@property (nonatomic, retain) NSArray *listData;
 
 @end

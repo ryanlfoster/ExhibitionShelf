@@ -10,14 +10,15 @@
 #import "Exhibition.h"
 #import "ExhibitionStore.h"
 #import "ThirdCoverView.h"
+
 @interface ShelfThirdViewController ()
 @end
 @implementation ShelfThirdViewController
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize containerView = _containerView;
 @synthesize navigationBar = _navigationBar;
-@synthesize databasePath = _databasePath;
-
+@synthesize listData = _listData;
+@synthesize sqliteService = _sqliteService;
 #pragma mark - View lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,35 +26,40 @@
     if (self) {
         self.tabBarItem.title = @"已下载";
         self.tabBarItem.image = [UIImage imageNamed:@"nav_download.png"];
+        _sqliteService = [[SqliteService alloc] init];
     }
     return self;
 }
 
+
 - (void)viewDidLoad    //Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
 
 {
+    
     [super viewDidLoad];
 
-    /***************************************load View****************************************/
+/***************************************load View****************************************/
     
     //load background
     UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
-    
-    _containerView.contentSize = CGSizeMake(0, 1024);
-    _containerView.showsVerticalScrollIndicator = NO;
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated    //Called when the view is about to made visible. Default does nothing
 {
+    
     //modify _navigatioBar
     if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
         [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
     }
     
+    _containerView.contentSize = CGSizeMake(0, 1024);
+    _containerView.showsVerticalScrollIndicator = NO;
+
+    [self reloadData];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated     //Called when the view has been fully transitioned onto the screen. Default does nothing
@@ -87,41 +93,53 @@
         return NO;
 }
 
+-(void)reloadData
+{
+    _listData = [_sqliteService getAllDateFromTable];
+    for(int i = 0 ; i < [_listData count] ; i++){
+        ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
+        Exhibition *exhibition = [_listData objectAtIndex:i];
+        cover.exhibitionID = exhibition.exhibitionID;
+        cover.title.text = exhibition.title;
+        cover.file = exhibition.file;
+        cover.cover.image = [UIImage imageWithContentsOfFile:exhibition.image];
+        cover.delegateSelected = self;
+        cover.delegateDeleted = self;
+        NSInteger row = i/2;
+        NSInteger col = i%2;
+        CGRect coverFrame = cover.frame;
+        coverFrame.origin = CGPointMake(col * CGRectGetWidth(coverFrame),CGRectGetHeight(coverFrame)*row);
+        cover.frame = coverFrame;
+        [_containerView addSubview:cover];
+ 
+    }
+
+}
 
 #pragma mark - ShelfViewControllerProtocol implementation
 
 -(void)coverSelected:(ThirdCoverView *)cover {
-    NSLog(@"Selected !!!!!!");
-    NSString *selectedExhibitionID = cover.exhibitionID;
-    Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
-    if(!selectedExhibition) {
-        NSLog(@"NO selected Exhibition id !!!!!!!");
-        return;
-    }
-    [self openZip:selectedExhibition];
-
-}
-
--(void)coverDeleted:(ThirdCoverView *)cover
-{
-    NSLog(@"Deleted !!!!!");
-}
-
-#pragma mark - Actions
--(void)openZip:(Exhibition *)exhibition{
-    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
-    NSString *documentPath = [[[exhibition contentURL]URLByAppendingPathComponent:@"exhibition"]path];
-    NSLog(@"documentPath:%@",documentPath);
     
-    NSBundle *myBundle = [NSBundle bundleWithPath:documentPath];
-    NSLog(@"myBundle:%@",myBundle);
+    NSLog(@"Selected !!!!!");
+    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
+    NSBundle *myBundle = [NSBundle bundleWithPath:cover.file];
+    NSLog(@"myBundle = %@",myBundle);
     viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
-    viewController.navigationBarTitle = exhibition.title;
+    viewController.navigationBarTitle = cover.title.text;
     //turn view
     if(viewController.str != nil){
         [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         [self presentModalViewController:viewController animated:YES];
     }
+
+    
 }
+
+-(void)coverDeleted:(ThirdCoverView *)cover
+{
+    
+}
+
+
 
 @end

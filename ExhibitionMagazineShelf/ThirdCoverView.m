@@ -14,6 +14,7 @@
 @synthesize deleteButton = _deleteButton;
 @synthesize viewButton = _viewButton;
 @synthesize title = _title;
+@synthesize file = _file;
 
 @synthesize delegateSelected = _delegateSelected;
 @synthesize delegateDeleted = _delegateDeleted;

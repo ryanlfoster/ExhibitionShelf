@@ -14,7 +14,6 @@
 
 @interface ShelfSecondViewController ()
 -(void)showShelf;
--(void)updateShelf;
 -(void)readIssue:(Issue *)issue;
 -(void)downloadIssue:(Issue *)issue updateCover:(SecondCoverView *)cover;
 -(SecondCoverView *)coverWithID:(NSString *)issueID;
