@@ -21,6 +21,8 @@
 @synthesize title = _title;
 @synthesize coverURL = _coverURL;
 @synthesize downloadURL = _downloadURL;
+@synthesize downloadData = _downloadData;
+@synthesize expectedLength = _expectedLength;
 @synthesize downloadProgress = _downloadProgress;
 @synthesize downloading = _downloading;
 
@@ -76,22 +78,22 @@
 #pragma mark - NSURLDataConnectionDataDelegate
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    if(!downloadData){
-        downloadData = [[NSMutableData alloc] init];
+    if(!_downloadData){
+        _downloadData = [[NSMutableData alloc] init];
     }
-    [downloadData setLength:0];
+    [_downloadData setLength:0];
     
     //response expected content length
-    expectedLength = [response expectedContentLength];
-    NSLog(@"%d",expectedLength);
+    _expectedLength = [response expectedContentLength];
+    NSLog(@"%d",_expectedLength);
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [downloadData appendData:data];
+    [_downloadData appendData:data];
     
-    NSNumber *expectedLengthNumber = [[NSNumber alloc]initWithInteger:expectedLength];
-    NSNumber *downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[downloadData length]];
+    NSNumber *expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
+    NSNumber *downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
     
     float expectedLengthFloat = [expectedLengthNumber floatValue];
     float downloadDataLengthFloat = [downloadDataLengthNumber floatValue];
@@ -104,7 +106,7 @@
 {
     
     NSURL *finalURL = [[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"];
-    [downloadData writeToURL:finalURL atomically:YES];
+    [_downloadData writeToURL:finalURL atomically:YES];
     
     NSString *zipPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"]path];
     

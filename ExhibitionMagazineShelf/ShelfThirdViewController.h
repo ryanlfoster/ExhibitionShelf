@@ -19,7 +19,7 @@
 
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
 @protocol ShelfThirdViewControllerDeletedProtocol
--(void)coverDeleted:(ThirdCoverView *)cover;
+-(void)coverDeleted;
 @end
 
 @interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol>{
@@ -31,7 +31,6 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
-@property (nonatomic, retain) SqliteService *sqliteService;
 @property (nonatomic, retain) NSArray *listData;
 
 @end

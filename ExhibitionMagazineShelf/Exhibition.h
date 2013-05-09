@@ -12,12 +12,7 @@
 #define EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION @"ExhibitionEndOfDownload"
 #define EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION @"ExhibitionFailedDownload"
 
-@interface Exhibition : NSObject<NSURLConnectionDataDelegate>{
-    NSMutableData *downloadData;//receive downloadData
-    NSInteger expectedLength;//expect total downloadData
-}
-
-//-------------------------------Exhibition Property-----------------------------------//
+@interface Exhibition : NSObject
 
 //exhibition id(file name)
 @property (nonatomic,copy)NSString *exhibitionID;
@@ -31,11 +26,16 @@
 //exhibition download net path
 @property (nonatomic,copy)NSString *downloadURL;
 
+//exhibition receive downloadData
+@property (nonatomic, copy)NSMutableData *downloadData;
+
+@property (nonatomic,assign)NSInteger expectedLength;
+
 //exhibition progress
 @property (nonatomic,readonly) float downloadProgress;
 
 //exhibition status download id
-@property(nonatomic,readonly,getter = isDownloading) BOOL downloading;
+@property (nonatomic,readonly,getter = isDownloading) BOOL downloading;
 
 //public method : exhibition file local path
 -(NSURL *)contentURL;

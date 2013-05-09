@@ -156,7 +156,6 @@
 -(BOOL)deleteToDB:(NSString *)exhibitionID
 {
     if([self openDB]){
-        NSLog(@"I'm here !!!!");
         sqlite3_stmt *statement;
         const char *delete_stmt = "DELETE from EXHIBITION where EXHIBITIONID = ?";
         

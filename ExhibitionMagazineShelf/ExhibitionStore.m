@@ -83,6 +83,26 @@
     return nil;
 }
 
+-(void)scheduleDownloadOfExhibition:(Exhibition *)exhibition{
+    
+    NSString *downloadURL = [exhibition downloadURL];
+    if(!downloadURL)return;
+    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
+    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:exhibition];
+    [conn start];
+}
+
+-(void)clearQueue:(Exhibition *)exhibition
+{
+    NSString *downloadURL = [exhibition downloadURL];
+    if(!downloadURL)return;
+    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
+    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:exhibition];
+    [conn cancel];
+    exhibition.downloadData = nil;
+    
+}
+
 #pragma mark - Startup(private)
 -(void)downloadStoreExhibition
 {
@@ -134,26 +154,6 @@
     }
 }
 
--(void)scheduleDownloadOfExhibition:(Exhibition *)exhibitionToDownload {
-    
-    NSString *downloadURL = [exhibitionToDownload downloadURL];
-    if(!downloadURL)return;
-    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
-    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:exhibitionToDownload];
-    
-    _op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startDownload:) object:conn];
-    [_downloadQueue addOperation:_op];
-    if(_op.isCancelled){
-        NSLog(@"_op is cacelled !!!");
-        [conn cancel];
-    }
-}
-
--(void)startDownload:(id)obj {
-    NSLog(@"start download !!!");
-    NSURLConnection *conn = (NSURLConnection *)obj;
-        [conn start];
-}
 
 #pragma mark - Private
 -(NSURL *)fileURLOfCachedExhibitionFile

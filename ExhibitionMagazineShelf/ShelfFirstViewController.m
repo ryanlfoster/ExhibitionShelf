@@ -155,7 +155,7 @@
     Reachability *reach = [note object];
     if(![reach isReachable])
     {
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"WIFI已断开，请重新连接" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
         [alerView show];
     }
 }
@@ -181,12 +181,25 @@
 
 -(void)coverSelected:(FirstCoverView *)cover {
     
-    NSString *selectedExhibitionID = cover.exhibitionID;
-    Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
-    if(!selectedExhibition) return;
-    if([selectedExhibition isExhibitionAvailibleForRead])[self openZip:selectedExhibition];
-    else if(cover.button.titleLabel.text == @"取消")[self cancel];
-    else [self downloadExhibition:selectedExhibition updateCover:cover];
+    Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
+
+    if ([reach startNotifier]) {
+        NSString *selectedExhibitionID = cover.exhibitionID;
+        Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
+        if([selectedExhibition isExhibitionAvailibleForRead]){
+            [self openZip:selectedExhibition];
+        }
+        else if([cover.button.titleLabel.text isEqual: @"取消"]){
+            [self cancelDownloadExhibition:selectedExhibition updateCover:cover];
+            cover.progress.alpha=0.0;
+            [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
+            [cover.button setTitle:@"下载" forState:UIControlStateNormal];
+            cover.button.alpha=1.0;
+        }
+        else [self downloadExhibition:selectedExhibition updateCover:cover];
+    }else{
+        return;
+    }
 
 }
 
@@ -209,7 +222,8 @@
 
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover {
     
-    cover.progress.alpha=1.0;      
+    cover.progress.alpha=1.0;
+    cover.progress.progress = 0;
     [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
     [cover.button setTitle:@"取消" forState:UIControlStateNormal];
     cover.button.alpha=1.0;
@@ -223,9 +237,9 @@
     [_exhibitionStore scheduleDownloadOfExhibition:exhibition];
 }
 
--(void)cancel
+-(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
 {
-    return;
+    [_exhibitionStore clearQueue:exhibition];
 }
 
 #pragma mark - NSNotification

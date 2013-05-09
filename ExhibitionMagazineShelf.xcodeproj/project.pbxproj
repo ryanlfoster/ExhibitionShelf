@@ -46,6 +46,7 @@
 		3CA05E3A171504C200B30FD1 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E32171504C200B30FD1 /* unzip.c */; };
 		3CA05E3B171504C200B30FD1 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E34171504C200B30FD1 /* zip.c */; };
 		3CA05E3C171504C200B30FD1 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E37171504C200B30FD1 /* ZipArchive.mm */; };
+		3CA1FB8D173B8ACB00365B3E /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1FB8C173B8ACB00365B3E /* SplashViewController.m */; };
 		3CB1A13816FC02C000AAAF25 /* SecondCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1A13716FC02C000AAAF25 /* SecondCoverView.m */; };
 		3CB1A13B16FC032200AAAF25 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1A13A16FC032200AAAF25 /* QuickLook.framework */; };
 		3CB9662D17043497002C1840 /* ExhibitionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9662C17043497002C1840 /* ExhibitionStore.m */; };
@@ -129,6 +130,8 @@
 		3CA05E35171504C200B30FD1 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		3CA05E36171504C200B30FD1 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		3CA05E37171504C200B30FD1 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		3CA1FB8B173B8ACB00365B3E /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		3CA1FB8C173B8ACB00365B3E /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		3CB1A13616FC02C000AAAF25 /* SecondCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondCoverView.h; sourceTree = "<group>"; };
 		3CB1A13716FC02C000AAAF25 /* SecondCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondCoverView.m; sourceTree = "<group>"; };
 		3CB1A13A16FC032200AAAF25 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -317,6 +320,8 @@
 				3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */,
 				3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */,
 				3C1691E3172669CA009E4B07 /* ShelfFivethViewController.xib */,
+				3CA1FB8B173B8ACB00365B3E /* SplashViewController.h */,
+				3CA1FB8C173B8ACB00365B3E /* SplashViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -488,7 +493,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = Shelf;
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = TodaySybor;
 			};
 			buildConfigurationList = 3C69F6CA16F9A5F200A8250C /* Build configuration list for PBXProject "ExhibitionMagazineShelf" */;
@@ -571,6 +576,7 @@
 				3C58496A1732553D00C3B7C6 /* AHAlertView.m in Sources */,
 				3C58497E1732735100C3B7C6 /* Reachability.m in Sources */,
 				3C0A57411737757A00B19737 /* SqliteService.m in Sources */,
+				3CA1FB8D173B8ACB00365B3E /* SplashViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +609,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -631,6 +640,9 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;

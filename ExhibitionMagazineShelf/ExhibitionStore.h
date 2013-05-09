@@ -18,7 +18,7 @@ typedef enum{
     ExhibitionStatusError
 }ExhibitionStatusType;
 
-@interface ExhibitionStore : NSObject{
+@interface ExhibitionStore : NSObject<NSURLConnectionDataDelegate>{
     
     //store exhibition cover array
     NSMutableArray *exhibitionArray;
@@ -46,7 +46,7 @@ typedef enum{
 -(void)loadInstalledExhibition;
 
 //download exhibition
--(void)scheduleDownloadOfExhibition:(Exhibition *)exhibitionToDownload;
+-(void)scheduleDownloadOfExhibition:(Exhibition *)exhibition;
 
 //exhibition count
 -(NSInteger)numberOfStoreExhibition;
@@ -59,5 +59,8 @@ typedef enum{
 
 //exhibition find depand on ID
 -(Exhibition *)exhibitionWithID:(NSString *)exhibitionID;
+
+//clear queue
+-(void)clearQueue:(Exhibition *)exhibition;
 
 @end

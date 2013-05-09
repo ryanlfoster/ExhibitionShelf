@@ -18,7 +18,6 @@
 @synthesize containerView = _containerView;
 @synthesize navigationBar = _navigationBar;
 @synthesize listData = _listData;
-@synthesize sqliteService = _sqliteService;
 #pragma mark - View lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,24 +25,29 @@
     if (self) {
         self.tabBarItem.title = @"已下载";
         self.tabBarItem.image = [UIImage imageNamed:@"nav_download.png"];
-        _sqliteService = [[SqliteService alloc] init];
     }
     return self;
 }
 
 
 - (void)viewDidLoad    //Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
-
 {
     
     [super viewDidLoad];
-
-/***************************************load View****************************************/
     
     //load background
     UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
+    
+    //load UIScrollView
+    _containerView.contentSize = CGSizeMake(0, 1024);
+    _containerView.showsVerticalScrollIndicator = NO;
+    
+    SqliteService *sqliteService = [[SqliteService alloc] init];
+    _listData = [sqliteService getAllDateFromTable];
+    [self loadScrollViewData];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated    //Called when the view is about to made visible. Default does nothing
@@ -54,11 +58,6 @@
         [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
     }
-    
-    _containerView.contentSize = CGSizeMake(0, 1024);
-    _containerView.showsVerticalScrollIndicator = NO;
-
-    [self reloadData];
 
 }
 
@@ -69,7 +68,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated     //Called when the view is dismissed, covered or otherwise hidden. Default does nothing
 {
-    
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated     //Called after the view was dismissed, covered or otherwise hidden. Default does nothing
@@ -93,9 +92,9 @@
         return NO;
 }
 
--(void)reloadData
+-(void)loadScrollViewData
 {
-    _listData = [_sqliteService getAllDateFromTable];
+    //load content in scrollView
     for(int i = 0 ; i < [_listData count] ; i++){
         ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
         Exhibition *exhibition = [_listData objectAtIndex:i];
@@ -111,16 +110,14 @@
         coverFrame.origin = CGPointMake(col * CGRectGetWidth(coverFrame),CGRectGetHeight(coverFrame)*row);
         cover.frame = coverFrame;
         [_containerView addSubview:cover];
- 
     }
-
 }
 
 #pragma mark - ShelfViewControllerProtocol implementation
 
 -(void)coverSelected:(ThirdCoverView *)cover {
     
-    NSLog(@"Selected !!!!!");
+    NSLog(@"Selected !!!");
     ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
     NSBundle *myBundle = [NSBundle bundleWithPath:cover.file];
     NSLog(@"myBundle = %@",myBundle);
@@ -135,9 +132,23 @@
     
 }
 
--(void)coverDeleted:(ThirdCoverView *)cover
+-(void)coverDeleted
 {
     
+}
+
+#pragma mark - NSNotification
+-(void)exhibitionDidEndDownload:(NSNotification *)notification {
+    Exhibition *exhibition = (Exhibition *)[notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
+    
+}
+
+-(void)exhibitionDidFailDownload:(NSNotification *)notification {
+    Exhibition *exhibition = (Exhibition *)[notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
 }
 
 
