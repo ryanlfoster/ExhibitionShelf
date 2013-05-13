@@ -12,7 +12,6 @@
 #import "ExhibitionStore.h"
 #import "Reachability.h"
 @interface ShelfFirstViewController ()
--(void)showShelf;
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover;
 //reachabilityChanged
 -(void)reachabilityChanged:(NSNotification *)note;
@@ -45,12 +44,6 @@
     //NSThread
     [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
     
-    /***************************************load View****************************************/
-    //load background
-    UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
-    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-    self.view.backgroundColor = backgroundColor;
-    
     //load progressHUD
     _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:_progressHUD];
@@ -58,6 +51,12 @@
     _progressHUD.delegate = self;
     self.progressHUD.labelText = @"努力加载中";
     [_progressHUD show:YES];
+    
+    /***************************************load View****************************************/
+    //load background
+    UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
+    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    self.view.backgroundColor = backgroundColor;
     
     /************************************Reachability****************************************/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
@@ -81,6 +80,7 @@
         [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
     }
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -106,7 +106,7 @@
 
 -(void)showShelf {
     if([_exhibitionStore isExhibitionReady]) {
-        _containerView.contentSize = CGSizeMake(0, 1024);
+        _containerView.contentSize = CGSizeMake(0, 1900);
         _containerView.showsVerticalScrollIndicator = NO;
         _containerView.alpha=1.0;
         
@@ -119,6 +119,14 @@
 }
 
 -(void)updateShelf {
+    
+    if(_containerView != nil){
+        [_containerView removeFromSuperview];
+    }
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 1024, 768)];
+    _containerView.contentSize = CGSizeMake(0, 1900);
+    _containerView.showsVerticalScrollIndicator = NO;
+    [self.view addSubview:_containerView];
 
     NSInteger exhibitionCount = [_exhibitionStore numberOfStoreExhibition];
     for(NSInteger i = 0;i < exhibitionCount;i++) {
@@ -129,15 +137,15 @@
         cover.title.text = anExhibition.title;
         cover.cover.image = [UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]];
         if([anExhibition isExhibitionAvailibleForRead]) {
-            [cover.button setTitle:@"观看" forState:UIControlStateNormal];
+            [cover.button setTitle:@"观 看" forState:UIControlStateNormal];
             [cover.button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
         } else {
-            [cover.button setTitle:@"下载" forState:UIControlStateNormal];
+            [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
         }
         NSInteger row = i/2;
         NSInteger col = i%2;
         CGRect coverFrame = cover.frame;
-        coverFrame.origin=CGPointMake(col * CGRectGetWidth(coverFrame), CGRectGetHeight(coverFrame)*row);
+        coverFrame.origin=CGPointMake(col * CGRectGetWidth(coverFrame) , CGRectGetHeight(coverFrame)*row);
         cover.frame=coverFrame;
         [_containerView addSubview:cover];
         
@@ -189,11 +197,11 @@
         if([selectedExhibition isExhibitionAvailibleForRead]){
             [self openZip:selectedExhibition];
         }
-        else if([cover.button.titleLabel.text isEqual: @"取消"]){
+        else if([cover.button.titleLabel.text isEqual: @"取 消"]){
             [self cancelDownloadExhibition:selectedExhibition updateCover:cover];
             cover.progress.alpha=0.0;
             [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
-            [cover.button setTitle:@"下载" forState:UIControlStateNormal];
+            [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
             cover.button.alpha=1.0;
         }
         else [self downloadExhibition:selectedExhibition updateCover:cover];
@@ -225,7 +233,8 @@
     cover.progress.alpha=1.0;
     cover.progress.progress = 0;
     [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
-    [cover.button setTitle:@"取消" forState:UIControlStateNormal];
+    cover.button.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14.0];
+    [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
     cover.button.alpha=1.0;
     
     [exhibition addObserver:cover forKeyPath:@"downloadProgress" options:NSKeyValueObservingOptionNew context:NULL];

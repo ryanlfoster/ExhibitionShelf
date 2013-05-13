@@ -7,7 +7,7 @@
 //
 
 #import "ShelfFourthViewController.h"
-
+#import "Reachability.h"
 @interface ShelfFourthViewController ()
 
 @end
@@ -31,6 +31,12 @@
 {
     [super viewDidLoad];
     
+    /************************************Reachability****************************************/
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
+    [reach startNotifier];
+    
+    //webView
     NSString *string = [NSString stringWithFormat:@"http://www.vrdam.com/news/aboutus.html"];
     NSString *stringURL = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:stringURL];
@@ -61,6 +67,16 @@
         return YES;
     else
         return NO;
+}
+
+-(void)reachabilityChanged:(NSNotification *)note
+{
+    Reachability *reach = [note object];
+    if(![reach isReachable])
+    {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+        [alerView show];
+    }
 }
 
 @end

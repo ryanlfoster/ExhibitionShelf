@@ -10,6 +10,7 @@
 #import "ShelfFirstViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "MCProgressBar.h"
+
 @interface FirstCoverView : UIView
 @property (nonatomic,copy) NSString *exhibitionID;
 @property (nonatomic,assign) id<ShelfFirstViewControllerProtocol> delegate;

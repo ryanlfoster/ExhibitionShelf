@@ -24,14 +24,14 @@
         self.frame = CGRectMake(0, 0, 512, 192);
         // title label
         _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 50, 224, 40)];
-        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:16.0];
-        _title.textColor=[UIColor blackColor];
+        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:15.0];
+        _title.textColor=[UIColor darkGrayColor];
         _title.backgroundColor=[UIColor clearColor];
         _title.textAlignment=UITextAlignmentLeft;
         _title.lineBreakMode = UILineBreakModeWordWrap;
         _title.numberOfLines = 0;
         //imageView
-        _cover = [[UIImageView alloc] initWithFrame:CGRectMake(40, 50, 202, 142)];
+        _cover = [[UIImageView alloc] initWithFrame:CGRectMake(40, 50, 202, 169)];
         _cover.userInteractionEnabled = YES;
         [_cover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonCallback:)]];
         //circol corner image
@@ -44,14 +44,15 @@
         // progress
         UIImage *backgroundImage = [UIImage imageNamed:@"progressBar_background_before.png"];
         UIImage *foregroundImage = [UIImage imageNamed:@"processBar_before.png"];
-        _progress = [[MCProgressBar alloc] initWithFrame:CGRectMake(40, 184, 202, 8) backgroundImage:backgroundImage foregroundImage:foregroundImage];
+        _progress = [[MCProgressBar alloc] initWithFrame:CGRectMake(42, 184, 200, 8) backgroundImage:backgroundImage foregroundImage:foregroundImage];
         _progress.alpha=0.0;
         
         // button
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         [_button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(buttonCallback:) forControlEvents:UIControlEventTouchUpInside];
-        [_button setTitle:@"下载" forState:UIControlStateNormal];
+        _button.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14.0];
+        [_button setTitle:@"下 载" forState:UIControlStateNormal];
         _button.frame=CGRectMake(272, 166, 76, 26);
         
         [self addSubview:_title];
@@ -83,7 +84,7 @@
     id obj = [notification object];
     _progress.alpha=0.0;
     [_button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
-    [_button setTitle:@"观看" forState:UIControlStateNormal];
+    [_button setTitle:@"观 看" forState:UIControlStateNormal];
     _button.alpha=1.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
@@ -93,7 +94,7 @@
 -(void)exhibitionDidFailDownload:(NSNotification *)notification {
     id obj = [notification object];
     _progress.alpha=0.0;
-    [_button setTitle:@"下载" forState:UIControlStateNormal];
+    [_button setTitle:@"下 载" forState:UIControlStateNormal];
     _button.alpha=1.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];

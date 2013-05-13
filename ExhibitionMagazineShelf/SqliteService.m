@@ -128,7 +128,6 @@
             NSLog(@"Error: failed to update !!!!");
             sqlite3_close(_database);
         }
-        
         sqlite3_bind_text(statement, 1, [exhibition.exhibitionID UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 2, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 3, [[exhibition exhibitionImagePath] UTF8String], -1, SQLITE_TRANSIENT);
@@ -153,19 +152,18 @@
     return NO;
 }
 //delete data
--(BOOL)deleteToDB:(NSString *)exhibitionID
+-(void)deleteToDB:(NSString *)exhibitionID
 {
     if([self openDB]){
         sqlite3_stmt *statement;
-        const char *delete_stmt = "DELETE from EXHIBITION where EXHIBITIONID = ?";
+        const char *delete_stmt = "DELETE from EXHIBITION where EXHIBITIONID = ? ";
         
         int success = sqlite3_prepare_v2(_database, delete_stmt, -1, &statement, NULL);
         if(success != SQLITE_OK){
             NSLog(@"Error: failed to delete");
 			sqlite3_close(_database);
-			return NO;
         }
-        
+        NSLog(@"%@",exhibitionID);
         sqlite3_bind_text(statement, 1, [exhibitionID UTF8String], -1, SQLITE_TRANSIENT);
             
         //execute sql sentense,update db
@@ -178,14 +176,11 @@
             NSLog(@"Error:failed to delete the database");
             //close db
             sqlite3_close(_database);
-            return NO;
         }
         //after execute successful,still close db
         sqlite3_close(_database);
-        return YES;
         
     }
-    return NO;
 }
 
 //get all data from table

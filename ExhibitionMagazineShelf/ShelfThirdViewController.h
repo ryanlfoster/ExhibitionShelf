@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ExhibitionViewController.h"
 #import "SqliteService.h"
+#import "ShelfFirstViewController.h"
+
 @class ThirdCoverView;
 @class ExhibitionStore;
 
@@ -19,7 +21,7 @@
 
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
 @protocol ShelfThirdViewControllerDeletedProtocol
--(void)coverDeleted;
+-(void)coverDeleted:(ThirdCoverView *)cover;
 @end
 
 @interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol>{
@@ -28,9 +30,8 @@
 }
 //------------------------------View-------------------------------------------------//
 @property (nonatomic, strong)ExhibitionStore *exhibitionStore;
-@property (strong, nonatomic) IBOutlet UIScrollView *containerView;
+@property (nonatomic, strong)UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
-
 @property (nonatomic, retain) NSArray *listData;
 
 @end

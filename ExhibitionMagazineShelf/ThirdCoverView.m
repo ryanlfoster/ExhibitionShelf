@@ -27,14 +27,14 @@
         self.frame = CGRectMake(0, 0, 512, 192);
         // title label
         _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 50, 224, 40)];
-        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:16.0];
-        _title.textColor=[UIColor blackColor];
+        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:15.0];
+        _title.textColor=[UIColor grayColor];
         _title.backgroundColor=[UIColor clearColor];
         _title.textAlignment=UITextAlignmentLeft;
         _title.lineBreakMode = UILineBreakModeWordWrap;
         _title.numberOfLines = 0;
         //imageView
-        _cover = [[UIImageView alloc] initWithFrame:CGRectMake(40, 50, 202, 142)];
+        _cover = [[UIImageView alloc] initWithFrame:CGRectMake(40, 50, 202, 169)];
         _cover.userInteractionEnabled = YES;
         [_cover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonCallback:)]];
         //circol corner image
@@ -45,13 +45,15 @@
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_deleteButton setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"]forState:UIControlStateNormal];
         [_deleteButton addTarget:self action:@selector(deleteEvent:) forControlEvents:UIControlEventTouchUpInside];
-        [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+        _deleteButton.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14.0];
+        [_deleteButton setTitle:@"删 除" forState:UIControlStateNormal];
         _deleteButton.frame = CGRectMake(358, 166, 76, 26);
         // view button
         _viewButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_viewButton setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
         [_viewButton addTarget:self action:@selector(buttonCallback:) forControlEvents:UIControlEventTouchUpInside];
-        [_viewButton setTitle:@"观看" forState:UIControlStateNormal];
+        _viewButton.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14.0];
+        [_viewButton setTitle:@"观 看" forState:UIControlStateNormal];
         _viewButton.frame=CGRectMake(272, 166, 76, 26);
         
         [self addSubview:_title];
@@ -76,7 +78,7 @@
 
 -(void)deleteEvent:(id)sender {
     
-    [_delegateDeleted coverDeleted];
+    [_delegateDeleted coverDeleted:self];
     
 }
 

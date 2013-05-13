@@ -19,15 +19,6 @@
 @synthesize navigationBar = _navigationBar;
 @synthesize listData = _listData;
 
-#pragma mark - override containerView setter
--(void)setContainerView:(UIScrollView *)containerView
-{
-    //load UIScrollView
-    containerView.contentSize = CGSizeMake(0, 1024);
-    containerView.showsVerticalScrollIndicator = NO;
-    _containerView = containerView;
-}
-
 #pragma mark - View lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,10 +40,7 @@
     UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
-    
-    SqliteService *sqliteService = [[SqliteService alloc] init];
-    _listData = [sqliteService getAllDateFromTable];
-    [self loadScrollViewData];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated    //Called when the view is about to made visible. Default does nothing
@@ -63,7 +51,11 @@
         [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
     }
-
+    
+    SqliteService *sqliteService = [[SqliteService alloc] init];
+    _listData = [sqliteService getAllDateFromTable];
+    [self loadScrollViewData];
+        
 }
 
 -(void)viewDidAppear:(BOOL)animated     //Called when the view has been fully transitioned onto the screen. Default does nothing
@@ -73,17 +65,16 @@
 
 -(void)viewWillDisappear:(BOOL)animated     //Called when the view is dismissed, covered or otherwise hidden. Default does nothing
 {
-    
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated     //Called after the view was dismissed, covered or otherwise hidden. Default does nothing
 {
-    
+
 }
 
 - (void)viewDidUnload
 {
-    [self setContainerView:nil];
     [self setNavigationBar:nil];
     [super viewDidUnload];
 }
@@ -99,6 +90,13 @@
 
 -(void)loadScrollViewData
 {
+    if(_containerView != nil){
+        [_containerView removeFromSuperview];
+    }
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 1024, 768)];
+    _containerView.contentSize = CGSizeMake(0, 1900);
+    _containerView.showsVerticalScrollIndicator = NO;
+    [self.view addSubview:_containerView];
     //load content in scrollView
     for(int i = 0 ; i < [_listData count] ; i++){
         ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
@@ -137,9 +135,26 @@
     
 }
 
--(void)coverDeleted
+-(void)coverDeleted:(ThirdCoverView *)cover
 {
+    NSLog(@"Deleted !!!");
+    SqliteService *sqliteService = [[SqliteService alloc] init];
+    [sqliteService deleteToDB:cover.exhibitionID];
+    cover.alpha = 0.0;
     
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *deleteDir = [CacheDirectory stringByAppendingPathComponent:cover.exhibitionID];
+    NSArray *contents = [fileManager contentsOfDirectoryAtPath:deleteDir error:NULL];
+    NSEnumerator *e = [contents objectEnumerator];
+    NSString *fileName;
+    while((fileName = [e nextObject])){
+//        if([[fileName pathExtension] isEqualToString:@"png"])return;
+        [fileManager removeItemAtPath:[deleteDir stringByAppendingPathComponent:fileName] error:NULL];
+    }
+    
+    ShelfFirstViewController *firstViewController = [[ShelfFirstViewController alloc] init];
+    [firstViewController viewDidLoad];
+  
 }
 
 #pragma mark - NSNotification

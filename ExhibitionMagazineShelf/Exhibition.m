@@ -90,9 +90,13 @@
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+    
     [_downloadData appendData:data];
     
-    if(_expectedLength == 0)return;
+    if(_expectedLength == 0){
+        NSLog(@"cancel !!!!!!");
+        [connection cancel];
+    }
     else{
         
         NSNumber *expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
@@ -103,6 +107,7 @@
         
         [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
     }
+   
     
 }
 

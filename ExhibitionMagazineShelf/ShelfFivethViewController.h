@@ -10,5 +10,7 @@
 
 @interface ShelfFivethViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 
 @end
