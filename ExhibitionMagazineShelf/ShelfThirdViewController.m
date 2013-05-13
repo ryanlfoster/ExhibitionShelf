@@ -18,6 +18,16 @@
 @synthesize containerView = _containerView;
 @synthesize navigationBar = _navigationBar;
 @synthesize listData = _listData;
+
+#pragma mark - override containerView setter
+-(void)setContainerView:(UIScrollView *)containerView
+{
+    //load UIScrollView
+    containerView.contentSize = CGSizeMake(0, 1024);
+    containerView.showsVerticalScrollIndicator = NO;
+    _containerView = containerView;
+}
+
 #pragma mark - View lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,14 +50,9 @@
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
     
-    //load UIScrollView
-    _containerView.contentSize = CGSizeMake(0, 1024);
-    _containerView.showsVerticalScrollIndicator = NO;
-    
     SqliteService *sqliteService = [[SqliteService alloc] init];
     _listData = [sqliteService getAllDateFromTable];
     [self loadScrollViewData];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated    //Called when the view is about to made visible. Default does nothing
@@ -63,12 +68,12 @@
 
 -(void)viewDidAppear:(BOOL)animated     //Called when the view has been fully transitioned onto the screen. Default does nothing
 {
-    
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated     //Called when the view is dismissed, covered or otherwise hidden. Default does nothing
 {
-
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated     //Called after the view was dismissed, covered or otherwise hidden. Default does nothing

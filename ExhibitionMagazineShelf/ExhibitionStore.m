@@ -99,6 +99,7 @@
     NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:exhibition];
     [conn cancel];
+    exhibition.expectedLength = 0;
     exhibition.downloadData = nil;
     
 }

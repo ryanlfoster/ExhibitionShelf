@@ -92,13 +92,17 @@
 {
     [_downloadData appendData:data];
     
-    NSNumber *expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
-    NSNumber *downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
-    
-    float expectedLengthFloat = [expectedLengthNumber floatValue];
-    float downloadDataLengthFloat = [downloadDataLengthNumber floatValue];
-    
-    [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
+    if(_expectedLength == 0)return;
+    else{
+        
+        NSNumber *expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
+        NSNumber *downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
+        
+        float expectedLengthFloat = [expectedLengthNumber floatValue];
+        float downloadDataLengthFloat = [downloadDataLengthNumber floatValue];
+        
+        [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
+    }
     
 }
 
