@@ -40,6 +40,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewDidUnload
+{
+    [self setContainerView:nil];
+    [self setNavigationBar:nil];
+    [super viewDidUnload];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    //modify _navigatioBar
+    if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
+        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
+    }
+    
     
     //NSThread
     [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
@@ -63,23 +80,6 @@
     
     Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
     [reach startNotifier];
-    	
-}
-
-- (void)viewDidUnload
-{
-    [self setContainerView:nil];
-    [self setNavigationBar:nil];
-    [super viewDidUnload];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    //modify _navigatioBar
-    if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
-    }
     
 }
 

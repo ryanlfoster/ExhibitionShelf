@@ -151,9 +151,6 @@
 //        if([[fileName pathExtension] isEqualToString:@"png"])return;
         [fileManager removeItemAtPath:[deleteDir stringByAppendingPathComponent:fileName] error:NULL];
     }
-    
-    ShelfFirstViewController *firstViewController = [[ShelfFirstViewController alloc] init];
-    [firstViewController viewDidLoad];
   
 }
 
