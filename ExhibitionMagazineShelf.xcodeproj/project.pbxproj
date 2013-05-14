@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3C035550172A576800B9F781 /* Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03554F172A576800B9F781 /* Shadow.m */; };
+		3C0489721741D8F200C28540 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D416F9A5F200A8250C /* UIKit.framework */; };
+		3C0489731741D8F200C28540 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D616F9A5F200A8250C /* Foundation.framework */; };
+		3C0489741741D8F200C28540 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D816F9A5F200A8250C /* CoreGraphics.framework */; };
+		3C04897A1741D8F200C28540 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C0489781741D8F200C28540 /* InfoPlist.strings */; };
+		3C04897C1741D8F200C28540 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C04897B1741D8F200C28540 /* main.m */; };
+		3C0489861741D96D00C28540 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0489851741D96D00C28540 /* GHUnitIOS.framework */; };
+		3C0489871741DA4400C28540 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF90791171FBD3800BDFA97 /* QuartzCore.framework */; };
+		3C04898A1741DA8000C28540 /* GHUnitSampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0489891741DA8000C28540 /* GHUnitSampleTest.m */; };
+		3C0489941741DBE100C28540 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C04898C1741DBE100C28540 /* libOCMock.a */; };
+		3C0489971741DC4600C28540 /* OCMockSampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0489961741DC4600C28540 /* OCMockSampleTest.m */; };
 		3C0A57411737757A00B19737 /* SqliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0A57401737757A00B19737 /* SqliteService.m */; };
 		3C1691D21726623A009E4B07 /* ShelfSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691D11726623A009E4B07 /* ShelfSecondViewController.xib */; };
 		3C1691D417266367009E4B07 /* ShelfFourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */; };
@@ -71,6 +81,23 @@
 /* Begin PBXFileReference section */
 		3C03554E172A576800B9F781 /* Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shadow.h; sourceTree = "<group>"; };
 		3C03554F172A576800B9F781 /* Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shadow.m; sourceTree = "<group>"; };
+		3C0489701741D8F200C28540 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C0489771741D8F200C28540 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		3C0489791741D8F200C28540 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3C04897B1741D8F200C28540 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3C04897D1741D8F200C28540 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		3C0489851741D96D00C28540 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../GHUnitIOS.framework; sourceTree = "<group>"; };
+		3C0489881741DA8000C28540 /* GHUnitSampleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUnitSampleTest.h; sourceTree = "<group>"; };
+		3C0489891741DA8000C28540 /* GHUnitSampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitSampleTest.m; sourceTree = "<group>"; };
+		3C04898C1741DBE100C28540 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = Libraries/libOCMock.a; sourceTree = "<group>"; };
+		3C04898E1741DBE100C28540 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		3C04898F1741DBE100C28540 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		3C0489901741DBE100C28540 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		3C0489911741DBE100C28540 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		3C0489921741DBE100C28540 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		3C0489931741DBE100C28540 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
+		3C0489951741DC4600C28540 /* OCMockSampleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockSampleTest.h; sourceTree = "<group>"; };
+		3C0489961741DC4600C28540 /* OCMockSampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCMockSampleTest.m; sourceTree = "<group>"; };
 		3C0A573F1737757A00B19737 /* SqliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteService.h; sourceTree = "<group>"; };
 		3C0A57401737757A00B19737 /* SqliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteService.m; sourceTree = "<group>"; };
 		3C1691D11726623A009E4B07 /* ShelfSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfSecondViewController.xib; sourceTree = "<group>"; };
@@ -162,6 +189,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C04896D1741D8F200C28540 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C0489871741DA4400C28540 /* QuartzCore.framework in Frameworks */,
+				3C0489721741D8F200C28540 /* UIKit.framework in Frameworks */,
+				3C0489731741D8F200C28540 /* Foundation.framework in Frameworks */,
+				3C0489741741D8F200C28540 /* CoreGraphics.framework in Frameworks */,
+				3C0489861741D96D00C28540 /* GHUnitIOS.framework in Frameworks */,
+				3C0489941741DBE100C28540 /* libOCMock.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C69F6CD16F9A5F200A8250C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -181,6 +221,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C0489751741D8F200C28540 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3C0489851741D96D00C28540 /* GHUnitIOS.framework */,
+				3C0489761741D8F200C28540 /* Supporting Files */,
+				3C0489881741DA8000C28540 /* GHUnitSampleTest.h */,
+				3C0489891741DA8000C28540 /* GHUnitSampleTest.m */,
+				3C0489951741DC4600C28540 /* OCMockSampleTest.h */,
+				3C0489961741DC4600C28540 /* OCMockSampleTest.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		3C0489761741D8F200C28540 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C0489771741D8F200C28540 /* Tests-Info.plist */,
+				3C0489781741D8F200C28540 /* InfoPlist.strings */,
+				3C04897B1741D8F200C28540 /* main.m */,
+				3C04897D1741D8F200C28540 /* Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3C04898B1741DBD400C28540 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3C04898C1741DBE100C28540 /* libOCMock.a */,
+				3C04898D1741DBE100C28540 /* OCMock */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		3C04898D1741DBE100C28540 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				3C04898E1741DBE100C28540 /* NSNotificationCenter+OCMAdditions.h */,
+				3C04898F1741DBE100C28540 /* OCMArg.h */,
+				3C0489901741DBE100C28540 /* OCMConstraint.h */,
+				3C0489911741DBE100C28540 /* OCMock.h */,
+				3C0489921741DBE100C28540 /* OCMockObject.h */,
+				3C0489931741DBE100C28540 /* OCMockRecorder.h */,
+			);
+			name = OCMock;
+			path = Libraries/OCMock;
+			sourceTree = "<group>";
+		};
 		3C0A573B1737750A00B19737 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,9 +441,11 @@
 		3C69F6C516F9A5F200A8250C = {
 			isa = PBXGroup;
 			children = (
+				3C04898B1741DBD400C28540 /* Libraries */,
 				3C58497B1732733100C3B7C6 /* Reachability */,
 				3CA05E2B171504C200B30FD1 /* ZipArchive */,
 				3C69F6DA16F9A5F200A8250C /* ExhibitionMagazineShelf */,
+				3C0489751741D8F200C28540 /* Tests */,
 				3C69F6D316F9A5F200A8250C /* Frameworks */,
 				3C69F6D116F9A5F200A8250C /* Products */,
 			);
@@ -366,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				3C69F6D016F9A5F200A8250C /* 数字美术馆.app */,
+				3C0489701741D8F200C28540 /* Tests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -472,6 +562,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3C04896F1741D8F200C28540 /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C0489831741D8F200C28540 /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				3C04896C1741D8F200C28540 /* Sources */,
+				3C04896D1741D8F200C28540 /* Frameworks */,
+				3C04896E1741D8F200C28540 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 3C0489701741D8F200C28540 /* Tests.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3C69F6CF16F9A5F200A8250C /* ExhibitionMagazineShelf */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C69F6FC16F9A5F200A8250C /* Build configuration list for PBXNativeTarget "ExhibitionMagazineShelf" */;
@@ -512,11 +619,20 @@
 			projectRoot = "";
 			targets = (
 				3C69F6CF16F9A5F200A8250C /* ExhibitionMagazineShelf */,
+				3C04896F1741D8F200C28540 /* Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3C04896E1741D8F200C28540 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C04897A1741D8F200C28540 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C69F6CE16F9A5F200A8250C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -549,6 +665,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3C04896C1741D8F200C28540 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C04897C1741D8F200C28540 /* main.m in Sources */,
+				3C04898A1741DA8000C28540 /* GHUnitSampleTest.m in Sources */,
+				3C0489971741DC4600C28540 /* OCMockSampleTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C69F6CC16F9A5F200A8250C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -587,6 +713,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3C0489781741D8F200C28540 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C0489791741D8F200C28540 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3C1691E0172668E1009E4B07 /* ShelfFirstViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -606,6 +740,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3C0489811741D8F200C28540 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Libraries\"/**";
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Libraries\"/**",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3C0489821741D8F200C28540 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Libraries\"/**";
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Libraries\"/**",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		3C69F6FA16F9A5F200A8250C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -692,6 +878,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C0489831741D8F200C28540 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C0489811741D8F200C28540 /* Debug */,
+				3C0489821741D8F200C28540 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		3C69F6CA16F9A5F200A8250C /* Build configuration list for PBXProject "ExhibitionMagazineShelf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
