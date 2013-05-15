@@ -63,24 +63,25 @@
     return self;
 }
 
-#pragma mark - Callbacks,ShelfViewControllerProtocol,update view over delegate
+#pragma mark - ShelfViewControllerProtocol
 
--(void)buttonCallback:(id)sender {
-    
-    NSLog(@"I'm HERE !!!!!!!!");
+-(void)buttonCallback:(id)sender
+{
     
     [_delegate coverSelected:self];
 }
 
 #pragma mark - KVO and Notifications
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
     
     float value = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
     _progress.progress=value;
 }
 
--(void)exhibitionDidEndDownload:(NSNotification *)notification {
+-(void)exhibitionDidEndDownload:(NSNotification *)notification
+{
     id obj = [notification object];
     _progress.alpha=0.0;
     [_button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
@@ -91,9 +92,11 @@
     [obj removeObserver:self forKeyPath:@"downloadProgress"];
 }
 
--(void)exhibitionDidFailDownload:(NSNotification *)notification {
+-(void)exhibitionDidFailDownload:(NSNotification *)notification
+{
     id obj = [notification object];
     _progress.alpha=0.0;
+    [_button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
     [_button setTitle:@"下 载" forState:UIControlStateNormal];
     _button.alpha=1.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];

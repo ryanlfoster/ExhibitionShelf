@@ -95,7 +95,6 @@
 -(void)clearQueue:(Exhibition *)exhibition
 {
     exhibition.expectedLength = 0;
-    exhibition.downloadData = nil;
     NSString *downloadURL = [exhibition downloadURL];
     if(!downloadURL)return;
     NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
@@ -108,10 +107,10 @@
 #pragma mark - Startup(private)
 -(void)downloadStoreExhibition
 {
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSArray *_list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/exhibition.plist"]];
+    NSArray *_list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/exhibition.plist"]];
         if(!_list){
-            //retrieve loacation list
             _list = [[NSArray alloc] initWithContentsOfURL:[self fileURLOfCachedExhibitionFile]];
         }
         if(_list){
@@ -141,7 +140,6 @@
         } else {
             exhibitionArray = nil;
             self.status=ExhibitionStatusError;
-            
         }
     });
 }

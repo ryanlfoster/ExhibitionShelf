@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "ExhibitionViewController.h"
-
 @class FirstCoverView;
 @class ExhibitionStore;
 
@@ -21,10 +20,10 @@
 @interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate>
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) UIScrollView *containerView;
-@property (strong,nonatomic) ExhibitionStore *exhibitionStore;
-@property (strong,nonatomic) MBProgressHUD *progressHUD;
-@property (nonatomic,retain)NSArray *listData;
+@property (strong, nonatomic) ExhibitionStore *exhibitionStore;
+@property (strong, nonatomic) MBProgressHUD *progressHUD;
+@property (nonatomic, retain) NSArray *listData;
 
--(void)showShelf;
+-(void)resourceRequest;
 
 @end

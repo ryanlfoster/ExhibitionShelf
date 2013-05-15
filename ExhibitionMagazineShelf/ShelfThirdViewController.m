@@ -7,17 +7,18 @@
 //
 
 #import "ShelfThirdViewController.h"
+#import "ThirdCoverView.h"
 #import "Exhibition.h"
 #import "ExhibitionStore.h"
-#import "ThirdCoverView.h"
 
-@interface ShelfThirdViewController ()
-@end
 @implementation ShelfThirdViewController
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize containerView = _containerView;
 @synthesize navigationBar = _navigationBar;
 @synthesize listData = _listData;
+
+@synthesize alertString = _alertString;
+@synthesize alertViewThird = _alertViewThird;
 
 #pragma mark - View lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -131,43 +132,53 @@
         [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         [self presentModalViewController:viewController animated:YES];
     }
-
     
 }
 
 -(void)coverDeleted:(ThirdCoverView *)cover
 {
-    NSLog(@"Deleted !!!");
-    SqliteService *sqliteService = [[SqliteService alloc] init];
-    [sqliteService deleteToDB:cover.exhibitionID];
-    cover.alpha = 0.0;
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *deleteDir = [CacheDirectory stringByAppendingPathComponent:cover.exhibitionID];
-    NSArray *contents = [fileManager contentsOfDirectoryAtPath:deleteDir error:NULL];
-    NSEnumerator *e = [contents objectEnumerator];
-    NSString *fileName;
-    while((fileName = [e nextObject])){
-//        if([[fileName pathExtension] isEqualToString:@"png"])return;
-        [fileManager removeItemAtPath:[deleteDir stringByAppendingPathComponent:fileName] error:NULL];
-    }
-  
-}
-
-#pragma mark - NSNotification
--(void)exhibitionDidEndDownload:(NSNotification *)notification {
-    Exhibition *exhibition = (Exhibition *)[notification object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要删除嘛?" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
+    [alert show];
+    
+    //variable control UIAlertViewDelegate
+    _alertViewThird = cover;
+    _alertString = cover.exhibitionID;
     
 }
 
--(void)exhibitionDidFailDownload:(NSNotification *)notification {
-    Exhibition *exhibition = (Exhibition *)[notification object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+        
+        //delete table 
+        SqliteService *sqliteService = [[SqliteService alloc] init];
+        [sqliteService deleteToDB:_alertString];
+        
+        //hide view
+        _alertViewThird.alpha = 0.0;
+        
+        //delete dir
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *deleteDir = [CacheDirectory stringByAppendingPathComponent:_alertString];
+        NSArray *contents = [fileManager contentsOfDirectoryAtPath:deleteDir error:NULL];
+        NSEnumerator *e = [contents objectEnumerator];
+        NSString *fileName;
+        while((fileName = [e nextObject])){
+            if(![[fileName pathExtension] isEqualToString:@"png"]){
+                [fileManager removeItemAtPath:[deleteDir stringByAppendingPathComponent:fileName] error:NULL];
+            }
+            
+        }
+        
+        //change first view button
+        ShelfFirstViewController *viewController = [[ShelfFirstViewController alloc] init];
+        Exhibition *exhibition = [viewController.exhibitionStore exhibitionWithID:_alertString];
+        NSLog(@"%@",exhibition);
+        [exhibition sendChangeFirstViewButtonNotification];
+
+    }else return;
 }
-
-
 
 @end

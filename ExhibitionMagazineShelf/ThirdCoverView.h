@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ShelfThirdViewController.h"
-
 @interface ThirdCoverView : UIView
 @property (nonatomic,copy) NSString *exhibitionID;
 @property (nonatomic,assign) id<ShelfThirdViewControllerSelectedProtocol> delegateSelected;

@@ -13,8 +13,8 @@
 
 typedef enum{
     ExhibitionStatusNotInizialized,
-    ExhibitionStatusDownloading,
     ExhibitionStatusReady,
+    ExhibitionStatusDownloading,
     ExhibitionStatusError
 }ExhibitionStatusType;
 

@@ -8,12 +8,9 @@
 
 #import "Exhibition.h"
 #import "ZipArchive.h"
-@interface Exhibition (Private){
-    
-}
+@interface Exhibition (Private)
 -(void)sendEndOfDownloadNotification;
 -(void)sendFailDownloadNotification;
-
 @end
 
 @implementation Exhibition
@@ -28,6 +25,9 @@
 
 @synthesize image = _image;
 @synthesize file = _file;
+
+@synthesize expectedLengthNumber = _expectedLengthNumber;
+@synthesize downloadDataLengthNumber = _downloadDataLengthNumber;
 
 #pragma mark - Public methods
 -(NSURL *)contentURL {
@@ -90,20 +90,19 @@
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    
-    [_downloadData appendData:data];
-    
+
     if(_expectedLength == 0){
         NSLog(@"cancel !!!!!!");
         [connection cancel];
+        _downloadData = nil;
     }
     else{
+        [_downloadData appendData:data];
+        _expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
+        _downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
         
-        NSNumber *expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
-        NSNumber *downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
-        
-        float expectedLengthFloat = [expectedLengthNumber floatValue];
-        float downloadDataLengthFloat = [downloadDataLengthNumber floatValue];
+         float expectedLengthFloat = [_expectedLengthNumber floatValue];
+         float downloadDataLengthFloat = [_downloadDataLengthNumber floatValue];
         
         [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
     }
@@ -170,12 +169,20 @@
 #pragma mark - Notifications
 
 -(void)sendEndOfDownloadNotification {
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:self];
 }
 
 -(void)sendFailedDownloadNotification {
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];
 }
 
+-(void)sendChangeFirstViewButtonNotification {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];
+
+    
+}
 
 @end

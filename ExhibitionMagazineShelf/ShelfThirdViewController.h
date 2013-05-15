@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ExhibitionViewController.h"
 #import "SqliteService.h"
-#import "ShelfFirstViewController.h"
 
 @class ThirdCoverView;
 @class ExhibitionStore;
@@ -24,14 +23,18 @@
 -(void)coverDeleted:(ThirdCoverView *)cover;
 @end
 
-@interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol>{
+@interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate>{
 //------------------------------DataBase Property------------------------------------//
     sqlite3 *exhibitionDB;
 }
 //------------------------------View-------------------------------------------------//
-@property (nonatomic, strong)ExhibitionStore *exhibitionStore;
-@property (nonatomic, strong)UIScrollView *containerView;
+@property (nonatomic, strong) ExhibitionStore *exhibitionStore;
+@property (nonatomic, strong) UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, retain) NSArray *listData;
 
+@property (nonatomic, weak) UIView *alertViewThird;
+@property (nonatomic, retain) NSString *alertString;
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 @end

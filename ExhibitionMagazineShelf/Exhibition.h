@@ -9,30 +9,37 @@
 #import <Foundation/Foundation.h>
 #import "ShelfFirstViewController.h"
 #import "SqliteService.h"
+#import "FirstCoverView.h"
+
 #define EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION @"ExhibitionEndOfDownload"
 #define EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION @"ExhibitionFailedDownload"
 
 @interface Exhibition : NSObject
 
 //exhibition id(file name)
-@property (nonatomic,copy)NSString *exhibitionID;
+@property (nonatomic, copy)NSString *exhibitionID;
 
 //exhibition title
-@property (nonatomic,copy)NSString *title;
+@property (nonatomic, copy)NSString *title;
 
 //exhibition cover net path 
-@property (nonatomic,copy)NSString *coverURL;
+@property (nonatomic, copy)NSString *coverURL;
 
 //exhibition download net path
-@property (nonatomic,copy)NSString *downloadURL;
+@property (nonatomic, copy)NSString *downloadURL;
 
 //exhibition receive downloadData
 @property (nonatomic, copy)NSMutableData *downloadData;
 
-@property (nonatomic,assign)NSInteger expectedLength;
+//progress expected length
+@property (nonatomic, assign)NSInteger expectedLength;
+
+//progress receive /total  retain number
+@property (nonatomic, retain)NSNumber *expectedLengthNumber;
+@property (nonatomic, retain)NSNumber *downloadDataLengthNumber;
 
 //exhibition progress
-@property (nonatomic,readonly) float downloadProgress;
+@property (nonatomic, readonly) float downloadProgress;
 
 //exhibition status download id
 @property (nonatomic,readonly,getter = isDownloading) BOOL downloading;
@@ -49,5 +56,8 @@
 
 //exhibition downloaded return boolean read or open
 -(BOOL)isExhibitionAvailibleForRead;
+
+//public notification button change in first view
+-(void)sendChangeFirstViewButtonNotification;
 
 @end
