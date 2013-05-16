@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ShelfFirstViewController.h"
 #import "SqliteService.h"
 #import "FirstCoverView.h"
 
 #define EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION @"ExhibitionEndOfDownload"
 #define EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION @"ExhibitionFailedDownload"
+#define EXHIBITION_CHANGE_BUTTON_NOTIFICATION @"ExhibitionChangeButton"
 
 @interface Exhibition : NSObject
 
@@ -57,7 +57,7 @@
 //exhibition downloaded return boolean read or open
 -(BOOL)isExhibitionAvailibleForRead;
 
-//public notification button change in first view
--(void)sendChangeFirstViewButtonNotification;
+//exhibition downloading 
+-(BOOL)isDownloading;
 
 @end

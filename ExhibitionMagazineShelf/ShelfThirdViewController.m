@@ -9,10 +9,8 @@
 #import "ShelfThirdViewController.h"
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
-#import "ExhibitionStore.h"
 
 @implementation ShelfThirdViewController
-@synthesize exhibitionStore = _exhibitionStore;
 @synthesize containerView = _containerView;
 @synthesize navigationBar = _navigationBar;
 @synthesize listData = _listData;
@@ -117,7 +115,7 @@
     }
 }
 
-#pragma mark - ShelfViewControllerProtocol implementation
+#pragma mark - ShelfThirdViewControllerSelectedProtocol implementation
 
 -(void)coverSelected:(ThirdCoverView *)cover {
     
@@ -134,6 +132,8 @@
     }
     
 }
+
+#pragma mark - ShelfThirdViewControllerDeletedProtocol implementation
 
 -(void)coverDeleted:(ThirdCoverView *)cover
 {
@@ -171,12 +171,6 @@
             }
             
         }
-        
-        //change first view button
-        ShelfFirstViewController *viewController = [[ShelfFirstViewController alloc] init];
-        Exhibition *exhibition = [viewController.exhibitionStore exhibitionWithID:_alertString];
-        NSLog(@"%@",exhibition);
-        [exhibition sendChangeFirstViewButtonNotification];
 
     }else return;
 }

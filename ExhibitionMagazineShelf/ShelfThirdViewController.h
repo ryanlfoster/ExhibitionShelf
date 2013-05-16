@@ -11,7 +11,6 @@
 #import "SqliteService.h"
 
 @class ThirdCoverView;
-@class ExhibitionStore;
 
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
 @protocol ShelfThirdViewControllerSelectedProtocol
@@ -28,7 +27,6 @@
     sqlite3 *exhibitionDB;
 }
 //------------------------------View-------------------------------------------------//
-@property (nonatomic, strong) ExhibitionStore *exhibitionStore;
 @property (nonatomic, strong) UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic, retain) NSArray *listData;

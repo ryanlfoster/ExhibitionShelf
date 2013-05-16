@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExhibitionMagazineShelf/ShelfFirstViewController.m"
-         timestampString = "390301688.298475"
+         timestampString = "390377366.127511"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
          landmarkName = "@implementation ShelfFirstViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExhibitionMagazineShelf/ShelfThirdViewController.h"
-         timestampString = "390301688.298475"
+         timestampString = "390373189.368674"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "26"
-         endingLineNumber = "26"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
          landmarkName = "@interface ShelfThirdViewController"
          landmarkType = "2">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExhibitionMagazineShelf/ShelfThirdViewController.m"
-         timestampString = "390302541.941085"
+         timestampString = "390373189.368674"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "224"
-         endingLineNumber = "224">
+         startingLineNumber = "218"
+         endingLineNumber = "218">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

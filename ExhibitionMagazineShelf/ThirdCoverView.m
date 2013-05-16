@@ -68,7 +68,8 @@
 
 #pragma mark - Callbacks,ShelfViewControllerProtocol,update view over delegate
 
--(void)buttonCallback:(id)sender {
+-(void)buttonCallback:(id)sender
+{
     
     [_delegateSelected coverSelected:self];
     
@@ -76,7 +77,8 @@
 
 #pragma mark - delegate event,ShelfViewControllerProtocol,update view over delegate
 
--(void)deleteEvent:(id)sender {
+-(void)deleteEvent:(id)sender
+{
     
     [_delegateDeleted coverDeleted:self];
     

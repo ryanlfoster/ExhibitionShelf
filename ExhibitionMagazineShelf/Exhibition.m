@@ -91,10 +91,13 @@
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
 
+    
     if(_expectedLength == 0){
         NSLog(@"cancel !!!!!!");
         [connection cancel];
         _downloadData = nil;
+        
+        _downloading = NO;
     }
     else{
         [_downloadData appendData:data];
@@ -105,6 +108,8 @@
          float downloadDataLengthFloat = [_downloadDataLengthNumber floatValue];
         
         [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
+        
+        _downloading = YES;
     }
    
     
@@ -132,6 +137,7 @@
             _image = [self exhibitionImagePath];
             _file = [self exhibitionFilePath];
             [sqlService insertToDB:self];
+            _downloading = NO;
             //send end of download notification
             [self sendEndOfDownloadNotification];
         }
@@ -168,21 +174,14 @@
 
 #pragma mark - Notifications
 
--(void)sendEndOfDownloadNotification {
-    
+-(void)sendEndOfDownloadNotification
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:self];
 }
 
--(void)sendFailedDownloadNotification {
-    
+-(void)sendFailedDownloadNotification
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];
-}
-
--(void)sendChangeFirstViewButtonNotification {
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];
-
-    
 }
 
 @end

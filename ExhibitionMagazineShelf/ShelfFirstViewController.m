@@ -31,7 +31,7 @@
     if (self) {
         self.tabBarItem.title = @"全景展览";
         self.tabBarItem.image = [UIImage imageNamed:@"nav_exhibition.png"];
-        }
+    }
     return self;
 }
 
@@ -137,8 +137,14 @@
         if([anExhibition isExhibitionAvailibleForRead]) {
             [cover.button setTitle:@"观 看" forState:UIControlStateNormal];
             [cover.button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
-        } else {
+        }else if([anExhibition isDownloading]){
+            cover.progress.alpha = 1.0;
+            [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
+            [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
+        }
+        else {
             [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
+            [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
         }
         NSInteger row = i/2;
         NSInteger col = i%2;
@@ -210,6 +216,7 @@
 }
 
 #pragma mark - Actions
+
 -(void)openZip:(Exhibition *)selectedExhibition{
     
     ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
@@ -238,6 +245,7 @@
     [exhibition addObserver:cover forKeyPath:@"downloadProgress" options:NSKeyValueObservingOptionNew context:NULL];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exhibitionDidEndDownload:) name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exhibitionDidFailDownload:) name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
+    
     [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidEndDownload:) name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
     [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidFailDownload:) name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
     
@@ -250,18 +258,19 @@
 }
 
 #pragma mark - NSNotification
--(void)exhibitionDidEndDownload:(NSNotification *)notification {
+-(void)exhibitionDidEndDownload:(NSNotification *)notification
+{
     Exhibition *exhibition = (Exhibition *)[notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
     
 }
 
--(void)exhibitionDidFailDownload:(NSNotification *)notification {
+-(void)exhibitionDidFailDownload:(NSNotification *)notification
+{
     Exhibition *exhibition = (Exhibition *)[notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
 }
-
 
 @end

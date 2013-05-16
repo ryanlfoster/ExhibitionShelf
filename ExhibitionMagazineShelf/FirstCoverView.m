@@ -104,4 +104,17 @@
     [obj removeObserver:self forKeyPath:@"downloadProgress"];
 }
 
+-(void)exhibitionChangeButton:(NSNotification *)notification
+{
+    NSLog(@"Change Button !!!");
+    id obj = [notification object];
+    _progress.alpha=0.0;
+    [_button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
+    [_button setTitle:@"下 载" forState:UIControlStateNormal];
+    _button.alpha=1.0;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
+    [obj removeObserver:self forKeyPath:@"downloadProgress"];
+}
+
 @end
