@@ -58,6 +58,7 @@
 		3C87312B174A096200955796 /* nav_button_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C87312A174A096200955796 /* nav_button_press.png */; };
 		3C896F701705653E003E079D /* ExhibitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C896F6F1705653E003E079D /* ExhibitionViewController.m */; };
 		3C896FB317057987003E079D /* Exhibition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C896FB217057987003E079D /* Exhibition.m */; };
+		3C8BF4F5174CC66D008E0B73 /* CustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BF4F4174CC66D008E0B73 /* CustomPageControl.m */; };
 		3C938AC2170BCD20004FD4CE /* FirstCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C938AC1170BCD20004FD4CE /* FirstCoverView.m */; };
 		3C9FB38E174B5AD700121C2B /* MicrosoftYaHeiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C9FB38D174B5AD700121C2B /* MicrosoftYaHeiBold.ttf */; };
 		3CA05E38171504C200B30FD1 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E2E171504C200B30FD1 /* ioapi.c */; };
@@ -163,6 +164,8 @@
 		3C896F6F1705653E003E079D /* ExhibitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhibitionViewController.m; sourceTree = "<group>"; };
 		3C896FB117057986003E079D /* Exhibition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exhibition.h; sourceTree = "<group>"; };
 		3C896FB217057987003E079D /* Exhibition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Exhibition.m; sourceTree = "<group>"; };
+		3C8BF4F3174CC66D008E0B73 /* CustomPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPageControl.h; sourceTree = "<group>"; };
+		3C8BF4F4174CC66D008E0B73 /* CustomPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPageControl.m; sourceTree = "<group>"; };
 		3C938AC0170BCD20004FD4CE /* FirstCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstCoverView.h; sourceTree = "<group>"; };
 		3C938AC1170BCD20004FD4CE /* FirstCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstCoverView.m; sourceTree = "<group>"; };
 		3C9FB38D174B5AD700121C2B /* MicrosoftYaHeiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MicrosoftYaHeiBold.ttf; sourceTree = "<group>"; };
@@ -423,6 +426,7 @@
 		3C58994616FA9BBA00624CE9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3C8BF4F1174CC631008E0B73 /* CustomPageControl */,
 				3C5849661732551E00C3B7C6 /* CustomAlertView */,
 				3C25331A17292DB100FC9843 /* ImageShadow */,
 				3C20754A17279CD500E0AE37 /* CustomTabBar */,
@@ -576,6 +580,15 @@
 				3CB9662C17043497002C1840 /* ExhibitionStore.m */,
 			);
 			name = Exhibition;
+			sourceTree = "<group>";
+		};
+		3C8BF4F1174CC631008E0B73 /* CustomPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				3C8BF4F3174CC66D008E0B73 /* CustomPageControl.h */,
+				3C8BF4F4174CC66D008E0B73 /* CustomPageControl.m */,
+			);
+			name = CustomPageControl;
 			sourceTree = "<group>";
 		};
 		3CA05E2B171504C200B30FD1 /* ZipArchive */ = {
@@ -815,6 +828,7 @@
 				3C58497E1732735100C3B7C6 /* Reachability.m in Sources */,
 				3C0A57411737757A00B19737 /* SqliteService.m in Sources */,
 				3CA1FB8D173B8ACB00365B3E /* SplashViewController.m in Sources */,
+				3C8BF4F5174CC66D008E0B73 /* CustomPageControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

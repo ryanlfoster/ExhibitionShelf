@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "ExhibitionViewController.h"
+#import "CustomPageControl.h"
 @class FirstCoverView;
 @class ExhibitionStore;
 
@@ -17,9 +18,12 @@
 -(void)coverSelected:(FirstCoverView *)cover;
 @end
 
-@interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate>
+@interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) UIScrollView *containerView;
+
+@property (strong, nonatomic) CustomPageControl *pageControl;
+
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (nonatomic, retain) NSArray *listData;

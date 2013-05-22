@@ -11,26 +11,48 @@
 #import "Exhibition.h"
 #import "ExhibitionStore.h"
 #import "Reachability.h"
+
+NSUInteger numberOfPages;
+
 @interface ShelfFirstViewController ()
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover;
 //reachabilityChanged
 -(void)reachabilityChanged:(NSNotification *)note;
 @end
-
 @implementation ShelfFirstViewController
 @synthesize containerView = _containerView;
+@synthesize pageControl = _pageControl;
 @synthesize navigationBar = _navigationBar;
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize progressHUD = _progressHUD;
 
 @synthesize listData = _listData;
 
+#pragma mark - nib init
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tabBarItem.title = @"全景展览";
         self.tabBarItem.image = [UIImage imageNamed:@"nav_exhibition.png"];
+        
+        _listData = [NSArray arrayWithContentsOfURL:[NSURL fileURLWithPathComponents:[NSArray arrayWithObjects:DocumentsDirectory,@"exhibition.plist",nil]]];
+        numberOfPages = [_listData count] / 6;
+        
+        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 1024, 768)];
+        _containerView.pagingEnabled = YES;
+        _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
+        _containerView.showsHorizontalScrollIndicator = NO;
+        _containerView.showsVerticalScrollIndicator = NO;
+        _containerView.delegate = self;
+        
+        _pageControl.numberOfPages = numberOfPages;
+        _pageControl.currentPage = 0;
+        _pageControl.userInteractionEnabled = NO;
+        
+        [self.view addSubview:_containerView];
+        [self.view sendSubviewToBack:_containerView];
+        
     }
     return self;
 }
@@ -72,6 +94,7 @@
 {
     [self setContainerView:nil];
     [self setNavigationBar:nil];
+    [self setPageControl:nil];
     [super viewDidUnload];
 }
 
@@ -110,8 +133,6 @@
 
 -(void)showShelf {
     if([_exhibitionStore isExhibitionReady]) {
-        _containerView.contentSize = CGSizeMake(0, 1900);
-        _containerView.showsHorizontalScrollIndicator = NO;
         _containerView.alpha=1.0;
         
         //back main thread
@@ -123,14 +144,6 @@
 }
 
 -(void)updateShelf {
-    
-    if(_containerView != nil){
-        [_containerView removeFromSuperview];
-    }
-    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 1024, 768)];
-    _containerView.contentSize = CGSizeMake(0, 1900);
-    _containerView.showsVerticalScrollIndicator = NO;
-    [self.view addSubview:_containerView];
 
     NSInteger exhibitionCount = [_exhibitionStore numberOfStoreExhibition];
     for(NSInteger i = 0;i < exhibitionCount;i++) {
@@ -153,10 +166,10 @@
             [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
             [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
         }
-        NSInteger row = i/2;
-        NSInteger col = i%2;
+        NSInteger row = i/3;
+        NSInteger col = i%3;
         CGRect coverFrame = cover.frame;
-        coverFrame.origin=CGPointMake(col * CGRectGetWidth(coverFrame) , CGRectGetHeight(coverFrame)*row);
+        coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
         cover.frame=coverFrame;
         [_containerView addSubview:cover];
         
@@ -187,6 +200,14 @@
 //    }
 //    return nil;
 //}
+
+#pragma mark - UIScrollView degelete
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat pageWidth = _containerView.frame.size.width;
+    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    _pageControl.currentPage = page;
+}
 
 #pragma mark - MBProgressHUDDelegate methods
 - (void)hudWasHidden:(MBProgressHUD *)hud {

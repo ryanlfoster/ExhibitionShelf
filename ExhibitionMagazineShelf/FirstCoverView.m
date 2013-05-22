@@ -56,7 +56,7 @@
         // progress
         UIImage *backgroundImage = [UIImage imageNamed:@"progressBar_background_before.png"];
         UIImage *foregroundImage = [UIImage imageNamed:@"processBar_before.png"];
-        _progress = [[MCProgressBar alloc] initWithFrame:CGRectMake(42, 184, 200, 8) backgroundImage:backgroundImage foregroundImage:foregroundImage];
+        _progress = [[MCProgressBar alloc] initWithFrame:CGRectMake(41, 184, 200, 8) backgroundImage:backgroundImage foregroundImage:foregroundImage];
         _progress.alpha=0.0;
         
         // button

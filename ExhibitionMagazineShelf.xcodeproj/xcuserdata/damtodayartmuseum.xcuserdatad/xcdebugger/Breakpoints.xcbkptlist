@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExhibitionMagazineShelf/ShelfFirstViewController.m"
-         timestampString = "390877830.995722"
+         timestampString = "390906218.172083"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "189"
-         endingLineNumber = "189"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
          landmarkName = "@implementation ShelfFirstViewController"
          landmarkType = "3">
       </FileBreakpoint>
