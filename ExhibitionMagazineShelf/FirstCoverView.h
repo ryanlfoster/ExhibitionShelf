@@ -18,4 +18,5 @@
 @property (nonatomic,strong) UIButton *button;
 @property (nonatomic,strong) MCProgressBar *progress;
 @property (nonatomic,strong) UILabel *title;
+@property (nonatomic,strong) UILabel *description;
 @end

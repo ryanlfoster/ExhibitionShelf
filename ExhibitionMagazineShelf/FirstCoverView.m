@@ -14,6 +14,14 @@
 @synthesize button = _button;
 @synthesize progress = _progress;
 @synthesize title = _title;
+@synthesize description = _description;
+
+//-(id)initWithCoder:(NSCoder *)aDecoder
+//{
+//    if(self = [super initWithCoder:aDecoder]){
+//        
+//    }
+//}
 
 - (id)initWithFrame:(CGRect)frame  //[[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont fontWithName:@"MicrosoftYaHei" size:14.0],UITextAttributeFont, nil] forState:UIControlStateNormal];
 
@@ -23,13 +31,20 @@
         // frame
         self.frame = CGRectMake(0, 0, 512, 192);
         // title label
-        _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 50, 224, 40)];
-        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:15.0];
-        _title.textColor=[UIColor darkGrayColor];
-        _title.backgroundColor=[UIColor clearColor];
-        _title.textAlignment=UITextAlignmentLeft;
+        _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 50, 224, 42)];
+        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:16.0];
+        _title.textColor=[UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
         _title.lineBreakMode = UILineBreakModeWordWrap;
         _title.numberOfLines = 0;
+        _title.backgroundColor = [UIColor clearColor];
+        //description label
+        _description = [[UILabel alloc] initWithFrame:CGRectMake(272, 98, 224, 50)];
+        _description.font = [UIFont fontWithName:@"MicrosoftYaHei" size:12.0];
+        _description.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1.0f];
+        _description.backgroundColor = [UIColor clearColor];
+        _description.textAlignment = UITextAlignmentLeft;
+        _description.lineBreakMode = UILineBreakModeWordWrap;
+        _description.numberOfLines = 0;
         //imageView
         _cover = [[UIImageView alloc] initWithFrame:CGRectMake(40, 50, 202, 169)];
         _cover.userInteractionEnabled = YES;
@@ -38,9 +53,6 @@
         CALayer *layer = [_cover layer];
         [layer setMasksToBounds:YES];
         [layer setCornerRadius:10.0];
-        //add image border
-//        layer.borderColor = [[UIColor blackColor]CGColor];
-//        layer.borderWidth = 5.0f;
         // progress
         UIImage *backgroundImage = [UIImage imageNamed:@"progressBar_background_before.png"];
         UIImage *foregroundImage = [UIImage imageNamed:@"processBar_before.png"];
@@ -56,6 +68,7 @@
         _button.frame=CGRectMake(272, 166, 76, 26);
         
         [self addSubview:_title];
+        [self addSubview:_description];
         [self addSubview:_cover];
         [self addSubview:_progress];
         [self addSubview:_button];

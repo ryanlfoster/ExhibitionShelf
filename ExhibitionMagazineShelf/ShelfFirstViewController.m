@@ -41,6 +41,10 @@
 {
     [super viewDidLoad];
     
+//    for (NSString *fontName in [UIFont familyNames]){
+//        NSLog(@"%@", fontName);
+//    }
+    
     //NSThread
     [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
     //load progressHUD
@@ -79,6 +83,8 @@
         [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
     }
     
+    
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -105,7 +111,7 @@
 -(void)showShelf {
     if([_exhibitionStore isExhibitionReady]) {
         _containerView.contentSize = CGSizeMake(0, 1900);
-        _containerView.showsVerticalScrollIndicator = NO;
+        _containerView.showsHorizontalScrollIndicator = NO;
         _containerView.alpha=1.0;
         
         //back main thread
@@ -133,6 +139,7 @@
         cover.exhibitionID = anExhibition.exhibitionID;
         cover.delegate = self;
         cover.title.text = anExhibition.title;
+        cover.description.text = anExhibition.description;
         cover.cover.image = [UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]];
         if([anExhibition isExhibitionAvailibleForRead]) {
             [cover.button setTitle:@"观 看" forState:UIControlStateNormal];

@@ -102,6 +102,7 @@
         Exhibition *exhibition = [_listData objectAtIndex:i];
         cover.exhibitionID = exhibition.exhibitionID;
         cover.title.text = exhibition.title;
+        cover.description.text = exhibition.description;
         cover.file = exhibition.file;
         cover.cover.image = [UIImage imageWithContentsOfFile:exhibition.image];
         cover.delegateSelected = self;

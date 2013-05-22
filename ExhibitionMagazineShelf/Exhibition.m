@@ -18,6 +18,7 @@
 @synthesize title = _title;
 @synthesize coverURL = _coverURL;
 @synthesize downloadURL = _downloadURL;
+@synthesize description = _description;
 @synthesize downloadData = _downloadData;
 @synthesize expectedLength = _expectedLength;
 @synthesize downloadProgress = _downloadProgress;

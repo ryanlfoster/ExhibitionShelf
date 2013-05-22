@@ -14,6 +14,7 @@
 @synthesize deleteButton = _deleteButton;
 @synthesize viewButton = _viewButton;
 @synthesize title = _title;
+@synthesize description = _description;
 @synthesize file = _file;
 
 @synthesize delegateSelected = _delegateSelected;
@@ -26,21 +27,24 @@
         // frame
         self.frame = CGRectMake(0, 0, 512, 192);
         // title label
-        _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 50, 224, 40)];
-        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:15.0];
-        _title.textColor=[UIColor grayColor];
-        _title.backgroundColor=[UIColor clearColor];
-        _title.textAlignment=UITextAlignmentLeft;
+        _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 50, 224, 42)];
+        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:16.0];
+        _title.textColor=[UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
         _title.lineBreakMode = UILineBreakModeWordWrap;
         _title.numberOfLines = 0;
+        _title.backgroundColor = [UIColor clearColor];
+        //description label
+        _description = [[UILabel alloc] initWithFrame:CGRectMake(272, 98, 224, 50)];
+        _description.font = [UIFont fontWithName:@"MicrosoftYaHei" size:12.0];
+        _description.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1.0f];
+        _description.backgroundColor = [UIColor clearColor];
+        _description.textAlignment = UITextAlignmentLeft;
+        _description.lineBreakMode = UILineBreakModeWordWrap;
+        _description.numberOfLines = 0;
         //imageView
         _cover = [[UIImageView alloc] initWithFrame:CGRectMake(40, 50, 202, 169)];
         _cover.userInteractionEnabled = YES;
         [_cover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonCallback:)]];
-        //circol corner image
-        CALayer *layer = [_cover layer];
-        [layer setMasksToBounds:YES];
-        [layer setCornerRadius:10.0];
         //delete button
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_deleteButton setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"]forState:UIControlStateNormal];
@@ -57,6 +61,7 @@
         _viewButton.frame=CGRectMake(272, 166, 76, 26);
         
         [self addSubview:_title];
+        [self addSubview:_description];
         [self addSubview:_cover];
         [self addSubview:_viewButton];
         [self addSubview:_deleteButton];

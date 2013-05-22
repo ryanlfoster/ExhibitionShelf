@@ -32,7 +32,7 @@
     [[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont fontWithName:@"MicrosoftYaHei" size:14.0],UITextAttributeFont, nil] forState:UIControlStateNormal];
     
     //set tab bar background
-    UIImage *backgroundImageNav = [UIImage imageNamed:@"background_nav_bottom.jpg"];
+    UIImage *backgroundImageNav = [UIImage imageNamed:@"background_nav_bottom_modify.png"];
     self.tabBarController.tabBar.backgroundImage = backgroundImageNav;
     
     //set tab bar item selected background

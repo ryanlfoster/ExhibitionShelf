@@ -17,5 +17,6 @@
 @property (nonatomic,strong) UIButton *viewButton;
 @property (nonatomic,strong) UIButton *deleteButton;
 @property (nonatomic,strong) UILabel *title;
+@property (nonatomic,strong) UILabel *description;
 @property (nonatomic,strong) NSString *file;
 @end

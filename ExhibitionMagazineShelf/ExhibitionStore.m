@@ -122,6 +122,7 @@
                 anExhibition.title=[exhibitionDictionary objectForKey:@"Title"];
                 anExhibition.coverURL=[exhibitionDictionary objectForKey:@"Cover URL"];
                 anExhibition.downloadURL=[exhibitionDictionary objectForKey:@"Download URL"];
+                anExhibition.description=[exhibitionDictionary objectForKey:@"Description"];
                 [exhibitionArray addObject:anExhibition];
                 // dispatch cover loading
                 if(![UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]]) {

@@ -28,6 +28,9 @@
 //exhibition download net path
 @property (nonatomic, copy)NSString *downloadURL;
 
+//exhibition description
+@property (nonatomic, copy)NSString *description;
+
 //exhibition receive downloadData
 @property (nonatomic, copy)NSMutableData *downloadData;
 
