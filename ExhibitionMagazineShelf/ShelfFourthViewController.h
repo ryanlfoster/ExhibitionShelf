@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
-@interface ShelfFourthViewController : UIViewController<MBProgressHUDDelegate>
+@interface ShelfFourthViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (strong,nonatomic)MBProgressHUD *progressHUD;
-
+@property (strong, nonatomic) UIButton *aboutusButton;
 @end

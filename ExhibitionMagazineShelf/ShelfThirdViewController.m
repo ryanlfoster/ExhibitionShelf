@@ -10,9 +10,12 @@
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
 
+NSUInteger numberOfPages;//scrollView page count
+
 @implementation ShelfThirdViewController
 @synthesize containerView = _containerView;
 @synthesize navigationBar = _navigationBar;
+@synthesize aboutusButton = _aboutusButton;
 @synthesize listData = _listData;
 
 @synthesize alertString = _alertString;
@@ -23,8 +26,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem.title = @"已下载";
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_download.png"];
+        self.tabBarItem.title = @"我的展览";
+        self.tabBarItem.image = [UIImage imageNamed:@"tabbar_myexhibition.png"];
+        self.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     }
     return self;
 }
@@ -47,12 +51,26 @@
     
     //modify _navigatioBar
     if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_bottom.jpg"] forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
     }
     
+    _aboutusButton = [[UIButton alloc] initWithFrame:CGRectMake(930.0f, 10.0f, 29.0f, 29.0f)];
+    [_aboutusButton setImage:[UIImage imageNamed:@"btn_aboutus.png"] forState:UIControlStateNormal];
+    [_navigationBar addSubview:_aboutusButton];
+    
+    [_aboutusButton addTarget:self action:@selector(aboutusButtonAction) forControlEvents:UIControlEventAllEvents];
+    
     SqliteService *sqliteService = [[SqliteService alloc] init];
+    
     _listData = [sqliteService getAllDateFromTable];
+    
+    if([_listData count] % 6 == 0){
+        numberOfPages = [_listData count] / 6;
+    }else{
+        numberOfPages = 1 + ([_listData count] / 6);
+    }
+    
     [self loadScrollViewData];
         
 }
@@ -92,10 +110,15 @@
     if(_containerView != nil){
         [_containerView removeFromSuperview];
     }
-    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 1024, 768)];
-    _containerView.contentSize = CGSizeMake(0, 1900);
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, 1024, 708)];
+    _containerView.pagingEnabled = YES;
+    _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
+    _containerView.showsHorizontalScrollIndicator = NO;
     _containerView.showsVerticalScrollIndicator = NO;
+    _containerView.delegate = self;
+    _containerView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_containerView];
+
     //load content in scrollView
     for(int i = 0 ; i < [_listData count] ; i++){
         ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
@@ -107,11 +130,12 @@
         cover.cover.image = [UIImage imageWithContentsOfFile:exhibition.image];
         cover.delegateSelected = self;
         cover.delegateDeleted = self;
-        NSInteger row = i/2;
-        NSInteger col = i%2;
+        NSInteger row = i/3;
+        NSInteger col = i%3;
         CGRect coverFrame = cover.frame;
-        coverFrame.origin = CGPointMake(col * CGRectGetWidth(coverFrame),CGRectGetHeight(coverFrame)*row);
-        cover.frame = coverFrame;
+        coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
+        cover.frame=coverFrame;
+        cover.backgroundColor = [UIColor clearColor];
         [_containerView addSubview:cover];
     }
 }
@@ -174,6 +198,12 @@
         }
 
     }else return;
+}
+
+#pragma mark - Action
+-(void)aboutusButtonAction
+{
+    return;
 }
 
 @end

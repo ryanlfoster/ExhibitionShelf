@@ -22,13 +22,14 @@
 -(void)coverDeleted:(ThirdCoverView *)cover;
 @end
 
-@interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate>{
+@interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate,UIScrollViewDelegate>{
 //------------------------------DataBase Property------------------------------------//
     sqlite3 *exhibitionDB;
 }
 //------------------------------View-------------------------------------------------//
 @property (nonatomic, strong) UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) UIButton *aboutusButton;
 @property (nonatomic, retain) NSArray *listData;
 
 @property (nonatomic, weak) UIView *alertViewThird;

@@ -16,5 +16,6 @@
 }
 @property (nonatomic,weak)NSString *str;
 @property (nonatomic,weak)NSString *navigationBarTitle;
+@property (nonatomic,strong)UIButton *backButton;
 
 @end

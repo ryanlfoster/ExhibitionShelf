@@ -15,7 +15,7 @@
 @implementation ExhibitionViewController
 @synthesize str = _str;
 @synthesize navigationBarTitle;
-
+@synthesize backButton = _backButton;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -27,21 +27,21 @@
         [webView loadRequest:[NSURLRequest requestWithURL:htmlUrl]];
     }
     [self.view addSubview:webView];
-    
+     
     //custom navigationBar
     navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 1024, 50)];
     navigationBar.tintColor = [UIColor blackColor];
-    [self.view addSubview:navigationBar];
-    
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backOnClick)];
-//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"观看网页版" style:UIBarButtonItemStylePlain target:self action:@selector(openSafari)];
-    
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
-    navItem.leftBarButtonItem = leftButton;
-//    navItem.rightBarButtonItem = rightButton;
     navItem.title = navigationBarTitle;
-    
+    [self.view addSubview:navigationBar];
     [navigationBar pushNavigationItem:navItem animated:YES];
+    
+    _backButton = [[UIButton alloc] initWithFrame:CGRectMake(45.0f, 10.0f, 29.0f, 29.0f)];
+    [_backButton setImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backOnClick) forControlEvents:UIControlEventAllEvents];
+    [navigationBar addSubview:_backButton];
+
+    
 }
 
 //back to before view

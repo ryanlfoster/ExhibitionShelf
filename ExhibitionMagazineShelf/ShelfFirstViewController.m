@@ -25,8 +25,7 @@ NSUInteger numberOfPages;
 @synthesize navigationBar = _navigationBar;
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize progressHUD = _progressHUD;
-
-@synthesize listData = _listData;
+@synthesize aboutusButton = _aboutusButton;
 
 #pragma mark - nib init
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,24 +33,16 @@ NSUInteger numberOfPages;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tabBarItem.title = @"全景展览";
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_exhibition.png"];
+        self.tabBarItem.image = [UIImage imageNamed:@"tabbar_exhibition.png"];
+        self.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
         
-        _listData = [NSArray arrayWithContentsOfURL:[NSURL fileURLWithPathComponents:[NSArray arrayWithObjects:DocumentsDirectory,@"exhibition.plist",nil]]];
-        numberOfPages = [_listData count] / 6;
+        /***************************************load View****************************************/
+        //load background
+        UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
+        UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+        self.view.backgroundColor = backgroundColor;
         
-        _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 1024, 768)];
-        _containerView.pagingEnabled = YES;
-        _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
-        _containerView.showsHorizontalScrollIndicator = NO;
-        _containerView.showsVerticalScrollIndicator = NO;
-        _containerView.delegate = self;
-        
-        _pageControl.numberOfPages = numberOfPages;
-        _pageControl.currentPage = 0;
-        _pageControl.userInteractionEnabled = NO;
-        
-        [self.view addSubview:_containerView];
-        [self.view sendSubviewToBack:_containerView];
+        _pageControl.alpha = 0 ;
         
     }
     return self;
@@ -77,11 +68,6 @@ NSUInteger numberOfPages;
     self.progressHUD.labelText = @"努力加载中";
     [_progressHUD show:YES];
     
-    /***************************************load View****************************************/
-    //load background
-    UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
-    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-    self.view.backgroundColor = backgroundColor;
     
     /************************************Reachability****************************************/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
@@ -102,12 +88,14 @@ NSUInteger numberOfPages;
 {
     //modify _navigatioBar
     if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_bottom.jpg"] forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
     }
     
-    
-    
+    _aboutusButton = [[UIButton alloc] initWithFrame:CGRectMake(930.0f, 10.0f, 29.0f, 29.0f)];
+    [_aboutusButton setImage:[UIImage imageNamed:@"btn_aboutus.png"] forState:UIControlStateNormal];
+    [_aboutusButton addTarget:self action:@selector(aboutusButtonAction) forControlEvents:UIControlEventAllEvents];
+    [_navigationBar addSubview:_aboutusButton];  
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -121,7 +109,7 @@ NSUInteger numberOfPages;
 
 -(void)resourceRequest
 {
-    //init Store;
+    //init Store
     _exhibitionStore = [[ExhibitionStore alloc]init];
     [_exhibitionStore startup];
     
@@ -134,7 +122,11 @@ NSUInteger numberOfPages;
 -(void)showShelf {
     if([_exhibitionStore isExhibitionReady]) {
         _containerView.alpha=1.0;
-        
+        if([_exhibitionStore.list count] % 6 == 0){
+            numberOfPages = [_exhibitionStore.list count] / 6;
+        }else{
+            numberOfPages = 1 + [_exhibitionStore.list count] / 6;
+        }
         //back main thread
         [self performSelectorOnMainThread:@selector(updateShelf) withObject:_containerView waitUntilDone:NO];
     } else {
@@ -144,6 +136,23 @@ NSUInteger numberOfPages;
 }
 
 -(void)updateShelf {
+    
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, 1024, 708)];
+    _containerView.pagingEnabled = YES;
+    _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
+    _containerView.showsHorizontalScrollIndicator = NO;
+    _containerView.showsVerticalScrollIndicator = NO;
+    _containerView.delegate = self;
+    _containerView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_containerView];
+    
+    _pageControl.backgroundColor = [UIColor clearColor];
+    [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"normal.png"]];
+    [_pageControl setImagePageStateHightlighted:[UIImage imageNamed:@"hightlighted.png"]];
+    _pageControl.numberOfPages = numberOfPages;
+    _pageControl.currentPage = 0;
+    _pageControl.userInteractionEnabled = NO;
+    [self.view addSubview:_pageControl];
 
     NSInteger exhibitionCount = [_exhibitionStore numberOfStoreExhibition];
     for(NSInteger i = 0;i < exhibitionCount;i++) {
@@ -171,11 +180,13 @@ NSUInteger numberOfPages;
         CGRect coverFrame = cover.frame;
         coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
         cover.frame=coverFrame;
+        cover.backgroundColor = [UIColor clearColor];
         [_containerView addSubview:cover];
         
         if(_progressHUD){
             [_progressHUD removeFromSuperview];
             _progressHUD = nil;
+            _pageControl.alpha = 1.0;
         }
 
     }
@@ -207,6 +218,12 @@ NSUInteger numberOfPages;
     CGFloat pageWidth = _containerView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     _pageControl.currentPage = page;
+    
+    NSArray *subView = _pageControl.subviews;
+    for(int i = 0; i < [subView count]; i++){
+        UIImageView *dot = [subView objectAtIndex:i];
+        dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"hightlighted.png"] : [UIImage imageNamed:@"normal.png"]);
+    }
 }
 
 #pragma mark - MBProgressHUDDelegate methods
@@ -283,6 +300,11 @@ NSUInteger numberOfPages;
 -(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
 {
     [_exhibitionStore clearQueue:exhibition];
+}
+
+-(void)aboutusButtonAction
+{
+    return;
 }
 
 #pragma mark - NSNotification

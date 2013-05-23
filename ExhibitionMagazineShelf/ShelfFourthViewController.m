@@ -14,15 +14,15 @@
 
 @implementation ShelfFourthViewController
 @synthesize navigationBar = _navigationBar;
-@synthesize webView = _webView;
-@synthesize progressHUD = _progressHUD;
+@synthesize aboutusButton = _aboutusButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-         self.tabBarItem.title = @"关于我们";
-        self.tabBarItem.image = [UIImage imageNamed:@"nav_aboutus.png"];
+         self.tabBarItem.title = @"使用指南";
+        self.tabBarItem.image = [UIImage imageNamed:@"tabbar_compress.png"];
+        self.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     }
     return self;
 }
@@ -30,23 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    /************************************Reachability****************************************/
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
-    [reach startNotifier];
-    
-    //webView
-    NSString *string = [NSString stringWithFormat:@"http://www.vrdam.com/news/aboutus.html"];
-    NSString *stringURL = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *url = [NSURL URLWithString:stringURL];
-    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 - (void)viewDidUnload
 {
     [self setNavigationBar:nil];
-    [self setWebView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -55,9 +43,15 @@
 {
     //modify _navigatioBar
     if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleVerticalPositionAdjustment:10 forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_bottom.jpg"] forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
     }
+    
+    _aboutusButton = [[UIButton alloc] initWithFrame:CGRectMake(930.0f, 10.0f, 29.0f, 29.0f)];
+    [_aboutusButton setImage:[UIImage imageNamed:@"btn_aboutus.png"] forState:UIControlStateNormal];
+    [_navigationBar addSubview:_aboutusButton];
+    
+    [_aboutusButton addTarget:self action:@selector(aboutusButtonAction) forControlEvents:UIControlEventAllEvents];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -69,14 +63,11 @@
         return NO;
 }
 
--(void)reachabilityChanged:(NSNotification *)note
+#pragma mark - Actions
+
+-(void)aboutusButtonAction
 {
-    Reachability *reach = [note object];
-    if(![reach isReachable])
-    {
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alerView show];
-    }
+    return;
 }
 
 @end

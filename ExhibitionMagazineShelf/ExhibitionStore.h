@@ -36,6 +36,9 @@ typedef enum{
 //connect download NSOperation children NSInvocationOperation add to NSOperationQueue
 @property (nonatomic,retain)NSInvocationOperation *op;
 
+//save list data
+@property (nonatomic,retain)NSArray *list;
+
 //init view
 -(void)startup;
 

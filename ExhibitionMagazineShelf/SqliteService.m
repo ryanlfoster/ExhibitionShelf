@@ -214,5 +214,27 @@
     }
     return array;
 }
+
+-(NSUInteger)getCountToDB
+{
+    
+    NSUInteger count = 0;
+    if([self openDB]){
+        sqlite3_stmt *statement;
+        const char *getCount_statement = "SELECT COUNT(*) FROM EXHIBITION";
+        if(sqlite3_prepare_v2(_database, getCount_statement,-1,&statement,NULL) != SQLITE_OK)
+        {
+            NSLog(@"Error: failed to get date");
+        }else{
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                count++;
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(_database);
+    }
+    return count;
+}
+
 @end
 

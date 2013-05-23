@@ -8,7 +8,14 @@
 
 #import "CustomPageControl.h"
 
+@interface CustomPageControl(Private)
+-(void) updateDots;
+@end
+
 @implementation CustomPageControl
+
+@synthesize imagePageStateHightlighted = _imagePageStateHightlighted;
+@synthesize imagePageStateNormal = _imagePageStateNormal;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -17,6 +24,33 @@
         // Initialization code
     }
     return self;
+}
+-(void) setImagePageStateHightlighted:(UIImage *)imagePageStateHightlighted
+{
+    _imagePageStateHightlighted = imagePageStateHightlighted;
+    [self updateDots];
+}
+-(void)setImagePageStateNormal:(UIImage *)imagePageStateNormal
+{
+    _imagePageStateNormal = imagePageStateNormal;
+    [self updateDots];
+}
+-(void)updateDots
+{
+    if(_imagePageStateNormal || _imagePageStateHightlighted)
+    {
+        NSArray *subView = self.subviews;
+        for(int i = 0 ; i < [subView count]; i++)
+        {
+            UIImageView *dot = [subView objectAtIndex:i];
+            dot.image = (self.currentPage == i ? _imagePageStateHightlighted : _imagePageStateNormal);
+        }
+    }
+}
+-(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    [super endTrackingWithTouch:touch withEvent:event];
+    [self updateDots];
 }
 
 /*

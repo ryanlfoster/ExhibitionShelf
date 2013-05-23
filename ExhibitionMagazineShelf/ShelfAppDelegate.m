@@ -22,23 +22,23 @@
 //    UIViewController *viewController2 = [[ShelfSecondViewController alloc] initWithNibName:@"ShelfSecondViewController" bundle:nil];
     UIViewController *viewController3 = [[ShelfThirdViewController alloc] initWithNibName:@"ShelfThirdViewController" bundle:nil];
     UIViewController *viewController4 = [[ShelfFourthViewController alloc] initWithNibName:@"ShelfFourthViewController" bundle:nil];
-    UIViewController *viewController5 = [[ShelfFivethViewController alloc] initWithNibName:@"ShelfFivethViewController" bundle:nil];
     
     //all add to tab bar controller
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[viewController1, viewController3, viewController4, viewController5];
+    self.tabBarController.viewControllers = @[viewController1, viewController3, viewController4];
     
     //set tab bar title style
-    [[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont fontWithName:@"MicrosoftYaHei" size:14.0],UITextAttributeFont, nil] forState:UIControlStateNormal];
+    [[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont fontWithName:@"MicrosoftYaHei" size:11.0],UITextAttributeFont,nil] forState:UIControlStateNormal];
     
     //set tab bar background
-    UIImage *backgroundImageNav = [UIImage imageNamed:@"background_nav_bottom_modify.png"];
+    UIImage *backgroundImageNav = [UIImage imageNamed:@"background_nav_bottom.jpg"];
     self.tabBarController.tabBar.backgroundImage = backgroundImageNav;
+    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
     
     //set tab bar item selected background
-    UIImage *backgroundImageBtnNav = [UIImage imageNamed:@"tab_bar_btn_50.png"];
+    UIImage *backgroundImageBtnNav = [UIImage imageNamed:@"tab_bar_btn_press 2.png"];
     self.tabBarController.tabBar.selectionIndicatorImage = backgroundImageBtnNav;
-    self.tabBarController.tabBar.selectedImageTintColor  = [UIColor redColor];
+    self.tabBarController.tabBar.selectedImageTintColor  = [UIColor whiteColor];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;

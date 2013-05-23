@@ -20,13 +20,11 @@
 
 @interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) UIButton *aboutusButton;
 @property (strong, nonatomic) UIScrollView *containerView;
-
-@property (strong, nonatomic) CustomPageControl *pageControl;
-
+@property (retain, nonatomic) IBOutlet CustomPageControl *pageControl;
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
-@property (nonatomic, retain) NSArray *listData;
 
 -(void)resourceRequest;
 

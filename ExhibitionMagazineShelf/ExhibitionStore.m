@@ -18,6 +18,7 @@
 @synthesize status = _status;
 @synthesize downloadQueue = _downloadQueue;
 @synthesize op = _op;
+@synthesize list = _list;
 
 #pragma mark - Object lifecycle
 
@@ -109,7 +110,7 @@
 {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    NSArray *_list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/exhibition.plist"]];
+    _list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/exhibition.plist"]];
         if(!_list){
             _list = [[NSArray alloc] initWithContentsOfURL:[self fileURLOfCachedExhibitionFile]];
         }

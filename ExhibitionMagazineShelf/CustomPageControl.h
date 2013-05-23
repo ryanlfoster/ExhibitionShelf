@@ -10,4 +10,7 @@
 
 @interface CustomPageControl : UIPageControl
 
+@property (nonatomic, strong) UIImage *imagePageStateNormal;
+@property (nonatomic, strong) UIImage *imagePageStateHightlighted;
+
 @end
