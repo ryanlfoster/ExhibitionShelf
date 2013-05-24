@@ -32,17 +32,10 @@ NSUInteger numberOfPages;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
         self.tabBarItem.title = @"全景展览";
         self.tabBarItem.image = [UIImage imageNamed:@"tabbar_exhibition.png"];
         self.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
-        
-        /***************************************load View****************************************/
-        //load background
-        UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
-        UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-        self.view.backgroundColor = backgroundColor;
-        
-        _pageControl.alpha = 0 ;
         
     }
     return self;
@@ -57,6 +50,14 @@ NSUInteger numberOfPages;
 //    for (NSString *fontName in [UIFont familyNames]){
 //        NSLog(@"%@", fontName);
 //    }
+    
+    _pageControl.alpha = 0 ;
+    
+    /***************************************load View****************************************/
+    //load background
+    UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
+    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    self.view.backgroundColor = backgroundColor;
     
     //NSThread
     [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
@@ -137,6 +138,9 @@ NSUInteger numberOfPages;
 
 -(void)updateShelf {
     
+    if(_containerView != nil){
+        [_containerView removeFromSuperview];
+    }
     _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, 1024, 708)];
     _containerView.pagingEnabled = YES;
     _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
@@ -147,7 +151,7 @@ NSUInteger numberOfPages;
     [self.view addSubview:_containerView];
     
     _pageControl.backgroundColor = [UIColor clearColor];
-    [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"normal.png"]];
+    [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"normalother.png"]];
     [_pageControl setImagePageStateHightlighted:[UIImage imageNamed:@"hightlighted.png"]];
     _pageControl.numberOfPages = numberOfPages;
     _pageControl.currentPage = 0;
@@ -222,7 +226,7 @@ NSUInteger numberOfPages;
     NSArray *subView = _pageControl.subviews;
     for(int i = 0; i < [subView count]; i++){
         UIImageView *dot = [subView objectAtIndex:i];
-        dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"hightlighted.png"] : [UIImage imageNamed:@"normal.png"]);
+        dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"hightlighted.png"] : [UIImage imageNamed:@"normalother.png"]);
     }
 }
 

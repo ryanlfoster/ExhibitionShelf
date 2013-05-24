@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3C004E75174E193900FF0E1E /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C004E74174E193900FF0E1E /* btn_back.png */; };
-		3C004E78174E209800FF0E1E /* tab_bar_btn_press 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C004E77174E209800FF0E1E /* tab_bar_btn_press 2.png */; };
 		3C035550172A576800B9F781 /* Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03554F172A576800B9F781 /* Shadow.m */; };
 		3C0489721741D8F200C28540 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D416F9A5F200A8250C /* UIKit.framework */; };
 		3C0489731741D8F200C28540 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D616F9A5F200A8250C /* Foundation.framework */; };
@@ -28,10 +27,8 @@
 		3C0A57411737757A00B19737 /* SqliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0A57401737757A00B19737 /* SqliteService.m */; };
 		3C1691D21726623A009E4B07 /* ShelfSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691D11726623A009E4B07 /* ShelfSecondViewController.xib */; };
 		3C1691D417266367009E4B07 /* ShelfFourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */; };
-		3C1691D9172663D0009E4B07 /* ShelfFivethViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1691D7172663D0009E4B07 /* ShelfFivethViewController.m */; };
 		3C1691DD17266469009E4B07 /* ShelfThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */; };
 		3C1691DE172668E1009E4B07 /* ShelfFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691E0172668E1009E4B07 /* ShelfFirstViewController.xib */; };
-		3C1691E4172669CA009E4B07 /* ShelfFivethViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691E3172669CA009E4B07 /* ShelfFivethViewController.xib */; };
 		3C1691F71726891A009E4B07 /* MicrosoftYaHei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691F61726891A009E4B07 /* MicrosoftYaHei.ttf */; };
 		3C1691FF1726946B009E4B07 /* background_nav_bottom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691FE1726946B009E4B07 /* background_nav_bottom.jpg */; };
 		3C16920317269B07009E4B07 /* background_nav_top.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C16920217269B07009E4B07 /* background_nav_top.jpg */; };
@@ -43,7 +40,6 @@
 		3C2A7AA3171E427400F3C423 /* download_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A7AA2171E427400F3C423 /* download_button.png */; };
 		3C2A7AA6171E81CC00F3C423 /* background_main.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A7AA5171E81CC00F3C423 /* background_main.jpg */; };
 		3C3848F217210F9A00B31758 /* MCProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3848F117210F9A00B31758 /* MCProgressBar.m */; };
-		3C470D0A1740CD9300F3E2EB /* help.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3C470D091740CD9300F3E2EB /* help.pdf */; };
 		3C58496A1732553D00C3B7C6 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5849691732553D00C3B7C6 /* AHAlertView.m */; };
 		3C58497E1732735100C3B7C6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C58497D1732735100C3B7C6 /* Reachability.m */; };
 		3C584980173276F200C3B7C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C58497F173276F200C3B7C6 /* SystemConfiguration.framework */; };
@@ -57,7 +53,6 @@
 		3C69F6F516F9A5F200A8250C /* ShelfSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69F6F416F9A5F200A8250C /* ShelfSecondViewController.m */; };
 		3C806ECF174DB04300D43AA6 /* hightlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ECE174DB04300D43AA6 /* hightlighted.png */; };
 		3C806ED1174DB04900D43AA6 /* normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED0174DB04900D43AA6 /* normal.png */; };
-		3C806ED3174DB0DB00D43AA6 /* tab_bar_btn_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED2174DB0DB00D43AA6 /* tab_bar_btn_press.png */; };
 		3C806ED5174DB17D00D43AA6 /* tabbar_exhibition.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED4174DB17D00D43AA6 /* tabbar_exhibition.png */; };
 		3C806ED8174DB23500D43AA6 /* tabbar_compress.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED6174DB23400D43AA6 /* tabbar_compress.png */; };
 		3C806ED9174DB23500D43AA6 /* tabbar_myexhibition.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */; };
@@ -73,10 +68,15 @@
 		3CA05E3B171504C200B30FD1 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E34171504C200B30FD1 /* zip.c */; };
 		3CA05E3C171504C200B30FD1 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E37171504C200B30FD1 /* ZipArchive.mm */; };
 		3CA1FB8D173B8ACB00365B3E /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1FB8C173B8ACB00365B3E /* SplashViewController.m */; };
+		3CADC8CF174EF8550053BBCE /* background_nav_bottom_red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8CE174EF8550053BBCE /* background_nav_bottom_red.jpg */; };
+		3CADC8D6174F17480053BBCE /* tab_bar_btn_press_108.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8D5174F17480053BBCE /* tab_bar_btn_press_108.png */; };
+		3CADC8D8174F1B380053BBCE /* tabbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8D7174F1B380053BBCE /* tabbar_background.png */; };
+		3CADC8E4174F5E250053BBCE /* normalother.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8E3174F5E250053BBCE /* normalother.png */; };
+		3CADC8E6174F620C0053BBCE /* tabbarcontent_help.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8E5174F620C0053BBCE /* tabbarcontent_help.png */; };
+		3CADC8E8174F623B0053BBCE /* content_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8E7174F623B0053BBCE /* content_about.png */; };
 		3CB1A13816FC02C000AAAF25 /* SecondCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1A13716FC02C000AAAF25 /* SecondCoverView.m */; };
 		3CB1A13B16FC032200AAAF25 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1A13A16FC032200AAAF25 /* QuickLook.framework */; };
 		3CB9662D17043497002C1840 /* ExhibitionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9662C17043497002C1840 /* ExhibitionStore.m */; };
-		3CBEB6981729231C00717AA0 /* nav_help.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CBEB6941729231C00717AA0 /* nav_help.png */; };
 		3CE07062171687040050B052 /* ShelfThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE07061171687040050B052 /* ShelfThirdViewController.m */; };
 		3CE0706517168E080050B052 /* ShelfFourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0706417168E080050B052 /* ShelfFourthViewController.m */; };
 		3CE0707A171694F80050B052 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE07079171694F80050B052 /* MBProgressHUD.m */; };
@@ -91,7 +91,6 @@
 
 /* Begin PBXFileReference section */
 		3C004E74174E193900FF0E1E /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
-		3C004E77174E209800FF0E1E /* tab_bar_btn_press 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bar_btn_press 2.png"; sourceTree = "<group>"; };
 		3C03554E172A576800B9F781 /* Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shadow.h; sourceTree = "<group>"; };
 		3C03554F172A576800B9F781 /* Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shadow.m; sourceTree = "<group>"; };
 		3C0489701741D8F200C28540 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,11 +121,8 @@
 		3C0A57401737757A00B19737 /* SqliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteService.m; sourceTree = "<group>"; };
 		3C1691D11726623A009E4B07 /* ShelfSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfSecondViewController.xib; sourceTree = "<group>"; };
 		3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfFourthViewController.xib; sourceTree = "<group>"; };
-		3C1691D6172663D0009E4B07 /* ShelfFivethViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfFivethViewController.h; sourceTree = "<group>"; };
-		3C1691D7172663D0009E4B07 /* ShelfFivethViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfFivethViewController.m; sourceTree = "<group>"; };
 		3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfThirdViewController.xib; sourceTree = "<group>"; };
 		3C1691DF172668E1009E4B07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ShelfFirstViewController.xib; sourceTree = "<group>"; };
-		3C1691E3172669CA009E4B07 /* ShelfFivethViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfFivethViewController.xib; sourceTree = "<group>"; };
 		3C1691F61726891A009E4B07 /* MicrosoftYaHei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MicrosoftYaHei.ttf; sourceTree = "<group>"; };
 		3C1691FE1726946B009E4B07 /* background_nav_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_nav_bottom.jpg; sourceTree = "<group>"; };
 		3C16920217269B07009E4B07 /* background_nav_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_nav_top.jpg; sourceTree = "<group>"; };
@@ -141,7 +137,6 @@
 		3C2A7AA5171E81CC00F3C423 /* background_main.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_main.jpg; sourceTree = "<group>"; };
 		3C3848F017210F9A00B31758 /* MCProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProgressBar.h; sourceTree = "<group>"; };
 		3C3848F117210F9A00B31758 /* MCProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProgressBar.m; sourceTree = "<group>"; };
-		3C470D091740CD9300F3E2EB /* help.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = help.pdf; sourceTree = "<group>"; };
 		3C5849681732553D00C3B7C6 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
 		3C5849691732553D00C3B7C6 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
 		3C58497C1732735100C3B7C6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -163,7 +158,6 @@
 		3C69F6F416F9A5F200A8250C /* ShelfSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShelfSecondViewController.m; sourceTree = "<group>"; };
 		3C806ECE174DB04300D43AA6 /* hightlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hightlighted.png; sourceTree = "<group>"; };
 		3C806ED0174DB04900D43AA6 /* normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normal.png; sourceTree = "<group>"; };
-		3C806ED2174DB0DB00D43AA6 /* tab_bar_btn_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bar_btn_press.png; sourceTree = "<group>"; };
 		3C806ED4174DB17D00D43AA6 /* tabbar_exhibition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_exhibition.png; sourceTree = "<group>"; };
 		3C806ED6174DB23400D43AA6 /* tabbar_compress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_compress.png; sourceTree = "<group>"; };
 		3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_myexhibition.png; sourceTree = "<group>"; };
@@ -190,12 +184,17 @@
 		3CA05E37171504C200B30FD1 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		3CA1FB8B173B8ACB00365B3E /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		3CA1FB8C173B8ACB00365B3E /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
+		3CADC8CE174EF8550053BBCE /* background_nav_bottom_red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_nav_bottom_red.jpg; sourceTree = "<group>"; };
+		3CADC8D5174F17480053BBCE /* tab_bar_btn_press_108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bar_btn_press_108.png; sourceTree = "<group>"; };
+		3CADC8D7174F1B380053BBCE /* tabbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_background.png; sourceTree = "<group>"; };
+		3CADC8E3174F5E250053BBCE /* normalother.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalother.png; sourceTree = "<group>"; };
+		3CADC8E5174F620C0053BBCE /* tabbarcontent_help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarcontent_help.png; sourceTree = "<group>"; };
+		3CADC8E7174F623B0053BBCE /* content_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = content_about.png; sourceTree = "<group>"; };
 		3CB1A13616FC02C000AAAF25 /* SecondCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondCoverView.h; sourceTree = "<group>"; };
 		3CB1A13716FC02C000AAAF25 /* SecondCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondCoverView.m; sourceTree = "<group>"; };
 		3CB1A13A16FC032200AAAF25 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		3CB9662B17043497002C1840 /* ExhibitionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionStore.h; sourceTree = "<group>"; };
 		3CB9662C17043497002C1840 /* ExhibitionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhibitionStore.m; sourceTree = "<group>"; };
-		3CBEB6941729231C00717AA0 /* nav_help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_help.png; sourceTree = "<group>"; };
 		3CE07060171687040050B052 /* ShelfThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfThirdViewController.h; sourceTree = "<group>"; };
 		3CE07061171687040050B052 /* ShelfThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfThirdViewController.m; sourceTree = "<group>"; };
 		3CE0706317168E080050B052 /* ShelfFourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfFourthViewController.h; sourceTree = "<group>"; };
@@ -456,15 +455,12 @@
 				3CE07061171687040050B052 /* ShelfThirdViewController.m */,
 				3CE0706317168E080050B052 /* ShelfFourthViewController.h */,
 				3CE0706417168E080050B052 /* ShelfFourthViewController.m */,
-				3C1691D6172663D0009E4B07 /* ShelfFivethViewController.h */,
-				3C1691D7172663D0009E4B07 /* ShelfFivethViewController.m */,
 				3C896F6E1705653E003E079D /* ExhibitionViewController.h */,
 				3C896F6F1705653E003E079D /* ExhibitionViewController.m */,
 				3C1691E0172668E1009E4B07 /* ShelfFirstViewController.xib */,
 				3C1691D11726623A009E4B07 /* ShelfSecondViewController.xib */,
 				3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */,
 				3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */,
-				3C1691E3172669CA009E4B07 /* ShelfFivethViewController.xib */,
 				3CA1FB8B173B8ACB00365B3E /* SplashViewController.h */,
 				3CA1FB8C173B8ACB00365B3E /* SplashViewController.m */,
 			);
@@ -474,23 +470,25 @@
 		3C58994816FA9BE500624CE9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3CADC8E7174F623B0053BBCE /* content_about.png */,
+				3CADC8E5174F620C0053BBCE /* tabbarcontent_help.png */,
+				3CADC8D7174F1B380053BBCE /* tabbar_background.png */,
+				3CADC8D5174F17480053BBCE /* tab_bar_btn_press_108.png */,
+				3CADC8CE174EF8550053BBCE /* background_nav_bottom_red.jpg */,
 				3C004E74174E193900FF0E1E /* btn_back.png */,
 				3C806ED6174DB23400D43AA6 /* tabbar_compress.png */,
 				3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */,
 				3C806ED4174DB17D00D43AA6 /* tabbar_exhibition.png */,
-				3C806ED2174DB0DB00D43AA6 /* tab_bar_btn_press.png */,
+				3CADC8E3174F5E250053BBCE /* normalother.png */,
 				3C806ED0174DB04900D43AA6 /* normal.png */,
 				3C806ECE174DB04300D43AA6 /* hightlighted.png */,
 				3C9FB38D174B5AD700121C2B /* MicrosoftYaHeiBold.ttf */,
-				3C470D091740CD9300F3E2EB /* help.pdf */,
 				3C806EDA174DBE5200D43AA6 /* btn_aboutus.png */,
-				3CBEB6941729231C00717AA0 /* nav_help.png */,
 				3C1692231726A5C1009E4B07 /* progressBar_background_before.png */,
 				3C1692241726A5C1009E4B07 /* processBar_before.png */,
 				3C16920217269B07009E4B07 /* background_nav_top.jpg */,
 				3C1691FE1726946B009E4B07 /* background_nav_bottom.jpg */,
 				3C1691F61726891A009E4B07 /* MicrosoftYaHei.ttf */,
-				3C004E77174E209800FF0E1E /* tab_bar_btn_press 2.png */,
 				3CF907A9171FEA3F00BDFA97 /* cancel_button.png */,
 				3CF9078E171FBAF900BDFA97 /* view_button.png */,
 				3C2A7AA5171E81CC00F3C423 /* background_main.jpg */,
@@ -746,24 +744,25 @@
 				3C1691D21726623A009E4B07 /* ShelfSecondViewController.xib in Resources */,
 				3C1691D417266367009E4B07 /* ShelfFourthViewController.xib in Resources */,
 				3C1691DD17266469009E4B07 /* ShelfThirdViewController.xib in Resources */,
-				3C1691E4172669CA009E4B07 /* ShelfFivethViewController.xib in Resources */,
 				3C1691F71726891A009E4B07 /* MicrosoftYaHei.ttf in Resources */,
 				3C1691FF1726946B009E4B07 /* background_nav_bottom.jpg in Resources */,
 				3C16920317269B07009E4B07 /* background_nav_top.jpg in Resources */,
 				3C1692251726A5C1009E4B07 /* progressBar_background_before.png in Resources */,
 				3C1692261726A5C1009E4B07 /* processBar_before.png in Resources */,
-				3CBEB6981729231C00717AA0 /* nav_help.png in Resources */,
-				3C470D0A1740CD9300F3E2EB /* help.pdf in Resources */,
 				3C9FB38E174B5AD700121C2B /* MicrosoftYaHeiBold.ttf in Resources */,
 				3C806ECF174DB04300D43AA6 /* hightlighted.png in Resources */,
 				3C806ED1174DB04900D43AA6 /* normal.png in Resources */,
-				3C806ED3174DB0DB00D43AA6 /* tab_bar_btn_press.png in Resources */,
 				3C806ED5174DB17D00D43AA6 /* tabbar_exhibition.png in Resources */,
 				3C806ED8174DB23500D43AA6 /* tabbar_compress.png in Resources */,
 				3C806ED9174DB23500D43AA6 /* tabbar_myexhibition.png in Resources */,
 				3C806EDB174DBE5200D43AA6 /* btn_aboutus.png in Resources */,
 				3C004E75174E193900FF0E1E /* btn_back.png in Resources */,
-				3C004E78174E209800FF0E1E /* tab_bar_btn_press 2.png in Resources */,
+				3CADC8CF174EF8550053BBCE /* background_nav_bottom_red.jpg in Resources */,
+				3CADC8D6174F17480053BBCE /* tab_bar_btn_press_108.png in Resources */,
+				3CADC8D8174F1B380053BBCE /* tabbar_background.png in Resources */,
+				3CADC8E4174F5E250053BBCE /* normalother.png in Resources */,
+				3CADC8E6174F620C0053BBCE /* tabbarcontent_help.png in Resources */,
+				3CADC8E8174F623B0053BBCE /* content_about.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,7 +828,6 @@
 				3CE0707A171694F80050B052 /* MBProgressHUD.m in Sources */,
 				3C1EC21A171C06FE003E9E79 /* ThirdCoverView.m in Sources */,
 				3C3848F217210F9A00B31758 /* MCProgressBar.m in Sources */,
-				3C1691D9172663D0009E4B07 /* ShelfFivethViewController.m in Sources */,
 				3C20754E17279EE500E0AE37 /* CustomTabBar.m in Sources */,
 				3C035550172A576800B9F781 /* Shadow.m in Sources */,
 				3C58496A1732553D00C3B7C6 /* AHAlertView.m in Sources */,

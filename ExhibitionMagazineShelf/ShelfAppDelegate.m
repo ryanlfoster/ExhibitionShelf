@@ -11,7 +11,6 @@
 #import "ShelfSecondViewController.h"
 #import "ShelfThirdViewController.h"
 #import "ShelfFourthViewController.h"
-#import "ShelfFivethViewController.h"
 @implementation ShelfAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -31,12 +30,12 @@
     [[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont fontWithName:@"MicrosoftYaHei" size:11.0],UITextAttributeFont,nil] forState:UIControlStateNormal];
     
     //set tab bar background
-    UIImage *backgroundImageNav = [UIImage imageNamed:@"background_nav_bottom.jpg"];
+    UIImage *backgroundImageNav = [UIImage imageNamed:@"tabbar_background.png"];
     self.tabBarController.tabBar.backgroundImage = backgroundImageNav;
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
     
     //set tab bar item selected background
-    UIImage *backgroundImageBtnNav = [UIImage imageNamed:@"tab_bar_btn_press 2.png"];
+    UIImage *backgroundImageBtnNav = [UIImage imageNamed:@"tab_bar_btn_press_108.png"];
     self.tabBarController.tabBar.selectionIndicatorImage = backgroundImageBtnNav;
     self.tabBarController.tabBar.selectedImageTintColor  = [UIColor whiteColor];
     self.window.rootViewController = self.tabBarController;

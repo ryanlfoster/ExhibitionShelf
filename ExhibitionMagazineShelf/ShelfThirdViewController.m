@@ -196,6 +196,8 @@ NSUInteger numberOfPages;//scrollView page count
             }
             
         }
+        
+        [self viewWillAppear:YES];
 
     }else return;
 }

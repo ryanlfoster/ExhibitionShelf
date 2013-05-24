@@ -31,7 +31,7 @@
         // frame
         self.frame = CGRectMake(0, 0, 512, 192);
         // title label
-        _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 50, 224, 40)];
+        _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 40, 224, 40)];
         _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:15.0];
         _title.textColor=[UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
         _title.textAlignment = UITextAlignmentLeft;
@@ -41,13 +41,13 @@
         _title.shadowColor = [UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
         _title.shadowOffset = CGSizeMake(0.1, 0.1);
         //description label
-        _description = [[UILabel alloc] initWithFrame:CGRectMake(272, 90, 224, 76)];
+        _description = [[UILabel alloc] initWithFrame:CGRectMake(272, 80, 224, 76)];
         _description.font = [UIFont fontWithName:@"MicrosoftYaHei" size:12.0];
         _description.textColor = [UIColor colorWithRed:153.0/255 green:153.0/255 blue:153.0/255 alpha:1.0f];
         _description.backgroundColor = [UIColor clearColor];
         _description.textAlignment = UITextAlignmentLeft;
         _description.lineBreakMode = UILineBreakModeTailTruncation;
-        _description.numberOfLines = 3;
+        _description.numberOfLines = 4;
         //imageView
         _cover = [[UIImageView alloc] initWithFrame:CGRectMake(40, 50, 202, 169)];
         _cover.userInteractionEnabled = YES;
