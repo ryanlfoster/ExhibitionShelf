@@ -11,6 +11,7 @@
 #import "Exhibition.h"
 #import "ExhibitionStore.h"
 #import "Reachability.h"
+#import "AboutUsViewController.h"
 
 NSUInteger numberOfPages;
 
@@ -308,7 +309,9 @@ NSUInteger numberOfPages;
 
 -(void)aboutusButtonAction
 {
-    return;
+    AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];
+    [aboutUsViewController setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+    [self presentModalViewController:aboutUsViewController animated:YES];
 }
 
 #pragma mark - NSNotification

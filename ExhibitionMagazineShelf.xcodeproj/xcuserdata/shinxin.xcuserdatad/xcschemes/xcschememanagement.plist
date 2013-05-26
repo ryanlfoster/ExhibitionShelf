@@ -9,9 +9,29 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>OCUnit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Tests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3C04896F1741D8F200C28540</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3C0489E51741E1FA00C28540</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3C69F6CF16F9A5F200A8250C</key>
 		<dict>
 			<key>primary</key>

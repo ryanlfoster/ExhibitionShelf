@@ -87,6 +87,8 @@
 		3CF9078F171FBAF900BDFA97 /* view_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9078E171FBAF900BDFA97 /* view_button.png */; };
 		3CF90792171FBD3800BDFA97 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF90791171FBD3800BDFA97 /* QuartzCore.framework */; };
 		3CF907AA171FEA3F00BDFA97 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF907A9171FEA3F00BDFA97 /* cancel_button.png */; };
+		76C7B9D7175228E800F29664 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C7B9D5175228E800F29664 /* AboutUsViewController.m */; };
+		76C7B9D8175228E800F29664 /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C7B9D6175228E800F29664 /* AboutUsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,6 +212,9 @@
 		3CF9078E171FBAF900BDFA97 /* view_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_button.png; sourceTree = "<group>"; };
 		3CF90791171FBD3800BDFA97 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3CF907A9171FEA3F00BDFA97 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
+		76C7B9D4175228E800F29664 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		76C7B9D5175228E800F29664 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		76C7B9D6175228E800F29664 /* AboutUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +468,9 @@
 				3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */,
 				3CA1FB8B173B8ACB00365B3E /* SplashViewController.h */,
 				3CA1FB8C173B8ACB00365B3E /* SplashViewController.m */,
+				76C7B9D4175228E800F29664 /* AboutUsViewController.h */,
+				76C7B9D5175228E800F29664 /* AboutUsViewController.m */,
+				76C7B9D6175228E800F29664 /* AboutUsViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -763,6 +771,7 @@
 				3CADC8E4174F5E250053BBCE /* normalother.png in Resources */,
 				3CADC8E6174F620C0053BBCE /* tabbarcontent_help.png in Resources */,
 				3CADC8E8174F623B0053BBCE /* content_about.png in Resources */,
+				76C7B9D8175228E800F29664 /* AboutUsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,6 +844,7 @@
 				3C0A57411737757A00B19737 /* SqliteService.m in Sources */,
 				3CA1FB8D173B8ACB00365B3E /* SplashViewController.m in Sources */,
 				3C8BF4F5174CC66D008E0B73 /* CustomPageControl.m in Sources */,
+				76C7B9D7175228E800F29664 /* AboutUsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

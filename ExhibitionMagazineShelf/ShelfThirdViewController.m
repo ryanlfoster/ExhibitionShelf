@@ -9,6 +9,7 @@
 #import "ShelfThirdViewController.h"
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
+#import "AboutUsViewController.h"
 
 NSUInteger numberOfPages;//scrollView page count
 
@@ -205,7 +206,9 @@ NSUInteger numberOfPages;//scrollView page count
 #pragma mark - Action
 -(void)aboutusButtonAction
 {
-    return;
+    AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];
+    [aboutUsViewController setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+    [self presentModalViewController:aboutUsViewController animated:YES];;
 }
 
 @end
