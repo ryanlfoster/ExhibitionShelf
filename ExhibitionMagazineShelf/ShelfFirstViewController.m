@@ -245,7 +245,9 @@ NSUInteger numberOfPages;
     
     Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
 
-    if ([reach startNotifier]) {
+    if ([reach currentReachabilityStatus] == NotReachable && [cover.button.titleLabel.text isEqualToString:@"下 载"]) {
+        [reach startNotifier];
+    }else{
         NSString *selectedExhibitionID = cover.exhibitionID;
         Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
         if([selectedExhibition isExhibitionAvailibleForRead]){
@@ -259,8 +261,6 @@ NSUInteger numberOfPages;
             cover.button.alpha=1.0;
         }
         else [self downloadExhibition:selectedExhibition updateCover:cover];
-    }else{
-        return;
     }
 
 }
@@ -310,7 +310,7 @@ NSUInteger numberOfPages;
 -(void)aboutusButtonAction
 {
     AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];
-    [aboutUsViewController setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+    [aboutUsViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentModalViewController:aboutUsViewController animated:YES];
 }
 

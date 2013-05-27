@@ -69,7 +69,7 @@
 -(void)aboutusButtonAction
 {
     AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];
-    [aboutUsViewController setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+    [aboutUsViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentModalViewController:aboutUsViewController animated:YES];;
 }
 
