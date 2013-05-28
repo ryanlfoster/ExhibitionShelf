@@ -57,6 +57,7 @@
 		3C806ED8174DB23500D43AA6 /* tabbar_compress.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED6174DB23400D43AA6 /* tabbar_compress.png */; };
 		3C806ED9174DB23500D43AA6 /* tabbar_myexhibition.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */; };
 		3C806EDB174DBE5200D43AA6 /* btn_aboutus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806EDA174DBE5200D43AA6 /* btn_aboutus.png */; };
+		3C88D41117532385003A6810 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C88D41017532385003A6810 /* Icon-72.png */; };
 		3C896F701705653E003E079D /* ExhibitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C896F6F1705653E003E079D /* ExhibitionViewController.m */; };
 		3C896FB317057987003E079D /* Exhibition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C896FB217057987003E079D /* Exhibition.m */; };
 		3C8BF4F5174CC66D008E0B73 /* CustomPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8BF4F4174CC66D008E0B73 /* CustomPageControl.m */; };
@@ -77,6 +78,7 @@
 		3CB1A13816FC02C000AAAF25 /* SecondCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1A13716FC02C000AAAF25 /* SecondCoverView.m */; };
 		3CB1A13B16FC032200AAAF25 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1A13A16FC032200AAAF25 /* QuickLook.framework */; };
 		3CB9662D17043497002C1840 /* ExhibitionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9662C17043497002C1840 /* ExhibitionStore.m */; };
+		3CC5F1341754498200C37C9F /* Icon-72-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC5F1331754498200C37C9F /* Icon-72-small.png */; };
 		3CE07062171687040050B052 /* ShelfThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE07061171687040050B052 /* ShelfThirdViewController.m */; };
 		3CE0706517168E080050B052 /* ShelfFourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0706417168E080050B052 /* ShelfFourthViewController.m */; };
 		3CE0707A171694F80050B052 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE07079171694F80050B052 /* MBProgressHUD.m */; };
@@ -164,6 +166,7 @@
 		3C806ED6174DB23400D43AA6 /* tabbar_compress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_compress.png; sourceTree = "<group>"; };
 		3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_myexhibition.png; sourceTree = "<group>"; };
 		3C806EDA174DBE5200D43AA6 /* btn_aboutus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_aboutus.png; sourceTree = "<group>"; };
+		3C88D41017532385003A6810 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		3C896F6E1705653E003E079D /* ExhibitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionViewController.h; sourceTree = "<group>"; };
 		3C896F6F1705653E003E079D /* ExhibitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhibitionViewController.m; sourceTree = "<group>"; };
 		3C896FB117057986003E079D /* Exhibition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exhibition.h; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		3CB1A13A16FC032200AAAF25 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		3CB9662B17043497002C1840 /* ExhibitionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionStore.h; sourceTree = "<group>"; };
 		3CB9662C17043497002C1840 /* ExhibitionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhibitionStore.m; sourceTree = "<group>"; };
+		3CC5F1331754498200C37C9F /* Icon-72-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72-small.png"; sourceTree = "<group>"; };
 		3CE07060171687040050B052 /* ShelfThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfThirdViewController.h; sourceTree = "<group>"; };
 		3CE07061171687040050B052 /* ShelfThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfThirdViewController.m; sourceTree = "<group>"; };
 		3CE0706317168E080050B052 /* ShelfFourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfFourthViewController.h; sourceTree = "<group>"; };
@@ -508,6 +512,8 @@
 		3C69F6C516F9A5F200A8250C = {
 			isa = PBXGroup;
 			children = (
+				3CC5F1331754498200C37C9F /* Icon-72-small.png */,
+				3C88D41017532385003A6810 /* Icon-72.png */,
 				3C04898B1741DBD400C28540 /* Libraries */,
 				3C58497B1732733100C3B7C6 /* Reachability */,
 				3CA05E2B171504C200B30FD1 /* ZipArchive */,
@@ -772,6 +778,8 @@
 				3CADC8E6174F620C0053BBCE /* tabbarcontent_help.png in Resources */,
 				3CADC8E8174F623B0053BBCE /* content_about.png in Resources */,
 				76C7B9D8175228E800F29664 /* AboutUsViewController.xib in Resources */,
+				3C88D41117532385003A6810 /* Icon-72.png in Resources */,
+				3CC5F1341754498200C37C9F /* Icon-72-small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1028,11 +1036,15 @@
 		3C69F6FD16F9A5F200A8250C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Huai Ji Li (LKXC4SGHS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Huai Ji Li (LKXC4SGHS8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Prefix.pch";
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "数字美术馆";
+				PROVISIONING_PROFILE = "2D509E95-5CCF-4C7C-8645-40E4C8A37D5B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2D509E95-5CCF-4C7C-8645-40E4C8A37D5B";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1041,11 +1053,15 @@
 		3C69F6FE16F9A5F200A8250C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Today Cyber Art Technology Co. (55N5H7YA5P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Today Cyber Art Technology Co. (55N5H7YA5P)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Prefix.pch";
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "数字美术馆";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
