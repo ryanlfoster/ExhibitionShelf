@@ -2,7 +2,7 @@
 //  ShelfThirdViewController.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-4-11.
+//  Created by 秦鑫 on 13-4-11.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
@@ -22,7 +22,7 @@ NSUInteger numberOfPages;//scrollView page count
 @synthesize alertString = _alertString;
 @synthesize alertViewThird = _alertViewThird;
 
-#pragma mark - View lifecycle
+#pragma mark -init nib
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,7 +34,7 @@ NSUInteger numberOfPages;//scrollView page count
     return self;
 }
 
-
+#pragma mark -View lifecycle
 - (void)viewDidLoad    //Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
 {
     
@@ -107,6 +107,13 @@ NSUInteger numberOfPages;//scrollView page count
         return NO;
 }
 
+/**********************************************************
+ 函数名称：-(void)loadScrollViewData
+ 函数描述：更新scrollView
+ 输入参数：N/A
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)loadScrollViewData
 {
     if(_containerView != nil){
@@ -142,8 +149,14 @@ NSUInteger numberOfPages;//scrollView page count
     }
 }
 
-#pragma mark - ShelfThirdViewControllerSelectedProtocol implementation
-
+#pragma mark -ShelfThirdViewControllerSelectedProtocol implementation
+/**********************************************************
+ 函数名称：-(void)coverSelected:(ThirdCoverView *)cover
+ 函数描述：ShelfThirdViewControllerSelectedProtocol
+ 输入参数：(ThirdCoverView *)cover：view
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)coverSelected:(ThirdCoverView *)cover {
     
     NSLog(@"Selected !!!");
@@ -160,8 +173,14 @@ NSUInteger numberOfPages;//scrollView page count
     
 }
 
-#pragma mark - ShelfThirdViewControllerDeletedProtocol implementation
-
+#pragma mark -ShelfThirdViewControllerDeletedProtocol implementation
+/**********************************************************
+ 函数名称：-(void)coverSelected:(ThirdCoverView *)cover
+ 函数描述：ShelfThirdViewControllerDeletedProtocol
+ 输入参数：(ThirdCoverView *)cover：view
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)coverDeleted:(ThirdCoverView *)cover
 {
     
@@ -174,7 +193,14 @@ NSUInteger numberOfPages;//scrollView page count
     
 }
 
-#pragma mark - UIAlertViewDelegate
+#pragma mark -UIAlertViewDelegate
+/**********************************************************
+ 函数名称：-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+ 函数描述：UIAlertViewDelegate
+ 输入参数：(UIAlertView *)alertView:alertView clickedButtonAtIndex:(NSInteger)buttonIndex:button
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 0){
@@ -205,6 +231,13 @@ NSUInteger numberOfPages;//scrollView page count
 }
 
 #pragma mark - Action
+/**********************************************************
+ 函数名称：-(void)aboutusButtonAction
+ 函数描述：按钮功能，关于我们
+ 输入参数：n/a
+ 输出参数：aboutUsViewController
+ 返回值：void
+ **********************************************************/
 -(void)aboutusButtonAction
 {
     AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];

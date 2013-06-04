@@ -2,7 +2,7 @@
 //  MCProgressBar.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-4-19.
+//  Created by 秦鑫 on 13-4-19.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 

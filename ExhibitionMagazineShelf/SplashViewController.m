@@ -2,7 +2,7 @@
 //  SplashViewController.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-5-9.
+//  Created by 秦鑫 on 13-5-9.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 

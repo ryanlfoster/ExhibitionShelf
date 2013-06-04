@@ -2,7 +2,7 @@
 //  ShelfFirstViewController.h
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-3-20.
+//  Created by 秦鑫 on 13-3-20.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
@@ -26,6 +26,7 @@
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 
+//new thread
 -(void)resourceRequest;
 
 @end

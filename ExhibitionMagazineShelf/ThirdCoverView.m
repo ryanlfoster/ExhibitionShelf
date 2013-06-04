@@ -2,7 +2,7 @@
 //  ThirdCoverView.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-4-15.
+//  Created by秦鑫 on 13-4-15.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 

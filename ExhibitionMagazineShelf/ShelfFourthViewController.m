@@ -2,7 +2,7 @@
 //  ShelfFourthViewController.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-4-11.
+//  Created by 秦鑫 on 13-4-11.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
@@ -17,6 +17,8 @@
 @synthesize navigationBar = _navigationBar;
 @synthesize aboutusButton = _aboutusButton;
 
+#pragma mark -nib init
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +29,8 @@
     }
     return self;
 }
+
+#pragma mark -View lifecycle
 
 - (void)viewDidLoad
 {
@@ -66,7 +70,13 @@
 }
 
 #pragma mark - Actions
-
+/**********************************************************
+ 函数名称：-(void)aboutusButtonAction
+ 函数描述：按钮功能，关于我们
+ 输入参数：n/a
+ 输出参数：aboutUsViewController
+ 返回值：void
+ **********************************************************/
 -(void)aboutusButtonAction
 {
     AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];

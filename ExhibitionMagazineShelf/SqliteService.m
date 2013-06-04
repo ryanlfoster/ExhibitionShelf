@@ -2,7 +2,7 @@
 //  SqliteService.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-5-6.
+//  Created by 秦鑫 on 13-5-6.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 

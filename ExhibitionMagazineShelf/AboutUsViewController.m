@@ -23,7 +23,7 @@
     }
     return self;
 }
-
+#pragma mark -view lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,13 +45,6 @@
 
 }
 
-//back to before view
--(void)backOnClick
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-//overturn
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft  ||
@@ -71,4 +64,18 @@
     [self setNavigationBar:nil];
     [super viewDidUnload];
 }
+
+#pragma mark -action
+/**********************************************************
+ 函数名称：-(void)backOnClick
+ 函数描述：返回上一级
+ 输入参数：n/a
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)backOnClick
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 @end

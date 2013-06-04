@@ -2,7 +2,7 @@
 //  ShelfFirstViewController.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-3-20.
+//  Created by 秦鑫 on 13-3-20.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
@@ -17,7 +17,6 @@ NSUInteger numberOfPages;
 
 @interface ShelfFirstViewController ()
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover;
-//reachabilityChanged
 -(void)reachabilityChanged:(NSNotification *)note;
 @end
 @implementation ShelfFirstViewController
@@ -28,7 +27,7 @@ NSUInteger numberOfPages;
 @synthesize progressHUD = _progressHUD;
 @synthesize aboutusButton = _aboutusButton;
 
-#pragma mark - nib init
+#pragma mark -nib init
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,7 +41,7 @@ NSUInteger numberOfPages;
     return self;
 }
 
-#pragma mark - View lifecycle
+#pragma mark -View lifecycle
 
 - (void)viewDidLoad
 {
@@ -109,7 +108,13 @@ NSUInteger numberOfPages;
     else
         return NO;
 }
-
+/**********************************************************
+ 函数名称：-(void)resourceRequest
+ 函数描述：开启新线程，去初始化数据
+ 输入参数：N/A
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)resourceRequest
 {
     //init Store
@@ -121,7 +126,13 @@ NSUInteger numberOfPages;
                                                  name:EXHIBITION_CHANGED_STATUS_NOTIFICATION
                                                object:nil];
 }
-
+/**********************************************************
+ 函数名称：-(void)showShelf
+ 函数描述：显示暑假scrollView
+ 输入参数：N/A
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)showShelf {
     if([_exhibitionStore isExhibitionReady]) {
         _containerView.alpha=1.0;
@@ -137,7 +148,13 @@ NSUInteger numberOfPages;
     }
 
 }
-
+/**********************************************************
+ 函数名称：-(void)showShelf
+ 函数描述：更新scrollView
+ 输入参数：N/A
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)updateShelf {
     
     if(_containerView != nil){
@@ -199,26 +216,14 @@ NSUInteger numberOfPages;
      
 }
 
--(void)reachabilityChanged:(NSNotification *)note
-{
-    Reachability *reach = [note object];
-    if(![reach isReachable])
-    {
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alerView show];
-    }
-}
-
-//-(FirstCoverView *)coverWithID:(NSString *)exhibitionID {
-//    for(UIView *aView in _containerView.subviews) {
-//        if([aView isKindOfClass:[FirstCoverView class]] && [[(FirstCoverView *)aView exhibitionID] isEqualToString:exhibitionID]) {
-//            return (FirstCoverView *)aView;
-//        }
-//    }
-//    return nil;
-//}
-
-#pragma mark - UIScrollView degelete
+#pragma mark -UIScrollView degelete
+/**********************************************************
+ 函数名称：-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+ 函数描述：UIScrollView degelete
+ 输入参数：(UIScrollView *)scrollView
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat pageWidth = _containerView.frame.size.width;
@@ -232,7 +237,14 @@ NSUInteger numberOfPages;
     }
 }
 
-#pragma mark - MBProgressHUDDelegate methods
+#pragma mark -MBProgressHUDDelegate methods
+/**********************************************************
+ 函数名称：- (void)hudWasHidden:(MBProgressHUD *)hud
+ 函数描述：隐藏_progressHUD
+ 输入参数：(MBProgressHUD *)hud：view
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 - (void)hudWasHidden:(MBProgressHUD *)hud {
     NSLog(@"Hud: %@", hud);
     // Remove HUD from screen when the HUD was hidded
@@ -240,8 +252,14 @@ NSUInteger numberOfPages;
     _progressHUD = nil;
 }
 
-#pragma mark - ShelfViewControllerProtocol implementation
-
+#pragma mark -ShelfViewControllerProtocol implementation
+/**********************************************************
+ 函数名称：-(void)coverSelected:(FirstCoverView *)cover
+ 函数描述：ShelfViewControllerProtocol
+ 输入参数：(FirstCoverView *)cover：view
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)coverSelected:(FirstCoverView *)cover {
     
     Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
@@ -266,8 +284,14 @@ NSUInteger numberOfPages;
 
 }
 
-#pragma mark - Actions
-
+#pragma mark -Actions
+/**********************************************************
+ 函数名称：-(void)openZip:(Exhibition *)selectedExhibition
+ 函数描述：打开压缩文件中的内容 并传递str参数
+ 输入参数：(Exhibition *)selectedExhibition：某实例
+ 输出参数：(NSString *)str ：打开的文件名称
+ 返回值：void
+ **********************************************************/
 -(void)openZip:(Exhibition *)selectedExhibition{
     
     ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
@@ -283,7 +307,13 @@ NSUInteger numberOfPages;
         [self presentModalViewController:viewController animated:YES];
     }
 }
-
+/**********************************************************
+ 函数名称：-(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
+ 函数描述：打开压缩文件中的内容 并传递str参数
+ 输入参数：(Exhibition *)exhibition :某实例 updateCover:(FirstCoverView *)cover：某View
+ 输出参数：exhibition:下载某一个实例
+ 返回值：void
+ **********************************************************/
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover {
     
     cover.progress.alpha=1.0;
@@ -302,12 +332,24 @@ NSUInteger numberOfPages;
     
     [_exhibitionStore scheduleDownloadOfExhibition:exhibition];
 }
-
+/**********************************************************
+ 函数名称：-(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
+ 函数描述：取消下载
+ 输入参数：(Exhibition *)exhibition:某一实例 updateCover:(FirstCoverView *)cover：某一view
+ 输出参数：exhibition:取消下载某一个实例
+ 返回值：void
+ **********************************************************/
 -(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
 {
     [_exhibitionStore clearQueue:exhibition];
 }
-
+/**********************************************************
+ 函数名称：-(void)aboutusButtonAction
+ 函数描述：按钮功能，关于我们
+ 输入参数：n/a
+ 输出参数：aboutUsViewController
+ 返回值：void
+ **********************************************************/
 -(void)aboutusButtonAction
 {
     AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];
@@ -315,7 +357,30 @@ NSUInteger numberOfPages;
     [self presentModalViewController:aboutUsViewController animated:YES];
 }
 
-#pragma mark - NSNotification
+#pragma mark -NSNotificationCenter
+/**********************************************************
+ 函数名称：-(void)reachabilityChanged:(NSNotification *)note
+ 函数描述：使用了支持ARC\GCD的网络监测
+ 输入参数：(NSString *)statu：某状态。
+ 输出参数：(int *)roomCount ：该状态房间数量。
+ 返回值：BOOL：操作是否成功。
+ **********************************************************/
+-(void)reachabilityChanged:(NSNotification *)note
+{
+    Reachability *reach = [note object];
+    if(![reach isReachable])
+    {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+        [alerView show];
+    }
+}
+/**********************************************************
+ 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
+ 函数描述：下载完成发送通知
+ 输入参数：(NSNotification *)notification
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
 -(void)exhibitionDidEndDownload:(NSNotification *)notification
 {
     Exhibition *exhibition = (Exhibition *)[notification object];
@@ -323,7 +388,13 @@ NSUInteger numberOfPages;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
     
 }
-
+/**********************************************************
+ 函数名称：-(void)exhibitionDidFailDownload:(NSNotification *)notification
+ 函数描述：下载失败发送通知
+ 输入参数：(NSNotification *)notification
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
 -(void)exhibitionDidFailDownload:(NSNotification *)notification
 {
     Exhibition *exhibition = (Exhibition *)[notification object];

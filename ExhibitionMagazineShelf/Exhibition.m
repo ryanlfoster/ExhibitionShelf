@@ -2,7 +2,7 @@
 //  Exhibition.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-3-29.
+//  Created by 秦鑫 on 13-3-29.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
@@ -30,7 +30,7 @@
 @synthesize expectedLengthNumber = _expectedLengthNumber;
 @synthesize downloadDataLengthNumber = _downloadDataLengthNumber;
 
-#pragma mark - Public methods
+#pragma mark -Public methods
 -(NSURL *)contentURL {
     NSURL *theURL = [NSURL fileURLWithPath:[CacheDirectory stringByAppendingPathComponent:_exhibitionID]];
     // create the URL
@@ -69,14 +69,14 @@
     return _downloading;
 }
 
-#pragma mark - Private methods
+#pragma mark -Private methods
 -(void)setDownloadProgress:(float)downloadProgress
 {
     _downloadProgress = downloadProgress;
     NSLog(@"Download progress: %.0f%%",_downloadProgress * 100);
 }
 
-#pragma mark - NSURLDataConnectionDataDelegate
+#pragma mark -NSURLDataConnectionDataDelegate
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     if(!_downloadData){
@@ -173,7 +173,7 @@
     [self sendFailedDownloadNotification];
 }
 
-#pragma mark - Notifications
+#pragma mark -NSNotificationCenter
 
 -(void)sendEndOfDownloadNotification
 {

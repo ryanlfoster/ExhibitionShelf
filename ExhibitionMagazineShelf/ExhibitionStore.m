@@ -2,7 +2,7 @@
 //  Exhibition.m
 //  ExhibitionMagazineShelf
 //
-//  Created by Today Sybor on 13-3-28.
+//  Created by 秦鑫 on 13-3-28.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
@@ -20,7 +20,7 @@
 @synthesize op = _op;
 @synthesize list = _list;
 
-#pragma mark - Object lifecycle
+#pragma mark -Object lifecycle
 
 -(id)init {
     self = [super init];
@@ -36,7 +36,7 @@
     return self;
 }
 
-#pragma mark - Get/Set override
+#pragma mark -Get/Set override
 //set override
 -(void)setStatus:(ExhibitionStatusType)newStatus
 {
@@ -47,7 +47,7 @@
     });
 }
 
-#pragma mark - Public
+#pragma mark -Public
 //init
 -(void)startup
 {
@@ -105,7 +105,7 @@
     
 }
 
-#pragma mark - Startup(private)
+#pragma mark -Startup(private)
 -(void)downloadStoreExhibition
 {
     
@@ -157,7 +157,7 @@
 }
 
 
-#pragma mark - Private
+#pragma mark -Private
 -(NSURL *)fileURLOfCachedExhibitionFile
 {
     return [NSURL fileURLWithPathComponents:[NSArray arrayWithObjects:DocumentsDirectory,@"exhibition.plist",nil]];
