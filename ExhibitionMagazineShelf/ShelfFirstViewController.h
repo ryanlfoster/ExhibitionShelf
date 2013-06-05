@@ -26,7 +26,4 @@
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 
-//new thread
--(void)resourceRequest;
-
 @end

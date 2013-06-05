@@ -73,7 +73,16 @@ NSUInteger numberOfPages;
     /************************************Reachability****************************************/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
-    Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
+    Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
+    
+    reach.unreachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alerView show];
+        });
+    };
+    
     [reach startNotifier];
 }
 
@@ -262,8 +271,8 @@ NSUInteger numberOfPages;
  **********************************************************/
 -(void)coverSelected:(FirstCoverView *)cover {
     
-    Reachability * reach = [Reachability reachabilityWithHostname:@"http://www.vrdam.com/app/exhibition.plist"];
-
+    Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
+    
     if ([reach currentReachabilityStatus] == NotReachable && [cover.button.titleLabel.text isEqualToString:@"下 载"]) {
         [reach startNotifier];
     }else{

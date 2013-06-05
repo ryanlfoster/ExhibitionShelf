@@ -15,7 +15,8 @@
 
 
 // User sub-dirs
-#define DocumentsDirectory [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, \
-NSUserDomainMask, YES) objectAtIndex:0]
+#define DocumentsDirectory [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0]
 
 #define CacheDirectory [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+
+#define EXHIBITIONLIST @"www.vrdam.com"

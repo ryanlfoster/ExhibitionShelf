@@ -40,8 +40,8 @@
 		3C2A7AA3171E427400F3C423 /* download_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A7AA2171E427400F3C423 /* download_button.png */; };
 		3C2A7AA6171E81CC00F3C423 /* background_main.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C2A7AA5171E81CC00F3C423 /* background_main.jpg */; };
 		3C3848F217210F9A00B31758 /* MCProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3848F117210F9A00B31758 /* MCProgressBar.m */; };
+		3C4ADF02175F25720011E701 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ADF01175F25720011E701 /* Reachability.m */; };
 		3C58496A1732553D00C3B7C6 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5849691732553D00C3B7C6 /* AHAlertView.m */; };
-		3C58497E1732735100C3B7C6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C58497D1732735100C3B7C6 /* Reachability.m */; };
 		3C584980173276F200C3B7C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C58497F173276F200C3B7C6 /* SystemConfiguration.framework */; };
 		3C69F6D516F9A5F200A8250C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D416F9A5F200A8250C /* UIKit.framework */; };
 		3C69F6D716F9A5F200A8250C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D616F9A5F200A8250C /* Foundation.framework */; };
@@ -141,10 +141,10 @@
 		3C2A7AA5171E81CC00F3C423 /* background_main.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_main.jpg; sourceTree = "<group>"; };
 		3C3848F017210F9A00B31758 /* MCProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProgressBar.h; sourceTree = "<group>"; };
 		3C3848F117210F9A00B31758 /* MCProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProgressBar.m; sourceTree = "<group>"; };
+		3C4ADF00175F25720011E701 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3C4ADF01175F25720011E701 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3C5849681732553D00C3B7C6 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
 		3C5849691732553D00C3B7C6 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
-		3C58497C1732735100C3B7C6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		3C58497D1732735100C3B7C6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3C58497F173276F200C3B7C6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3C69F6D016F9A5F200A8250C /* 数字美术馆.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "数字美术馆.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C69F6D416F9A5F200A8250C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -420,8 +420,8 @@
 		3C58497B1732733100C3B7C6 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				3C58497C1732735100C3B7C6 /* Reachability.h */,
-				3C58497D1732735100C3B7C6 /* Reachability.m */,
+				3C4ADF00175F25720011E701 /* Reachability.h */,
+				3C4ADF01175F25720011E701 /* Reachability.m */,
 			);
 			name = Reachability;
 			sourceTree = "<group>";
@@ -848,11 +848,11 @@
 				3C20754E17279EE500E0AE37 /* CustomTabBar.m in Sources */,
 				3C035550172A576800B9F781 /* Shadow.m in Sources */,
 				3C58496A1732553D00C3B7C6 /* AHAlertView.m in Sources */,
-				3C58497E1732735100C3B7C6 /* Reachability.m in Sources */,
 				3C0A57411737757A00B19737 /* SqliteService.m in Sources */,
 				3CA1FB8D173B8ACB00365B3E /* SplashViewController.m in Sources */,
 				3C8BF4F5174CC66D008E0B73 /* CustomPageControl.m in Sources */,
 				76C7B9D7175228E800F29664 /* AboutUsViewController.m in Sources */,
+				3C4ADF02175F25720011E701 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
