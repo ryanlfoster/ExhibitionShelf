@@ -16,7 +16,9 @@
 
 // User sub-dirs
 #define DocumentsDirectory [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0]
-
 #define CacheDirectory [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-
+#define EXHIBITION_CHANGED_STATUS_NOTIFICATION @"ExhibitionChangedStatus"
 #define EXHIBITIONLIST @"www.vrdam.com"
+#define EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION @"ExhibitionEndOfDownload"
+#define EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION @"ExhibitionFailedDownload"
+#define EXHIBITION_CHANGE_BUTTON_NOTIFICATION @"ExhibitionChangeButton"

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ExhibitionViewController.h"
 #import "SqliteService.h"
+#import "ShelfFirstViewController.h"
 
 @class ThirdCoverView;
 
@@ -35,5 +36,8 @@
 @property (nonatomic, weak) UIView *alertViewThird;
 @property (nonatomic, retain) NSString *alertString;
 
+@property (nonatomic,retain) ShelfFirstViewController *shelfFirstViewController;
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+
 @end

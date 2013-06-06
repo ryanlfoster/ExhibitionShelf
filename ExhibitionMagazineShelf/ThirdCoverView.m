@@ -20,6 +20,14 @@
 @synthesize delegateSelected = _delegateSelected;
 @synthesize delegateDeleted = _delegateDeleted;
 
+#pragma mark -init
+/**********************************************************
+ 函数名称：- (id)initWithFrame:(CGRect)frame
+ 函数描述：初始化view
+ 输入参数：(CGRect)frame ：view 框架
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -74,8 +82,14 @@
     return self;
 }
 
-#pragma mark - Callbacks,ShelfViewControllerProtocol,update view over delegate
-
+#pragma mark -ShelfViewControllerProtocol
+/**********************************************************
+ 函数名称：-(void)buttonCallback:(id)sender
+ 函数描述：按钮点击协议方法
+ 输入参数：(id)sender：click
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
 -(void)buttonCallback:(id)sender
 {
     
@@ -84,14 +98,17 @@
 }
 
 #pragma mark - delegate event,ShelfViewControllerProtocol,update view over delegate
-
+/**********************************************************
+ 函数名称：-(void)deleteEvent:(id)sender
+ 函数描述：按钮点击协议方法
+ 输入参数：(id)sender：click
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
 -(void)deleteEvent:(id)sender
 {
     
     [_delegateDeleted coverDeleted:self];
     
 }
-
-
-
 @end

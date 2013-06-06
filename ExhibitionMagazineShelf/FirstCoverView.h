@@ -8,15 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ShelfFirstViewController.h"
-#import <QuartzCore/QuartzCore.h>
 #import "MCProgressBar.h"
-
 @interface FirstCoverView : UIView
 @property (nonatomic,copy) NSString *exhibitionID;
 @property (nonatomic,assign) id<ShelfFirstViewControllerProtocol> delegate;
 @property (nonatomic,strong) UIImageView *cover;
 @property (nonatomic,strong) UIButton *button;
-@property (nonatomic,strong) MCProgressBar *progress;
 @property (nonatomic,strong) UILabel *title;
 @property (nonatomic,strong) UILabel *description;
+@property (nonatomic,strong) MCProgressBar *progressBar;
 @end

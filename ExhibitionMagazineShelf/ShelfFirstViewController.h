@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "ExhibitionViewController.h"
 #import "CustomPageControl.h"
+
 @class FirstCoverView;
 @class ExhibitionStore;
 
@@ -22,8 +23,10 @@
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) UIButton *aboutusButton;
 @property (strong, nonatomic) UIScrollView *containerView;
-@property (retain, nonatomic) IBOutlet CustomPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet CustomPageControl *pageControl;
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
-@property (strong, nonatomic) MBProgressHUD *progressHUD;
+@property (strong, nonatomic) MBProgressHUD *progressHUD;//开启应用的加载等待view
+
+-(void)updateShelf;
 
 @end

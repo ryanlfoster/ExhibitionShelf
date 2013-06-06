@@ -7,9 +7,9 @@
 //
 
 #import "ShelfThirdViewController.h"
+#import "AboutUsViewController.h"
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
-#import "AboutUsViewController.h"
 
 NSUInteger numberOfPages;//scrollView page count
 
@@ -21,6 +21,8 @@ NSUInteger numberOfPages;//scrollView page count
 
 @synthesize alertString = _alertString;
 @synthesize alertViewThird = _alertViewThird;
+
+@synthesize shelfFirstViewController = _shelfFirstViewController;
 
 #pragma mark -init nib
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,7 +54,7 @@ NSUInteger numberOfPages;//scrollView page count
     
     //modify _navigatioBar
     if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_bottom.jpg"] forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor],UITextAttributeTextColor, nil]];
     }
@@ -183,9 +185,14 @@ NSUInteger numberOfPages;//scrollView page count
  **********************************************************/
 -(void)coverDeleted:(ThirdCoverView *)cover
 {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要删除嘛?" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
-    [alert show];
+    NSLog(@"删除中 ＝＝ %d",[Exhibition ifHaveExhibitionDownloading]);
+    if ([Exhibition ifHaveExhibitionDownloading]) {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有全景展览正在下载，请您稍后再试" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+        [alerView show];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要删除此展览?" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
+        [alert show];
+    }
     
     //variable control UIAlertViewDelegate
     _alertViewThird = cover;
@@ -225,9 +232,15 @@ NSUInteger numberOfPages;//scrollView page count
             
         }
         
-        [self viewWillAppear:YES];
+        if(_shelfFirstViewController == nil){
+            _shelfFirstViewController = [[ShelfFirstViewController alloc] init];
+        }
+        
+        [_shelfFirstViewController updateShelf];
 
     }else return;
+    
+    [self viewWillAppear:YES];
 }
 
 #pragma mark - Action

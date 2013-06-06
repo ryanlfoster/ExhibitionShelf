@@ -15,6 +15,14 @@
     CGFloat availableWidth;
 }
 
+#pragma mark -init
+/**********************************************************
+ 函数名称：- (id)initWithFrame:(CGRect)frame
+ 函数描述：初始化view
+ 输入参数：(CGRect)frame ：view 框架
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
 -(id)initWithFrame:(CGRect)frame backgroundImage:(UIImage *)backgroundImage foregroundImage:(UIImage *)foregroundImage
 {
     self = [super initWithFrame:frame];
@@ -40,7 +48,14 @@
     
     return self;
 }
-
+#pragma mark -init
+/**********************************************************
+ 函数名称：-(void)setProgress:(float)progress
+ 函数描述：设置进度条
+ 输入参数：(float)progress：当前进度
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
 -(void)setProgress:(float)progress
 {
     _progress = progress;

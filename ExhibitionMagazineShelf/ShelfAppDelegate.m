@@ -8,7 +8,6 @@
 
 #import "ShelfAppDelegate.h"
 #import "ShelfFirstViewController.h"
-#import "ShelfSecondViewController.h"
 #import "ShelfThirdViewController.h"
 #import "ShelfFourthViewController.h"
 @implementation ShelfAppDelegate
@@ -18,7 +17,6 @@
     
     // Override point for customization after application launch.
     UIViewController *viewController1 = [[ShelfFirstViewController alloc] initWithNibName:@"ShelfFirstViewController" bundle:nil];
-//    UIViewController *viewController2 = [[ShelfSecondViewController alloc] initWithNibName:@"ShelfSecondViewController" bundle:nil];
     UIViewController *viewController3 = [[ShelfThirdViewController alloc] initWithNibName:@"ShelfThirdViewController" bundle:nil];
     UIViewController *viewController4 = [[ShelfFourthViewController alloc] initWithNibName:@"ShelfFourthViewController" bundle:nil];
     

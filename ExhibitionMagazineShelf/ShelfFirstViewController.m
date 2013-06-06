@@ -47,10 +47,6 @@ NSUInteger numberOfPages;
 {
     [super viewDidLoad];
     
-//    for (NSString *fontName in [UIFont familyNames]){
-//        NSLog(@"%@", fontName);
-//    }
-    
     _pageControl.alpha = 0 ;
     
     /***************************************load View****************************************/
@@ -78,7 +74,7 @@ NSUInteger numberOfPages;
     reach.unreachableBlock = ^(Reachability * reachability)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"本软件需要联网后使用，请确保您的网络通畅" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
             [alerView show];
         });
     };
@@ -98,7 +94,7 @@ NSUInteger numberOfPages;
 {
     //modify _navigatioBar
     if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_bottom.jpg"] forBarMetrics:UIBarMetricsDefault];
+        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
         [_navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor],UITextAttributeTextColor, nil]];
     }
@@ -143,7 +139,7 @@ NSUInteger numberOfPages;
  返回值：void
  **********************************************************/
 -(void)showShelf {
-    if([_exhibitionStore isExhibitionReady]) {
+    if([_exhibitionStore isExhibitionStoreReady]) {
         _containerView.alpha=1.0;
         if([_exhibitionStore.list count] % 6 == 0){
             numberOfPages = [_exhibitionStore.list count] / 6;
@@ -158,7 +154,7 @@ NSUInteger numberOfPages;
 
 }
 /**********************************************************
- 函数名称：-(void)showShelf
+ 函数名称：-(void)updateShelf 
  函数描述：更新scrollView
  输入参数：N/A
  输出参数：N/A
@@ -199,7 +195,7 @@ NSUInteger numberOfPages;
             [cover.button setTitle:@"观 看" forState:UIControlStateNormal];
             [cover.button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
         }else if([anExhibition isDownloading]){
-            cover.progress.alpha = 1.0;
+            cover.progressBar.alpha = 1.0;
             [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
             [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
         }
@@ -283,7 +279,7 @@ NSUInteger numberOfPages;
         }
         else if([cover.button.titleLabel.text isEqual: @"取 消"]){
             [self cancelDownloadExhibition:selectedExhibition updateCover:cover];
-            cover.progress.alpha=0.0;
+            cover.progressBar.alpha=0.0;
             [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
             [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
             cover.button.alpha=1.0;
@@ -295,28 +291,6 @@ NSUInteger numberOfPages;
 
 #pragma mark -Actions
 /**********************************************************
- 函数名称：-(void)openZip:(Exhibition *)selectedExhibition
- 函数描述：打开压缩文件中的内容 并传递str参数
- 输入参数：(Exhibition *)selectedExhibition：某实例
- 输出参数：(NSString *)str ：打开的文件名称
- 返回值：void
- **********************************************************/
--(void)openZip:(Exhibition *)selectedExhibition{
-    
-    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
-    NSString *documentPath = [[[selectedExhibition contentURL]URLByAppendingPathComponent:@"exhibition"]path];
-    NSLog(@"documentPath = %@",documentPath);
-    NSBundle *myBundle = [NSBundle bundleWithPath:documentPath];
-    NSLog(@"myBundle = %@",myBundle);
-    viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
-    viewController.navigationBarTitle = selectedExhibition.title;
-    //turn view
-    if(viewController.str != nil){
-        [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        [self presentModalViewController:viewController animated:YES];
-    }
-}
-/**********************************************************
  函数名称：-(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
  函数描述：打开压缩文件中的内容 并传递str参数
  输入参数：(Exhibition *)exhibition :某实例 updateCover:(FirstCoverView *)cover：某View
@@ -325,8 +299,8 @@ NSUInteger numberOfPages;
  **********************************************************/
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover {
     
-    cover.progress.alpha=1.0;
-    cover.progress.progress = 0;
+    cover.progressBar.alpha=1.0;
+    cover.progressBar.progress = 0;
     [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
     cover.button.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14.0];
     [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
@@ -351,6 +325,28 @@ NSUInteger numberOfPages;
 -(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
 {
     [_exhibitionStore clearQueue:exhibition];
+}
+/**********************************************************
+ 函数名称：-(void)openZip:(Exhibition *)selectedExhibition
+ 函数描述：打开压缩文件中的内容 并传递str参数
+ 输入参数：(Exhibition *)selectedExhibition：某实例
+ 输出参数：(NSString *)str ：打开的文件名称
+ 返回值：void
+ **********************************************************/
+-(void)openZip:(Exhibition *)selectedExhibition{
+    
+    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
+    NSString *documentPath = [[[selectedExhibition contentURL]URLByAppendingPathComponent:@"exhibition"]path];
+    NSLog(@"documentPath = %@",documentPath);
+    NSBundle *myBundle = [NSBundle bundleWithPath:documentPath];
+    NSLog(@"myBundle = %@",myBundle);
+    viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
+    viewController.navigationBarTitle = selectedExhibition.title;
+    //turn view
+    if(viewController.str != nil){
+        [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [self presentModalViewController:viewController animated:YES];
+    }
 }
 /**********************************************************
  函数名称：-(void)aboutusButtonAction

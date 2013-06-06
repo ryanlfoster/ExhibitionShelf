@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FirstCoverView.h"
+
 @class Exhibition;
-#define EXHIBITION_CHANGED_STATUS_NOTIFICATION @"ExhibitionChangedStatus"
 
 typedef enum{
     ExhibitionStatusNotInizialized,
@@ -18,52 +18,28 @@ typedef enum{
     ExhibitionStatusError
 }ExhibitionStatusType;
 
-@interface ExhibitionStore : NSObject<NSURLConnectionDataDelegate>{
-    
-    //store exhibition cover array
-    NSMutableArray *exhibitionArray;
-    
-    //user exhibition downloaded
-    NSMutableDictionary *userExhibition;
-}
+@interface ExhibitionStore : NSObject
 
+//store exhibition cover array
+@property (nonatomic,retain) NSMutableArray * exhibitionArray;
 //Exhibition status 
-@property (nonatomic,assign)ExhibitionStatusType status;
-
-//NSOperationQueue easy better than NSOperationQueue bacause not extending or override
-@property (nonatomic,retain)NSOperationQueue *downloadQueue;
-
-//connect download NSOperation children NSInvocationOperation add to NSOperationQueue
-@property (nonatomic,retain)NSInvocationOperation *op;
-
+@property (nonatomic,assign) ExhibitionStatusType status;
 //save list data
-@property (nonatomic,retain)NSArray *list;
+@property (nonatomic,retain) NSArray *list;
 
 //init view
 -(void)startup;
-
-//Exhibition cover return boolean ready
--(BOOL)isExhibitionReady;
-
-//retrive Exhibition downloaded if have set in userExhibition
--(void)loadInstalledExhibition;
-
 //download exhibition
 -(void)scheduleDownloadOfExhibition:(Exhibition *)exhibition;
-
-//exhibition count
--(NSInteger)numberOfStoreExhibition;
-
-//exhibition downloaded count
--(NSInteger)numberOfDownloadedExhibition;
-
-//exhibitin location
--(Exhibition *)exhibitionAtIndex:(NSInteger)index;
-
-//exhibition find depand on ID
--(Exhibition *)exhibitionWithID:(NSString *)exhibitionID;
-
 //clear queue
 -(void)clearQueue:(Exhibition *)exhibition;
+//Exhibition cover return boolean ready
+-(BOOL)isExhibitionStoreReady;
+//exhibition count
+-(NSInteger)numberOfStoreExhibition;
+//exhibitin location
+-(Exhibition *)exhibitionAtIndex:(NSInteger)index;
+//exhibition find depand on ID
+-(Exhibition *)exhibitionWithID:(NSString *)exhibitionID;
 
 @end

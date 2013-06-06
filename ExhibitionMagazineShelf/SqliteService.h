@@ -19,7 +19,7 @@
 -(BOOL)updateToDB:(Exhibition *)exhibition;//update db
 -(void)deleteToDB:(NSString *)exhibitionID;//delete acorrding to id
 -(NSUInteger)getCountToDB;
+-(NSMutableArray *)getAllDateFromTable;//get all date
 
--(NSMutableArray *)getAllDateFromTable;//get all date 
 @end
 
