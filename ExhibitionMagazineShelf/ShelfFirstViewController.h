@@ -19,14 +19,14 @@
 -(void)coverSelected:(FirstCoverView *)cover;
 @end
 
-@interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>
+@interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>{
+    NSOperationQueue *_queue;
+}
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) UIButton *aboutusButton;
 @property (strong, nonatomic) UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet CustomPageControl *pageControl;
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;//开启应用的加载等待view
-
--(void)updateShelf;
 
 @end

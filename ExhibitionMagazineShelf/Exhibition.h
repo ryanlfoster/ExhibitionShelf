@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "SqliteService.h"
-#import "ShelfThirdViewController.h"
 
-@interface Exhibition : NSObject<NSURLConnectionDataDelegate>
+@interface Exhibition : NSObject<NSURLConnectionDataDelegate>{
+    NSOperationQueue *_queue;
+}
 
 //exhibition id(file name)
 @property (nonatomic, copy)NSString *exhibitionID;
@@ -24,7 +25,6 @@
 @property (nonatomic, copy)NSString *description;
 //exhibition progress
 @property (nonatomic, readonly) float downloadProgress;
-
 //exhibition receive downloadData
 @property (nonatomic, copy)NSMutableData *downloadData;
 //progress expected length
@@ -34,10 +34,13 @@
 @property (nonatomic, retain)NSNumber *downloadDataLengthNumber;
 //exhibition status download id
 @property (nonatomic,readwrite,getter = isDownloading) BOOL downloading;
-
 @property (nonatomic,copy)NSString *file;
 @property (nonatomic,copy)NSString *image;
 
+//download exhibition
+-(void)scheduleDownloadOfExhibition;
+//clear queue
+-(void)clearOperation;
 //exhibition file local path
 -(NSURL *)contentURL;
 //exhibition downloaded return boolean read or open

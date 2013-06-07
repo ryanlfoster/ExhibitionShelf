@@ -29,10 +29,6 @@ typedef enum{
 
 //init view
 -(void)startup;
-//download exhibition
--(void)scheduleDownloadOfExhibition:(Exhibition *)exhibition;
-//clear queue
--(void)clearQueue:(Exhibition *)exhibition;
 //Exhibition cover return boolean ready
 -(BOOL)isExhibitionStoreReady;
 //exhibition count

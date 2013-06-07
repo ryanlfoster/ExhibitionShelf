@@ -31,8 +31,8 @@
 -(id)init {
     self = [super init];
     if(self) {
-        _exhibitionArray=[[NSMutableArray alloc] init];
-        _status=ExhibitionStatusNotInizialized;
+        _exhibitionArray = [[NSMutableArray alloc] init];
+        _status = ExhibitionStatusNotInizialized;
     }
     return self;
 }
@@ -172,36 +172,5 @@
         }
     }
     return nil;
-}
-/**********************************************************
- 函数名称：-(void)scheduleDownloadOfExhibition:(Exhibition *)exhibition
- 函数描述：将对象放入到队列，开始下载
- 输入参数：(Exhibition *)exhibition:传入的下载对象
- 输出参数：n/a
- 返回值：void
- **********************************************************/
--(void)scheduleDownloadOfExhibition:(Exhibition *)exhibition
-{
-    NSString *downloadURL = exhibition.downloadURL;
-    if(!downloadURL)return;
-    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
-    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:exhibition];
-    [conn start];
-}
-/**********************************************************
- 函数名称：-(void)clearQueue:(Exhibition *)exhibition
- 函数描述：取消队列中的下载对象
- 输入参数：(Exhibition *)exhibition
- 输出参数：n/a
- 返回值：void
- **********************************************************/
--(void)clearQueue:(Exhibition *)exhibition
-{
-    exhibition.expectedLength = 0;
-    NSString *downloadURL = [exhibition downloadURL];
-    if(!downloadURL)return;
-    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
-    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:exhibition];
-    [conn cancel];
 }
 @end

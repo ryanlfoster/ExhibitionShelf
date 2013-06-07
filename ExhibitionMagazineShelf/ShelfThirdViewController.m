@@ -236,7 +236,7 @@ NSUInteger numberOfPages;//scrollView page count
             _shelfFirstViewController = [[ShelfFirstViewController alloc] init];
         }
         
-        [_shelfFirstViewController updateShelf];
+        [_shelfFirstViewController viewDidLoad];
 
     }else return;
     

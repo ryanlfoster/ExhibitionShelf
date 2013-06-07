@@ -8,8 +8,6 @@
 
 #import "Exhibition.h"
 #import "ZipArchive.h"
-#import "ShelfThirdViewController.h"
-#import "ExhibitionStore.h"
 
 @interface Exhibition (Private)
 
@@ -20,7 +18,6 @@
 @end
 
 static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时看是否有文件在下载当中。
-
 @implementation Exhibition
 @synthesize exhibitionID = _exhibitionID;
 @synthesize title = _title;
@@ -31,18 +28,10 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 @synthesize expectedLength = _expectedLength;
 @synthesize downloadProgress = _downloadProgress;
 @synthesize downloading = _downloading;
-
 @synthesize image = _image;
 @synthesize file = _file;
-
 @synthesize expectedLengthNumber = _expectedLengthNumber;
 @synthesize downloadDataLengthNumber = _downloadDataLengthNumber;
-
-#pragma mark -inite methods
--(id)init
-{
-    return self;
-}
 
 #pragma mark -Class Methods
 /**********************************************************
@@ -137,6 +126,68 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
     _downloadProgress = downloadProgress;
     NSLog(@"Download progress: %.0f%%",_downloadProgress * 100);
 }
+/**********************************************************
+ 函数名称：-(void)clearQueue:(Exhibition *)exhibition
+ 函数描述：取消队列中的下载对象
+ 输入参数：(Exhibition *)exhibition
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)clearOperation
+{
+    self.expectedLength = 0;
+    NSString *downloadURL = [self downloadURL];
+    if(!downloadURL)return;
+    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
+    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:self];
+    [conn cancel];
+}
+/**********************************************************
+ 函数名称：-(void)scheduleDownloadOfExhibition:(Exhibition *)exhibition
+ 函数描述：将对象放入到队列，开始下载
+ 输入参数：(Exhibition *)exhibition:传入的下载对象
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)scheduleDownloadOfExhibition
+{
+    NSString *downloadURL = self.downloadURL;
+    if(!downloadURL)return;
+    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startDownload:) object:downloadRequest];
+    if (_queue == nil) {
+        _queue = [[NSOperationQueue alloc] init];
+    }
+    _queue.MaxConcurrentOperationCount = 1;
+    [_queue setSuspended:NO];
+    [_queue addOperation:operation];
+}
+-(void)startDownload:(id)obj
+{
+    NSURLRequest *downloadRequest = (NSURLRequest *)obj;
+    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:self];
+    [conn start];
+}
+
+//#pragma mark -NSURLConnectionDownloadDelegate
+//-(void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes
+//{
+//    NSLog(@"hahaha");
+//    [self setDownloadProgress:1.*totalBytesWritten/expectedTotalBytes];
+//}
+//-(void)connectionDidResumeDownloading:(NSURLConnection *)connection totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes
+//{
+//    [self setDownloadProgress:1.*totalBytesWritten/expectedTotalBytes];
+//}
+//-(void)connectionDidFinishDownloading:(NSURLConnection *)connection destinationURL:(NSURL *)destinationURL
+//{
+//    
+//}
+//#pragma mark -NSURLConnectionDelegate
+//-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+//{
+//    
+//}
 
 #pragma mark -NSURLConnectionDataDelegate
 /**********************************************************
@@ -150,6 +201,7 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
  **********************************************************/
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    NSLog(@"response !!!!!!!!!!!");
     if(!_downloadData){
         _downloadData = [[NSMutableData alloc] init];
     }
@@ -180,12 +232,12 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
         _expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
         _downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
         
-         float expectedLengthFloat = [_expectedLengthNumber floatValue];
-         float downloadDataLengthFloat = [_downloadDataLengthNumber floatValue];
+        float expectedLengthFloat = [_expectedLengthNumber floatValue];
+        float downloadDataLengthFloat = [_downloadDataLengthNumber floatValue];
         
-        if(downloadDataLengthFloat != 0 || expectedLengthFloat != 0){
-            [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
-        }else [self sendFailedDownloadNotification];
+//        if(downloadDataLengthFloat != 0 || expectedLengthFloat != 0){
+        [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
+//        }else [self sendFailedDownloadNotification];
     }
     
     NSLog(@"下载中＝＝%d",haveExhibitionDownloading);
@@ -292,5 +344,4 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];
 }
-
 @end

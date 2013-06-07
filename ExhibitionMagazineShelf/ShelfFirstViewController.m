@@ -313,7 +313,7 @@ NSUInteger numberOfPages;
     [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidEndDownload:) name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
     [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidFailDownload:) name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
     
-    [_exhibitionStore scheduleDownloadOfExhibition:exhibition];
+    [exhibition scheduleDownloadOfExhibition];
 }
 /**********************************************************
  函数名称：-(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
@@ -324,7 +324,7 @@ NSUInteger numberOfPages;
  **********************************************************/
 -(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
 {
-    [_exhibitionStore clearQueue:exhibition];
+    [exhibition clearOperation];
 }
 /**********************************************************
  函数名称：-(void)openZip:(Exhibition *)selectedExhibition
