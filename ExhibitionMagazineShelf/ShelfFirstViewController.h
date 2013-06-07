@@ -29,4 +29,6 @@
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;//开启应用的加载等待view
 
+-(void)updateShelf;
+
 @end

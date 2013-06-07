@@ -10,10 +10,18 @@
 #import "ShelfFirstViewController.h"
 #import "ShelfThirdViewController.h"
 #import "ShelfFourthViewController.h"
+#import "Reachability.h"
 @implementation ShelfAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    /************************************Reachability****************************************/
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+    Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
+    
+    [reach startNotifier];
     
     // Override point for customization after application launch.
     UIViewController *viewController1 = [[ShelfFirstViewController alloc] initWithNibName:@"ShelfFirstViewController" bundle:nil];
@@ -39,6 +47,23 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+/**********************************************************
+ 函数名称：-(void)reachabilityChanged:(NSNotification *)note
+ 函数描述：使用了支持ARC\GCD的网络监测
+ 输入参数：(NSString *)statu：某状态。
+ 输出参数：(int *)roomCount ：该状态房间数量。
+ 返回值：BOOL：操作是否成功。
+ **********************************************************/
+-(void)reachabilityChanged:(NSNotification *)note
+{
+    Reachability *reach = [note object];
+    if(![reach isReachable])
+    {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"本软件需要联网后使用，请确保您的网络通畅" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+        [alerView show];
+    }
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

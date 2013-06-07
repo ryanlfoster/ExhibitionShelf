@@ -109,7 +109,14 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
  **********************************************************/
 -(BOOL)isExhibitionAvailibleForRead
 {
-    NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
+    //delete file
+    NSFileManager *fileManger = [NSFileManager defaultManager];
+    NSString *contentPathDelete = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
+    if(contentPathDelete){
+        [fileManger removeItemAtPath:contentPathDelete error:NULL];
+    }
+    
+    NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition"] path];
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:contentPath];
     NSLog(@"Checking for path: %@ ==> %d",contentPath,fileExists);
     return(fileExists);
@@ -154,20 +161,22 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
     NSString *downloadURL = self.downloadURL;
     if(!downloadURL)return;
     NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
-    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startDownload:) object:downloadRequest];
-    if (_queue == nil) {
-        _queue = [[NSOperationQueue alloc] init];
-    }
-    _queue.MaxConcurrentOperationCount = 1;
-    [_queue setSuspended:NO];
-    [_queue addOperation:operation];
-}
--(void)startDownload:(id)obj
-{
-    NSURLRequest *downloadRequest = (NSURLRequest *)obj;
     NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:self];
     [conn start];
+//    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startDownload:) object:downloadRequest];
+//    if (_queue == nil) {
+//        _queue = [[NSOperationQueue alloc] init];
+//    }
+//    _queue.MaxConcurrentOperationCount = 1;
+//    [_queue setSuspended:NO];
+//    [_queue addOperation:operation];
 }
+//-(void)startDownload:(id)obj
+//{
+//    NSURLRequest *downloadRequest = (NSURLRequest *)obj;
+//    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:self];
+//    [conn start];
+//}
 
 //#pragma mark -NSURLConnectionDownloadDelegate
 //-(void)connection:(NSURLConnection *)connection didWriteData:(long long)bytesWritten totalBytesWritten:(long long)totalBytesWritten expectedTotalBytes:(long long)expectedTotalBytes
@@ -271,6 +280,10 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
             _file = [self exhibitionFilePath];
             [sqlService insertToDB:self];
             //send end of download notification
+            //delete file
+            NSFileManager *fileManger = [NSFileManager defaultManager];
+            NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
+            [fileManger removeItemAtPath:contentPath error:NULL];
             [self sendEndOfDownloadNotification];
         }
         else{

@@ -10,9 +10,8 @@
 #import <QuickLook/QuickLook.h>
 #import "Exhibition.h"
 #import "ExhibitionStore.h"
-#import "Reachability.h"
 #import "AboutUsViewController.h"
-
+#import "Reachability.h"
 NSUInteger numberOfPages;
 
 @interface ShelfFirstViewController ()
@@ -64,22 +63,6 @@ NSUInteger numberOfPages;
     _progressHUD.delegate = self;
     self.progressHUD.labelText = @"努力加载中";
     [_progressHUD show:YES];
-    
-    
-    /************************************Reachability****************************************/
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    
-    Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
-    
-    reach.unreachableBlock = ^(Reachability * reachability)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"本软件需要联网后使用，请确保您的网络通畅" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-            [alerView show];
-        });
-    };
-    
-    [reach startNotifier];
 }
 
 - (void)viewDidUnload
@@ -375,7 +358,7 @@ NSUInteger numberOfPages;
     Reachability *reach = [note object];
     if(![reach isReachable])
     {
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的连接已中断或当前网络不稳定" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"本软件需要联网后使用，请确保您的网络通畅" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
         [alerView show];
     }
 }

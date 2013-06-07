@@ -10,7 +10,7 @@
 #import "SqliteService.h"
 
 @interface Exhibition : NSObject<NSURLConnectionDataDelegate>{
-    NSOperationQueue *_queue;
+//    NSOperationQueue *_queue;
 }
 
 //exhibition id(file name)
