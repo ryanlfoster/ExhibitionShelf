@@ -261,16 +261,38 @@ NSUInteger numberOfPages;
             [self openZip:selectedExhibition];
         }
         else if([cover.button.titleLabel.text isEqual: @"取 消"]){
-            [self cancelDownloadExhibition:selectedExhibition updateCover:cover];
-            cover.progressBar.alpha=0.0;
-            [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
-            [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
-            cover.button.alpha=1.0;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要取消下载么？" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
+            [alert show];
+            receiveExhibition = selectedExhibition;
         }
-        else [self downloadExhibition:selectedExhibition updateCover:cover];
+        else{
+            if([Exhibition ifHaveExhibitionDownloading]){
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不要着急嘛，请等待上一个下载完成" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                [alerView show];
+            }else [self downloadExhibition:selectedExhibition updateCover:cover];
+            
+        }
     }
 
 }
+#pragma mark -UIAlertViewDelegate
+/**********************************************************
+ 函数名称：-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+ 函数描述：UIAlertViewDelegate
+ 输入参数：(UIAlertView *)alertView:alertView clickedButtonAtIndex:(NSInteger)buttonIndex:button
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0){
+        [NSThread sleepForTimeInterval:2];
+        [receiveExhibition sendFailedDownloadNotification];
+        [receiveExhibition clearOperation];
+    }else return;
+    
+}
+
 
 #pragma mark -Actions
 /**********************************************************

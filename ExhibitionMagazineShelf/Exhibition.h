@@ -52,4 +52,7 @@
 
 +(BOOL)ifHaveExhibitionDownloading;
 
+-(void)sendEndOfDownloadNotification;
+-(void)sendFailedDownloadNotification;
+
 @end

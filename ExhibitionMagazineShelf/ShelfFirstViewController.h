@@ -13,14 +13,15 @@
 
 @class FirstCoverView;
 @class ExhibitionStore;
-
+@class Exhibition;
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
 @protocol ShelfFirstViewControllerProtocol
 -(void)coverSelected:(FirstCoverView *)cover;
 @end
 
-@interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>{
+@interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate,UIAlertViewDelegate>{
     NSOperationQueue *_queue;
+    Exhibition *receiveExhibition;
 }
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) UIButton *aboutusButton;

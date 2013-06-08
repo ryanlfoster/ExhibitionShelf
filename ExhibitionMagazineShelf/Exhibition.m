@@ -10,11 +10,7 @@
 #import "ZipArchive.h"
 
 @interface Exhibition (Private)
-
--(void)sendEndOfDownloadNotification;
--(void)sendFailDownloadNotification;
 -(void)alertView;
-
 @end
 
 static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时看是否有文件在下载当中。
@@ -143,6 +139,7 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 -(void)clearOperation
 {
     self.expectedLength = 0;
+    haveExhibitionDownloading = NO;
     NSString *downloadURL = [self downloadURL];
     if(!downloadURL)return;
     NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
