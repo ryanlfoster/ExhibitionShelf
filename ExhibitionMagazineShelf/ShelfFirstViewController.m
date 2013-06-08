@@ -16,7 +16,6 @@ NSUInteger numberOfPages;
 
 @interface ShelfFirstViewController ()
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover;
--(void)reachabilityChanged:(NSNotification *)note;
 @end
 @implementation ShelfFirstViewController
 @synthesize containerView = _containerView;
@@ -252,7 +251,7 @@ NSUInteger numberOfPages;
     
     Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
     
-    if ([reach currentReachabilityStatus] == NotReachable && [cover.button.titleLabel.text isEqualToString:@"下 载"]) {
+    if (![reach isReachable] && [cover.button.titleLabel.text isEqualToString:@"下 载"]) {
         [reach startNotifier];
     }else{
         NSString *selectedExhibitionID = cover.exhibitionID;
@@ -368,22 +367,6 @@ NSUInteger numberOfPages;
 }
 
 #pragma mark -NSNotificationCenter
-/**********************************************************
- 函数名称：-(void)reachabilityChanged:(NSNotification *)note
- 函数描述：使用了支持ARC\GCD的网络监测
- 输入参数：(NSString *)statu：某状态。
- 输出参数：(int *)roomCount ：该状态房间数量。
- 返回值：BOOL：操作是否成功。
- **********************************************************/
--(void)reachabilityChanged:(NSNotification *)note
-{
-    Reachability *reach = [note object];
-    if(![reach isReachable])
-    {
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"本软件需要联网后使用，请确保您的网络通畅" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alerView show];
-    }
-}
 /**********************************************************
  函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
  函数描述：下载完成发送通知
