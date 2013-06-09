@@ -124,7 +124,7 @@
 		3C4ADF00175F25720011E701 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3C4ADF01175F25720011E701 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3C58497F173276F200C3B7C6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3C69F6D016F9A5F200A8250C /* 数字美术馆.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "数字美术馆.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C69F6D016F9A5F200A8250C /* 今日数字美术馆.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "今日数字美术馆.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C69F6D416F9A5F200A8250C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3C69F6D616F9A5F200A8250C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3C69F6D816F9A5F200A8250C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -428,7 +428,7 @@
 		3C69F6D116F9A5F200A8250C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3C69F6D016F9A5F200A8250C /* 数字美术馆.app */,
+				3C69F6D016F9A5F200A8250C /* 今日数字美术馆.app */,
 				3C0489701741D8F200C28540 /* Tests.app */,
 				3C0489E61741E1FA00C28540 /* OCUnit.octest */,
 			);
@@ -585,7 +585,7 @@
 			);
 			name = ExhibitionMagazineShelf;
 			productName = ExhibitionMagazineShelf;
-			productReference = 3C69F6D016F9A5F200A8250C /* 数字美术馆.app */;
+			productReference = 3C69F6D016F9A5F200A8250C /* 今日数字美术馆.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -912,15 +912,15 @@
 		3C69F6FD16F9A5F200A8250C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Huai Ji Li (LKXC4SGHS8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Huai Ji Li (LKXC4SGHS8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Today Cyber Art Technology Co. (55N5H7YA5P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Today Cyber Art Technology Co. (55N5H7YA5P)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Prefix.pch";
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "数字美术馆";
-				PROVISIONING_PROFILE = "2D509E95-5CCF-4C7C-8645-40E4C8A37D5B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2D509E95-5CCF-4C7C-8645-40E4C8A37D5B";
+				PRODUCT_NAME = "今日数字美术馆";
+				PROVISIONING_PROFILE = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -935,9 +935,9 @@
 				GCC_PREFIX_HEADER = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Prefix.pch";
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "数字美术馆";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PRODUCT_NAME = "今日数字美术馆";
+				PROVISIONING_PROFILE = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};

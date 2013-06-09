@@ -285,7 +285,7 @@ NSUInteger numberOfPages;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 0){
-        [NSThread sleepForTimeInterval:2];
+        [NSThread sleepForTimeInterval:1];
         [receiveExhibition sendFailedDownloadNotification];
         [receiveExhibition clearOperation];
     }else return;
