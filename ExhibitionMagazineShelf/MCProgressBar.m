@@ -48,7 +48,6 @@
     
     return self;
 }
-#pragma mark -init
 /**********************************************************
  函数名称：-(void)setProgress:(float)progress
  函数描述：设置进度条

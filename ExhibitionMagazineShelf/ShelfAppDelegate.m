@@ -7,44 +7,24 @@
 //
 
 #import "ShelfAppDelegate.h"
-#import "ShelfFirstViewController.h"
-#import "ShelfThirdViewController.h"
-#import "ShelfFourthViewController.h"
 #import "Reachability.h"
+#import "ExhibitionShelfViewController.h"
+
 @implementation ShelfAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    /************************************Reachability****************************************/
+/********************************Reachability************************************/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
     
     [reach startNotifier];
-    
-    // Override point for customization after application launch.
-    UIViewController *viewController1 = [[ShelfFirstViewController alloc] initWithNibName:@"ShelfFirstViewController" bundle:nil];
-    UIViewController *viewController3 = [[ShelfThirdViewController alloc] initWithNibName:@"ShelfThirdViewController" bundle:nil];
-    UIViewController *viewController4 = [[ShelfFourthViewController alloc] initWithNibName:@"ShelfFourthViewController" bundle:nil];
-    
-    //all add to tab bar controller
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[viewController1, viewController3, viewController4];
-    
-    //set tab bar title style
-    [[UITabBarItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont fontWithName:@"MicrosoftYaHei" size:11.0],UITextAttributeFont,nil] forState:UIControlStateNormal];
-    
-    //set tab bar background
-    UIImage *backgroundImageNav = [UIImage imageNamed:@"tabbar_background.png"];
-    self.tabBarController.tabBar.backgroundImage = backgroundImageNav;
-    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
-    
-    //set tab bar item selected background
-    UIImage *backgroundImageBtnNav = [UIImage imageNamed:@"tab_bar_btn_press_108.png"];
-    self.tabBarController.tabBar.selectionIndicatorImage = backgroundImageBtnNav;
-    self.tabBarController.tabBar.selectedImageTintColor  = [UIColor whiteColor];
-    self.window.rootViewController = self.tabBarController;
+/*********************************************************************************/
+
+    self.viewController = [[ExhibitionShelfViewController alloc] initWithNibName:@"ExhibitionShelfViewController" bundle:nil];
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }

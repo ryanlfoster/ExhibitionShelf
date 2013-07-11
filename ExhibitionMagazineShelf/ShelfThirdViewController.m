@@ -29,9 +29,6 @@ NSUInteger numberOfPages;//scrollView page count
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem.title = @"我的展览";
-        self.tabBarItem.image = [UIImage imageNamed:@"tabbar_myexhibition.png"];
-        self.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     }
     return self;
 }

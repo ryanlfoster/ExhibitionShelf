@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "ExhibitionViewController.h"
 #import "CustomPageControl.h"
+#import "CustomParentsViewController.h"
 
 @class FirstCoverView;
 @class ExhibitionStore;
@@ -19,7 +20,7 @@
 -(void)coverSelected:(FirstCoverView *)cover;
 @end
 
-@interface ShelfFirstViewController : UIViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate,UIAlertViewDelegate>{
+@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate,UIAlertViewDelegate>{
     NSOperationQueue *_queue;
     Exhibition *receiveExhibition;
 }

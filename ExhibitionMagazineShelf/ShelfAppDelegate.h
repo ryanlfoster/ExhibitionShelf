@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class ExhibitionShelfViewController;
+
 @interface ShelfAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) UITabBarController *tabBarController;
+@property (strong, nonatomic) ExhibitionShelfViewController *viewController;
 
 @end

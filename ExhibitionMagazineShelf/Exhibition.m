@@ -119,10 +119,10 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 }
 /**********************************************************
  函数名称：-(void)setDownloadProgress:(float)downloadProgress
- 函数描述：展览zip是否正在下载
+ 函数描述：
  输入参数：n/a
  输出参数：n/a
- 返回值：(BOOL)
+ 返回值：
  **********************************************************/
 -(void)setDownloadProgress:(float)downloadProgress
 {
@@ -344,7 +344,7 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:self];
 }
 /**********************************************************
- 函数名称：-(void)alertView
+ 函数名称：-(void)sendFailedDownloadNotification
  函数描述：下载失败发送的通知
  输入参数：n/a
  输出参数：n/a

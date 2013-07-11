@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomParentsViewController.h"
 
-@interface AboutUsViewController : UIViewController
+@interface AboutUsViewController : CustomParentsViewController
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic,strong)UIButton *backButton;
 @end

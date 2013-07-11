@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FirstCoverView.h"
 
 @class Exhibition;
 

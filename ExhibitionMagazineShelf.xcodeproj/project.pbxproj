@@ -24,10 +24,8 @@
 		3C0489F01741E1FA00C28540 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C0489EE1741E1FA00C28540 /* InfoPlist.strings */; };
 		3C0489F31741E1FA00C28540 /* OCUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0489F21741E1FA00C28540 /* OCUnit.m */; };
 		3C0A57411737757A00B19737 /* SqliteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0A57401737757A00B19737 /* SqliteService.m */; };
-		3C1691D417266367009E4B07 /* ShelfFourthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */; };
 		3C1691DD17266469009E4B07 /* ShelfThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */; };
 		3C1691DE172668E1009E4B07 /* ShelfFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691E0172668E1009E4B07 /* ShelfFirstViewController.xib */; };
-		3C1691F71726891A009E4B07 /* MicrosoftYaHei.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C1691F61726891A009E4B07 /* MicrosoftYaHei.ttf */; };
 		3C1692251726A5C1009E4B07 /* progressBar_background_before.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1692231726A5C1009E4B07 /* progressBar_background_before.png */; };
 		3C1692261726A5C1009E4B07 /* processBar_before.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1692241726A5C1009E4B07 /* processBar_before.png */; };
 		3C1BCCC31713AD4A0005A83F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1BCCC21713AD4A0005A83F /* libz.dylib */; };
@@ -44,10 +42,9 @@
 		3C69F6E116F9A5F200A8250C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69F6E016F9A5F200A8250C /* main.m */; };
 		3C69F6E516F9A5F200A8250C /* ShelfAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69F6E416F9A5F200A8250C /* ShelfAppDelegate.m */; };
 		3C69F6EE16F9A5F200A8250C /* ShelfFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69F6ED16F9A5F200A8250C /* ShelfFirstViewController.m */; };
+		3C7D8605178BAAB90001D482 /* progressBar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D8603178BAAB90001D482 /* progressBar_background.png */; };
+		3C7D8606178BAAB90001D482 /* progressBar_foreground.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D8604178BAAB90001D482 /* progressBar_foreground.png */; };
 		3C806ECF174DB04300D43AA6 /* hightlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ECE174DB04300D43AA6 /* hightlighted.png */; };
-		3C806ED5174DB17D00D43AA6 /* tabbar_exhibition.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED4174DB17D00D43AA6 /* tabbar_exhibition.png */; };
-		3C806ED8174DB23500D43AA6 /* tabbar_compress.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED6174DB23400D43AA6 /* tabbar_compress.png */; };
-		3C806ED9174DB23500D43AA6 /* tabbar_myexhibition.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */; };
 		3C806EDB174DBE5200D43AA6 /* btn_aboutus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806EDA174DBE5200D43AA6 /* btn_aboutus.png */; };
 		3C88D41117532385003A6810 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C88D41017532385003A6810 /* Icon-72.png */; };
 		3C896F701705653E003E079D /* ExhibitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C896F6F1705653E003E079D /* ExhibitionViewController.m */; };
@@ -60,22 +57,35 @@
 		3CA05E3B171504C200B30FD1 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E34171504C200B30FD1 /* zip.c */; };
 		3CA05E3C171504C200B30FD1 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3CA05E37171504C200B30FD1 /* ZipArchive.mm */; };
 		3CADC8D6174F17480053BBCE /* tab_bar_btn_press_108.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8D5174F17480053BBCE /* tab_bar_btn_press_108.png */; };
-		3CADC8D8174F1B380053BBCE /* tabbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8D7174F1B380053BBCE /* tabbar_background.png */; };
 		3CADC8E4174F5E250053BBCE /* normalother.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8E3174F5E250053BBCE /* normalother.png */; };
 		3CADC8E6174F620C0053BBCE /* tabbarcontent_help.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8E5174F620C0053BBCE /* tabbarcontent_help.png */; };
 		3CADC8E8174F623B0053BBCE /* content_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CADC8E7174F623B0053BBCE /* content_about.png */; };
 		3CB1A13B16FC032200AAAF25 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1A13A16FC032200AAAF25 /* QuickLook.framework */; };
 		3CB9662D17043497002C1840 /* ExhibitionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9662C17043497002C1840 /* ExhibitionStore.m */; };
 		3CC5F1341754498200C37C9F /* Icon-72-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC5F1331754498200C37C9F /* Icon-72-small.png */; };
-		3CD25FF11760348B001DD7DB /* background_nav_top.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CD25FF01760348B001DD7DB /* background_nav_top.jpg */; };
 		3CE07062171687040050B052 /* ShelfThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE07061171687040050B052 /* ShelfThirdViewController.m */; };
-		3CE0706517168E080050B052 /* ShelfFourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0706417168E080050B052 /* ShelfFourthViewController.m */; };
 		3CE0707A171694F80050B052 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE07079171694F80050B052 /* MBProgressHUD.m */; };
 		3CF47433171CF47600F57921 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF47431171CF47600F57921 /* libsqlite3.0.dylib */; };
 		3CF47434171CF47600F57921 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF47432171CF47600F57921 /* libsqlite3.dylib */; };
 		3CF9078F171FBAF900BDFA97 /* view_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF9078E171FBAF900BDFA97 /* view_button.png */; };
 		3CF90792171FBD3800BDFA97 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF90791171FBD3800BDFA97 /* QuartzCore.framework */; };
 		3CF907AA171FEA3F00BDFA97 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF907A9171FEA3F00BDFA97 /* cancel_button.png */; };
+		3CFD3F3F178E54E700F50216 /* CustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD3F3E178E54E700F50216 /* CustomTabBar.m */; };
+		3CFD3F42178E5E0800F50216 /* CustomTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD3F41178E5E0800F50216 /* CustomTabBarButton.m */; };
+		3CFD3F45178E5E8400F50216 /* CustomParentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD3F44178E5E8400F50216 /* CustomParentsViewController.m */; };
+		3CFD3F4B178E8E5700F50216 /* tabbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F4A178E8E5700F50216 /* tabbar_background.png */; };
+		3CFD3F4F178E8F4200F50216 /* ExhibitionShelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFD3F4D178E8F4200F50216 /* ExhibitionShelfViewController.m */; };
+		3CFD3F50178E8F4200F50216 /* ExhibitionShelfViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F4E178E8F4200F50216 /* ExhibitionShelfViewController.xib */; };
+		3CFD3F57178E9E2E00F50216 /* tabbar_exhibitiondisplay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F51178E9E2B00F50216 /* tabbar_exhibitiondisplay.png */; };
+		3CFD3F58178E9E2E00F50216 /* tabbar_aboutus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F52178E9E2B00F50216 /* tabbar_aboutus.png */; };
+		3CFD3F59178E9E2E00F50216 /* tabbar_myexhibition.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F53178E9E2B00F50216 /* tabbar_myexhibition.png */; };
+		3CFD3F5A178E9E2E00F50216 /* tabbar_myexhibition_highly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F54178E9E2C00F50216 /* tabbar_myexhibition_highly.png */; };
+		3CFD3F5B178E9E2E00F50216 /* tabbat_exhibitiondisplay_highly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F55178E9E2C00F50216 /* tabbat_exhibitiondisplay_highly.png */; };
+		3CFD3F5C178E9E2E00F50216 /* tabbar_aboutus_highly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F56178E9E2D00F50216 /* tabbar_aboutus_highly.png */; };
+		3CFD3F5E178EA54C00F50216 /* navigationBar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F5D178EA54B00F50216 /* navigationBar_background.png */; };
+		3CFD3F60178EA8D100F50216 /* FZLTHJW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F5F178EA8D100F50216 /* FZLTHJW.TTF */; };
+		3CFD3F62178EAB1B00F50216 /* FZYDCHJW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F61178EAB1B00F50216 /* FZYDCHJW.TTF */; };
+		3CFD3F64178EAB2300F50216 /* Futura.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 3CFD3F63178EAB2300F50216 /* Futura.dfont */; };
 		76C7B9D7175228E800F29664 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C7B9D5175228E800F29664 /* AboutUsViewController.m */; };
 		76C7B9D8175228E800F29664 /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C7B9D6175228E800F29664 /* AboutUsViewController.xib */; };
 /* End PBXBuildFile section */
@@ -108,10 +118,8 @@
 		3C0489F41741E1FA00C28540 /* OCUnit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCUnit-Prefix.pch"; sourceTree = "<group>"; };
 		3C0A573F1737757A00B19737 /* SqliteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteService.h; sourceTree = "<group>"; };
 		3C0A57401737757A00B19737 /* SqliteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteService.m; sourceTree = "<group>"; };
-		3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfFourthViewController.xib; sourceTree = "<group>"; };
 		3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelfThirdViewController.xib; sourceTree = "<group>"; };
 		3C1691DF172668E1009E4B07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ShelfFirstViewController.xib; sourceTree = "<group>"; };
-		3C1691F61726891A009E4B07 /* MicrosoftYaHei.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MicrosoftYaHei.ttf; sourceTree = "<group>"; };
 		3C1692231726A5C1009E4B07 /* progressBar_background_before.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressBar_background_before.png; sourceTree = "<group>"; };
 		3C1692241726A5C1009E4B07 /* processBar_before.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = processBar_before.png; sourceTree = "<group>"; };
 		3C1BCCC21713AD4A0005A83F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -124,7 +132,7 @@
 		3C4ADF00175F25720011E701 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3C4ADF01175F25720011E701 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3C58497F173276F200C3B7C6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3C69F6D016F9A5F200A8250C /* 今日数字美术馆.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "今日数字美术馆.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C69F6D016F9A5F200A8250C /* 今日数字馆.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "今日数字馆.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C69F6D416F9A5F200A8250C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3C69F6D616F9A5F200A8250C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3C69F6D816F9A5F200A8250C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,10 +144,9 @@
 		3C69F6E416F9A5F200A8250C /* ShelfAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShelfAppDelegate.m; sourceTree = "<group>"; };
 		3C69F6EC16F9A5F200A8250C /* ShelfFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShelfFirstViewController.h; sourceTree = "<group>"; };
 		3C69F6ED16F9A5F200A8250C /* ShelfFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShelfFirstViewController.m; sourceTree = "<group>"; };
+		3C7D8603178BAAB90001D482 /* progressBar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressBar_background.png; sourceTree = "<group>"; };
+		3C7D8604178BAAB90001D482 /* progressBar_foreground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressBar_foreground.png; sourceTree = "<group>"; };
 		3C806ECE174DB04300D43AA6 /* hightlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hightlighted.png; sourceTree = "<group>"; };
-		3C806ED4174DB17D00D43AA6 /* tabbar_exhibition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_exhibition.png; sourceTree = "<group>"; };
-		3C806ED6174DB23400D43AA6 /* tabbar_compress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_compress.png; sourceTree = "<group>"; };
-		3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_myexhibition.png; sourceTree = "<group>"; };
 		3C806EDA174DBE5200D43AA6 /* btn_aboutus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_aboutus.png; sourceTree = "<group>"; };
 		3C88D41017532385003A6810 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
 		3C896F6E1705653E003E079D /* ExhibitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionViewController.h; sourceTree = "<group>"; };
@@ -162,7 +169,6 @@
 		3CA05E36171504C200B30FD1 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		3CA05E37171504C200B30FD1 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		3CADC8D5174F17480053BBCE /* tab_bar_btn_press_108.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bar_btn_press_108.png; sourceTree = "<group>"; };
-		3CADC8D7174F1B380053BBCE /* tabbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_background.png; sourceTree = "<group>"; };
 		3CADC8E3174F5E250053BBCE /* normalother.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalother.png; sourceTree = "<group>"; };
 		3CADC8E5174F620C0053BBCE /* tabbarcontent_help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarcontent_help.png; sourceTree = "<group>"; };
 		3CADC8E7174F623B0053BBCE /* content_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = content_about.png; sourceTree = "<group>"; };
@@ -170,11 +176,8 @@
 		3CB9662B17043497002C1840 /* ExhibitionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionStore.h; sourceTree = "<group>"; };
 		3CB9662C17043497002C1840 /* ExhibitionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhibitionStore.m; sourceTree = "<group>"; };
 		3CC5F1331754498200C37C9F /* Icon-72-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72-small.png"; path = "../Icon-72-small.png"; sourceTree = "<group>"; };
-		3CD25FF01760348B001DD7DB /* background_nav_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background_nav_top.jpg; sourceTree = "<group>"; };
 		3CE07060171687040050B052 /* ShelfThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfThirdViewController.h; sourceTree = "<group>"; };
 		3CE07061171687040050B052 /* ShelfThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfThirdViewController.m; sourceTree = "<group>"; };
-		3CE0706317168E080050B052 /* ShelfFourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelfFourthViewController.h; sourceTree = "<group>"; };
-		3CE0706417168E080050B052 /* ShelfFourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelfFourthViewController.m; sourceTree = "<group>"; };
 		3CE07078171694F80050B052 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		3CE07079171694F80050B052 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3CF47431171CF47600F57921 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -182,6 +185,26 @@
 		3CF9078E171FBAF900BDFA97 /* view_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_button.png; sourceTree = "<group>"; };
 		3CF90791171FBD3800BDFA97 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3CF907A9171FEA3F00BDFA97 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
+		3CFD3F3D178E54E700F50216 /* CustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBar.h; sourceTree = "<group>"; };
+		3CFD3F3E178E54E700F50216 /* CustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBar.m; sourceTree = "<group>"; };
+		3CFD3F40178E5E0800F50216 /* CustomTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarButton.h; sourceTree = "<group>"; };
+		3CFD3F41178E5E0800F50216 /* CustomTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarButton.m; sourceTree = "<group>"; };
+		3CFD3F43178E5E8400F50216 /* CustomParentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomParentsViewController.h; sourceTree = "<group>"; };
+		3CFD3F44178E5E8400F50216 /* CustomParentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomParentsViewController.m; sourceTree = "<group>"; };
+		3CFD3F4A178E8E5700F50216 /* tabbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_background.png; sourceTree = "<group>"; };
+		3CFD3F4C178E8F4100F50216 /* ExhibitionShelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionShelfViewController.h; sourceTree = "<group>"; };
+		3CFD3F4D178E8F4200F50216 /* ExhibitionShelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhibitionShelfViewController.m; sourceTree = "<group>"; };
+		3CFD3F4E178E8F4200F50216 /* ExhibitionShelfViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExhibitionShelfViewController.xib; sourceTree = "<group>"; };
+		3CFD3F51178E9E2B00F50216 /* tabbar_exhibitiondisplay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_exhibitiondisplay.png; sourceTree = "<group>"; };
+		3CFD3F52178E9E2B00F50216 /* tabbar_aboutus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_aboutus.png; sourceTree = "<group>"; };
+		3CFD3F53178E9E2B00F50216 /* tabbar_myexhibition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_myexhibition.png; sourceTree = "<group>"; };
+		3CFD3F54178E9E2C00F50216 /* tabbar_myexhibition_highly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_myexhibition_highly.png; sourceTree = "<group>"; };
+		3CFD3F55178E9E2C00F50216 /* tabbat_exhibitiondisplay_highly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbat_exhibitiondisplay_highly.png; sourceTree = "<group>"; };
+		3CFD3F56178E9E2D00F50216 /* tabbar_aboutus_highly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_aboutus_highly.png; sourceTree = "<group>"; };
+		3CFD3F5D178EA54B00F50216 /* navigationBar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigationBar_background.png; sourceTree = "<group>"; };
+		3CFD3F5F178EA8D100F50216 /* FZLTHJW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = FZLTHJW.TTF; sourceTree = "<group>"; };
+		3CFD3F61178EAB1B00F50216 /* FZYDCHJW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = FZYDCHJW.TTF; sourceTree = "<group>"; };
+		3CFD3F63178EAB2300F50216 /* Futura.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.dfont; sourceTree = "<group>"; };
 		76C7B9D4175228E800F29664 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		76C7B9D5175228E800F29664 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		76C7B9D6175228E800F29664 /* AboutUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
@@ -354,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				3C8BF4F1174CC631008E0B73 /* CustomPageControl */,
+				3CFD3F3C178E53DD00F50216 /* CustomTabBar */,
 				3C1691CC17265E75009E4B07 /* FirstCoverView */,
 				3C1691CE17265EB5009E4B07 /* ThirdCoverView */,
 				3C3848EB17210CB400B31758 /* MBProgressBar */,
@@ -365,20 +389,12 @@
 		3C58994716FA9BBF00624CE9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3C69F6EC16F9A5F200A8250C /* ShelfFirstViewController.h */,
-				3C69F6ED16F9A5F200A8250C /* ShelfFirstViewController.m */,
-				3CE07060171687040050B052 /* ShelfThirdViewController.h */,
-				3CE07061171687040050B052 /* ShelfThirdViewController.m */,
-				3CE0706317168E080050B052 /* ShelfFourthViewController.h */,
-				3CE0706417168E080050B052 /* ShelfFourthViewController.m */,
-				3C896F6E1705653E003E079D /* ExhibitionViewController.h */,
-				3C896F6F1705653E003E079D /* ExhibitionViewController.m */,
-				3C1691E0172668E1009E4B07 /* ShelfFirstViewController.xib */,
-				3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */,
-				3C1691D317266367009E4B07 /* ShelfFourthViewController.xib */,
-				76C7B9D4175228E800F29664 /* AboutUsViewController.h */,
-				76C7B9D5175228E800F29664 /* AboutUsViewController.m */,
-				76C7B9D6175228E800F29664 /* AboutUsViewController.xib */,
+				3CFD3F43178E5E8400F50216 /* CustomParentsViewController.h */,
+				3CFD3F44178E5E8400F50216 /* CustomParentsViewController.m */,
+				3CFD3F46178E8C3A00F50216 /* ExhibitionDisplayViewController */,
+				3CFD3F47178E8C8A00F50216 /* MyExhibitionViewController */,
+				3CFD3F48178E8CB400F50216 /* AboutUsViewController */,
+				3CFD3F49178E8CF600F50216 /* ExhibitionViewController */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -386,23 +402,28 @@
 		3C58994816FA9BE500624CE9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				3CD25FF01760348B001DD7DB /* background_nav_top.jpg */,
+				3CFD3F65178EAB2600F50216 /* Font */,
+				3CFD3F5D178EA54B00F50216 /* navigationBar_background.png */,
+				3CFD3F51178E9E2B00F50216 /* tabbar_exhibitiondisplay.png */,
+				3CFD3F52178E9E2B00F50216 /* tabbar_aboutus.png */,
+				3CFD3F53178E9E2B00F50216 /* tabbar_myexhibition.png */,
+				3CFD3F54178E9E2C00F50216 /* tabbar_myexhibition_highly.png */,
+				3CFD3F55178E9E2C00F50216 /* tabbat_exhibitiondisplay_highly.png */,
+				3CFD3F56178E9E2D00F50216 /* tabbar_aboutus_highly.png */,
+				3CFD3F4A178E8E5700F50216 /* tabbar_background.png */,
+				3C7D8603178BAAB90001D482 /* progressBar_background.png */,
+				3C7D8604178BAAB90001D482 /* progressBar_foreground.png */,
 				3CC5F1331754498200C37C9F /* Icon-72-small.png */,
 				3C88D41017532385003A6810 /* Icon-72.png */,
 				3CADC8E7174F623B0053BBCE /* content_about.png */,
 				3CADC8E5174F620C0053BBCE /* tabbarcontent_help.png */,
-				3CADC8D7174F1B380053BBCE /* tabbar_background.png */,
 				3CADC8D5174F17480053BBCE /* tab_bar_btn_press_108.png */,
 				3C004E74174E193900FF0E1E /* btn_back.png */,
-				3C806ED6174DB23400D43AA6 /* tabbar_compress.png */,
-				3C806ED7174DB23500D43AA6 /* tabbar_myexhibition.png */,
-				3C806ED4174DB17D00D43AA6 /* tabbar_exhibition.png */,
 				3CADC8E3174F5E250053BBCE /* normalother.png */,
 				3C806ECE174DB04300D43AA6 /* hightlighted.png */,
 				3C806EDA174DBE5200D43AA6 /* btn_aboutus.png */,
 				3C1692231726A5C1009E4B07 /* progressBar_background_before.png */,
 				3C1692241726A5C1009E4B07 /* processBar_before.png */,
-				3C1691F61726891A009E4B07 /* MicrosoftYaHei.ttf */,
 				3CF907A9171FEA3F00BDFA97 /* cancel_button.png */,
 				3CF9078E171FBAF900BDFA97 /* view_button.png */,
 				3C2A7AA5171E81CC00F3C423 /* background_main.jpg */,
@@ -428,7 +449,7 @@
 		3C69F6D116F9A5F200A8250C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3C69F6D016F9A5F200A8250C /* 今日数字美术馆.app */,
+				3C69F6D016F9A5F200A8250C /* 今日数字馆.app */,
 				3C0489701741D8F200C28540 /* Tests.app */,
 				3C0489E61741E1FA00C28540 /* OCUnit.octest */,
 			);
@@ -462,6 +483,9 @@
 				3C58994416FA9BB000624CE9 /* Model */,
 				3C69F6E316F9A5F200A8250C /* ShelfAppDelegate.h */,
 				3C69F6E416F9A5F200A8250C /* ShelfAppDelegate.m */,
+				3CFD3F4C178E8F4100F50216 /* ExhibitionShelfViewController.h */,
+				3CFD3F4D178E8F4200F50216 /* ExhibitionShelfViewController.m */,
+				3CFD3F4E178E8F4200F50216 /* ExhibitionShelfViewController.xib */,
 				3C69F6DB16F9A5F200A8250C /* Supporting Files */,
 			);
 			path = ExhibitionMagazineShelf;
@@ -533,6 +557,66 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		3CFD3F3C178E53DD00F50216 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				3CFD3F3D178E54E700F50216 /* CustomTabBar.h */,
+				3CFD3F3E178E54E700F50216 /* CustomTabBar.m */,
+				3CFD3F40178E5E0800F50216 /* CustomTabBarButton.h */,
+				3CFD3F41178E5E0800F50216 /* CustomTabBarButton.m */,
+			);
+			name = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		3CFD3F46178E8C3A00F50216 /* ExhibitionDisplayViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3C69F6EC16F9A5F200A8250C /* ShelfFirstViewController.h */,
+				3C69F6ED16F9A5F200A8250C /* ShelfFirstViewController.m */,
+				3C1691E0172668E1009E4B07 /* ShelfFirstViewController.xib */,
+			);
+			name = ExhibitionDisplayViewController;
+			sourceTree = "<group>";
+		};
+		3CFD3F47178E8C8A00F50216 /* MyExhibitionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3CE07060171687040050B052 /* ShelfThirdViewController.h */,
+				3CE07061171687040050B052 /* ShelfThirdViewController.m */,
+				3C1691DC17266469009E4B07 /* ShelfThirdViewController.xib */,
+			);
+			name = MyExhibitionViewController;
+			sourceTree = "<group>";
+		};
+		3CFD3F48178E8CB400F50216 /* AboutUsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				76C7B9D4175228E800F29664 /* AboutUsViewController.h */,
+				76C7B9D5175228E800F29664 /* AboutUsViewController.m */,
+				76C7B9D6175228E800F29664 /* AboutUsViewController.xib */,
+			);
+			name = AboutUsViewController;
+			sourceTree = "<group>";
+		};
+		3CFD3F49178E8CF600F50216 /* ExhibitionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3C896F6E1705653E003E079D /* ExhibitionViewController.h */,
+				3C896F6F1705653E003E079D /* ExhibitionViewController.m */,
+			);
+			name = ExhibitionViewController;
+			sourceTree = "<group>";
+		};
+		3CFD3F65178EAB2600F50216 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				3CFD3F63178EAB2300F50216 /* Futura.dfont */,
+				3CFD3F61178EAB1B00F50216 /* FZYDCHJW.TTF */,
+				3CFD3F5F178EA8D100F50216 /* FZLTHJW.TTF */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -585,7 +669,7 @@
 			);
 			name = ExhibitionMagazineShelf;
 			productName = ExhibitionMagazineShelf;
-			productReference = 3C69F6D016F9A5F200A8250C /* 今日数字美术馆.app */;
+			productReference = 3C69F6D016F9A5F200A8250C /* 今日数字馆.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -644,26 +728,33 @@
 				3CF9078F171FBAF900BDFA97 /* view_button.png in Resources */,
 				3CF907AA171FEA3F00BDFA97 /* cancel_button.png in Resources */,
 				3C1691DE172668E1009E4B07 /* ShelfFirstViewController.xib in Resources */,
-				3C1691D417266367009E4B07 /* ShelfFourthViewController.xib in Resources */,
 				3C1691DD17266469009E4B07 /* ShelfThirdViewController.xib in Resources */,
-				3C1691F71726891A009E4B07 /* MicrosoftYaHei.ttf in Resources */,
 				3C1692251726A5C1009E4B07 /* progressBar_background_before.png in Resources */,
 				3C1692261726A5C1009E4B07 /* processBar_before.png in Resources */,
 				3C806ECF174DB04300D43AA6 /* hightlighted.png in Resources */,
-				3C806ED5174DB17D00D43AA6 /* tabbar_exhibition.png in Resources */,
-				3C806ED8174DB23500D43AA6 /* tabbar_compress.png in Resources */,
-				3C806ED9174DB23500D43AA6 /* tabbar_myexhibition.png in Resources */,
 				3C806EDB174DBE5200D43AA6 /* btn_aboutus.png in Resources */,
 				3C004E75174E193900FF0E1E /* btn_back.png in Resources */,
 				3CADC8D6174F17480053BBCE /* tab_bar_btn_press_108.png in Resources */,
-				3CADC8D8174F1B380053BBCE /* tabbar_background.png in Resources */,
 				3CADC8E4174F5E250053BBCE /* normalother.png in Resources */,
 				3CADC8E6174F620C0053BBCE /* tabbarcontent_help.png in Resources */,
 				3CADC8E8174F623B0053BBCE /* content_about.png in Resources */,
 				76C7B9D8175228E800F29664 /* AboutUsViewController.xib in Resources */,
 				3C88D41117532385003A6810 /* Icon-72.png in Resources */,
 				3CC5F1341754498200C37C9F /* Icon-72-small.png in Resources */,
-				3CD25FF11760348B001DD7DB /* background_nav_top.jpg in Resources */,
+				3C7D8605178BAAB90001D482 /* progressBar_background.png in Resources */,
+				3C7D8606178BAAB90001D482 /* progressBar_foreground.png in Resources */,
+				3CFD3F4B178E8E5700F50216 /* tabbar_background.png in Resources */,
+				3CFD3F50178E8F4200F50216 /* ExhibitionShelfViewController.xib in Resources */,
+				3CFD3F57178E9E2E00F50216 /* tabbar_exhibitiondisplay.png in Resources */,
+				3CFD3F58178E9E2E00F50216 /* tabbar_aboutus.png in Resources */,
+				3CFD3F59178E9E2E00F50216 /* tabbar_myexhibition.png in Resources */,
+				3CFD3F5A178E9E2E00F50216 /* tabbar_myexhibition_highly.png in Resources */,
+				3CFD3F5B178E9E2E00F50216 /* tabbat_exhibitiondisplay_highly.png in Resources */,
+				3CFD3F5C178E9E2E00F50216 /* tabbar_aboutus_highly.png in Resources */,
+				3CFD3F5E178EA54C00F50216 /* navigationBar_background.png in Resources */,
+				3CFD3F60178EA8D100F50216 /* FZLTHJW.TTF in Resources */,
+				3CFD3F62178EAB1B00F50216 /* FZYDCHJW.TTF in Resources */,
+				3CFD3F64178EAB2300F50216 /* Futura.dfont in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,7 +812,6 @@
 				3CA05E3B171504C200B30FD1 /* zip.c in Sources */,
 				3CA05E3C171504C200B30FD1 /* ZipArchive.mm in Sources */,
 				3CE07062171687040050B052 /* ShelfThirdViewController.m in Sources */,
-				3CE0706517168E080050B052 /* ShelfFourthViewController.m in Sources */,
 				3CE0707A171694F80050B052 /* MBProgressHUD.m in Sources */,
 				3C1EC21A171C06FE003E9E79 /* ThirdCoverView.m in Sources */,
 				3C3848F217210F9A00B31758 /* MCProgressBar.m in Sources */,
@@ -729,6 +819,10 @@
 				3C8BF4F5174CC66D008E0B73 /* CustomPageControl.m in Sources */,
 				76C7B9D7175228E800F29664 /* AboutUsViewController.m in Sources */,
 				3C4ADF02175F25720011E701 /* Reachability.m in Sources */,
+				3CFD3F3F178E54E700F50216 /* CustomTabBar.m in Sources */,
+				3CFD3F42178E5E0800F50216 /* CustomTabBarButton.m in Sources */,
+				3CFD3F45178E5E8400F50216 /* CustomParentsViewController.m in Sources */,
+				3CFD3F4F178E8F4200F50216 /* ExhibitionShelfViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,15 +1006,15 @@
 		3C69F6FD16F9A5F200A8250C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Today Cyber Art Technology Co. (55N5H7YA5P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Today Cyber Art Technology Co. (55N5H7YA5P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Huai Ji Li (LKXC4SGHS8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Huai Ji Li (LKXC4SGHS8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Prefix.pch";
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "今日数字美术馆";
-				PROVISIONING_PROFILE = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
+				PRODUCT_NAME = "今日数字馆";
+				PROVISIONING_PROFILE = "377F3658-2802-4281-98AF-5BA2BBC3ACB8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "377F3658-2802-4281-98AF-5BA2BBC3ACB8";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -935,7 +1029,7 @@
 				GCC_PREFIX_HEADER = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Prefix.pch";
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "今日数字美术馆";
+				PRODUCT_NAME = "今日数字馆";
 				PROVISIONING_PROFILE = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C0FD2E0E-74AF-4C89-BC2C-F07467FCE36E";
 				TARGETED_DEVICE_FAMILY = 2;

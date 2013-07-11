@@ -10,6 +10,7 @@
 #import "ExhibitionViewController.h"
 #import "SqliteService.h"
 #import "ShelfFirstViewController.h"
+#import "CustomParentsViewController.h"
 
 @class ThirdCoverView;
 
@@ -23,7 +24,7 @@
 -(void)coverDeleted:(ThirdCoverView *)cover;
 @end
 
-@interface ShelfThirdViewController : UIViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate,UIScrollViewDelegate>{
+@interface ShelfThirdViewController : CustomParentsViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate,UIScrollViewDelegate>{
 //------------------------------DataBase Property------------------------------------//
     sqlite3 *exhibitionDB;
 }

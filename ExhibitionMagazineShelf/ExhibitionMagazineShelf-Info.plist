@@ -37,7 +37,9 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>MicrosoftYaHei.ttf</string>
+		<string>FZLTHJW.TTF</string>
+		<string>FZYDCHJW.TTF</string>
+		<string>Futura.dfont</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

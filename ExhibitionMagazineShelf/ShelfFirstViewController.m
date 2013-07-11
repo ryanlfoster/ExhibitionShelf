@@ -12,6 +12,7 @@
 #import "ExhibitionStore.h"
 #import "AboutUsViewController.h"
 #import "Reachability.h"
+#import "FirstCoverView.h"
 NSUInteger numberOfPages;
 
 @interface ShelfFirstViewController ()
@@ -30,11 +31,6 @@ NSUInteger numberOfPages;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        self.tabBarItem.title = @"全景展览";
-        self.tabBarItem.image = [UIImage imageNamed:@"tabbar_exhibition.png"];
-        self.tabBarItem.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
-        
     }
     return self;
 }
@@ -297,8 +293,8 @@ NSUInteger numberOfPages;
 /**********************************************************
  函数名称：-(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
  函数描述：打开压缩文件中的内容 并传递str参数
- 输入参数：(Exhibition *)exhibition :某实例 updateCover:(FirstCoverView *)cover：某View
- 输出参数：exhibition:下载某一个实例
+ 输入参数：(Exhibition *)exhibition  updateCover:(FirstCoverView *)cover
+ 输出参数：
  返回值：void
  **********************************************************/
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover {
