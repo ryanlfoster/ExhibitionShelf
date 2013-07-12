@@ -30,7 +30,6 @@
 }
 //------------------------------View-------------------------------------------------//
 @property (nonatomic, strong) UIScrollView *containerView;
-@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) UIButton *aboutusButton;
 @property (nonatomic, retain) NSArray *listData;
 

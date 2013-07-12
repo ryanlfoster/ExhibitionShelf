@@ -15,7 +15,6 @@ NSUInteger numberOfPages;//scrollView page count
 
 @implementation ShelfThirdViewController
 @synthesize containerView = _containerView;
-@synthesize navigationBar = _navigationBar;
 @synthesize aboutusButton = _aboutusButton;
 @synthesize listData = _listData;
 
@@ -38,30 +37,11 @@ NSUInteger numberOfPages;//scrollView page count
 {
     
     [super viewDidLoad];
-    
-    //load background
-    UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
-    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-    self.view.backgroundColor = backgroundColor;
 
 }
 
 -(void)viewWillAppear:(BOOL)animated    //Called when the view is about to made visible. Default does nothing
 {
-    
-    //modify _navigatioBar
-    if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor],UITextAttributeTextColor, nil]];
-    }
-    
-    _aboutusButton = [[UIButton alloc] initWithFrame:CGRectMake(930.0f, 10.0f, 29.0f, 29.0f)];
-    [_aboutusButton setImage:[UIImage imageNamed:@"btn_aboutus.png"] forState:UIControlStateNormal];
-    [_navigationBar addSubview:_aboutusButton];
-    
-    [_aboutusButton addTarget:self action:@selector(aboutusButtonAction) forControlEvents:UIControlEventAllEvents];
-    
     SqliteService *sqliteService = [[SqliteService alloc] init];
     
     _listData = [sqliteService getAllDateFromTable];
@@ -93,7 +73,6 @@ NSUInteger numberOfPages;//scrollView page count
 
 - (void)viewDidUnload
 {
-    [self setNavigationBar:nil];
     [super viewDidUnload];
 }
 
@@ -238,21 +217,6 @@ NSUInteger numberOfPages;//scrollView page count
     }else return;
     
     [self viewWillAppear:YES];
-}
-
-#pragma mark - Action
-/**********************************************************
- 函数名称：-(void)aboutusButtonAction
- 函数描述：按钮功能，关于我们
- 输入参数：n/a
- 输出参数：aboutUsViewController
- 返回值：void
- **********************************************************/
--(void)aboutusButtonAction
-{
-    AboutUsViewController *aboutUsViewController = [[AboutUsViewController alloc] init];
-    [aboutUsViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [self presentModalViewController:aboutUsViewController animated:YES];;
 }
 
 @end

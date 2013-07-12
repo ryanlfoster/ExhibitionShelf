@@ -10,6 +10,5 @@
 #import "CustomParentsViewController.h"
 
 @interface AboutUsViewController : CustomParentsViewController
-@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (nonatomic,strong)UIButton *backButton;
 @end

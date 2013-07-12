@@ -24,7 +24,6 @@
     NSOperationQueue *_queue;
     Exhibition *receiveExhibition;
 }
-@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (strong, nonatomic) UIButton *aboutusButton;
 @property (strong, nonatomic) UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet CustomPageControl *pageControl;

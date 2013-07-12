@@ -36,7 +36,7 @@
         [button setImage:info.highlightedIcon forState:UIControlStateHighlighted];
         [button setImage:info.highlightedIcon forState:UIControlStateSelected];
         [button addTarget:self action:@selector(touchDownForButton:) forControlEvents:UIControlEventTouchDown];
-        [button addTarget:self action:@selector(touchUpforButton:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(touchUpForButton:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:button];
         [_buttons addObject:button];

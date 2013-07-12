@@ -21,7 +21,6 @@ NSUInteger numberOfPages;
 @implementation ShelfFirstViewController
 @synthesize containerView = _containerView;
 @synthesize pageControl = _pageControl;
-@synthesize navigationBar = _navigationBar;
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize progressHUD = _progressHUD;
 @synthesize aboutusButton = _aboutusButton;
@@ -43,11 +42,12 @@ NSUInteger numberOfPages;
     
     _pageControl.alpha = 0 ;
     
-    /***************************************load View****************************************/
+/***********************************background****************************************/
     //load background
-    UIImage *backgroundImage = [UIImage imageNamed:@"background_main.jpg"];
+    UIImage *backgroundImage = [UIImage imageNamed:@"exhibitiondisplay_background.png"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
+/************************************************************************************/
     
     //NSThread
     [NSThread detachNewThreadSelector:@selector(resourceRequest) toTarget:self withObject:nil];
@@ -63,24 +63,8 @@ NSUInteger numberOfPages;
 - (void)viewDidUnload
 {
     [self setContainerView:nil];
-    [self setNavigationBar:nil];
     [self setPageControl:nil];
     [super viewDidUnload];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    //modify _navigatioBar
-    if([_navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]){
-        [_navigationBar setBackgroundImage:[UIImage imageNamed:@"background_nav_top.jpg"] forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
-        [_navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor],UITextAttributeTextColor, nil]];
-    }
-    
-    _aboutusButton = [[UIButton alloc] initWithFrame:CGRectMake(930.0f, 10.0f, 29.0f, 29.0f)];
-    [_aboutusButton setImage:[UIImage imageNamed:@"btn_aboutus.png"] forState:UIControlStateNormal];
-    [_aboutusButton addTarget:self action:@selector(aboutusButtonAction) forControlEvents:UIControlEventAllEvents];
-    [_navigationBar addSubview:_aboutusButton];  
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -143,7 +127,7 @@ NSUInteger numberOfPages;
     if(_containerView != nil){
         [_containerView removeFromSuperview];
     }
-    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, 1024, 708)];
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 43, 1024, 738)];
     _containerView.pagingEnabled = YES;
     _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
     _containerView.showsHorizontalScrollIndicator = NO;
