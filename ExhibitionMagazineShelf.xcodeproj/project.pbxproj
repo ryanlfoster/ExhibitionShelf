@@ -40,6 +40,9 @@
 		3C69F6E116F9A5F200A8250C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69F6E016F9A5F200A8250C /* main.m */; };
 		3C69F6E516F9A5F200A8250C /* ShelfAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69F6E416F9A5F200A8250C /* ShelfAppDelegate.m */; };
 		3C69F6EE16F9A5F200A8250C /* ShelfFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69F6ED16F9A5F200A8250C /* ShelfFirstViewController.m */; };
+		3C753A6A17938A3000504372 /* imageDownloadView.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C753A6917938A3000504372 /* imageDownloadView.png */; };
+		3C753A6F1793A80400504372 /* BriefUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C753A6E1793A80400504372 /* BriefUILabel.m */; };
+		3C753A721793A81E00504372 /* DownloadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C753A711793A81E00504372 /* DownloadImageView.m */; };
 		3C806ECF174DB04300D43AA6 /* hightlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C806ECE174DB04300D43AA6 /* hightlighted.png */; };
 		3C815835178F94D200DAF4DE /* tabbar_myexhibition.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C815834178F94D200DAF4DE /* tabbar_myexhibition.png */; };
 		3C815839178F955700DAF4DE /* tabbar_exhibitiondisplay_highly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C815838178F955700DAF4DE /* tabbar_exhibitiondisplay_highly.png */; };
@@ -47,7 +50,6 @@
 		3C81583D178F9C0B00DAF4DE /* exhibitiondisplay_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C81583C178F9C0A00DAF4DE /* exhibitiondisplay_background.png */; };
 		3C81583F178FABC100DAF4DE /* imagelayout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C81583E178FABC100DAF4DE /* imagelayout.png */; };
 		3C815843178FCC7000DAF4DE /* CoverImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C815842178FCC7000DAF4DE /* CoverImageView.m */; };
-		3C815847178FECA700DAF4DE /* DownloadAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C815846178FECA700DAF4DE /* DownloadAnimationView.m */; };
 		3C88D41117532385003A6810 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C88D41017532385003A6810 /* Icon-72.png */; };
 		3C896F701705653E003E079D /* ExhibitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C896F6F1705653E003E079D /* ExhibitionViewController.m */; };
 		3C896FB317057987003E079D /* Exhibition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C896FB217057987003E079D /* Exhibition.m */; };
@@ -139,6 +141,11 @@
 		3C69F6E416F9A5F200A8250C /* ShelfAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShelfAppDelegate.m; sourceTree = "<group>"; };
 		3C69F6EC16F9A5F200A8250C /* ShelfFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShelfFirstViewController.h; sourceTree = "<group>"; };
 		3C69F6ED16F9A5F200A8250C /* ShelfFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShelfFirstViewController.m; sourceTree = "<group>"; };
+		3C753A6917938A3000504372 /* imageDownloadView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageDownloadView.png; sourceTree = "<group>"; };
+		3C753A6D1793A80400504372 /* BriefUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BriefUILabel.h; sourceTree = "<group>"; };
+		3C753A6E1793A80400504372 /* BriefUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BriefUILabel.m; sourceTree = "<group>"; };
+		3C753A701793A81E00504372 /* DownloadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadImageView.h; sourceTree = "<group>"; };
+		3C753A711793A81E00504372 /* DownloadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadImageView.m; sourceTree = "<group>"; };
 		3C806ECE174DB04300D43AA6 /* hightlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hightlighted.png; sourceTree = "<group>"; };
 		3C815834178F94D200DAF4DE /* tabbar_myexhibition.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_myexhibition.png; sourceTree = "<group>"; };
 		3C815838178F955700DAF4DE /* tabbar_exhibitiondisplay_highly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_exhibitiondisplay_highly.png; sourceTree = "<group>"; };
@@ -147,8 +154,6 @@
 		3C81583E178FABC100DAF4DE /* imagelayout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagelayout.png; sourceTree = "<group>"; };
 		3C815841178FCC7000DAF4DE /* CoverImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverImageView.h; sourceTree = "<group>"; };
 		3C815842178FCC7000DAF4DE /* CoverImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverImageView.m; sourceTree = "<group>"; };
-		3C815845178FECA700DAF4DE /* DownloadAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadAnimationView.h; sourceTree = "<group>"; };
-		3C815846178FECA700DAF4DE /* DownloadAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadAnimationView.m; sourceTree = "<group>"; };
 		3C88D41017532385003A6810 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
 		3C896F6E1705653E003E079D /* ExhibitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionViewController.h; sourceTree = "<group>"; };
 		3C896F6F1705653E003E079D /* ExhibitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExhibitionViewController.m; sourceTree = "<group>"; };
@@ -328,7 +333,8 @@
 		3C1691CC17265E75009E4B07 /* FirstCoverView */ = {
 			isa = PBXGroup;
 			children = (
-				3C815844178FD39C00DAF4DE /* DownloadAnimationView */,
+				3C753A6C1793A7CD00504372 /* DownloadImageView */,
+				3C753A6B1793A76D00504372 /* BriefUILabel */,
 				3C815840178FCB9E00DAF4DE /* AsyncImageView */,
 				3C938AC0170BCD20004FD4CE /* FirstCoverView.h */,
 				3C938AC1170BCD20004FD4CE /* FirstCoverView.m */,
@@ -400,6 +406,7 @@
 		3C58994816FA9BE500624CE9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3C753A6917938A3000504372 /* imageDownloadView.png */,
 				3C81583E178FABC100DAF4DE /* imagelayout.png */,
 				3C81583C178F9C0A00DAF4DE /* exhibitiondisplay_background.png */,
 				3CFD3F5D178EA54B00F50216 /* navigationBar_background.png */,
@@ -495,6 +502,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3C753A6B1793A76D00504372 /* BriefUILabel */ = {
+			isa = PBXGroup;
+			children = (
+				3C753A6D1793A80400504372 /* BriefUILabel.h */,
+				3C753A6E1793A80400504372 /* BriefUILabel.m */,
+			);
+			name = BriefUILabel;
+			sourceTree = "<group>";
+		};
+		3C753A6C1793A7CD00504372 /* DownloadImageView */ = {
+			isa = PBXGroup;
+			children = (
+				3C753A701793A81E00504372 /* DownloadImageView.h */,
+				3C753A711793A81E00504372 /* DownloadImageView.m */,
+			);
+			name = DownloadImageView;
+			sourceTree = "<group>";
+		};
 		3C815840178FCB9E00DAF4DE /* AsyncImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,15 +527,6 @@
 				3C815842178FCC7000DAF4DE /* CoverImageView.m */,
 			);
 			name = AsyncImageView;
-			sourceTree = "<group>";
-		};
-		3C815844178FD39C00DAF4DE /* DownloadAnimationView */ = {
-			isa = PBXGroup;
-			children = (
-				3C815845178FECA700DAF4DE /* DownloadAnimationView.h */,
-				3C815846178FECA700DAF4DE /* DownloadAnimationView.m */,
-			);
-			name = DownloadAnimationView;
 			sourceTree = "<group>";
 		};
 		3C896FB517058673003E079D /* Exhibition */ = {
@@ -761,6 +777,7 @@
 				3C81583B178F96F300DAF4DE /* aboutus.png in Resources */,
 				3C81583D178F9C0B00DAF4DE /* exhibitiondisplay_background.png in Resources */,
 				3C81583F178FABC100DAF4DE /* imagelayout.png in Resources */,
+				3C753A6A17938A3000504372 /* imageDownloadView.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,7 +847,8 @@
 				3CFD3F45178E5E8400F50216 /* CustomParentsViewController.m in Sources */,
 				3CFD3F4F178E8F4200F50216 /* ExhibitionShelfViewController.m in Sources */,
 				3C815843178FCC7000DAF4DE /* CoverImageView.m in Sources */,
-				3C815847178FECA700DAF4DE /* DownloadAnimationView.m in Sources */,
+				3C753A6F1793A80400504372 /* BriefUILabel.m in Sources */,
+				3C753A721793A81E00504372 /* DownloadImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,8 +1039,8 @@
 				INFOPLIST_FILE = "ExhibitionMagazineShelf/ExhibitionMagazineShelf-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "今日数字馆";
-				PROVISIONING_PROFILE = "377F3658-2802-4281-98AF-5BA2BBC3ACB8";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "377F3658-2802-4281-98AF-5BA2BBC3ACB8";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};

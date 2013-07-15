@@ -23,7 +23,6 @@ NSUInteger numberOfPages;
 @synthesize pageControl = _pageControl;
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize progressHUD = _progressHUD;
-@synthesize aboutusButton = _aboutusButton;
 
 #pragma mark -nib init
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -103,10 +102,10 @@ NSUInteger numberOfPages;
 -(void)showShelf {
     if([_exhibitionStore isExhibitionStoreReady]) {
         _containerView.alpha=1.0;
-        if([_exhibitionStore.list count] % 6 == 0){
-            numberOfPages = [_exhibitionStore.list count] / 6;
+        if([_exhibitionStore numberOfStoreExhibition] % 6 == 0){
+            numberOfPages = [_exhibitionStore numberOfStoreExhibition] / 6;
         }else{
-            numberOfPages = 1 + [_exhibitionStore.list count] / 6;
+            numberOfPages = 1 + [_exhibitionStore numberOfStoreExhibition] / 6;
         }
         //back main thread
         [self performSelectorOnMainThread:@selector(updateShelf) withObject:_containerView waitUntilDone:NO];
@@ -124,10 +123,7 @@ NSUInteger numberOfPages;
  **********************************************************/
 -(void)updateShelf {
     
-    if(_containerView != nil){
-        [_containerView removeFromSuperview];
-    }
-    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 43, 1024, 738)];
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 1024, 670)];
     _containerView.pagingEnabled = YES;
     _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
     _containerView.showsHorizontalScrollIndicator = NO;
@@ -146,32 +142,55 @@ NSUInteger numberOfPages;
 
     NSInteger exhibitionCount = [_exhibitionStore numberOfStoreExhibition];
     for(NSInteger i = 0;i < exhibitionCount;i++) {
+//        Exhibition *anExhibition = [_exhibitionStore exhibitionAtIndex:i];
+//        FirstCoverView *cover = [[FirstCoverView alloc] initWithFrame:CGRectZero];
+//        cover.exhibitionID = anExhibition.exhibitionID;
+//        cover.delegate = self;
+//        cover.title.text = anExhibition.title;
+//        cover.description.text = anExhibition.description;
+//        cover.cover.image = [UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]];
+//        if([anExhibition isExhibitionAvailibleForRead]) {
+//            [cover.button setTitle:@"观 看" forState:UIControlStateNormal];
+//            [cover.button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
+//        }else if([anExhibition isDownloading]){
+//            cover.progressBar.alpha = 1.0;
+//            [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
+//            [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
+//        }
+//        else {
+//            [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
+//            [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
+//        }
+//        NSInteger row = i/3;
+//        NSInteger col = i%3;
+//        CGRect coverFrame = cover.frame;
+//        coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
+//        cover.frame=coverFrame;
+//        cover.backgroundColor = [UIColor clearColor];
+//        [_containerView addSubview:cover];
+        
         Exhibition *anExhibition = [_exhibitionStore exhibitionAtIndex:i];
         FirstCoverView *cover = [[FirstCoverView alloc] initWithFrame:CGRectZero];
         cover.exhibitionID = anExhibition.exhibitionID;
-        cover.delegate = self;
-        cover.title.text = anExhibition.title;
-        cover.description.text = anExhibition.description;
-        cover.cover.image = [UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]];
-        if([anExhibition isExhibitionAvailibleForRead]) {
-            [cover.button setTitle:@"观 看" forState:UIControlStateNormal];
-            [cover.button setBackgroundImage:[UIImage imageNamed:@"view_button.png"] forState:UIControlStateNormal];
-        }else if([anExhibition isDownloading]){
-            cover.progressBar.alpha = 1.0;
-            [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
-            [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
+        cover.coverImageView.exhibitionID = anExhibition.exhibitionID;
+        cover.coverImageView.imgURL = anExhibition.coverURL;
+        
+        if(i == 4){
+            cover.downloadImageView.image = [cover.downloadImageView addText:[UIImage imageNamed:@"imageDownloadView.png"] text:anExhibition.description];            
         }
-        else {
-            [cover.button setTitle:@"下 载" forState:UIControlStateNormal];
-            [cover.button setBackgroundImage:[UIImage imageNamed:@"download_button.png"] forState:UIControlStateNormal];
-        }
-        NSInteger row = i/3;
-        NSInteger col = i%3;
+        
+        cover.briefUILable.titleLabel.text = anExhibition.title;
+        cover.briefUILable.subTitleLabel.text = anExhibition.subTitle;
+        cover.briefUILable.dateLabel.text = anExhibition.date;
+        
+        NSInteger row = i/2;
+        NSInteger col = i%2;
         CGRect coverFrame = cover.frame;
         coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
         cover.frame=coverFrame;
         cover.backgroundColor = [UIColor clearColor];
         [_containerView addSubview:cover];
+        
         
         if(_progressHUD){
             [_progressHUD removeFromSuperview];
@@ -229,29 +248,29 @@ NSUInteger numberOfPages;
  **********************************************************/
 -(void)coverSelected:(FirstCoverView *)cover {
     
-    Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
-    
-    if (![reach isReachable] && [cover.button.titleLabel.text isEqualToString:@"下 载"]) {
-        [reach startNotifier];
-    }else{
-        NSString *selectedExhibitionID = cover.exhibitionID;
-        Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
-        if([selectedExhibition isExhibitionAvailibleForRead]){
-            [self openZip:selectedExhibition];
-        }
-        else if([cover.button.titleLabel.text isEqual: @"取 消"]){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要取消下载么？" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
-            [alert show];
-            receiveExhibition = selectedExhibition;
-        }
-        else{
-            if([Exhibition ifHaveExhibitionDownloading]){
-                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不要着急嘛，请等待上一个下载完成" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-                [alerView show];
-            }else [self downloadExhibition:selectedExhibition updateCover:cover];
-            
-        }
-    }
+//    Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
+//    
+//    if (![reach isReachable] && [cover.button.titleLabel.text isEqualToString:@"下 载"]) {
+//        [reach startNotifier];
+//    }else{
+//        NSString *selectedExhibitionID = cover.exhibitionID;
+//        Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
+//        if([selectedExhibition isExhibitionAvailibleForRead]){
+//            [self openZip:selectedExhibition];
+//        }
+//        else if([cover.button.titleLabel.text isEqual: @"取 消"]){
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要取消下载么？" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
+//            [alert show];
+//            receiveExhibition = selectedExhibition;
+//        }
+//        else{
+//            if([Exhibition ifHaveExhibitionDownloading]){
+//                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"不要着急嘛，请等待上一个下载完成" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+//                [alerView show];
+//            }else [self downloadExhibition:selectedExhibition updateCover:cover];
+//            
+//        }
+//    }
 
 }
 #pragma mark -UIAlertViewDelegate
@@ -283,12 +302,12 @@ NSUInteger numberOfPages;
  **********************************************************/
 -(void)downloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover {
     
-    cover.progressBar.alpha=1.0;
-    cover.progressBar.progress = 0;
-    [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
-    cover.button.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14.0];
-    [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
-    cover.button.alpha=1.0;
+//    cover.progressBar.alpha=1.0;
+//    cover.progressBar.progress = 0;
+//    [cover.button setBackgroundImage:[UIImage imageNamed:@"cancel_button.png"] forState:UIControlStateNormal];
+//    cover.button.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14.0];
+//    [cover.button setTitle:@"取 消" forState:UIControlStateNormal];
+//    cover.button.alpha=1.0;
     
     [exhibition addObserver:cover forKeyPath:@"downloadProgress" options:NSKeyValueObservingOptionNew context:NULL];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exhibitionDidEndDownload:) name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];

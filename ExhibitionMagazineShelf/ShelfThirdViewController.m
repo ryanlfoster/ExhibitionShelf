@@ -107,24 +107,24 @@ NSUInteger numberOfPages;//scrollView page count
     [self.view addSubview:_containerView];
 
     //load content in scrollView
-    for(int i = 0 ; i < [_listData count] ; i++){
-        ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
-        Exhibition *exhibition = [_listData objectAtIndex:i];
-        cover.exhibitionID = exhibition.exhibitionID;
-        cover.title.text = exhibition.title;
-        cover.description.text = exhibition.description;
-        cover.file = exhibition.file;
-        cover.cover.image = [UIImage imageWithContentsOfFile:exhibition.image];
-        cover.delegateSelected = self;
-        cover.delegateDeleted = self;
-        NSInteger row = i/3;
-        NSInteger col = i%3;
-        CGRect coverFrame = cover.frame;
-        coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
-        cover.frame=coverFrame;
-        cover.backgroundColor = [UIColor clearColor];
-        [_containerView addSubview:cover];
-    }
+//    for(int i = 0 ; i < [_listData count] ; i++){
+//        ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
+//        Exhibition *exhibition = [_listData objectAtIndex:i];
+//        cover.exhibitionID = exhibition.exhibitionID;
+//        cover.title.text = exhibition.title;
+//        cover.description.text = exhibition.description;
+//        cover.file = exhibition.file;
+//        cover.cover.image = [UIImage imageWithContentsOfFile:exhibition.image];
+//        cover.delegateSelected = self;
+//        cover.delegateDeleted = self;
+//        NSInteger row = i/3;
+//        NSInteger col = i%3;
+//        CGRect coverFrame = cover.frame;
+//        coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
+//        cover.frame=coverFrame;
+//        cover.backgroundColor = [UIColor clearColor];
+//        [_containerView addSubview:cover];
+//    }
 }
 
 #pragma mark -ShelfThirdViewControllerSelectedProtocol implementation

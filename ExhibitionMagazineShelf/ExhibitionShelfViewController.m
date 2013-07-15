@@ -54,8 +54,8 @@
     [_customTabBar showDefault];
     
     _navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 1024, 43)];
-    [_navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_background.png"] forBarMetrics:UIBarMetricsDefault];
-    [_navigationBar setTitleVerticalPositionAdjustment:2.0f forBarMetrics:UIBarMetricsDefault];
+    [_navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar_background.png"] forBarMetrics:UIBarMetricsDefault];
+    [_navigationBar setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 1024, 43)];
     titleLabel.font = [UIFont fontWithName:@"FZLTHJW--GB1-0" size:18.0f];
     titleLabel.textColor = [UIColor blackColor];
@@ -77,7 +77,7 @@
 
 -(void)switchViewController:(UIViewController *)vc
 {
-    vc.view.frame = CGRectMake(0, _navigationBar.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height - _customTabBar.frame.size.height);
+    vc.view.frame = CGRectMake(0, 43, self.view.bounds.size.width, self.view.bounds.size.height - _customTabBar.frame.size.height);
     [self.view insertSubview:vc.view belowSubview:_customTabBar];
 }
 

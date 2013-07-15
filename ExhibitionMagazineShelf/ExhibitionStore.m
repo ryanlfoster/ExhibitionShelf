@@ -66,7 +66,7 @@
 {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        _list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/exhibition.plist"]];
+        _list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/test.plist"]];
         if(!_list){
             _list = [[NSArray alloc] initWithContentsOfURL:[self fileURLOfCachedExhibitionFile]];
         }
@@ -75,21 +75,23 @@
             [_list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 NSDictionary *exhibitionDictionary = (NSDictionary *)obj;
                 Exhibition *anExhibition = [[Exhibition alloc] init];
-                anExhibition.exhibitionID=[exhibitionDictionary objectForKey:@"ID"];
-                anExhibition.title=[exhibitionDictionary objectForKey:@"Title"];
-                anExhibition.coverURL=[exhibitionDictionary objectForKey:@"Cover URL"];
-                anExhibition.downloadURL=[exhibitionDictionary objectForKey:@"Download URL"];
-                anExhibition.description=[exhibitionDictionary objectForKey:@"Description"];
+                anExhibition.exhibitionID = [exhibitionDictionary objectForKey:@"ID"];
+                anExhibition.title = [exhibitionDictionary objectForKey:@"Title"];
+                anExhibition.subTitle = [exhibitionDictionary objectForKey:@"Sub Title"];
+                anExhibition.date = [exhibitionDictionary objectForKey:@"Date"];
+                anExhibition.coverURL = [exhibitionDictionary objectForKey:@"Cover URL"];
+                anExhibition.downloadURL = [exhibitionDictionary objectForKey:@"Download URL"];
+                anExhibition.description = [exhibitionDictionary objectForKey:@"Description"];
                 [_exhibitionArray addObject:anExhibition];
-                // dispatch cover loading
-                if(![UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]]) {
-                    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:anExhibition.coverURL]];
-                        if(imgData) {
-                            [imgData writeToFile:[anExhibition exhibitionImagePath] atomically:YES];
-                        }
-                    });
-                }
+//                // dispatch cover loading
+//                if(![UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]]) {
+//                    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:anExhibition.coverURL]];
+//                        if(imgData) {
+//                            [imgData writeToFile:[anExhibition exhibitionImagePath] atomically:YES];
+//                        }
+//                    });
+//                }
             }];
             // save the location
             [_list writeToURL:[self fileURLOfCachedExhibitionFile] atomically:YES];

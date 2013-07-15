@@ -17,6 +17,10 @@
 @property (nonatomic, copy)NSString *exhibitionID;
 //exhibition title
 @property (nonatomic, copy)NSString *title;
+//exhibition sub title
+@property (nonatomic, copy)NSString *subTitle;
+//exhibition date 
+@property (nonatomic, copy)NSString *date;
 //exhibition cover net path 
 @property (nonatomic, copy)NSString *coverURL;
 //exhibition download net path

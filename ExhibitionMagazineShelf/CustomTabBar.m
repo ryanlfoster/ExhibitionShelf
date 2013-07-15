@@ -31,7 +31,7 @@
     _buttons = [[NSMutableArray alloc] init];
     for (CustomTabBarButton *info in _buttonData) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(264 +(168*count), 0, 162, 35);
+        button.frame = CGRectMake(264 +(150*count), 0, 162, 35);
         [button setImage:info.icon forState:UIControlStateNormal];
         [button setImage:info.highlightedIcon forState:UIControlStateHighlighted];
         [button setImage:info.highlightedIcon forState:UIControlStateSelected];

@@ -17,9 +17,8 @@
 //@synthesize progressBar = _progressBar;
 @synthesize coverImageViewFrameView = _coverImageViewFrameView;
 @synthesize coverImageView = _coverImageView;
-@synthesize titleLabel = _titleLabel;
-@synthesize subTitleLabel = _subTitleLabel;
-@synthesize dateLabel = _dateLabel;
+@synthesize downloadImageView = _downloadImageView;
+@synthesize briefUILable = _briefUILable;
 
 #pragma mark -init
 /**********************************************************
@@ -34,7 +33,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // frame
-        self.frame = CGRectMake(0, 0, 512, 192);
+//        self.frame = CGRectMake(0, 0, 512, 192);
 //        // title label
 //        _title = [[UILabel alloc] initWithFrame:CGRectMake(272, 40, 224, 40)];
 //        _title.font = [UIFont fontWithName:@"MicrosoftYaHei" size:15.0];
@@ -75,6 +74,31 @@
 //        [self addSubview:_cover];
 //        [self addSubview:_button];
 //        [self addSubview:_progressBar];
+        
+//        @synthesize coverImageViewFrameView = _coverImageViewFrameView;
+//        @synthesize coverImageView = _coverImageView;
+//        @synthesize downloadImageView = _downloadImageView;
+//        @synthesize titleLabel = _titleLabel;
+//        @synthesize subTitleLabel = _subTitleLabel;
+//        @synthesize dateLabel = _dateLabel;
+        
+        self.frame = CGRectMake(0, 0, 341, 300);
+        
+        _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 50, 220, 202)];
+        _coverImageViewFrameView.image = [UIImage imageNamed:@"imagelayout.png"];
+        
+        _coverImageView = [[CoverImageView alloc] initWithFrame:CGRectMake(85 + 4, 50 + 4, 212, 194)];
+        _coverImageView.userInteractionEnabled = YES;
+        
+        _downloadImageView = [[DownloadImageView alloc] initWithFrame:CGRectMake(85, 50, 220, 202)];
+        
+        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 260, 220, 50)];
+        
+        [self addSubview:_coverImageViewFrameView];
+        [self addSubview:_coverImageView];
+        [self addSubview:_downloadImageView];
+        [self addSubview:_briefUILable];
+        
     }
     return self;
 }

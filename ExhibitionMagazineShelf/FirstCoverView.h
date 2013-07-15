@@ -10,6 +10,8 @@
 #import "ShelfFirstViewController.h"
 #import "MCProgressBar.h"
 #import "CoverImageView.h"
+#import "BriefUILabel.h"
+#import "DownloadImageView.h"
 
 @interface FirstCoverView : UIView
 
@@ -24,8 +26,7 @@
 @property (nonatomic, copy) NSString *exhibitionID;
 @property (nonatomic, strong) UIImageView *coverImageViewFrameView;
 @property (nonatomic, strong) CoverImageView *coverImageView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *subTitleLabel;
-@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) DownloadImageView *downloadImageView;
+@property (nonatomic, strong) BriefUILabel *briefUILable;
 
 @end

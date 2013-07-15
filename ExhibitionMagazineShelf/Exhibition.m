@@ -17,6 +17,8 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 @implementation Exhibition
 @synthesize exhibitionID = _exhibitionID;
 @synthesize title = _title;
+@synthesize subTitle = _subTitle;
+@synthesize date = _date;
 @synthesize coverURL = _coverURL;
 @synthesize downloadURL = _downloadURL;
 @synthesize description = _description;
