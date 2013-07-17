@@ -38,8 +38,6 @@
 @property (nonatomic, retain)NSNumber *downloadDataLengthNumber;
 //exhibition status download id
 @property (nonatomic,readwrite,getter = isDownloading) BOOL downloading;
-@property (nonatomic,copy)NSString *file;
-@property (nonatomic,copy)NSString *image;
 
 //download exhibition
 -(void)scheduleDownloadOfExhibition;
@@ -58,5 +56,7 @@
 
 -(void)sendEndOfDownloadNotification;
 -(void)sendFailedDownloadNotification;
+
+-(void)sendAddExhbitionNotification;
 
 @end

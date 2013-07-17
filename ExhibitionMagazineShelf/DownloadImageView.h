@@ -10,6 +10,6 @@
 
 @interface DownloadImageView : UIImageView
 
--(UIImage *)addText:(UIImage *)img text:(NSString *)string;
+@property(nonatomic, strong) UILabel *description;
 
 @end

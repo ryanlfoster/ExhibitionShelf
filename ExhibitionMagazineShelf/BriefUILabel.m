@@ -18,34 +18,30 @@
     self = [super initWithFrame:frame];
     if (self) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220, 20)];
-        _titleLabel.font = [UIFont systemFontOfSize:15.0];
-        _titleLabel.textColor=[UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
+        _titleLabel.font = [UIFont fontWithName:@"FZYDCHJW--GB1-0" size:18.0];
+        _titleLabel.textColor=[UIColor blackColor];
         _titleLabel.textAlignment = UITextAlignmentLeft;
         _titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
         _titleLabel.numberOfLines = 1;
         _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.shadowColor = [UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
-        _titleLabel.shadowOffset = CGSizeMake(0.1, 0.1);
         
-        _subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 220, 15)];
-        _subTitleLabel.font = [UIFont systemFontOfSize:15.0];
-        _subTitleLabel.textColor=[UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
+        _subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 22, 220, 16)];
+        _subTitleLabel.font = [UIFont fontWithName:@"FZLTHJW--GB1-0" size:14.0];
+        _subTitleLabel.textColor=[UIColor grayColor];
         _subTitleLabel.textAlignment = UITextAlignmentLeft;
         _subTitleLabel.lineBreakMode = UILineBreakModeTailTruncation;
         _subTitleLabel.numberOfLines = 1;
         _subTitleLabel.backgroundColor = [UIColor clearColor];
-        _subTitleLabel.shadowColor = [UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
-        _subTitleLabel.shadowOffset = CGSizeMake(0.1, 0.1);
         
-        _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, 220, 10)];
-        _dateLabel.font = [UIFont systemFontOfSize:12.0];
-        _dateLabel.textColor=[UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
+        _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, 220, 12)];
+        _dateLabel.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:10.0];
+        _dateLabel.textColor=[UIColor grayColor];
         _dateLabel.textAlignment = UITextAlignmentLeft;
         _dateLabel.lineBreakMode = UILineBreakModeTailTruncation;
         _dateLabel.numberOfLines = 1;
         _dateLabel.backgroundColor = [UIColor clearColor];
-        _dateLabel.shadowColor = [UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
-        _dateLabel.shadowOffset = CGSizeMake(0.1, 0.1);
+//        _dateLabel.shadowColor = [UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
+//        _dateLabel.shadowOffset = CGSizeMake(0.1, 0.1);
         
         [self addSubview:_titleLabel];
         [self addSubview:_subTitleLabel];

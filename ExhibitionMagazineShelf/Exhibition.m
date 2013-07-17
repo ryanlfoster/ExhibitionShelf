@@ -26,8 +26,6 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 @synthesize expectedLength = _expectedLength;
 @synthesize downloadProgress = _downloadProgress;
 @synthesize downloading = _downloading;
-@synthesize image = _image;
-@synthesize file = _file;
 @synthesize expectedLengthNumber = _expectedLengthNumber;
 @synthesize downloadDataLengthNumber = _downloadDataLengthNumber;
 
@@ -67,7 +65,7 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 {
     NSURL *theURL = [NSURL fileURLWithPath:[CacheDirectory stringByAppendingPathComponent:_exhibitionID]];
     // create the URL
-    if([[NSFileManager defaultManager] fileExistsAtPath:[theURL path]]==NO) {
+    if(![[NSFileManager defaultManager] fileExistsAtPath:[theURL path]]) {
         NSError *error=nil;
         if([[NSFileManager defaultManager] createDirectoryAtPath:[theURL path] withIntermediateDirectories:NO attributes:nil error:&error]==NO) {
             NSLog(@"There was an error in creating the directory: %@",error);
@@ -271,13 +269,6 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
         BOOL ret = [zip UnzipFileTo:[self exhibitionFilePath] overWrite:YES];
         if(ret){
             NSLog(@"unzip success !!!");
-            
-            //init SqlService
-            SqliteService *sqlService = [[SqliteService alloc] init];
-            //packaging exhibition
-            _image = [self exhibitionImagePath];
-            _file = [self exhibitionFilePath];
-            [sqlService insertToDB:self];
             //send end of download notification
             //delete file
             NSFileManager *fileManger = [NSFileManager defaultManager];
@@ -335,6 +326,17 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 
 #pragma mark -NSNotificationCenter
 /**********************************************************
+ 函数名称：-(void)cancelDownloadExhibiiton
+ 函数描述：send conceal downloadCoverImageView notification
+ 输入参数：n/a
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)sendConcealDownloadCoverImageViewNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:self];
+}
+/**********************************************************
  函数名称：-(void)sendEndOfDownloadNotification
  函数描述：下载完成后放松通知
  输入参数：n/a
@@ -355,5 +357,16 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 -(void)sendFailedDownloadNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];
+}
+/**********************************************************
+ 函数名称：-(void)sendAddExhbitionNotification
+ 函数描述：向ShelfThirdViewController中发送执行addExhibition方法的通知
+ 输入参数：n/a
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)sendAddExhbitionNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ADD_EXHIBITION_NOTIFICATION object:self];
 }
 @end

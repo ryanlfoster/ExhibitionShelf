@@ -8,27 +8,38 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
-#import "ExhibitionViewController.h"
-#import "CustomPageControl.h"
 #import "CustomParentsViewController.h"
 
 @class FirstCoverView;
 @class ExhibitionStore;
 @class Exhibition;
+@class ShelfThirdViewController;
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
-@protocol ShelfFirstViewControllerProtocol
--(void)coverSelected:(FirstCoverView *)cover;
+//@protocol ShelfFirstViewControllerProtocol
+//-(void)coverSelected:(FirstCoverView *)cover;
+//@end
+
+/*delegate protocol to click exhibition*/
+@protocol ShelfFirstViewControllerClickExhibitionProtocol <NSObject>
+
+-(void)clickExhibition:(FirstCoverView *)cover;
+
 @end
 
-@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerProtocol,MBProgressHUDDelegate,UIScrollViewDelegate,UIAlertViewDelegate>{
-    NSOperationQueue *_queue;
-    Exhibition *receiveExhibition;
-}
-@property (strong, nonatomic) UIScrollView *containerView;
-@property (strong, nonatomic) IBOutlet CustomPageControl *pageControl;
-@property (strong, nonatomic) ExhibitionStore *exhibitionStore;
-@property (strong, nonatomic) MBProgressHUD *progressHUD;//开启应用的加载等待view
+/*delegate protocol to click exhibition which ready for download */
+@protocol ShelfFirstViewControllerClickDownloadExhibitionProtocol <NSObject>
 
--(void)updateShelf;
+-(void)clickDownloadExhibition:(FirstCoverView *)cover;
+
+@end
+
+@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>{
+    
+    CALayer *transitionLayer;
+    
+}
+
+@property (strong, nonatomic) ExhibitionStore *exhibitionStore;
+@property (strong, nonatomic) ShelfThirdViewController *stvc;
 
 @end

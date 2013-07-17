@@ -29,4 +29,7 @@
 @property (nonatomic, strong) DownloadImageView *downloadImageView;
 @property (nonatomic, strong) BriefUILabel *briefUILable;
 
+@property (nonatomic, weak) id<ShelfFirstViewControllerClickExhibitionProtocol> delegate;
+@property (nonatomic, weak) id<ShelfFirstViewControllerClickDownloadExhibitionProtocol>delegateCancelDownload;
+
 @end

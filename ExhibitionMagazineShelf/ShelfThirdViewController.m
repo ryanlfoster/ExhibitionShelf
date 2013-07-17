@@ -7,7 +7,6 @@
 //
 
 #import "ShelfThirdViewController.h"
-#import "AboutUsViewController.h"
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
 
@@ -15,19 +14,18 @@ NSUInteger numberOfPages;//scrollView page count
 
 @implementation ShelfThirdViewController
 @synthesize containerView = _containerView;
-@synthesize aboutusButton = _aboutusButton;
 @synthesize listData = _listData;
 
 @synthesize alertString = _alertString;
 @synthesize alertViewThird = _alertViewThird;
 
-@synthesize shelfFirstViewController = _shelfFirstViewController;
 
 #pragma mark -init nib
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
     }
     return self;
 }
@@ -37,44 +35,16 @@ NSUInteger numberOfPages;//scrollView page count
 {
     
     [super viewDidLoad];
-
-}
-
--(void)viewWillAppear:(BOOL)animated    //Called when the view is about to made visible. Default does nothing
-{
-    SqliteService *sqliteService = [[SqliteService alloc] init];
     
-    _listData = [sqliteService getAllDateFromTable];
-    
-    if([_listData count] % 6 == 0){
-        numberOfPages = [_listData count] / 6;
-    }else{
-        numberOfPages = 1 + ([_listData count] / 6);
-    }
-    
-    [self loadScrollViewData];
-        
-}
-
--(void)viewDidAppear:(BOOL)animated     //Called when the view has been fully transitioned onto the screen. Default does nothing
-{
+    /***********************************background****************************************/
+    //load background
+    UIImage *backgroundImage = [UIImage imageNamed:@"exhibitiondisplay_background.png"];
+    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    self.view.backgroundColor = backgroundColor;
+    /************************************************************************************/
 
 }
 
--(void)viewWillDisappear:(BOOL)animated     //Called when the view is dismissed, covered or otherwise hidden. Default does nothing
-{
-
-}
-
--(void)viewDidDisappear:(BOOL)animated     //Called after the view was dismissed, covered or otherwise hidden. Default does nothing
-{
-
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -86,6 +56,32 @@ NSUInteger numberOfPages;//scrollView page count
 }
 
 /**********************************************************
+ 函数名称：-(void)addExhibition:(NSNotification *)notification
+ 函数描述：更新ThirdView
+ 输入参数：(NSNotification *)notification
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
+-(void)addExhibition:(NSNotification *)notification
+{
+    NSLog(@"addExhibition");
+    
+    //observer & sender to remove from the dispatch table
+    Exhibition *exhibition = (Exhibition *)[notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ADD_EXHIBITION_NOTIFICATION object:exhibition];
+    
+    SqliteService *sqliteService = [[SqliteService alloc] init];
+    _listData = [sqliteService getAllDateFromTable];
+    if([_listData count] % 6 == 0){
+        numberOfPages = [_listData count] / 6;
+    }else{
+        numberOfPages = 1 + ([_listData count] / 6);
+    }
+    NSLog(@"_listData count == %d",[_listData count]);
+    [self loadScrollViewData];
+}
+
+/**********************************************************
  函数名称：-(void)loadScrollViewData
  函数描述：更新scrollView
  输入参数：N/A
@@ -94,10 +90,7 @@ NSUInteger numberOfPages;//scrollView page count
  **********************************************************/
 -(void)loadScrollViewData
 {
-    if(_containerView != nil){
-        [_containerView removeFromSuperview];
-    }
-    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, 1024, 708)];
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, 670)];
     _containerView.pagingEnabled = YES;
     _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
     _containerView.showsHorizontalScrollIndicator = NO;
@@ -107,24 +100,26 @@ NSUInteger numberOfPages;//scrollView page count
     [self.view addSubview:_containerView];
 
     //load content in scrollView
-//    for(int i = 0 ; i < [_listData count] ; i++){
-//        ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
-//        Exhibition *exhibition = [_listData objectAtIndex:i];
-//        cover.exhibitionID = exhibition.exhibitionID;
-//        cover.title.text = exhibition.title;
-//        cover.description.text = exhibition.description;
-//        cover.file = exhibition.file;
-//        cover.cover.image = [UIImage imageWithContentsOfFile:exhibition.image];
-//        cover.delegateSelected = self;
-//        cover.delegateDeleted = self;
-//        NSInteger row = i/3;
-//        NSInteger col = i%3;
-//        CGRect coverFrame = cover.frame;
-//        coverFrame.origin=CGPointMake(CGRectGetWidth(coverFrame)*row , CGRectGetHeight(coverFrame)*col);
-//        cover.frame=coverFrame;
-//        cover.backgroundColor = [UIColor clearColor];
-//        [_containerView addSubview:cover];
-//    }
+    for(int i = 0 ; i < [_listData count] ; i++){
+        ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
+        Exhibition *exhibition = [_listData objectAtIndex:i];
+        cover.exhibitionID = exhibition.exhibitionID;
+        
+        CGFloat edge;
+        if(i >= 6 ){
+            edge = 70.0f;
+        }else edge = 0;
+        CGFloat row = i % 3;
+        CGFloat col = i / 3;
+        CGRect coverFrame = cover.frame;
+        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
+        cover.frame = coverFrame;
+        cover.backgroundColor = [UIColor clearColor];
+        [_containerView addSubview:cover];
+
+    }
+    
+    [self viewDidLoad];
 }
 
 #pragma mark -ShelfThirdViewControllerSelectedProtocol implementation
@@ -135,21 +130,21 @@ NSUInteger numberOfPages;//scrollView page count
  输出参数：N/A
  返回值：void
  **********************************************************/
--(void)coverSelected:(ThirdCoverView *)cover {
-    
-    NSLog(@"Selected !!!");
-    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
-    NSBundle *myBundle = [NSBundle bundleWithPath:cover.file];
-    NSLog(@"myBundle = %@",myBundle);
-    viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
-    viewController.navigationBarTitle = cover.title.text;
-    //turn view
-    if(viewController.str != nil){
-        [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        [self presentModalViewController:viewController animated:YES];
-    }
-    
-}
+//-(void)coverSelected:(ThirdCoverView *)cover {
+//    
+//    NSLog(@"Selected !!!");
+//    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
+//    NSBundle *myBundle = [NSBundle bundleWithPath:cover.file];
+//    NSLog(@"myBundle = %@",myBundle);
+//    viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
+//    viewController.navigationBarTitle = cover.title.text;
+//    //turn view
+//    if(viewController.str != nil){
+//        [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+//        [self presentModalViewController:viewController animated:YES];
+//    }
+//    
+//}
 
 #pragma mark -ShelfThirdViewControllerDeletedProtocol implementation
 /**********************************************************
@@ -207,12 +202,6 @@ NSUInteger numberOfPages;//scrollView page count
             }
             
         }
-        
-        if(_shelfFirstViewController == nil){
-            _shelfFirstViewController = [[ShelfFirstViewController alloc] init];
-        }
-        
-        [_shelfFirstViewController viewDidLoad];
 
     }else return;
     
