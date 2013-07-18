@@ -21,7 +21,7 @@ NSUInteger numberOfPages;
 
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong, nonatomic) UIScrollView *containerView;
-@property (strong, nonatomic) CustomPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet CustomPageControl *pageControl;
 
 @end
 @implementation ShelfFirstViewController
@@ -137,7 +137,7 @@ NSUInteger numberOfPages;
         _progressHUD = nil;
     }
     
-    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 670)];
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, 266 * 2 + 36)];
     _containerView.pagingEnabled = YES;
     _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
     _containerView.showsHorizontalScrollIndicator = NO;
@@ -145,6 +145,15 @@ NSUInteger numberOfPages;
     _containerView.delegate = self;
     _containerView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_containerView];
+    
+    _pageControl.backgroundColor = [UIColor clearColor];
+    [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"imagePageStateNormal.png"]];
+    [_pageControl setImagePageStateHightlighted:[UIImage imageNamed:@"imagePageStateHighly.png"]];
+    _pageControl.numberOfPages = numberOfPages;
+    _pageControl.currentPage = 0;
+    _pageControl.userInteractionEnabled = NO;
+    [_pageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.view addSubview:_pageControl];
     
     NSInteger exhibitionCount = [_exhibitionStore numberOfStoreExhibition];
     for(NSInteger i = 0;i < exhibitionCount;i++) {
@@ -170,20 +179,11 @@ NSUInteger numberOfPages;
         CGFloat row = i / 2;
         CGFloat col = i % 2;
         CGRect coverFrame = cover.frame;
-        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
+        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);   
         cover.frame = coverFrame;
         cover.backgroundColor = [UIColor clearColor];
         [_containerView addSubview:cover];
     }
-    
-    _pageControl = [[CustomPageControl alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2.0, 40, 100, 30)];
-    _pageControl.backgroundColor = [UIColor clearColor];
-    [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"imagePageStateNormal.png"]];
-    [_pageControl setImagePageStateHightlighted:[UIImage imageNamed:@"imagePageStateHighly.png"]];
-    _pageControl.numberOfPages = numberOfPages;
-    _pageControl.currentPage = 0;
-    _pageControl.userInteractionEnabled = NO;
-    [self.view addSubview:_pageControl];
 }
 
 
@@ -295,7 +295,7 @@ NSUInteger numberOfPages;
     NSArray *subView = _pageControl.subviews;
     for(int i = 0; i < [subView count]; i++){
         UIImageView *dot = [subView objectAtIndex:i];
-        dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"hightlighted.png"] : [UIImage imageNamed:@"normalother.png"]);
+        dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"imagePageStateHighly.png"] : [UIImage imageNamed:@"imagePageStateNormal.png"]);
     }
 }
 

@@ -45,6 +45,18 @@ NSUInteger numberOfPages;//scrollView page count
 
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    SqliteService *sqliteService = [[SqliteService alloc] init];
+    _listData = [sqliteService getAllDateFromTable];
+    if([_listData count] % 6 == 0){
+        numberOfPages = [_listData count] / 6;
+    }else{
+        numberOfPages = 1 + ([_listData count] / 6);
+    }
+    NSLog(@"_listData count == %d",[_listData count]);
+    [self loadScrollViewData];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -69,16 +81,6 @@ NSUInteger numberOfPages;//scrollView page count
     //observer & sender to remove from the dispatch table
     Exhibition *exhibition = (Exhibition *)[notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ADD_EXHIBITION_NOTIFICATION object:exhibition];
-    
-    SqliteService *sqliteService = [[SqliteService alloc] init];
-    _listData = [sqliteService getAllDateFromTable];
-    if([_listData count] % 6 == 0){
-        numberOfPages = [_listData count] / 6;
-    }else{
-        numberOfPages = 1 + ([_listData count] / 6);
-    }
-    NSLog(@"_listData count == %d",[_listData count]);
-    [self loadScrollViewData];
 }
 
 /**********************************************************
@@ -109,17 +111,14 @@ NSUInteger numberOfPages;//scrollView page count
         if(i >= 6 ){
             edge = 70.0f;
         }else edge = 0;
-        CGFloat row = i % 3;
-        CGFloat col = i / 3;
+        CGFloat row = i / 2;
+        CGFloat col = i % 2;
         CGRect coverFrame = cover.frame;
         coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
         cover.frame = coverFrame;
         cover.backgroundColor = [UIColor clearColor];
         [_containerView addSubview:cover];
-
     }
-    
-    [self viewDidLoad];
 }
 
 #pragma mark -ShelfThirdViewControllerSelectedProtocol implementation

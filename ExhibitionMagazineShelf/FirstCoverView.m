@@ -28,21 +28,21 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.frame = CGRectMake(85, 50, 222, 266);
+        self.frame = CGRectMake(85, 0, 222, 266);
         
-        _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 50, 220, 202)];
+        _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
         _coverImageViewFrameView.image = [UIImage imageNamed:@"imagelayout.png"];
         
-        _coverImageView = [[CoverImageView alloc] initWithFrame:CGRectMake(85 + 4, 50 + 4, 212, 194)];
+        _coverImageView = [[CoverImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 212, 194)];
         _coverImageView.userInteractionEnabled = YES;
         [_coverImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickExhibition:)]];
         
-        _downloadImageView = [[DownloadImageView alloc] initWithFrame:CGRectMake(85, 50, 220, 202)];
+        _downloadImageView = [[DownloadImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
         _downloadImageView.alpha = 0.0f;
         _downloadImageView.userInteractionEnabled = YES;
         [_downloadImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickDownloadExhibition:)]];
         
-        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 262, 220, 52)];
+        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 212, 220, 52)];
         
         [self addSubview:_coverImageViewFrameView];
         [self addSubview:_coverImageView];

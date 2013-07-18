@@ -30,16 +30,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         // frame
-        self.frame = CGRectMake(85, 50, 222, 266);
-        _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 50, 220, 202)];
+        self.frame = CGRectMake(85, 0, 222, 266);
+        _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
         _coverImageViewFrameView.image = [UIImage imageNamed:@"imagelayout.png"];
-        _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 50 + 4, 212, 194)];
-        _coverImageViewDownloading = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 50 + 4 + 96, 212, 30)];
-        _coverImageViewReadyPlay = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 50 + 4 + 96, 212, 30)];
+        _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 212, 194)];
+        _coverImageViewDownloading = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4 + 96, 212, 30)];
+        _coverImageViewReadyPlay = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4 + 96, 212, 30)];
         _coverImageViewReadyPlay.userInteractionEnabled = YES;
         [_coverImageViewReadyPlay addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playExhibition:)]];
-        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 50 + 4 + 96 + 30, 212, 60)];
-        _progressBar = [[MCProgressBar alloc] initWithFrame:CGRectMake(85, 50 + 4 + 96 + 30 + 60, 212, 16)];
+        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 0 + 4 + 96 + 30, 212, 60)];
+        _progressBar = [[MCProgressBar alloc] initWithFrame:CGRectMake(85, 0 + 4 + 96 + 30 + 60, 212, 16)];
         
         [self addSubview:_coverImageViewFrameView];
         [self addSubview:_coverImageView];
