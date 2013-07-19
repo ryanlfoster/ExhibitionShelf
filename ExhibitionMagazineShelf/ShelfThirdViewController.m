@@ -76,11 +76,26 @@ NSUInteger numberOfPages;//scrollView page count
  **********************************************************/
 -(void)addExhibition:(NSNotification *)notification
 {
-    NSLog(@"addExhibition");
-    
     //observer & sender to remove from the dispatch table
     Exhibition *exhibition = (Exhibition *)[notification object];
+    NSLog(@"add which one exhibition = %@ !!!",exhibition.exhibitionID);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ADD_EXHIBITION_NOTIFICATION object:exhibition];
+    
+    ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
+    NSInteger count = [_listData count] + 1;
+    CGFloat edge;
+    if(count >= 6 ){
+        edge = 70.0f;
+    }else edge = 0;
+    CGFloat row = count / 2;
+    CGFloat col = count % 2;
+    CGRect coverFrame = cover.frame;
+    coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (count / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
+    cover.frame = coverFrame;
+    cover.backgroundColor = [UIColor clearColor];
+    [_containerView addSubview:cover];
+    NSLog(@"_listData count == %d",[_listData count]);
+    NSLog(@"Add Exhibition !!!");
 }
 
 /**********************************************************

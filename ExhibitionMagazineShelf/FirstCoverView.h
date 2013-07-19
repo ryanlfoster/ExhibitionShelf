@@ -27,9 +27,12 @@
 @property (nonatomic, strong) UIImageView *coverImageViewFrameView;
 @property (nonatomic, strong) CoverImageView *coverImageView;
 @property (nonatomic, strong) DownloadImageView *downloadImageView;
+@property (nonatomic, strong) UIImageView *downloadingImageView;
+@property (nonatomic, strong) UIImageView *playImageView;
 @property (nonatomic, strong) BriefUILabel *briefUILable;
 
 @property (nonatomic, weak) id<ShelfFirstViewControllerClickExhibitionProtocol> delegate;
-@property (nonatomic, weak) id<ShelfFirstViewControllerClickDownloadExhibitionProtocol>delegateCancelDownload;
+@property (nonatomic, weak) id<ShelfFirstViewControllerClickDownloadExhibitionProtocol>delegateDownload;
+@property (nonatomic, weak) id<ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol>delegateCancelDownload;
 
 @end

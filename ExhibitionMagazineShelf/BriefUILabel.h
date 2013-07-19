@@ -14,4 +14,7 @@
 @property (nonatomic, strong) UILabel *subTitleLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
 
+-(void)changeGreen;
+-(void)changeNormal;
+
 @end

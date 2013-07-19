@@ -46,7 +46,7 @@
 //exhibition file local path
 -(NSURL *)contentURL;
 //exhibition downloaded return boolean read or open
--(BOOL)isExhibitionAvailibleForRead;
+-(BOOL)isExhibitionAvailibleForPlay;
 -(NSString *)exhibitionImagePath;
 -(NSString *)exhibitionFilePath;
 //exhibition downloading
@@ -56,7 +56,6 @@
 
 -(void)sendEndOfDownloadNotification;
 -(void)sendFailedDownloadNotification;
-
 -(void)sendAddExhbitionNotification;
 
 @end

@@ -33,7 +33,14 @@
 
 @end
 
-@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>{
+/*delegate protocol to click exhibition which cancel for download */
+@protocol ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol <NSObject>
+
+-(void)clickCancelDownloadExhibition:(FirstCoverView *)cover;
+
+@end
+
+@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>{
     
     CALayer *transitionLayer;
     

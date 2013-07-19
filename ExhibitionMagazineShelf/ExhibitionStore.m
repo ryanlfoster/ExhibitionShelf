@@ -64,7 +64,6 @@
  **********************************************************/
 -(void)analyzeXml
 {
-    
     _list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/test.plist"]];
     if(!_list){
         _list = [[NSArray alloc] initWithContentsOfURL:[self fileURLOfCachedExhibitionFile]];

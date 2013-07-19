@@ -28,4 +28,6 @@
 
 #define CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION @"ConcealDownloadCoverImageView"
 
-#define ADD_EXHIBITION_NOTIFICATION @"Add_Exhibition"
+#define ADD_EXHIBITION_NOTIFICATION @"AddExhibition"
+
+#define OPENSAFARI @"http://www.vrdam.com"

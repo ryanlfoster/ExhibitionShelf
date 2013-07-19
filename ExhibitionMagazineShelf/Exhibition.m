@@ -103,7 +103,7 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
  输出参数：n/a
  返回值：(NSString *)
  **********************************************************/
--(BOOL)isExhibitionAvailibleForRead
+-(BOOL)isExhibitionAvailibleForPlay
 {
     //delete file
     NSFileManager *fileManger = [NSFileManager defaultManager];

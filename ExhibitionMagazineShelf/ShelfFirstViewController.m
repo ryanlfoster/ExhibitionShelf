@@ -22,6 +22,7 @@ NSUInteger numberOfPages;
 @property (strong, nonatomic) MBProgressHUD *progressHUD;
 @property (strong, nonatomic) UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet CustomPageControl *pageControl;
+@property (weak, nonatomic) NSTimer *timer;
 
 @end
 @implementation ShelfFirstViewController
@@ -30,6 +31,7 @@ NSUInteger numberOfPages;
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize progressHUD = _progressHUD;
 @synthesize stvc = _stvc;
+@synthesize timer = _timer;
 
 #pragma mark -nib init
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -136,7 +138,7 @@ NSUInteger numberOfPages;
         [_progressHUD removeFromSuperview];
         _progressHUD = nil;
     }
-    
+    //scroll view
     _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, 266 * 2 + 36)];
     _containerView.pagingEnabled = YES;
     _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
@@ -145,7 +147,7 @@ NSUInteger numberOfPages;
     _containerView.delegate = self;
     _containerView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_containerView];
-    
+    //page view
     _pageControl.backgroundColor = [UIColor clearColor];
     [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"imagePageStateNormal.png"]];
     [_pageControl setImagePageStateHightlighted:[UIImage imageNamed:@"imagePageStateHighly.png"]];
@@ -170,6 +172,7 @@ NSUInteger numberOfPages;
         cover.briefUILable.dateLabel.text = anExhibition.date;
         
         cover.delegate = self;
+        cover.delegateDownload = self;
         cover.delegateCancelDownload = self;
         
         CGFloat edge;
@@ -198,6 +201,7 @@ NSUInteger numberOfPages;
 -(void)clickExhibition:(FirstCoverView *)cover{
     
     cover.downloadImageView.alpha = 1.0f;
+    [cover.briefUILable changeGreen];
     
     NSString *selectedExhibitionID = cover.exhibitionID;
     Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
@@ -209,7 +213,8 @@ NSUInteger numberOfPages;
     }
     [[NSNotificationCenter defaultCenter] addObserver:_stvc selector:@selector(addExhibition:) name:ADD_EXHIBITION_NOTIFICATION object:selectedExhibition];
     
-    [NSTimer scheduledTimerWithTimeInterval:8.0 target:selectedExhibition selector:@selector(sendConcealDownloadCoverImageViewNotification) userInfo:nil repeats:NO];
+    //create a timer count :8s later [selectedExhibition sendConcealDownloadCoverImageViewNotification]
+    _timer = [NSTimer scheduledTimerWithTimeInterval:8.0 target:selectedExhibition selector:@selector(sendConcealDownloadCoverImageViewNotification) userInfo:nil repeats:NO];
     
 }
 
@@ -218,56 +223,64 @@ NSUInteger numberOfPages;
 {
     NSLog(@"Begin download !!!");
     
+    cover.downloadImageView.alpha = 0.0f;
+    [cover.briefUILable changeNormal];
+    cover.downloadingImageView.alpha = 1.0f;
+    
+    //stop timer
+    [_timer invalidate];
+    
     //SqlService Insert exhibition to sql
     Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:cover.exhibitionID];
+    [NSTimer cancelPreviousPerformRequestsWithTarget:selectedExhibition];
+    
     SqliteService *sqlService = [[SqliteService alloc] init];
     [sqlService insertToDB:selectedExhibition];
-    
     NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:selectedExhibition.coverURL]];
     if(imgData) {
+        //save img to sand box 
         [imgData writeToFile:[selectedExhibition exhibitionImagePath] atomically:YES];
     }
-    
+ 
     [selectedExhibition sendAddExhbitionNotification];
     
     if(!transitionLayer){
         transitionLayer = [[CALayer alloc] init];
     }
     [CATransaction begin];
-	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-	transitionLayer.opacity = 1.0;
-	transitionLayer.contents = (id)cover.coverImageView.image.CGImage;
-	transitionLayer.frame = [[UIApplication sharedApplication].keyWindow convertRect:cover.coverImageView.bounds fromView:cover.coverImageView];
-	[[UIApplication sharedApplication].keyWindow.layer addSublayer:transitionLayer];
-	[CATransaction commit];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    transitionLayer.opacity = 1.0;
+    transitionLayer.contents = (id)cover.coverImageView.image.CGImage;
+    transitionLayer.frame = [[UIApplication sharedApplication].keyWindow convertRect:cover.coverImageView.bounds fromView:cover.coverImageView];
+    [[UIApplication sharedApplication].keyWindow.layer addSublayer:transitionLayer];
+    [CATransaction commit];
     
     CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-	positionAnimation.fromValue = [NSValue valueWithCGPoint:transitionLayer.position];
-	positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0, self.view.bounds.size.width / 2.0)];
+    positionAnimation.fromValue = [NSValue valueWithCGPoint:transitionLayer.position];
+    positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0, self.view.bounds.size.width / 2.0)];
     
-	CABasicAnimation *boundsAnimation = [CABasicAnimation animationWithKeyPath:@"bounds"];
-	boundsAnimation.fromValue = [NSValue valueWithCGRect:transitionLayer.bounds];
-	boundsAnimation.toValue = [NSValue valueWithCGRect:CGRectZero];
+    CABasicAnimation *boundsAnimation = [CABasicAnimation animationWithKeyPath:@"bounds"];
+    boundsAnimation.fromValue = [NSValue valueWithCGRect:transitionLayer.bounds];
+    boundsAnimation.toValue = [NSValue valueWithCGRect:CGRectZero];
     
-	CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-	opacityAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-	opacityAnimation.toValue = [NSNumber numberWithFloat:0.5];
-	
-	CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-	rotateAnimation.fromValue = [NSNumber numberWithFloat:0 * M_PI];
-	rotateAnimation.toValue = [NSNumber numberWithFloat:2 * M_PI];
-	
-	
-	CAAnimationGroup *group = [CAAnimationGroup animation];
-	group.beginTime = CACurrentMediaTime() + 0.25;
-	group.duration = 0.8;
-	group.animations = [NSArray arrayWithObjects:positionAnimation, boundsAnimation, opacityAnimation, rotateAnimation, nil];
-	group.delegate = self;
-	group.fillMode = kCAFillModeForwards;
-	group.removedOnCompletion = NO;
-	
-	[transitionLayer addAnimation:group forKey:@"move"];
-
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+    opacityAnimation.toValue = [NSNumber numberWithFloat:0.5];
+    
+    CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotateAnimation.fromValue = [NSNumber numberWithFloat:0 * M_PI];
+    rotateAnimation.toValue = [NSNumber numberWithFloat:2 * M_PI];
+    
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.beginTime = CACurrentMediaTime() + 0.25;
+    group.duration = 0.8;
+    group.animations = [NSArray arrayWithObjects:positionAnimation, boundsAnimation, opacityAnimation, rotateAnimation, nil];
+    group.delegate = self;
+    group.fillMode = kCAFillModeForwards;
+    group.removedOnCompletion = NO;
+    
+    [transitionLayer addAnimation:group forKey:@"move"];
 }
 
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -276,6 +289,13 @@ NSUInteger numberOfPages;
 		[transitionLayer removeFromSuperlayer];
 		[transitionLayer removeAllAnimations];
 	}
+}
+
+#pragma mark -ShelfViewControllerClickCancelDownloadExhibitionProtocol implementation
+-(void)clickCancelDownloadExhibition:(FirstCoverView *)cover
+{
+    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"正在下载" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+    [alerView show];
 }
 
 #pragma mark -UIScrollView degelete

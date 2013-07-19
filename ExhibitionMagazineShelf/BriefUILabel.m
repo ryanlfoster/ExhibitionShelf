@@ -40,14 +40,26 @@
         _dateLabel.lineBreakMode = UILineBreakModeTailTruncation;
         _dateLabel.numberOfLines = 1;
         _dateLabel.backgroundColor = [UIColor clearColor];
-//        _dateLabel.shadowColor = [UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0f];
-//        _dateLabel.shadowOffset = CGSizeMake(0.1, 0.1);
         
         [self addSubview:_titleLabel];
         [self addSubview:_subTitleLabel];
         [self addSubview:_dateLabel];
     }
     return self;
+}
+
+-(void)changeGreen
+{
+    _titleLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:0.5f];
+    _subTitleLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:0.5f];
+    _dateLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:0.5f];
+}
+
+-(void)changeNormal
+{
+    _titleLabel.textColor = [UIColor grayColor];
+    _subTitleLabel.textColor = [UIColor grayColor];
+    _dateLabel.textColor = [UIColor grayColor];
 }
 
 

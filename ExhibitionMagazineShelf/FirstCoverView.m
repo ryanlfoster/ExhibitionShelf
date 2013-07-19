@@ -13,6 +13,8 @@
 @synthesize coverImageViewFrameView = _coverImageViewFrameView;
 @synthesize coverImageView = _coverImageView;
 @synthesize downloadImageView = _downloadImageView;
+@synthesize downloadingImageView = _downloadingImageView;
+@synthesize playImageView = _playImageView;
 @synthesize briefUILable = _briefUILable;
 
 #pragma mark -init
@@ -42,11 +44,22 @@
         _downloadImageView.userInteractionEnabled = YES;
         [_downloadImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickDownloadExhibition:)]];
         
+        _downloadingImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
+        _downloadingImageView.alpha = 0.0f;
+        _downloadingImageView.userInteractionEnabled = YES;
+        [_downloadingImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCancelDownloadExhibition:)]];
+        
+        _playImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
+        _playImageView.image = [UIImage imageNamed:@"playImageView.png"];
+        _playImageView.alpha = 0.0f;
+        
         _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 212, 220, 52)];
         
         [self addSubview:_coverImageViewFrameView];
         [self addSubview:_coverImageView];
         [self addSubview:_downloadImageView];
+        [self addSubview:_downloadingImageView];
+        [self addSubview:_playImageView];
         [self addSubview:_briefUILable];
         
     }
@@ -66,7 +79,7 @@
     [_delegate clickExhibition:self];
 }
 
-#pragma mark - ShelfViewControllerClickCancelDownloadExhibitionProtocol
+#pragma mark - ShelfViewControllerClickDownloadExhibitionProtocol
 /**********************************************************
  函数名称：-(void)clickCancelDownloadExhibition:(id)sender
  函数描述：按钮点击协议方法
@@ -76,7 +89,20 @@
  **********************************************************/
 -(void)clickDownloadExhibition:(id)sender
 {
-    [_delegateCancelDownload clickDownloadExhibition:self];
+    [_delegateDownload clickDownloadExhibition:self];
+}
+
+#pragma mark - ShelfViewControllerClickCancelDownloadExhibitionProtocol
+/**********************************************************
+ 函数名称：-(void)clickCancelDownloadExhibition:(id)sender
+ 函数描述：按钮点击协议方法
+ 输入参数：(id)sender：click
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)clickCancelDownloadExhibition:(id)sender
+{
+    [_delegateCancelDownload clickCancelDownloadExhibition:self];
 }
 
 #pragma mark - KVO and Notifications
@@ -90,6 +116,7 @@
 -(void)concealDownloadCoverImageViewNotification:(NSNotification *)notification
 {
     _downloadImageView.alpha = 0.0f;
+    [_briefUILable changeNormal];
     //observer & sender to remove from the dispatch table
     Exhibition *exhibition = (Exhibition *)[notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:exhibition];

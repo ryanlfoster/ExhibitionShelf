@@ -32,6 +32,23 @@
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
 /************************************************************************************/
+
+    UIImageView *linkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(270, 330, 200, 40)];
+    [self.view addSubview:linkImageView];
+    linkImageView.userInteractionEnabled = YES;
+    [linkImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)]];
+
+    UIImageView *linkLogoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(460, 67, 100, 185)];
+    [self.view addSubview:linkLogoImageView];
+    linkLogoImageView.userInteractionEnabled = YES;
+    [linkLogoImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)]];
+}
+
+-(void)openURL
+{
+    NSLog(@"点中!!!");
+    NSURL *url = [NSURL URLWithString:OPENSAFARI];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
