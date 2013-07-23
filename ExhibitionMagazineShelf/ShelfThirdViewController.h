@@ -30,8 +30,10 @@
 }
 //------------------------------View-------------------------------------------------//
 @property (nonatomic, strong) UIScrollView *containerView;
-@property (nonatomic, retain) NSArray *listData;
+@property (nonatomic, strong) NSArray *listData;
 @property (nonatomic, weak) UIView *alertViewThird;
 @property (nonatomic, copy) NSString *alertString;
+
+-(void)addExhibition;
 
 @end

@@ -12,13 +12,16 @@
 
 NSUInteger numberOfPages;//scrollView page count
 
+@interface ShelfThirdViewController()
+
+@end
+
 @implementation ShelfThirdViewController
 @synthesize containerView = _containerView;
 @synthesize listData = _listData;
 
 @synthesize alertString = _alertString;
 @synthesize alertViewThird = _alertViewThird;
-
 
 #pragma mark -init nib
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,7 +36,6 @@ NSUInteger numberOfPages;//scrollView page count
 #pragma mark -View lifecycle
 - (void)viewDidLoad    //Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
 {
-    
     [super viewDidLoad];
     
     /***********************************background****************************************/
@@ -42,7 +44,7 @@ NSUInteger numberOfPages;//scrollView page count
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
     /************************************************************************************/
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -54,7 +56,7 @@ NSUInteger numberOfPages;//scrollView page count
     }else{
         numberOfPages = 1 + ([_listData count] / 6);
     }
-    NSLog(@"_listData count == %d",[_listData count]);
+    
     [self loadScrollViewData];
 }
 
@@ -74,33 +76,14 @@ NSUInteger numberOfPages;//scrollView page count
  输出参数：N/A
  返回值：void
  **********************************************************/
--(void)addExhibition:(NSNotification *)notification
+-(void)addExhibition
 {
-    //observer & sender to remove from the dispatch table
-    Exhibition *exhibition = (Exhibition *)[notification object];
-    NSLog(@"add which one exhibition = %@ !!!",exhibition.exhibitionID);
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ADD_EXHIBITION_NOTIFICATION object:exhibition];
-    
-    ThirdCoverView *cover = [[ThirdCoverView alloc] initWithFrame:CGRectZero];
-    NSInteger count = [_listData count] + 1;
-    CGFloat edge;
-    if(count >= 6 ){
-        edge = 70.0f;
-    }else edge = 0;
-    CGFloat row = count / 2;
-    CGFloat col = count % 2;
-    CGRect coverFrame = cover.frame;
-    coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (count / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
-    cover.frame = coverFrame;
-    cover.backgroundColor = [UIColor clearColor];
-    [_containerView addSubview:cover];
-    NSLog(@"_listData count == %d",[_listData count]);
-    NSLog(@"Add Exhibition !!!");
+    [self viewWillAppear:YES];
 }
 
 /**********************************************************
  函数名称：-(void)loadScrollViewData
- 函数描述：更新scrollView
+ 函数描述：更新scrollView295435247
  输入参数：N/A
  输出参数：N/A
  返回值：void
@@ -220,6 +203,10 @@ NSUInteger numberOfPages;//scrollView page count
     }else return;
     
     [self viewWillAppear:YES];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
 }
 
 @end

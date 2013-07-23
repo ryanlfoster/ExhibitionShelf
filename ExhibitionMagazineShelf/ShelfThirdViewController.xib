@@ -100,7 +100,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">23</int>
+			<int key="maxID">29</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -115,6 +115,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ShelfThirdViewController</string>
 					<string key="superclassName">CustomParentsViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">add:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">add:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">add:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ShelfThirdViewController.h</string>

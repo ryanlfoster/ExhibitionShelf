@@ -50,6 +50,7 @@
     NSInteger i = [_buttons indexOfObject:button];
     UIViewController *vc = [[_buttonData objectAtIndex:i] viewController];
     [_delegate switchViewController:vc];
+    [vc viewWillAppear:YES];
 }
 
 -(void)touchUpForButton:(UIButton*)button

@@ -358,15 +358,4 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];
 }
-/**********************************************************
- 函数名称：-(void)sendAddExhbitionNotification
- 函数描述：向ShelfThirdViewController中发送执行addExhibition方法的通知
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
--(void)sendAddExhbitionNotification
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:ADD_EXHIBITION_NOTIFICATION object:self];
-}
 @end

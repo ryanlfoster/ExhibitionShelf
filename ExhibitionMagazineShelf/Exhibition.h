@@ -56,6 +56,5 @@
 
 -(void)sendEndOfDownloadNotification;
 -(void)sendFailedDownloadNotification;
--(void)sendAddExhbitionNotification;
 
 @end

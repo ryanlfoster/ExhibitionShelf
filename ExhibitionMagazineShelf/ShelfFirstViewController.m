@@ -13,7 +13,6 @@
 #import "Reachability.h"
 #import "FirstCoverView.h"
 #import "CustomPageControl.h"
-#import <QuartzCore/QuartzCore.h>
 
 NSUInteger numberOfPages;
 
@@ -208,13 +207,14 @@ NSUInteger numberOfPages;
     
     [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(concealDownloadCoverImageViewNotification:) name:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:selectedExhibition];
     
-    if(_stvc == nil){
-        _stvc = [[ShelfThirdViewController alloc] init];
-    }
-    [[NSNotificationCenter defaultCenter] addObserver:_stvc selector:@selector(addExhibition:) name:ADD_EXHIBITION_NOTIFICATION object:selectedExhibition];
-    
     //create a timer count :8s later [selectedExhibition sendConcealDownloadCoverImageViewNotification]
     _timer = [NSTimer scheduledTimerWithTimeInterval:8.0 target:selectedExhibition selector:@selector(sendConcealDownloadCoverImageViewNotification) userInfo:nil repeats:NO];
+    
+//    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:selectedExhibition.coverURL]];
+//    if(imgData) {
+//        //save img to sand box
+//        [imgData writeToFile:[selectedExhibition exhibitionImagePath] atomically:YES];
+//    }
     
 }
 
@@ -235,14 +235,14 @@ NSUInteger numberOfPages;
     [NSTimer cancelPreviousPerformRequestsWithTarget:selectedExhibition];
     
     SqliteService *sqlService = [[SqliteService alloc] init];
-    [sqlService insertToDB:selectedExhibition];
-    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:selectedExhibition.coverURL]];
-    if(imgData) {
-        //save img to sand box 
-        [imgData writeToFile:[selectedExhibition exhibitionImagePath] atomically:YES];
+    if ([sqlService insertToDB:selectedExhibition]) {
+        ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
+        [stvc addExhibition];
+    }else{
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"将对象插入到本地库失败！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+        [alerView show];
+        return;
     }
- 
-    [selectedExhibition sendAddExhbitionNotification];
     
     if(!transitionLayer){
         transitionLayer = [[CALayer alloc] init];
@@ -386,5 +386,4 @@ NSUInteger numberOfPages;
 //        [self presentModalViewController:viewController animated:YES];
 //    }
 //}
-
 @end

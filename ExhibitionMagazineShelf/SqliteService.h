@@ -15,7 +15,7 @@
 @property(nonatomic) sqlite3 *database;
 
 -(void)createTable;//create db
--(void)insertToDB:(Exhibition *)exhibition;//insert data to db
+-(BOOL)insertToDB:(Exhibition *)exhibition;//insert data to db
 -(BOOL)updateToDB:(Exhibition *)exhibition;//update db
 -(void)deleteToDB:(NSString *)exhibitionID;//delete acorrding to id
 -(NSUInteger)getCountToDB;

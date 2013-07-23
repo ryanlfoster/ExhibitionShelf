@@ -80,14 +80,14 @@
 }
 
 //insert data
--(void)insertToDB:(Exhibition *)exhibition
+-(BOOL)insertToDB:(Exhibition *)exhibition
 {
     
     if([self openDB]){
         
         sqlite3_stmt *statement;
 
-//        //selected exhibitionID before insert
+        //selected exhibitionID before insert
 //        const char *get_statement = "SELECT EXHIBITIONID FROM EXHIBITION";
 //        if(sqlite3_prepare_v2(_database, get_statement, -1, &statement, NULL) != SQLITE_OK){
 //            NSLog(@"Error: failed to get date");
@@ -96,7 +96,7 @@
 //            NSString *string = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
 //                if([string isEqualToString:exhibition.exhibitionID]){
 //                    NSLog(@"相同喽!!!");
-//                    return ;
+//                    return false;
 //                }
 //            }
 //        }
@@ -108,7 +108,7 @@
         if (success != SQLITE_OK) {
             NSLog(@"Error:failed to insert");
             sqlite3_close(_database);
-            return ;
+            return false;
         }
 
         //execute insert operate
@@ -125,9 +125,14 @@
         //if insert fail
         if(success == SQLITE_ERROR){
             NSLog(@"Error : failed to insert into the database !!!");
+            return false;
             sqlite3_close(_database);
-        }else  sqlite3_close(_database);
+        }else{
+            return true;
+            sqlite3_close(_database);
+        }
     }
+    return false;
 }
 
 //update db
