@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SqliteService.h"
 
-@interface Exhibition : NSObject<NSURLConnectionDataDelegate>{
-//    NSOperationQueue *_queue;
-}
+@interface Exhibition : NSObject<NSURLConnectionDataDelegate>
 
 //exhibition id(file name)
 @property (nonatomic, copy)NSString *exhibitionID;
@@ -39,10 +37,6 @@
 //exhibition status download id
 @property (nonatomic,readwrite,getter = isDownloading) BOOL downloading;
 
-//download exhibition
--(void)scheduleDownloadOfExhibition;
-//clear queue
--(void)clearOperation;
 //exhibition file local path
 -(NSURL *)contentURL;
 //exhibition downloaded return boolean read or open

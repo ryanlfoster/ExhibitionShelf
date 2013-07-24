@@ -31,15 +31,30 @@
     if (self) {
         // frame
         self.frame = CGRectMake(85, 0, 222, 266);
+        
         _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
         _coverImageViewFrameView.image = [UIImage imageNamed:@"imagelayout.png"];
+        
         _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 212, 194)];
-        _coverImageViewDownloading = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4 + 96, 212, 30)];
-        _coverImageViewReadyPlay = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4 + 96, 212, 30)];
+        
+        _coverImageViewDownloading = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0 + 4, 220, 202)];
+        _coverImageViewDownloading.image = [UIImage imageNamed:@"imageview_downloading.png"];
+        _coverImageViewDownloading.alpha = 0.0f;
+        
+        _coverImageViewReadyPlay = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 220, 202)];
+        _coverImageViewReadyPlay.image = [UIImage imageNamed:@"playImageView.png"];
         _coverImageViewReadyPlay.userInteractionEnabled = YES;
         [_coverImageViewReadyPlay addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playExhibition:)]];
-        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 0 + 4 + 96 + 30, 212, 60)];
-        _progressBar = [[MCProgressBar alloc] initWithFrame:CGRectMake(85, 0 + 4 + 96 + 30 + 60, 212, 16)];
+        _coverImageViewReadyPlay.alpha = 0.0f;
+        
+        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 0 + 4 + 106, 220, 52)];
+        _briefUILable.titleLabel.textAlignment = UITextAlignmentCenter;
+        _briefUILable.subTitleLabel.textAlignment = UITextAlignmentCenter;
+        _briefUILable.dateLabel.textAlignment = UITextAlignmentCenter;
+        
+        
+        _progressBar = [[MCProgressBar alloc] initWithFrame:CGRectMake(85, 0 + 4 + 96, 212, 16) backgroundImage:[UIImage imageNamed:@"progressbar_background.png"] foregroundImage:[UIImage imageNamed:@"progressbar_foreground.png"]];
+        _progressBar.alpha = 0.0f;
         
         [self addSubview:_coverImageViewFrameView];
         [self addSubview:_coverImageView];
@@ -66,8 +81,38 @@
  **********************************************************/
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-//    float value = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
-//    _progressBar.progress = value;
+    float value = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+    _progressBar.progress = value;
+}
+/**********************************************************
+ 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
+ 函数描述：下载完成发送通知
+ 输入参数：(NSNotification *)notification
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)exhibitionDidEndDownload:(NSNotification *)notification
+{
+    id obj = [notification object];
+    _progressBar.alpha = 0.0f;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
+    [obj removeObserver:self forKeyPath:@"downloadProgress"];
+}
+/**********************************************************
+ 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
+ 函数描述：下载失败发送通知
+ 输入参数：(NSNotification *)notification
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)exhibitionDidFailDownload:(NSNotification *)notification
+{
+    id obj = [notification object];
+    _progressBar.alpha = 0.0f;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
+    [obj removeObserver:self forKeyPath:@"downloadProgress"];
 }
 
 @end

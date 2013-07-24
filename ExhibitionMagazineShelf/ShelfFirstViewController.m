@@ -164,7 +164,7 @@ NSUInteger numberOfPages;
         cover.exhibitionID = anExhibition.exhibitionID;
         cover.coverImageView.exhibitionID = anExhibition.exhibitionID;
         cover.coverImageView.imgURL = anExhibition.coverURL;
-        cover.downloadImageView.image = [UIImage imageNamed:@"imageDownloadView.png"];
+        cover.downloadImageView.image = [UIImage imageNamed:@"imageview_ready_download.png"];
         cover.downloadImageView.description.text = anExhibition.description;
         cover.briefUILable.titleLabel.text = anExhibition.title;
         cover.briefUILable.subTitleLabel.text = anExhibition.subTitle;
@@ -210,12 +210,6 @@ NSUInteger numberOfPages;
     //create a timer count :8s later [selectedExhibition sendConcealDownloadCoverImageViewNotification]
     _timer = [NSTimer scheduledTimerWithTimeInterval:8.0 target:selectedExhibition selector:@selector(sendConcealDownloadCoverImageViewNotification) userInfo:nil repeats:NO];
     
-//    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:selectedExhibition.coverURL]];
-//    if(imgData) {
-//        //save img to sand box
-//        [imgData writeToFile:[selectedExhibition exhibitionImagePath] atomically:YES];
-//    }
-    
 }
 
 #pragma mark -ShelfViewControllerClickDownloadExhibitionProtocol implementation
@@ -237,7 +231,7 @@ NSUInteger numberOfPages;
     SqliteService *sqlService = [[SqliteService alloc] init];
     if ([sqlService insertToDB:selectedExhibition]) {
         ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
-        [stvc addExhibition];
+        [stvc addExhibition:selectedExhibition];
     }else{
         UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"将对象插入到本地库失败！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
         [alerView show];

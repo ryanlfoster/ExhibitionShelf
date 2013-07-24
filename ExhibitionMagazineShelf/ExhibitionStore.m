@@ -51,7 +51,10 @@
     NSLog(@"newStatus == %d",newStatus);
     NSLog(@"_status == %d",_status);
     _status = newStatus;
-    [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_CHANGED_STATUS_NOTIFICATION object:self];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_CHANGED_STATUS_NOTIFICATION object:self];
+    });
 }
 
 #pragma mark -Private
@@ -64,36 +67,38 @@
  **********************************************************/
 -(void)analyzeXml
 {
-    _list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/test.plist"]];
-    if(!_list){
-        _list = [[NSArray alloc] initWithContentsOfURL:[self fileURLOfCachedExhibitionFile]];
-        NSLog(@"本地的xml数据");
-    }
-    else{
-        //retrieve sever list
-        [_list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *exhibitionDictionary = (NSDictionary *)obj;
-            Exhibition *anExhibition = [[Exhibition alloc] init];
-            anExhibition.exhibitionID = [exhibitionDictionary objectForKey:@"ID"];
-            anExhibition.title = [exhibitionDictionary objectForKey:@"Title"];
-            anExhibition.subTitle = [exhibitionDictionary objectForKey:@"Sub Title"];
-            anExhibition.date = [exhibitionDictionary objectForKey:@"Date"];
-            anExhibition.coverURL = [exhibitionDictionary objectForKey:@"Cover URL"];
-            anExhibition.downloadURL = [exhibitionDictionary objectForKey:@"Download URL"];
-            anExhibition.description = [exhibitionDictionary objectForKey:@"Description"];
-            [_exhibitionArray addObject:anExhibition];
-        }];
-        if(_exhibitionArray){
-            // save the location
-            [_list writeToURL:[self fileURLOfCachedExhibitionFile] atomically:YES];
-            self.status = ExhibitionStatusReady;
-            NSLog(@"服务器的xml数据");
-        }else{
-            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务器中的xml文件没有数据" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-            [alerView show];
-            self.status = ExhibitionStatusError;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        _list = [[NSArray alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.vrdam.com/app/test.plist"]];
+        if(!_list){
+            _list = [[NSArray alloc] initWithContentsOfURL:[self fileURLOfCachedExhibitionFile]];
+            NSLog(@"本地的xml数据");
         }
-    }
+        else{
+            //retrieve sever list
+            [_list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                NSDictionary *exhibitionDictionary = (NSDictionary *)obj;
+                Exhibition *anExhibition = [[Exhibition alloc] init];
+                anExhibition.exhibitionID = [exhibitionDictionary objectForKey:@"ID"];
+                anExhibition.title = [exhibitionDictionary objectForKey:@"Title"];
+                anExhibition.subTitle = [exhibitionDictionary objectForKey:@"Sub Title"];
+                anExhibition.date = [exhibitionDictionary objectForKey:@"Date"];
+                anExhibition.coverURL = [exhibitionDictionary objectForKey:@"Cover URL"];
+                anExhibition.downloadURL = [exhibitionDictionary objectForKey:@"Download URL"];
+                anExhibition.description = [exhibitionDictionary objectForKey:@"Description"];
+                [_exhibitionArray addObject:anExhibition];
+            }];
+            if(_exhibitionArray){
+                // save the location
+                [_list writeToURL:[self fileURLOfCachedExhibitionFile] atomically:YES];
+                self.status = ExhibitionStatusReady;
+                NSLog(@"服务器的xml数据");
+            }else{
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务器中的xml文件没有数据" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                [alerView show];
+                self.status = ExhibitionStatusError;
+            }
+        }
+    });
 }
 /**********************************************************
  函数名称：-(NSURL *)fileURLOfCachedExhibitionFile

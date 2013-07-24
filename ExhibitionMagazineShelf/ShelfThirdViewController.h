@@ -25,15 +25,19 @@
 @end
 
 @interface ShelfThirdViewController : CustomParentsViewController<UIAlertViewDelegate,UIScrollViewDelegate>{
-//------------------------------DataBase Property------------------------------------//
+    
     sqlite3 *exhibitionDB;
+    
 }
-//------------------------------View-------------------------------------------------//
+
 @property (nonatomic, strong) UIScrollView *containerView;
 @property (nonatomic, strong) NSArray *listData;
 @property (nonatomic, weak) UIView *alertViewThird;
 @property (nonatomic, copy) NSString *alertString;
+@property (nonatomic, retain) NSMutableArray *coverArray;
 
--(void)addExhibition;
+-(void)addExhibition:(Exhibition *)addExhibition;
+
+-(ThirdCoverView *)coverWithID:(NSString *)exhibitionID;
 
 @end

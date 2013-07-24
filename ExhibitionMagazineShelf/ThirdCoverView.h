@@ -15,7 +15,7 @@
 @interface ThirdCoverView : UIView
 
 @property (nonatomic, copy) NSString *exhibitionID;
-@property (nonatomic, strong) UIImageView *coverImageViewFrameView;
+@property (nonatomic, strong)UIImageView *coverImageViewFrameView;
 @property (nonatomic, strong) UIImageView *coverImageView;
 @property (nonatomic, strong) UIImageView *coverImageViewDownloading;
 @property (nonatomic, strong) UIImageView *coverImageViewReadyPlay;
