@@ -10,16 +10,18 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ShelfThirdViewController.h"
 #import "BriefUILabel.h"
-#import "MCProgressBar.h"
 
 @interface ThirdCoverView : UIView
 
 @property (nonatomic, copy) NSString *exhibitionID;
-@property (nonatomic, strong)UIImageView *coverImageViewFrameView;
+@property (nonatomic, strong) UIImageView *coverImageViewFrameView;
 @property (nonatomic, strong) UIImageView *coverImageView;
-@property (nonatomic, strong) UIImageView *coverImageViewDownloading;
-@property (nonatomic, strong) UIImageView *coverImageViewReadyPlay;
+@property (nonatomic, strong) UIImageView *playImageView;
 @property (nonatomic, strong) BriefUILabel *briefUILable;
-@property (nonatomic, strong) MCProgressBar *progressBar;
+
+@property (nonatomic, copy) NSString *exhibitionPath;
+
+@property (nonatomic, weak) id<ShelfThirdViewControllerSelectedProtocol>delegatePlay;
+@property (nonatomic, weak) id<ShelfThirdViewControllerDeletedProtocol>delegateDelete;
 
 @end

@@ -13,15 +13,9 @@
 #import "BriefUILabel.h"
 #import "DownloadImageView.h"
 
-@interface FirstCoverView : UIView
-
-//@property (nonatomic,copy) NSString *exhibitionID;
-//@property (nonatomic,assign) id<ShelfFirstViewControllerProtocol> delegate;
-//@property (nonatomic,strong) UIImageView *cover;
-//@property (nonatomic,strong) UIButton *button;
-//@property (nonatomic,strong) UILabel *title;
-//@property (nonatomic,strong) UILabel *description;
-//@property (nonatomic,strong) MCProgressBar *progressBar;
+@interface FirstCoverView : UIView{
+        CALayer *transitionLayer;
+}
 
 @property (nonatomic, copy) NSString *exhibitionID;
 @property (nonatomic, strong) UIImageView *coverImageViewFrameView;
@@ -30,9 +24,11 @@
 @property (nonatomic, strong) UIImageView *downloadingImageView;
 @property (nonatomic, strong) UIImageView *playImageView;
 @property (nonatomic, strong) BriefUILabel *briefUILable;
+@property (nonatomic, strong) MCProgressBar *progressBar;
 
 @property (nonatomic, weak) id<ShelfFirstViewControllerClickExhibitionProtocol> delegate;
 @property (nonatomic, weak) id<ShelfFirstViewControllerClickDownloadExhibitionProtocol>delegateDownload;
 @property (nonatomic, weak) id<ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol>delegateCancelDownload;
+@property (nonatomic, weak) id<ShelfFirstViewControllerClickPlayExhibitionProtocol>delegatePlay;
 
 @end

@@ -57,7 +57,7 @@
 
 -(void)changeNormal
 {
-    _titleLabel.textColor = [UIColor grayColor];
+    _titleLabel.textColor = [UIColor blackColor];
     _subTitleLabel.textColor = [UIColor grayColor];
     _dateLabel.textColor = [UIColor grayColor];
 }

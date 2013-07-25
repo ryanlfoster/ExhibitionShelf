@@ -9,13 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface ExhibitionViewController : UIViewController<UIWebViewDelegate>
-{
-    @private
-    UIWebView *webView;
-    UINavigationBar *navigationBar;
-}
-@property (nonatomic,weak)NSString *str;
-@property (nonatomic,weak)NSString *navigationBarTitle;
-@property (nonatomic,strong)UIButton *backButton;
+
+@property (nonatomic, copy)NSString *str;
+@property (nonatomic, copy)NSString *navigationBarTitle;
+@property (nonatomic, strong)UIButton *backButton;
+@property (nonatomic, strong)UINavigationBar *navigationBar;
+@property (nonatomic, strong)UIWebView *webView;
 
 @end

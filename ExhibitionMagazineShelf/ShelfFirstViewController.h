@@ -13,7 +13,6 @@
 @class FirstCoverView;
 @class ExhibitionStore;
 @class Exhibition;
-@class ShelfThirdViewController;
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
 //@protocol ShelfFirstViewControllerProtocol
 //-(void)coverSelected:(FirstCoverView *)cover;
@@ -40,13 +39,15 @@
 
 @end
 
-@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>{
-    
-    CALayer *transitionLayer;
-    
-}
+/*delegate protocol to click exhibition which cancel for download */
+@protocol ShelfFirstViewControllerClickPlayExhibitionProtocol <NSObject>
+
+-(void)clickPlayExhibition:(FirstCoverView *)cover;
+
+@end
+
+@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol,ShelfFirstViewControllerClickPlayExhibitionProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>
 
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
-@property (strong, nonatomic) ShelfThirdViewController *stvc;
 
 @end

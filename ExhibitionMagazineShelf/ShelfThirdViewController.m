@@ -9,6 +9,7 @@
 #import "ShelfThirdViewController.h"
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
+#import "ExhibitionViewController.h"
 
 NSUInteger numberOfPages;//scrollView page count
 
@@ -17,7 +18,6 @@ NSUInteger numberOfPages;//scrollView page count
 @synthesize listData = _listData;
 @synthesize alertString = _alertString;
 @synthesize alertViewThird = _alertViewThird;
-@synthesize coverArray = _coverArray;
 
 #pragma mark -init nib
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,6 +46,9 @@ NSUInteger numberOfPages;//scrollView page count
 {
     SqliteService *sqliteService = [[SqliteService alloc] init];
     _listData = [sqliteService getAllDateFromTable];
+    
+    NSLog(@"_listData count == %d",[_listData count]);
+    
     if([_listData count] % 6 == 0){
         numberOfPages = [_listData count] / 6;
     }else{
@@ -82,47 +85,7 @@ NSUInteger numberOfPages;//scrollView page count
             [imgData writeToFile:[addExhibition exhibitionImagePath] atomically:YES];
         }
     });
-    
-    [NSThread detachNewThreadSelector:@selector(startDownloadExhibition:) toTarget:self withObject:addExhibition];
 }
--(void)startDownloadExhibition:(Exhibition *)addExhibition
-{
-    ThirdCoverView *cover = [self coverWithID:addExhibition.exhibitionID];
-    cover.progressBar.alpha = 1.0f;
-    cover.progressBar.progress = 0;
-    NSLog(@"cover = %@",cover);
-    [addExhibition addObserver:cover forKeyPath:@"downloadProgress" options:NSKeyValueObservingOptionNew context:NULL];
-    [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidEndDownload:) name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:addExhibition];
-    [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidFailDownload:) name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:addExhibition];
-    
-    NSString *downloadURL = addExhibition.downloadURL;
-    if(!downloadURL)return;
-    NSLog(@"downloadURL == %@",downloadURL);
-    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
-    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:addExhibition];
-    [conn start];
-}
-
--(ThirdCoverView *)coverWithID:(NSString *)exhibitionID
-{
-    
-    for(ThirdCoverView *cover in _coverArray) {
-        if([cover.exhibitionID isEqualToString:exhibitionID]) {
-            return cover;
-        }
-    }
-    return nil;
-}
-
-//-(void)startDownload:(Exhibition *)addExhibition
-//{
-//    NSString *downloadURL = addExhibition.downloadURL;
-//    if(!downloadURL)return;
-//    NSLog(@"downloadURL == %@",downloadURL);
-//    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
-//    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:addExhibition];
-//    [conn start];
-//}
 
 /**********************************************************
  函数名称：-(void)loadScrollViewData
@@ -145,11 +108,6 @@ NSUInteger numberOfPages;//scrollView page count
     _containerView.delegate = self;
     _containerView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_containerView];
-    
-    if(_coverArray == nil){
-        NSLog(@"_coverArray是空");
-        _coverArray = [[NSMutableArray alloc] init];
-    }
 
     //load content in scrollView
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -158,16 +116,16 @@ NSUInteger numberOfPages;//scrollView page count
             Exhibition *anExhibition = [_listData objectAtIndex:i];
             cover.exhibitionID = anExhibition.exhibitionID;
             cover.coverImageView.image = [UIImage imageWithContentsOfFile:[anExhibition exhibitionImagePath]];
-            if([anExhibition isExhibitionAvailibleForPlay]){
-                cover.coverImageViewReadyPlay.alpha = 1.0f;
-            }else{
-                cover.coverImageViewDownloading.alpha = 1.0f;
-            }
+    
             cover.briefUILable.titleLabel.text = anExhibition.title;
             cover.briefUILable.subTitleLabel.text = anExhibition.subTitle;
             cover.briefUILable.dateLabel.text = anExhibition.date;
             [cover.briefUILable theColorInThirdView];
-            [_coverArray addObject:cover];
+            
+            cover.exhibitionPath = [anExhibition exhibitionFilePath];
+            
+            cover.delegatePlay = self;
+            cover.delegateDelete = self;
             
             CGFloat edge;
             if(i >= 6 ){
@@ -187,26 +145,23 @@ NSUInteger numberOfPages;//scrollView page count
 #pragma mark -ShelfThirdViewControllerSelectedProtocol implementation
 /**********************************************************
  函数名称：-(void)coverSelected:(ThirdCoverView *)cover
- 函数描述：ShelfThirdViewControllerSelectedProtocol
+ 函数描述：
  输入参数：(ThirdCoverView *)cover：view
  输出参数：N/A
  返回值：void
  **********************************************************/
-//-(void)coverSelected:(ThirdCoverView *)cover {
-//    
-//    NSLog(@"Selected !!!");
-//    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
-//    NSBundle *myBundle = [NSBundle bundleWithPath:cover.file];
-//    NSLog(@"myBundle = %@",myBundle);
-//    viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
-//    viewController.navigationBarTitle = cover.title.text;
-//    //turn view
-//    if(viewController.str != nil){
-//        [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-//        [self presentModalViewController:viewController animated:YES];
-//    }
-//    
-//}
+-(void)coverSelected:(ThirdCoverView *)cover
+{
+    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
+    NSBundle *myBundle = [NSBundle bundleWithPath:cover.exhibitionPath];
+    viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
+    viewController.navigationBarTitle = cover.briefUILable.titleLabel.text;
+    //turn view
+    if(viewController.str != nil){
+        [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [self presentModalViewController:viewController animated:YES];
+    }
+}
 
 #pragma mark -ShelfThirdViewControllerDeletedProtocol implementation
 /**********************************************************
@@ -218,16 +173,10 @@ NSUInteger numberOfPages;//scrollView page count
  **********************************************************/
 -(void)coverDeleted:(ThirdCoverView *)cover
 {
-    NSLog(@"删除中 ＝＝ %d",[Exhibition ifHaveExhibitionDownloading]);
-    if ([Exhibition ifHaveExhibitionDownloading]) {
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"有全景展览正在下载，请您稍后再试" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alerView show];
-    }else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要删除此展览?" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
-        [alert show];
-    }
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要删除此展览?" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
+    [alert show];
     
-    //variable control UIAlertViewDelegate
     _alertViewThird = cover;
     _alertString = cover.exhibitionID;
     
@@ -245,7 +194,7 @@ NSUInteger numberOfPages;//scrollView page count
 {
     if(buttonIndex == 0){
         
-        //delete table 
+        //delete table
         SqliteService *sqliteService = [[SqliteService alloc] init];
         [sqliteService deleteToDB:_alertString];
         
@@ -268,10 +217,6 @@ NSUInteger numberOfPages;//scrollView page count
     }else return;
     
     [self viewWillAppear:YES];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 @end

@@ -11,5 +11,5 @@
 
 @interface ExhibitionShelfViewController : UIViewController<CustomTabBarDelegate>
 @property (nonatomic, strong) CustomTabBar *customTabBar;
-@property (nonatomic, strong)UINavigationBar *navigationBar;
+@property (nonatomic, strong) UINavigationBar *navigationBar;
 @end

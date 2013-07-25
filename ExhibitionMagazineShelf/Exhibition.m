@@ -8,12 +8,12 @@
 
 #import "Exhibition.h"
 #import "ZipArchive.h"
+#import "ShelfThirdViewController.h"
 
 @interface Exhibition (Private)
 -(void)alertDownloadErrorView;
 @end
 
-static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时看是否有文件在下载当中。
 @implementation Exhibition
 @synthesize exhibitionID = _exhibitionID;
 @synthesize title = _title;
@@ -25,35 +25,10 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 @synthesize downloadData = _downloadData;
 @synthesize expectedLength = _expectedLength;
 @synthesize downloadProgress = _downloadProgress;
-@synthesize downloading = _downloading;
 @synthesize expectedLengthNumber = _expectedLengthNumber;
 @synthesize downloadDataLengthNumber = _downloadDataLengthNumber;
 
-#pragma mark -Class Methods
-/**********************************************************
- 函数名称：+(BOOL)ifHaveExhibitionDownloading
- 函数描述：检查是否存在下载中的文件
- 输入参数：n/a
- 输出参数：n/a
- 返回值：(BOOL) 返回YES,则有文件在下载
- **********************************************************/
-+(BOOL)ifHaveExhibitionDownloading
-{
-    return haveExhibitionDownloading;
-}
-
 #pragma mark -Public methods
-/**********************************************************
- 函数名称：-(BOOL)isDownloading
- 函数描述：展览zip是否正在下载
- 输入参数：n/a
- 输出参数：n/a
- 返回值：(BOOL)
- **********************************************************/
--(BOOL)isDownloading
-{
-    return _downloading;
-}
 /**********************************************************
  函数名称：-(NSURL *)contentURL
  函数描述：对象在沙盒文件中的路径URL
@@ -142,14 +117,15 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
  **********************************************************/
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"response !!!!!!!!!!!");
     if(!_downloadData){
         _downloadData = [[NSMutableData alloc] init];
     }
-    [_downloadData setLength:0];
-    
     _expectedLength = [response expectedContentLength];
     NSLog(@"_expectedLength = %d",_expectedLength);
+    
+    if(_downloadData.length != 0){
+        _downloadData.length = 0;
+    }
 }
 /**********************************************************
  函数名称：-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -161,7 +137,6 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
  **********************************************************/
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    haveExhibitionDownloading = YES;
     [_downloadData appendData:data];
     _expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
     _downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
@@ -171,7 +146,6 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
     
     [self setDownloadProgress:downloadDataLengthFloat / expectedLengthFloat];
     
-    NSLog(@"下载中＝＝%d",haveExhibitionDownloading);
 }
 /**********************************************************
  函数名称：-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -182,7 +156,6 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
  **********************************************************/
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    haveExhibitionDownloading = NO;
     NSURL *finalURL = [[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"];
     [_downloadData writeToURL:finalURL atomically:YES];
     
@@ -199,7 +172,16 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
             NSFileManager *fileManger = [NSFileManager defaultManager];
             NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
             [fileManger removeItemAtPath:contentPath error:NULL];
-            [self sendEndOfDownloadNotification];
+            
+            SqliteService *sqlService = [[SqliteService alloc] init];
+            if ([sqlService insertToDB:self]) {
+                ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
+                [stvc addExhibition:self];
+                [self sendEndOfDownloadNotification];
+            }else{
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"将对象插入到本地库失败！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                [alerView show];
+            }
         }
         else{
             //delete incomplement UnzipFile
@@ -209,8 +191,6 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
         [zip UnzipCloseFile];
     }
 /********************************************************************************************/ 
-    
-    NSLog(@"下载后＝＝%d",haveExhibitionDownloading);
 }
 /**********************************************************
  函数名称：-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -222,11 +202,9 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSLog(@"There was an error downloading this exhibition %@ with connection %@ . Error is: %@",self,connection,error);
-    haveExhibitionDownloading = NO;
-    [self setDownloadProgress:0.0];
+    self.downloadProgress = 0.0;
     // post notification
     [self sendFailedDownloadNotification];
-    NSLog(@"下载失败＝＝%d",haveExhibitionDownloading);
     return;
 }
 /**********************************************************
@@ -261,6 +239,17 @@ static BOOL haveExhibitionDownloading;//全局变量，当执行删除操作时�
 -(void)sendConcealDownloadCoverImageViewNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:self];
+}
+/**********************************************************
+ 函数名称：-(void)sendConcealPlayCoverImageViewNotification
+ 函数描述：send conceal playCoverImageView notification
+ 输入参数：n/a
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)sendConcealPlayCoverImageViewNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:CONCEAL_PLAYCOVERIMAGEVIEW_NOTIFICATION object:self];
 }
 /**********************************************************
  函数名称：-(void)sendEndOfDownloadNotification

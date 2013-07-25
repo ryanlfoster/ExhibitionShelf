@@ -28,5 +28,6 @@
 #define EXHIBITION_CHANGE_BUTTON_NOTIFICATION @"ExhibitionChangeButton"
 
 #define CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION @"ConcealDownloadCoverImageView"
+#define CONCEAL_PLAYCOVERIMAGEVIEW_NOTIFICATION @"ConcealPlayCoverImageView"
 
 #define OPENSAFARI @"http://www.vrdam.com"

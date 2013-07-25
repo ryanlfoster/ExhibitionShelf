@@ -13,6 +13,7 @@
 #import "Reachability.h"
 #import "FirstCoverView.h"
 #import "CustomPageControl.h"
+#import "ExhibitionViewController.h"
 
 NSUInteger numberOfPages;
 
@@ -29,7 +30,6 @@ NSUInteger numberOfPages;
 @synthesize pageControl = _pageControl;
 @synthesize exhibitionStore = _exhibitionStore;
 @synthesize progressHUD = _progressHUD;
-@synthesize stvc = _stvc;
 @synthesize timer = _timer;
 
 #pragma mark -nib init
@@ -164,7 +164,6 @@ NSUInteger numberOfPages;
         cover.exhibitionID = anExhibition.exhibitionID;
         cover.coverImageView.exhibitionID = anExhibition.exhibitionID;
         cover.coverImageView.imgURL = anExhibition.coverURL;
-        cover.downloadImageView.image = [UIImage imageNamed:@"imageview_ready_download.png"];
         cover.downloadImageView.description.text = anExhibition.description;
         cover.briefUILable.titleLabel.text = anExhibition.title;
         cover.briefUILable.subTitleLabel.text = anExhibition.subTitle;
@@ -173,6 +172,7 @@ NSUInteger numberOfPages;
         cover.delegate = self;
         cover.delegateDownload = self;
         cover.delegateCancelDownload = self;
+        cover.delegatePlay = self;
         
         CGFloat edge;
         if(i >= 6 ){
@@ -197,18 +197,24 @@ NSUInteger numberOfPages;
  输出参数：N/A
  返回值：void
  **********************************************************/
--(void)clickExhibition:(FirstCoverView *)cover{
-    
-    cover.downloadImageView.alpha = 1.0f;
-    [cover.briefUILable changeGreen];
-    
+-(void)clickExhibition:(FirstCoverView *)cover
+{
     NSString *selectedExhibitionID = cover.exhibitionID;
     Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:selectedExhibitionID];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(concealDownloadCoverImageViewNotification:) name:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:selectedExhibition];
-    
-    //create a timer count :8s later [selectedExhibition sendConcealDownloadCoverImageViewNotification]
-    _timer = [NSTimer scheduledTimerWithTimeInterval:8.0 target:selectedExhibition selector:@selector(sendConcealDownloadCoverImageViewNotification) userInfo:nil repeats:NO];
+    if([selectedExhibition isExhibitionAvailibleForPlay]){
+        cover.playImageView.alpha = 1.0f;
+        [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(concealPlayCoverImageViewNotification:) name:CONCEAL_PLAYCOVERIMAGEVIEW_NOTIFICATION object:selectedExhibition];
+        
+        //create a timer count :8s later [selectedExhibition concealPlayCoverImageViewNotification]
+        _timer = [NSTimer scheduledTimerWithTimeInterval:8.0 target:selectedExhibition selector:@selector(sendConcealPlayCoverImageViewNotification) userInfo:nil repeats:NO];
+    }else{
+        cover.downloadImageView.alpha = 1.0f;
+        [cover.briefUILable changeGreen];
+        [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(concealDownloadCoverImageViewNotification:) name:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:selectedExhibition];
+        
+        //create a timer count :8s later [selectedExhibition sendConcealDownloadCoverImageViewNotification]
+        _timer = [NSTimer scheduledTimerWithTimeInterval:8.0 target:selectedExhibition selector:@selector(sendConcealDownloadCoverImageViewNotification) userInfo:nil repeats:NO];
+    }
     
 }
 
@@ -217,10 +223,6 @@ NSUInteger numberOfPages;
 {
     NSLog(@"Begin download !!!");
     
-    cover.downloadImageView.alpha = 0.0f;
-    [cover.briefUILable changeNormal];
-    cover.downloadingImageView.alpha = 1.0f;
-    
     //stop timer
     [_timer invalidate];
     
@@ -228,69 +230,64 @@ NSUInteger numberOfPages;
     Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:cover.exhibitionID];
     [NSTimer cancelPreviousPerformRequestsWithTarget:selectedExhibition];
     
-    SqliteService *sqlService = [[SqliteService alloc] init];
-    if ([sqlService insertToDB:selectedExhibition]) {
-        ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
-        [stvc addExhibition:selectedExhibition];
-    }else{
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"将对象插入到本地库失败！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alerView show];
-        return;
-    }
+    cover.downloadImageView.alpha = 0.0f;
+    [cover.briefUILable changeNormal];
+    cover.downloadingImageView.alpha = 1.0f;
+    cover.progressBar.alpha = 1.0;
+    cover.progressBar.progress = 0;
     
-    if(!transitionLayer){
-        transitionLayer = [[CALayer alloc] init];
-    }
-    [CATransaction begin];
-    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    transitionLayer.opacity = 1.0;
-    transitionLayer.contents = (id)cover.coverImageView.image.CGImage;
-    transitionLayer.frame = [[UIApplication sharedApplication].keyWindow convertRect:cover.coverImageView.bounds fromView:cover.coverImageView];
-    [[UIApplication sharedApplication].keyWindow.layer addSublayer:transitionLayer];
-    [CATransaction commit];
+    [selectedExhibition addObserver:cover forKeyPath:@"downloadProgress" options:NSKeyValueObservingOptionNew context:NULL];
     
-    CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-    positionAnimation.fromValue = [NSValue valueWithCGPoint:transitionLayer.position];
-    positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0, self.view.bounds.size.width / 2.0)];
+    [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidEndDownload:) name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:selectedExhibition];
+    [[NSNotificationCenter defaultCenter] addObserver:cover selector:@selector(exhibitionDidFailDownload:) name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:selectedExhibition];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exhibitionDidEndDownload:) name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:selectedExhibition];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exhibitionDidFailDownload:) name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:selectedExhibition];
     
-    CABasicAnimation *boundsAnimation = [CABasicAnimation animationWithKeyPath:@"bounds"];
-    boundsAnimation.fromValue = [NSValue valueWithCGRect:transitionLayer.bounds];
-    boundsAnimation.toValue = [NSValue valueWithCGRect:CGRectZero];
-    
-    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    opacityAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-    opacityAnimation.toValue = [NSNumber numberWithFloat:0.5];
-    
-    CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotateAnimation.fromValue = [NSNumber numberWithFloat:0 * M_PI];
-    rotateAnimation.toValue = [NSNumber numberWithFloat:2 * M_PI];
-    
-    
-    CAAnimationGroup *group = [CAAnimationGroup animation];
-    group.beginTime = CACurrentMediaTime() + 0.25;
-    group.duration = 0.8;
-    group.animations = [NSArray arrayWithObjects:positionAnimation, boundsAnimation, opacityAnimation, rotateAnimation, nil];
-    group.delegate = self;
-    group.fillMode = kCAFillModeForwards;
-    group.removedOnCompletion = NO;
-    
-    [transitionLayer addAnimation:group forKey:@"move"];
-}
-
--(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
-    if ([anim isEqual:[transitionLayer animationForKey:@"move"]]) {
-		[transitionLayer removeFromSuperlayer];
-		[transitionLayer removeAllAnimations];
-	}
+    NSString *downloadString = selectedExhibition.downloadURL;
+    NSLog(@"downloadString = %@",downloadString);
+    if(!downloadString)return;
+    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadString]];
+    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:selectedExhibition];
+    [conn start];
 }
 
 #pragma mark -ShelfViewControllerClickCancelDownloadExhibitionProtocol implementation
+/**********************************************************
+ 函数名称：-(void)clickCancelDownloadExhibition:(FirstCoverView *)cover
+ 函数描述：
+ 输入参数：
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
 -(void)clickCancelDownloadExhibition:(FirstCoverView *)cover
 {
-    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"正在下载" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"正在下载，请等待..." delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
     [alerView show];
 }
+
+#pragma mark -ShelfViewControllerClickCancelDownloadExhibitionProtocol implementation
+/**********************************************************
+ 函数名称：-(void)clickPlayExhibition:(FirstCoverView *)cover
+ 函数描述：
+ 输入参数：
+ 输出参数：N/A
+ 返回值：void
+ **********************************************************/
+-(void)clickPlayExhibition:(FirstCoverView *)cover
+{
+    Exhibition *selectedExhibition = [_exhibitionStore exhibitionWithID:cover.exhibitionID];
+    ExhibitionViewController *evc = [[ExhibitionViewController alloc] init];
+    NSString *documentPath = [[[selectedExhibition contentURL]URLByAppendingPathComponent:@"exhibition"]path];
+    NSBundle *myBundle = [NSBundle bundleWithPath:documentPath];
+    evc.str = [myBundle pathForResource:@"index" ofType:@"html"];
+    evc.navigationBarTitle = selectedExhibition.title;
+    //turn view
+    if(evc.str != nil){
+        [evc setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [self presentModalViewController:evc animated:YES];
+    }
+}
+
 
 #pragma mark -UIScrollView degelete
 /**********************************************************
@@ -328,56 +325,32 @@ NSUInteger numberOfPages;
     _progressHUD = nil;
 }
 
-//#pragma mark -UIAlertViewDelegate
+#pragma mark -KVO methods
 /**********************************************************
- 函数名称：-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
- 函数描述：UIAlertViewDelegate
- 输入参数：(UIAlertView *)alertView:alertView clickedButtonAtIndex:(NSInteger)buttonIndex:button
- 输出参数：N/A
+ 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
+ 函数描述：
+ 输入参数：(NSNotification *)notification
+ 输出参数：n/a
  返回值：void
  **********************************************************/
-//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if(buttonIndex == 0){
-//        [NSThread sleepForTimeInterval:1];
-//        [receiveExhibition sendFailedDownloadNotification];
-//        [receiveExhibition clearOperation];
-//    }else return;
-//    
-//}
+-(void)exhibitionDidEndDownload:(NSNotification *)notification
+{
+    Exhibition *exhibition = (Exhibition *)notification;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];
+}
+/**********************************************************
+ 函数名称：-(void)exhibitionDidFailDownload:(NSNotification *)notification
+ 函数描述：
+ 输入参数：(NSNotification *)notification
+ 输出参数：n/a
+ 返回值：void
+ **********************************************************/
+-(void)exhibitionDidFailDownload:(NSNotification *)notification
+{
+    Exhibition *exhibition = (Exhibition *)notification;    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];    
+}
 
-//#pragma mark -Actions
-/**********************************************************
- 函数名称：-(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
- 函数描述：取消下载
- 输入参数：(Exhibition *)exhibition:某一实例 updateCover:(FirstCoverView *)cover：某一view
- 输出参数：exhibition:取消下载某一个实例
- 返回值：void
- **********************************************************/
-//-(void)cancelDownloadExhibition:(Exhibition *)exhibition updateCover:(FirstCoverView *)cover
-//{
-//    [exhibition clearOperation];
-//}
-/**********************************************************
- 函数名称：-(void)openZip:(Exhibition *)selectedExhibition
- 函数描述：打开压缩文件中的内容 并传递str参数
- 输入参数：(Exhibition *)selectedExhibition：某实例
- 输出参数：(NSString *)str ：打开的文件名称
- 返回值：void
- **********************************************************/
-//-(void)openZip:(Exhibition *)selectedExhibition{
-//    
-//    ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
-//    NSString *documentPath = [[[selectedExhibition contentURL]URLByAppendingPathComponent:@"exhibition"]path];
-//    NSLog(@"documentPath = %@",documentPath);
-//    NSBundle *myBundle = [NSBundle bundleWithPath:documentPath];
-//    NSLog(@"myBundle = %@",myBundle);
-//    viewController.str = [myBundle pathForResource:@"index" ofType:@"html"];
-//    viewController.navigationBarTitle = selectedExhibition.title;
-//    //turn view
-//    if(viewController.str != nil){
-//        [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-//        [self presentModalViewController:viewController animated:YES];
-//    }
-//}
 @end

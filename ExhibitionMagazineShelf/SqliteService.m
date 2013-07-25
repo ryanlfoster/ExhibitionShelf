@@ -61,7 +61,7 @@
 -(void)createTable
 {
     sqlite3_stmt *statement;
-    const char *sql_stmt = "CREATE TABLE IF NOT EXISTS EXHIBITION(ID INTEGER PRIMARY KEY AUTOINCREMENT,EXHIBITIONID TEXT,TITLE TEXT,SUBTITLE TEXT,DATE TEXT)";
+    const char *sql_stmt = "CREATE TABLE IF NOT EXISTS EXHIBITION(ID INTEGER PRIMARY KEY AUTOINCREMENT,EXHIBITIONID TEXT,TITLE TEXT,SUBTITLE TEXT,DATE TEXT,DOWNLOAD TEXT)";
     NSInteger sqlReturn = sqlite3_prepare_v2(_database,sql_stmt,-1,&statement,nil);
     
     //if sql sentense analysis error return
@@ -102,7 +102,7 @@
 //        }
         
         //insert exhibition to sql
-        const char *insert_stmt = "INSERT INTO EXHIBITION(exhibitionid,title,subtitle,date) values(?,?,?,?)";
+        const char *insert_stmt = "INSERT INTO EXHIBITION(exhibitionid,title,subtitle,date,download) values(?,?,?,?,?)";
         int success = sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         
         if (success != SQLITE_OK) {
@@ -115,7 +115,8 @@
         sqlite3_bind_text(statement, 1, [exhibition.exhibitionID UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 2, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 3, [exhibition.subTitle UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 4, [[exhibition date] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 4, [exhibition.date UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 5, [exhibition.downloadURL UTF8String], -1, SQLITE_TRANSIENT);
         
         //execute insert sentense
         success = sqlite3_step(statement);
@@ -140,7 +141,7 @@
 {
     if([self openDB]){
         sqlite3_stmt *statement;
-        const char *update_stmt = "UPDATE EXHIBITION set exhibitionid = ?,title = ?,subtitle = ?,date = ?";
+        const char *update_stmt = "UPDATE EXHIBITION set exhibitionid = ?,title = ?,subtitle = ?,date = ?,download = ?";
         int success = sqlite3_prepare_v2(_database, update_stmt, -1, &statement, NULL);
         if(success != SQLITE_OK){
             NSLog(@"Error: failed to update !!!!");
@@ -149,7 +150,8 @@
         sqlite3_bind_text(statement, 1, [exhibition.exhibitionID UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 2, [exhibition.title UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 2, [exhibition.subTitle UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(statement, 3, [[exhibition date] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 3, [exhibition.date UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 4, [exhibition.downloadURL UTF8String], -1, SQLITE_TRANSIENT);
         
         //execute sql sentense , update db
         success = sqlite3_step(statement);
@@ -208,7 +210,7 @@
     //first judge db open
     if([self openDB]){
         sqlite3_stmt *statement;
-        const char *get_statement = "SELECT EXHIBITIONID,TITLE,SUBTITLE,DATE FROM EXHIBITION";
+        const char *get_statement = "SELECT EXHIBITIONID,TITLE,SUBTITLE,DATE,DOWNLOAD FROM EXHIBITION";
         
         if(sqlite3_prepare_v2(_database, get_statement, -1, &statement, NULL) != SQLITE_OK){
             NSLog(@"Error: failed to get date");
@@ -220,6 +222,7 @@
                 exhibition.title = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 exhibition.subTitle = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
                 exhibition.date = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                exhibition.downloadURL = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
                 [array addObject:exhibition];
                 
             }

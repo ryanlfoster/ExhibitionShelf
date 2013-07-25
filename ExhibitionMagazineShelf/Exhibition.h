@@ -34,8 +34,6 @@
 //progress receive total number
 @property (nonatomic, retain)NSNumber *expectedLengthNumber;
 @property (nonatomic, retain)NSNumber *downloadDataLengthNumber;
-//exhibition status download id
-@property (nonatomic,readwrite,getter = isDownloading) BOOL downloading;
 
 //exhibition file local path
 -(NSURL *)contentURL;
@@ -43,10 +41,6 @@
 -(BOOL)isExhibitionAvailibleForPlay;
 -(NSString *)exhibitionImagePath;
 -(NSString *)exhibitionFilePath;
-//exhibition downloading
--(BOOL)isDownloading;
-
-+(BOOL)ifHaveExhibitionDownloading;
 
 -(void)sendEndOfDownloadNotification;
 -(void)sendFailedDownloadNotification;

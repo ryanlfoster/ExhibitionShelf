@@ -24,7 +24,7 @@
 -(void)coverDeleted:(ThirdCoverView *)cover;
 @end
 
-@interface ShelfThirdViewController : CustomParentsViewController<UIAlertViewDelegate,UIScrollViewDelegate>{
+@interface ShelfThirdViewController : CustomParentsViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate,UIScrollViewDelegate>{
     
     sqlite3 *exhibitionDB;
     
@@ -34,10 +34,7 @@
 @property (nonatomic, strong) NSArray *listData;
 @property (nonatomic, weak) UIView *alertViewThird;
 @property (nonatomic, copy) NSString *alertString;
-@property (nonatomic, retain) NSMutableArray *coverArray;
 
 -(void)addExhibition:(Exhibition *)addExhibition;
-
--(ThirdCoverView *)coverWithID:(NSString *)exhibitionID;
 
 @end

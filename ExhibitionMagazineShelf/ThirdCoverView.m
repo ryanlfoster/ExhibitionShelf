@@ -12,10 +12,9 @@
 @synthesize exhibitionID = _exhibitionID;
 @synthesize coverImageViewFrameView = _coverImageViewFrameView;
 @synthesize coverImageView = _coverImageView;
-@synthesize coverImageViewDownloading = _coverImageViewDownloading;
-@synthesize coverImageViewReadyPlay = _coverImageViewReadyPlay;
+@synthesize playImageView = _playImageView;
 @synthesize briefUILable = _briefUILable;
-@synthesize progressBar = _progressBar;
+@synthesize exhibitionPath = _exhibitionPath;
 
 #pragma mark -init
 /**********************************************************
@@ -37,82 +36,41 @@
         
         _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 212, 194)];
         
-        _coverImageViewDownloading = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0 + 4, 220, 202)];
-        _coverImageViewDownloading.image = [UIImage imageNamed:@"imageview_downloading.png"];
-        _coverImageViewDownloading.alpha = 0.0f;
+        _playImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
+        _playImageView.image = [UIImage imageNamed:@"playImageView.png"];
+        _playImageView.userInteractionEnabled = YES;
+        [_playImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playExhibition:)]];
+        [_playImageView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExhibition:)]];
         
-        _coverImageViewReadyPlay = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 220, 202)];
-        _coverImageViewReadyPlay.image = [UIImage imageNamed:@"playImageView.png"];
-        _coverImageViewReadyPlay.userInteractionEnabled = YES;
-        [_coverImageViewReadyPlay addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playExhibition:)]];
-        _coverImageViewReadyPlay.alpha = 0.0f;
-        
-        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 0 + 4 + 106, 220, 52)];
+        _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 0 + 4 + 120, 220, 52)];
         _briefUILable.titleLabel.textAlignment = UITextAlignmentCenter;
         _briefUILable.subTitleLabel.textAlignment = UITextAlignmentCenter;
         _briefUILable.dateLabel.textAlignment = UITextAlignmentCenter;
         
-        
-        _progressBar = [[MCProgressBar alloc] initWithFrame:CGRectMake(85, 0 + 4 + 96, 212, 16) backgroundImage:[UIImage imageNamed:@"progressbar_background.png"] foregroundImage:[UIImage imageNamed:@"progressbar_foreground.png"]];
-        _progressBar.alpha = 0.0f;
-        
         [self addSubview:_coverImageViewFrameView];
         [self addSubview:_coverImageView];
-        [self addSubview:_coverImageViewDownloading];
-        [self addSubview:_coverImageViewReadyPlay];
+        [self addSubview:_playImageView];
         [self addSubview:_briefUILable];
-        [self addSubview:_progressBar];
-        
     }
     return self;
 }
 
-#pragma mark - KVO and Notifications
+#pragma mark - ShelfThirdViewControllerSelectedProtocol
 /**********************************************************
- 函数名称：-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
- 函数描述：Given that the receiver has been registered as an observer of the value at a key path relative to an object, be notified of
- a change to that value.
- 输入参数：(NSString *)keyPath : NSKeyValueChangeKindKey entry whose value is an NSNumber wrapping an NSKeyValueChange
- ofObject:(id)object : NSNumber
- change:(NSDictionary *)change: NSKeyValueChange
- context:(void *)context:is always the same pointer that was passed in at observer registration time.
+ 函数名称：-(void)clickCancelDownloadExhibition:(id)sender
+ 函数描述：按钮点击协议方法
+ 输入参数：(id)sender：click
  输出参数：n/a
  返回值：void
  **********************************************************/
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+-(void)playExhibition:(id)sender
 {
-    float value = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
-    _progressBar.progress = value;
+    [_delegatePlay coverSelected:self];
 }
-/**********************************************************
- 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
- 函数描述：下载完成发送通知
- 输入参数：(NSNotification *)notification
- 输出参数：n/a
- 返回值：void
- **********************************************************/
--(void)exhibitionDidEndDownload:(NSNotification *)notification
+
+-(void)deleteExhibition:(id)sender
 {
-    id obj = [notification object];
-    _progressBar.alpha = 0.0f;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
-    [obj removeObserver:self forKeyPath:@"downloadProgress"];
-}
-/**********************************************************
- 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
- 函数描述：下载失败发送通知
- 输入参数：(NSNotification *)notification
- 输出参数：n/a
- 返回值：void
- **********************************************************/
--(void)exhibitionDidFailDownload:(NSNotification *)notification
-{
-    id obj = [notification object];
-    _progressBar.alpha = 0.0f;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
-    [obj removeObserver:self forKeyPath:@"downloadProgress"];
+    [_delegateDelete coverDeleted:self];
 }
 
 @end
