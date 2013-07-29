@@ -8,10 +8,6 @@
 
 #import "CustomParentsViewController.h"
 
-@interface CustomParentsViewController ()
-
-@end
-
 @implementation CustomParentsViewController
 @synthesize customTabBarButton = _customTabBarButton;
 

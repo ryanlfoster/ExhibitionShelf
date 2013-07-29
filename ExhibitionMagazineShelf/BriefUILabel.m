@@ -62,11 +62,4 @@
     _dateLabel.textColor = [UIColor grayColor];
 }
 
--(void)theColorInThirdView
-{
-    _titleLabel.textColor = [UIColor colorWithRed:227.0/255 green:235.0/255 blue:158.0/255 alpha:0.5f];
-    _subTitleLabel.textColor = [UIColor colorWithRed:227.0/255 green:235.0/255 blue:158.0/255 alpha:0.5f];
-    _dateLabel.textColor = [UIColor colorWithRed:227.0/255 green:235.0/255 blue:158.0/255 alpha:0.5f];
-}
-
 @end

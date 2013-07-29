@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PlaySoundTools.h"
 
 @protocol CustomTabBarDelegate
 
@@ -16,10 +16,7 @@
 
 @interface CustomTabBar : UIView
 
-@property(nonatomic,strong)NSMutableArray *buttonData;
-@property(nonatomic,strong)NSMutableArray *buttons;
-
-@property(nonatomic,weak)id<CustomTabBarDelegate>delegate;
+@property(nonatomic, weak) id<CustomTabBarDelegate>delegate;
 
 -(id)initWithItems:(NSArray*)items;
 -(void)touchDownForButton:(UIButton*)button;

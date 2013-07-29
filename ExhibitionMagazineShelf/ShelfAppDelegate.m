@@ -11,17 +11,18 @@
 #import "ExhibitionShelfViewController.h"
 
 @implementation ShelfAppDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-/********************************Reachability************************************/
+    /********************************Reachability************************************/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     Reachability * reach = [Reachability reachabilityWithHostname:EXHIBITIONLIST];
     
     [reach startNotifier];
-/*********************************************************************************/
+    /*********************************************************************************/
 
     self.viewController = [[ExhibitionShelfViewController alloc] initWithNibName:@"ExhibitionShelfViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
@@ -29,13 +30,11 @@
     return YES;
 }
 
-/**********************************************************
- 函数名称：-(void)reachabilityChanged:(NSNotification *)note
- 函数描述：使用了支持ARC\GCD的网络监测
- 输入参数：(NSString *)statu：某状态。
- 输出参数：(int *)roomCount ：该状态房间数量。
- 返回值：BOOL：操作是否成功。
- **********************************************************/
+/**
+ *	observe network
+ *
+ *	@param	note	note
+ */
 -(void)reachabilityChanged:(NSNotification *)note
 {
     Reachability *reach = [note object];

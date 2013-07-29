@@ -6,17 +6,12 @@
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "CustomParentsViewController.h"
 
 @class FirstCoverView;
 @class ExhibitionStore;
 @class Exhibition;
-/* delegate protocol to pass actions from the CoverView to the Shelf controller */
-//@protocol ShelfFirstViewControllerProtocol
-//-(void)coverSelected:(FirstCoverView *)cover;
-//@end
 
 /*delegate protocol to click exhibition*/
 @protocol ShelfFirstViewControllerClickExhibitionProtocol <NSObject>
@@ -47,7 +42,5 @@
 @end
 
 @interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol,ShelfFirstViewControllerClickPlayExhibitionProtocol,MBProgressHUDDelegate,UIScrollViewDelegate>
-
-@property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 
 @end

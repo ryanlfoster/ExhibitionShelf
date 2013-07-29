@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MCProgressBar : UIView
+
+@property (nonatomic, assign) float progress;
+
 -(id)initWithFrame:(CGRect)frame backgroundImage:(UIImage *)backgroundImage foregroundImage:(UIImage *)foregroundImage;
-@property(nonatomic,assign)float progress;
+
 @end

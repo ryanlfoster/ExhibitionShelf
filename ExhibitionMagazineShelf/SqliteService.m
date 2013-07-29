@@ -7,21 +7,25 @@
 //
 
 #import "SqliteService.h"
-#import "Exhibition.h"
-@implementation SqliteService
-//-(void)getAllToDB;
-@synthesize database = _database;
--(id)init
-{
-    return self;
-}
 
-//get document path
+@implementation SqliteService
+@synthesize database = _database;
+
+/**
+ *	return data file path
+ *
+ *	@return	data file path 
+ */
 -(NSString *)dataFilePath
 {
     return [DocumentsDirectory stringByAppendingPathComponent:@"exhibition.db"];
 }
-//create;open db
+
+/**
+ *	open db
+ *
+ *	@return	TRUE:exist or FALSE:none
+ */
 -(BOOL)openDB
 {
     //get db path
@@ -57,7 +61,9 @@
     return NO;
 }
 
-//create table
+/**
+ *	create table
+ */
 -(void)createTable
 {
     sqlite3_stmt *statement;
@@ -79,27 +85,19 @@
     
 }
 
-//insert data
+/**
+ *	insert exhibition to table
+ *
+ *	@param	exhibition	exhibition which ready for inserting
+ *
+ *	@return	YES:success NO:Error
+ */
 -(BOOL)insertToDB:(Exhibition *)exhibition
 {
     
     if([self openDB]){
         
         sqlite3_stmt *statement;
-
-        //selected exhibitionID before insert
-//        const char *get_statement = "SELECT EXHIBITIONID FROM EXHIBITION";
-//        if(sqlite3_prepare_v2(_database, get_statement, -1, &statement, NULL) != SQLITE_OK){
-//            NSLog(@"Error: failed to get date");
-//        }else{
-//            while (sqlite3_step(statement) == SQLITE_ROW) {
-//            NSString *string = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
-//                if([string isEqualToString:exhibition.exhibitionID]){
-//                    NSLog(@"相同喽!!!");
-//                    return false;
-//                }
-//            }
-//        }
         
         //insert exhibition to sql
         const char *insert_stmt = "INSERT INTO EXHIBITION(exhibitionid,title,subtitle,date,download) values(?,?,?,?,?)";
@@ -136,7 +134,13 @@
     return false;
 }
 
-//update db
+/**
+ *	update table
+ *
+ *	@param	exhibition	exhibition
+ *
+ *	@return	YES:success NO:error
+ */
 -(BOOL)updateToDB:(Exhibition *)exhibition
 {
     if([self openDB]){
@@ -171,7 +175,12 @@
     }
     return NO;
 }
-//delete data
+
+/**
+ *	delete exhibition in table
+ *
+ *	@param	exhibitionID	with exhibition id 
+ */
 -(void)deleteToDB:(NSString *)exhibitionID
 {
     if([self openDB]){
@@ -203,7 +212,11 @@
     }
 }
 
-//get all data from table
+/**
+ *	get all data from table
+ *
+ *	@return	array exhibition
+ */
 -(NSMutableArray *)getAllDateFromTable
 {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
@@ -233,6 +246,11 @@
     return array;
 }
 
+/**
+ *	exhibition count in table
+ *
+ *	@return	count
+ */
 -(NSUInteger)getCountToDB
 {
     

@@ -21,7 +21,7 @@
 
 @property (nonatomic, copy) NSString *exhibitionPath;
 
-@property (nonatomic, weak) id<ShelfThirdViewControllerSelectedProtocol>delegatePlay;
-@property (nonatomic, weak) id<ShelfThirdViewControllerDeletedProtocol>delegateDelete;
+@property (nonatomic, weak) id <ShelfThirdViewControllerSelectedProtocol> delegatePlay;
+@property (nonatomic, weak) id <ShelfThirdViewControllerDeletedProtocol> delegateDelete;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
+
 @implementation ThirdCoverView
 @synthesize exhibitionID = _exhibitionID;
 @synthesize coverImageViewFrameView = _coverImageViewFrameView;
@@ -16,14 +17,6 @@
 @synthesize briefUILable = _briefUILable;
 @synthesize exhibitionPath = _exhibitionPath;
 
-#pragma mark -init
-/**********************************************************
- 函数名称：- (id)initWithFrame:(CGRect)frame
- 函数描述：初始化view
- 输入参数：(CGRect)frame ：view 框架
- 输出参数：n/a
- 返回值：void
- **********************************************************/
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -40,7 +33,11 @@
         _playImageView.image = [UIImage imageNamed:@"playImageView.png"];
         _playImageView.userInteractionEnabled = YES;
         [_playImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playExhibition:)]];
-        [_playImageView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExhibition:)]];
+        
+        UILongPressGestureRecognizer *longPressGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(deleteExhibition:)];
+        longPressGR.allowableMovement = NO;
+        longPressGR.minimumPressDuration = 0.3;
+        [_playImageView addGestureRecognizer:longPressGR];
         
         _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 0 + 4 + 120, 220, 52)];
         _briefUILable.titleLabel.textAlignment = UITextAlignmentCenter;
@@ -55,21 +52,24 @@
     return self;
 }
 
-#pragma mark - ShelfThirdViewControllerSelectedProtocol
-/**********************************************************
- 函数名称：-(void)clickCancelDownloadExhibition:(id)sender
- 函数描述：按钮点击协议方法
- 输入参数：(id)sender：click
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	delegatePlay click
+ *
+ *	@param	sender	sender
+ */
 -(void)playExhibition:(id)sender
 {
     [_delegatePlay coverSelected:self];
 }
 
--(void)deleteExhibition:(id)sender
+/**
+ *	delegateDelete click
+ *
+ *	@param	sender	sender
+ */
+-(void)deleteExhibition:(UILongPressGestureRecognizer *)sender
 {
+    if(sender.state == UIGestureRecognizerStateBegan)
     [_delegateDelete coverDeleted:self];
 }
 

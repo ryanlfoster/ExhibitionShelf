@@ -9,7 +9,9 @@
 #import "CustomPageControl.h"
 
 @interface CustomPageControl(Private)
+
 -(void) updateDots;
+
 @end
 
 @implementation CustomPageControl
@@ -26,37 +28,31 @@
     return self;
 }
 
-/**********************************************************
- 函数名称：-(void) setImagePageStateHightlighted:(UIImage *)imagePageStateHightlighted
- 函数描述：设置dots高亮显示
- 输入参数：(UIImage *)imagePageStateHightlighted:高亮图片
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	hight light image
+ *
+ *	@param	imagePageStateHightlighted	transmit image
+ */
 -(void) setImagePageStateHightlighted:(UIImage *)imagePageStateHightlighted
 {
     _imagePageStateHightlighted = imagePageStateHightlighted;
     [self updateDots];
 }
-/**********************************************************
- 函数名称：-(void) setImagePageStateHightlighted:(UIImage *)imagePageStateHightlighted
- 函数描述：正常状态下的图片样式
- 输入参数：(UIImage *)imagePageStateHightlighted:默认图片
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+
+/**
+ *	normal image
+ *
+ *	@param	imagePageStateNormal	transmit image
+ */
 -(void)setImagePageStateNormal:(UIImage *)imagePageStateNormal
 {
     _imagePageStateNormal = imagePageStateNormal;
     [self updateDots];
 }
-/**********************************************************
- 函数名称：updateDots
- 函数描述：更新dots样式
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+
+/**
+ *	page view dots
+ */
 -(void)updateDots
 {
     if(_imagePageStateNormal || _imagePageStateHightlighted)
@@ -69,13 +65,13 @@
         }
     }
 }
-/**********************************************************
- 函数名称：-(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
- 函数描述：触摸dots跳转
- 输入参数：(UITouch *)touch：触摸方式 withEvent:(UIEvent *)event：点击时事件
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+
+/**
+ *	click dots jump to page view
+ *
+ *	@param	touch	touch event
+ *	@param	event	UIEvent
+ */
 -(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
     [super endTrackingWithTouch:touch withEvent:event];

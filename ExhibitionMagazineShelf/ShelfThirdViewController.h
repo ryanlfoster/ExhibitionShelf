@@ -6,10 +6,8 @@
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "ExhibitionViewController.h"
 #import "SqliteService.h"
-#import "ShelfFirstViewController.h"
+#import "ExhibitionViewController.h"
 #import "CustomParentsViewController.h"
 
 @class ThirdCoverView;
@@ -29,11 +27,6 @@
     sqlite3 *exhibitionDB;
     
 }
-
-@property (nonatomic, strong) UIScrollView *containerView;
-@property (nonatomic, strong) NSArray *listData;
-@property (nonatomic, weak) UIView *alertViewThird;
-@property (nonatomic, copy) NSString *alertString;
 
 -(void)addExhibition:(Exhibition *)addExhibition;
 

@@ -10,6 +10,13 @@
 
 @interface ExhibitionViewController ()
 
+@property (nonatomic, strong)UIButton *backButton;
+@property (nonatomic, strong)UINavigationBar *navigationBar;
+@property (nonatomic, strong)UIWebView *webView;
+@property (nonatomic, strong)PlaySoundTools *sound;
+
+-(void)backOnClick;
+
 @end
 
 @implementation ExhibitionViewController
@@ -18,15 +25,18 @@
 @synthesize backButton = _backButton;
 @synthesize navigationBar = _navigationBar;
 @synthesize webView = _webView;
+@synthesize sound = _sound;
 
 #pragma mark -view lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //webView
     _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 43, 1024, 768-20-43)];
     
     if(_webView != nil){
-        NSLog(@"_str = %@",_str);
+        NSLog(@"open url = %@",_str);
         NSURL *htmlUrl = [NSURL fileURLWithPath:_str];
         [_webView loadRequest:[NSURLRequest requestWithURL:htmlUrl]];
     }
@@ -64,16 +74,15 @@
     else
         return NO;
 }
-#pragma mark -action
-/**********************************************************
- 函数名称：-(void)backOnClick
- 函数描述：返回上一级
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+
+/**
+ *	back view
+ */
 -(void)backOnClick
 {
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"applaunch" ofType: @"wav"];
+    _sound = [[PlaySoundTools alloc] initWithContentsOfFile:soundFilePath];
+    [_sound play];
     [self dismissModalViewControllerAnimated:YES];
 }
 

@@ -11,15 +11,27 @@
 #import "Exhibition.h"
 #import "ExhibitionViewController.h"
 
-NSUInteger numberOfPages;//scrollView page count
+NSUInteger numberOfPages;
+
+@interface ShelfThirdViewController()
+
+@property (nonatomic, strong) UIScrollView *containerView;
+@property (nonatomic, strong) NSArray *listData;
+@property (nonatomic, weak) UIView *alertViewThird;
+@property (nonatomic, copy) NSString *alertString;
+@property (nonatomic, strong) PlaySoundTools *sound;
+
+-(void)loadScrollViewData;
+
+@end
 
 @implementation ShelfThirdViewController
 @synthesize containerView = _containerView;
 @synthesize listData = _listData;
 @synthesize alertString = _alertString;
 @synthesize alertViewThird = _alertViewThird;
+@synthesize sound = _sound;
 
-#pragma mark -init nib
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,17 +41,20 @@ NSUInteger numberOfPages;//scrollView page count
     return self;
 }
 
-#pragma mark -View lifecycle
-- (void)viewDidLoad    //Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
+/**
+ *	Called after the view has been loaded. For view controllers created in code, this is after -loadView. 
+    For view controllers unarchived from a nib, this is after the view is set.
+ */
+- (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    /***********************************background****************************************/
+    /***********************************background***************************************/
     //load background
     UIImage *backgroundImage = [UIImage imageNamed:@"exhibitiondisplay_background.png"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
-    /************************************************************************************/
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -67,17 +82,27 @@ NSUInteger numberOfPages;//scrollView page count
         return NO;
 }
 
-/**********************************************************
- 函数名称：-(void)addExhibition:(NSNotification *)notification
- 函数描述：更新ThirdView
- 输入参数：(NSNotification *)notification
- 输出参数：N/A
- 返回值：void
- **********************************************************/
+#pragma mark -Public Methods
+/**
+ *	add exhibition in Third View
+ *
+ *	@param	addExhibition	exhibiton which tansmit downloaded
+ */
 -(void)addExhibition:(Exhibition *)addExhibition
 {
     [self viewWillAppear:YES];
     
+    SqliteService *sqlService = [[SqliteService alloc] init];
+    if ([sqlService insertToDB:addExhibition]) {
+        NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"download_complete" ofType: @"wav"];
+        _sound = [[PlaySoundTools alloc] initWithContentsOfFile:soundFilePath];
+        [_sound play];
+        [addExhibition sendEndOfDownloadNotification];
+    }else{
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"将对象插入到本地库失败！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+        [alerView show];
+    }
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:addExhibition.coverURL]];
         if(imgData) {
@@ -87,13 +112,11 @@ NSUInteger numberOfPages;//scrollView page count
     });
 }
 
-/**********************************************************
- 函数名称：-(void)loadScrollViewData
- 函数描述：更新scrollView
- 输入参数：N/A
- 输出参数：N/A
- 返回值：void
- **********************************************************/
+
+#pragma mark -Private Methods
+/**
+ *	load exhibition which have downloaded in scrollView
+ */
 -(void)loadScrollViewData
 {
     if(_containerView != nil){
@@ -120,7 +143,7 @@ NSUInteger numberOfPages;//scrollView page count
             cover.briefUILable.titleLabel.text = anExhibition.title;
             cover.briefUILable.subTitleLabel.text = anExhibition.subTitle;
             cover.briefUILable.dateLabel.text = anExhibition.date;
-            [cover.briefUILable theColorInThirdView];
+            [cover.briefUILable changeGreen];
             
             cover.exhibitionPath = [anExhibition exhibitionFilePath];
             
@@ -143,13 +166,11 @@ NSUInteger numberOfPages;//scrollView page count
 }
 
 #pragma mark -ShelfThirdViewControllerSelectedProtocol implementation
-/**********************************************************
- 函数名称：-(void)coverSelected:(ThirdCoverView *)cover
- 函数描述：
- 输入参数：(ThirdCoverView *)cover：view
- 输出参数：N/A
- 返回值：void
- **********************************************************/
+/**
+ *	click exhibiiton which cover play imageView
+ *
+ *	@param	cover	ThirdCoverView
+ */
 -(void)coverSelected:(ThirdCoverView *)cover
 {
     ExhibitionViewController *viewController = [[ExhibitionViewController alloc] init];
@@ -161,21 +182,27 @@ NSUInteger numberOfPages;//scrollView page count
         [viewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         [self presentModalViewController:viewController animated:YES];
     }
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"applaunch" ofType: @"wav"];
+    _sound = [[PlaySoundTools alloc] initWithContentsOfFile:soundFilePath];
+    [_sound play];
 }
 
 #pragma mark -ShelfThirdViewControllerDeletedProtocol implementation
-/**********************************************************
- 函数名称：-(void)coverSelected:(ThirdCoverView *)cover
- 函数描述：ShelfThirdViewControllerDeletedProtocol
- 输入参数：(ThirdCoverView *)cover：view
- 输出参数：N/A
- 返回值：void
- **********************************************************/
+/**
+ *	click to delete exhibition
+ *
+ *	@param	cover	ThirdCoverView
+ */
 -(void)coverDeleted:(ThirdCoverView *)cover
 {
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"真的要删除此展览?" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:@"返回", nil];
     [alert show];
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"alert" ofType: @"wav"];
+    _sound = [[PlaySoundTools alloc] initWithContentsOfFile:soundFilePath];
+    [_sound play];
     
     _alertViewThird = cover;
     _alertString = cover.exhibitionID;
@@ -183,13 +210,12 @@ NSUInteger numberOfPages;//scrollView page count
 }
 
 #pragma mark -UIAlertViewDelegate
-/**********************************************************
- 函数名称：-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
- 函数描述：UIAlertViewDelegate
- 输入参数：(UIAlertView *)alertView:alertView clickedButtonAtIndex:(NSInteger)buttonIndex:button
- 输出参数：N/A
- 返回值：void
- **********************************************************/
+/**
+ *	alert view
+ *
+ *	@param	alertView	delete exhibition view
+ *	@param	buttonIndex	0:YES 1 :return 
+ */
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 0){
@@ -213,6 +239,10 @@ NSUInteger numberOfPages;//scrollView page count
             }
             
         }
+        
+        NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"app_delete" ofType: @"wav"];
+        _sound = [[PlaySoundTools alloc] initWithContentsOfFile:soundFilePath];
+        [_sound play];
 
     }else return;
     

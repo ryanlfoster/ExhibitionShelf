@@ -10,10 +10,17 @@
 
 @interface AboutUsViewController ()
 
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) PlaySoundTools *sound;
+
+-(void)openURL;
+
 @end
 
 @implementation AboutUsViewController
 @synthesize backButton = _backButton;
+@synthesize sound = _sound;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,33 +29,27 @@
     }
     return self;
 }
-#pragma mark -view lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-/***********************************background****************************************/
+
     //load background
     UIImage *backgroundImage = [UIImage imageNamed:@"aboutus.png"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
-/************************************************************************************/
-
+    
+    //link image view
     UIImageView *linkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(270, 330, 200, 40)];
     [self.view addSubview:linkImageView];
     linkImageView.userInteractionEnabled = YES;
     [linkImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)]];
-
+    
+    //logo link image view
     UIImageView *linkLogoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(460, 67, 100, 185)];
     [self.view addSubview:linkLogoImageView];
     linkLogoImageView.userInteractionEnabled = YES;
     [linkLogoImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)]];
-}
-
--(void)openURL
-{
-    NSLog(@"点中!!!");
-    NSURL *url = [NSURL URLWithString:OPENSAFARI];
-    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -64,6 +65,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/**
+ *	open page net in safari
+ */
+-(void)openURL
+{
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"applaunch" ofType: @"wav"];
+    _sound = [[PlaySoundTools alloc] initWithContentsOfFile:soundFilePath];
+    [_sound play];
+    NSURL *url = [NSURL URLWithString:OPENSAFARI];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end

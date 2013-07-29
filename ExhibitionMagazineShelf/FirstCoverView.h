@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIImageView *downloadingImageView;
 @property (nonatomic, strong) UIImageView *playImageView;
 @property (nonatomic, strong) BriefUILabel *briefUILable;
+@property (nonatomic, strong) BriefUILabel *changeLocationBriefUILable;
 @property (nonatomic, strong) MCProgressBar *progressBar;
 
 @property (nonatomic, weak) id<ShelfFirstViewControllerClickExhibitionProtocol> delegate;

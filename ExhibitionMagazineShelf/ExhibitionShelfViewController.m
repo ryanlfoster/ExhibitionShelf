@@ -13,10 +13,6 @@
 #import "ShelfThirdViewController.h"
 #import "AboutUsViewController.h"
 
-@interface ExhibitionShelfViewController ()
-
-@end
-
 @implementation ExhibitionShelfViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

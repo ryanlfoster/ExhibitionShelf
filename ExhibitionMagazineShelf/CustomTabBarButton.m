@@ -13,6 +13,13 @@
 @synthesize highlightedIcon = _highlightedIcon;
 @synthesize viewController = _viewController;
 
+/**
+ *	custom tab bar button init with icon
+ *
+ *	@param	icon	image icon
+ *
+ *	@return	custom tab bar button
+ */
 -(id)initWithIcon:(UIImage *)icon
 {
     if (self = [super init]) {
@@ -21,6 +28,11 @@
     return self;
 }
 
+/**
+ *	set view controller
+ *
+ *	@param	viewController	transmit viewcontroller
+ */
 -(void)setViewController:(CustomParentsViewController *)viewController
 {
     _viewController = viewController;

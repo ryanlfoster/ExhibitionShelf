@@ -10,9 +10,10 @@
 #import "CustomParentsViewController.h"
 
 @interface CustomTabBarButton : NSObject
-@property(nonatomic,strong)UIImage *icon;
-@property(nonatomic,strong)UIImage *highlightedIcon;
-@property(nonatomic,strong)CustomParentsViewController *viewController;
+
+@property(nonatomic, strong) UIImage *icon;
+@property(nonatomic, strong) UIImage *highlightedIcon;
+@property(nonatomic, strong) CustomParentsViewController *viewController;
 
 -(id)initWithIcon:(UIImage*)icon;
 

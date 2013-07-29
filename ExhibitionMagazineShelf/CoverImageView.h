@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CoverImageView : UIImageView<NSURLConnectionDataDelegate>
+
 @property (nonatomic, strong) NSString *imgURL;
 @property (nonatomic, strong) NSString *exhibitionID;
+
 @end

@@ -10,24 +10,21 @@
 #import "Exhibition.h"
 
 @interface ExhibitionStore(Private)
-//analyze xml
+
 -(void)analyzeXml;
-//exhibition plist save to cache Dir
 -(NSURL *)fileURLOfCachedExhibitionFile;
+
 @end
 @implementation ExhibitionStore
 @synthesize exhibitionArray = _exhibitionArray;
 @synthesize status = _status;
 @synthesize list = _list;
 
-#pragma mark -init
-/**********************************************************
- 函数名称：-(id)init
- 函数描述：初始化变量
- 输入参数：n/a
- 输出参数：n/a
- 返回值：self
- **********************************************************/
+/**
+ *	init _exhibitionArray & _status
+ *
+ *	@return	self
+ */
 -(id)init {
     self = [super init];
     if(self) {
@@ -38,13 +35,11 @@
 }
 
 #pragma mark -Get/Set override
-/**********************************************************
- 函数名称：-(void)setStatus:(ExhibitionStatusType)newStatus
- 函数描述：exhibition set status 
- 输入参数：(ExhibitionStatusType)newStatus:新状态
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	set status
+ *
+ *	@param	newStatus	transmit new status
+ */
 -(void)setStatus:(ExhibitionStatusType)newStatus
 {
     if(_status == newStatus)return;
@@ -58,13 +53,9 @@
 }
 
 #pragma mark -Private
-/**********************************************************
- 函数名称：-(void)analyzeXml
- 函数描述：从服务器文件中读取并解析xml文件
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	anlyze xml in server
+ */
 -(void)analyzeXml
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -93,77 +84,67 @@
                 self.status = ExhibitionStatusReady;
                 NSLog(@"服务器的xml数据");
             }else{
-                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务器中的xml文件没有数据" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"服务器没有数据" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
                 [alerView show];
                 self.status = ExhibitionStatusError;
             }
         }
     });
 }
-/**********************************************************
- 函数名称：-(NSURL *)fileURLOfCachedExhibitionFile
- 函数描述：得到缓存文件URL
- 输入参数：n/a
- 输出参数：n/a
- 返回值：(NSURL *)
- **********************************************************/
+/**
+ *	analyze xml in sandbox documnetDirectory
+ *
+ *	@return	NSURL:plist path
+ */
 -(NSURL *)fileURLOfCachedExhibitionFile
 {
     return [NSURL fileURLWithPathComponents:[NSArray arrayWithObjects:DocumentsDirectory,@"exhibition.plist",nil]];
 }
 
 #pragma mark -Public
-/**********************************************************
- 函数名称：-(void)startup
- 函数描述：初始化exhibition store
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	analyzexml()
+ */
 -(void)startup
 {
     [self analyzeXml];
 }
-/**********************************************************
- 函数名称：-(BOOL)isExhibitionReady
- 函数描述：exhibition 是否已下载
- 输入参数：n/a
- 输出参数：n/a
- 返回值：BOOL
- **********************************************************/
+/**
+ *	whether exhibition is play
+ *
+ *	@return	BOOL
+ */
 -(BOOL)isExhibitionStoreReady
 {
     return (_status == ExhibitionStatusReady);
 }
-/**********************************************************
- 函数名称：-(NSInteger)numberOfStoreExhibition 
- 函数描述：exhibition total count
- 输入参数：n/a
- 输出参数：n/a
- 返回值：NSInteger
- **********************************************************/
+/**
+ *	the number of exhibiton in store
+ *
+ *	@return	NSInteger
+ */
 -(NSInteger)numberOfStoreExhibition
 {
     return [_exhibitionArray count];
 }
-/**********************************************************
- 函数名称：-(Exhibition *)exhibitionAtIndex:(NSInteger)index
- 函数描述：通过array的位置取出exhibition对象
- 输入参数：(NSInteger)index
- 输出参数：n/a
- 返回值：Exhibition
- **********************************************************/
+/**
+ *	get exhibition with index in exhibitionStore
+ *
+ *	@param	index	index
+ *
+ *	@return	exhibition
+ */
 -(Exhibition *)exhibitionAtIndex:(NSInteger)index
 {
     return [_exhibitionArray objectAtIndex:index];
 }
-/**********************************************************
- 函数名称：-(Exhibition *)exhibitionWithID:(NSString *)exhibitionID
- 函数描述：通过exhibitionID得到exhibition对象
- 输入参数：(NSString *)exhibitionID
- 输出参数：n/a
- 返回值：Exhibition
- **********************************************************/
+/**
+ *	get exhibition with exhibitionID in exhibitionArray
+ *
+ *	@param	exhibitionID	exhibiitonID
+ *
+ *	@return	exhibiiton
+ */
 -(Exhibition *)exhibitionWithID:(NSString *)exhibitionID
 {
     for(Exhibition *anExhibition in _exhibitionArray) {

@@ -8,79 +8,98 @@
 
 #import "Exhibition.h"
 #import "ZipArchive.h"
+#import "SqliteService.h"
 #import "ShelfThirdViewController.h"
 
-@interface Exhibition (Private)
+static BOOL isDownloading;
+
+@interface Exhibition()
+
+@property (nonatomic, readonly) float downloadProgress;
+@property (nonatomic, copy) NSMutableData *downloadData;
+@property (nonatomic, assign) NSInteger expectedLength;
+@property (nonatomic, retain) NSNumber *expectedLengthNumber;
+@property (nonatomic, retain) NSNumber *downloadDataLengthNumber;
+@property (nonatomic, strong) PlaySoundTools *sound;
+
 -(void)alertDownloadErrorView;
+-(void)sendConcealDownloadCoverImageViewNotification;
+-(void)sendConcealPlayCoverImageViewNotification;
+-(void)sendEndOfDownloadNotification;
+-(void)sendFailedDownloadNotification;
+
 @end
 
 @implementation Exhibition
-@synthesize exhibitionID = _exhibitionID;
-@synthesize title = _title;
-@synthesize subTitle = _subTitle;
 @synthesize date = _date;
+@synthesize title = _title;
+@synthesize sound = _sound;
+@synthesize subTitle = _subTitle;
 @synthesize coverURL = _coverURL;
 @synthesize downloadURL = _downloadURL;
 @synthesize description = _description;
 @synthesize downloadData = _downloadData;
+@synthesize exhibitionID = _exhibitionID;
 @synthesize expectedLength = _expectedLength;
 @synthesize downloadProgress = _downloadProgress;
 @synthesize expectedLengthNumber = _expectedLengthNumber;
 @synthesize downloadDataLengthNumber = _downloadDataLengthNumber;
 
+
+#pragma mark -Class Methods
+/**
+ *	whether has exhibition is downloading
+ *
+ *	@return	BOOL
+ */
++(BOOL)isDownlaoding
+{
+    return isDownloading;
+}
+
 #pragma mark -Public methods
-/**********************************************************
- 函数名称：-(NSURL *)contentURL
- 函数描述：对象在沙盒文件中的路径URL
- 输入参数：n/a
- 输出参数：n/a
- 返回值：(NSURL *)
- **********************************************************/
+/**
+ *	CacheDirectory with wxhibitionID
+ *
+ *	@return	(NSURL *)CacheURL
+ */
 -(NSURL *)contentURL
 {
-    NSURL *theURL = [NSURL fileURLWithPath:[CacheDirectory stringByAppendingPathComponent:_exhibitionID]];
-    // create the URL
-    if(![[NSFileManager defaultManager] fileExistsAtPath:[theURL path]]) {
+    NSURL *CacheURL = [NSURL fileURLWithPath:[CacheDirectory stringByAppendingPathComponent:_exhibitionID]];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:[CacheURL path]]) {
         NSError *error=nil;
-        if([[NSFileManager defaultManager] createDirectoryAtPath:[theURL path] withIntermediateDirectories:NO attributes:nil error:&error]==NO) {
+        if([[NSFileManager defaultManager] createDirectoryAtPath:[CacheURL path] withIntermediateDirectories:NO attributes:nil error:&error]==NO) {
             NSLog(@"There was an error in creating the directory: %@",error);
         }
         
     }
-    return theURL;
+    return CacheURL;
 }
-/**********************************************************
- 函数名称：-(NSString *)exhibitionImagePath
- 函数描述：对象在沙盒文件中的封面路径string
- 输入参数：n/a
- 输出参数：n/a
- 返回值：(NSString *)
- **********************************************************/
+/**
+ *	cover image exhibition
+ *
+ *	@return	exhibition cover image path
+ */
 -(NSString *)exhibitionImagePath
 {
     return[[[self contentURL] URLByAppendingPathComponent:@"cover.png"] path];
 }
-/**********************************************************
- 函数名称：-(NSString *)exhibitionFilePath
- 函数描述：展览文件在沙盒文件中的目录string
- 输入参数：n/a
- 输出参数：n/a
- 返回值：(NSString *)
- **********************************************************/
+/**
+ *	file exhibition
+ *
+ *	@return	exhibition file path
+ */
 -(NSString *)exhibitionFilePath
 {
     return [[[self contentURL] URLByAppendingPathComponent:@"exhibition"]path];
 }
-/**********************************************************
- 函数名称：-(BOOL)isExhibitionAvailibleForRead
- 函数描述：展览zip是否已下载
- 输入参数：n/a
- 输出参数：n/a
- 返回值：(NSString *)
- **********************************************************/
+/**
+ *	whether exhibition is ready for play
+ *
+ *	@return	BOOL 
+ */
 -(BOOL)isExhibitionAvailibleForPlay
 {
-    //delete file
     NSFileManager *fileManger = [NSFileManager defaultManager];
     NSString *contentPathDelete = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
     if(contentPathDelete){
@@ -92,13 +111,26 @@
     NSLog(@"Checking for path: %@ ==> %d",contentPath,fileExists);
     return(fileExists);
 }
-/**********************************************************
- 函数名称：-(void)setDownloadProgress:(float)downloadProgress
- 函数描述：
- 输入参数：n/a
- 输出参数：n/a
- 返回值：
- **********************************************************/
+/**
+ *	stop downloading 
+ */
+-(void)stopDownload
+{
+    self.expectedLength = 0;
+    isDownloading = NO;
+    NSString *downloadURL = self.downloadURL;
+    if(!downloadURL)return;
+    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
+    NSURLConnection *conn = [NSURLConnection connectionWithRequest:downloadRequest delegate:self];
+    [conn cancel];
+}
+
+#pragma mark -Override setter Methods
+/**
+ *	set download progress
+ *
+ *	@param	downloadProgress	transmit downloadProgress
+ */
 -(void)setDownloadProgress:(float)downloadProgress
 {
     _downloadProgress = downloadProgress;
@@ -137,6 +169,13 @@
  **********************************************************/
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+    if(_expectedLength == 0){
+        [connection cancel];
+        _downloadData = nil;
+        return;
+    }
+    
+    isDownloading = YES;
     [_downloadData appendData:data];
     _expectedLengthNumber = [[NSNumber alloc]initWithInteger:_expectedLength];
     _downloadDataLengthNumber = [[NSNumber alloc] initWithInteger:[_downloadData length]];
@@ -156,12 +195,12 @@
  **********************************************************/
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+
+    isDownloading = NO;
     NSURL *finalURL = [[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"];
     [_downloadData writeToURL:finalURL atomically:YES];
     
     NSString *zipPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"]path];
-    
-/**************************************Zip operate*******************************************/    
     ZipArchive *zip = [[ZipArchive alloc] init];
     if([zip UnzipOpenFile:zipPath]){
         BOOL ret = [zip UnzipFileTo:[self exhibitionFilePath] overWrite:YES];
@@ -172,25 +211,15 @@
             NSFileManager *fileManger = [NSFileManager defaultManager];
             NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
             [fileManger removeItemAtPath:contentPath error:NULL];
-            
-            SqliteService *sqlService = [[SqliteService alloc] init];
-            if ([sqlService insertToDB:self]) {
-                ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
-                [stvc addExhibition:self];
-                [self sendEndOfDownloadNotification];
-            }else{
-                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"将对象插入到本地库失败！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-                [alerView show];
-            }
+            ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
+            [stvc addExhibition:self];
         }
         else{
             //delete incomplement UnzipFile
             [self alertDownloadErrorView];
         }
-        
         [zip UnzipCloseFile];
     }
-/********************************************************************************************/ 
 }
 /**********************************************************
  函数名称：-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -201,19 +230,18 @@
  **********************************************************/
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    isDownloading = NO;
     NSLog(@"There was an error downloading this exhibition %@ with connection %@ . Error is: %@",self,connection,error);
     self.downloadProgress = 0.0;
     // post notification
     [self sendFailedDownloadNotification];
     return;
 }
-/**********************************************************
- 函数名称：-(void)alertView
- 函数描述：下载出错弹窗
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+
+#pragma mark -Private Methods
+/**
+ *	alert download error view
+ */
 -(void)alertDownloadErrorView
 {
     UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"呀吼！下载出错了请在再试一次!" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
@@ -229,46 +257,30 @@
 }
 
 #pragma mark -NSNotificationCenter
-/**********************************************************
- 函数名称：-(void)cancelDownloadExhibiiton
- 函数描述：send conceal downloadCoverImageView notification
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	send conceal download cover image view notification
+ */
 -(void)sendConcealDownloadCoverImageViewNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:self];
 }
-/**********************************************************
- 函数名称：-(void)sendConcealPlayCoverImageViewNotification
- 函数描述：send conceal playCoverImageView notification
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	send conceal play cover iamge view notification
+ */
 -(void)sendConcealPlayCoverImageViewNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:CONCEAL_PLAYCOVERIMAGEVIEW_NOTIFICATION object:self];
 }
-/**********************************************************
- 函数名称：-(void)sendEndOfDownloadNotification
- 函数描述：下载完成后放松通知
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	send exhibition have finished notification
+ */
 -(void)sendEndOfDownloadNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:self];
 }
-/**********************************************************
- 函数名称：-(void)sendFailedDownloadNotification
- 函数描述：下载失败发送的通知
- 输入参数：n/a
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	send exhibition download failed notification
+ */
 -(void)sendFailedDownloadNotification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:self];

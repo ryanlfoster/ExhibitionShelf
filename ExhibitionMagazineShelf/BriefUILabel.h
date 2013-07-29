@@ -16,6 +16,5 @@
 
 -(void)changeGreen;
 -(void)changeNormal;
--(void)theColorInThirdView;
 
 @end

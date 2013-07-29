@@ -8,6 +8,7 @@
 
 #import "FirstCoverView.h"
 #import "Exhibition.h"
+
 @implementation FirstCoverView
 @synthesize exhibitionID = _exhibitionID;
 @synthesize coverImageViewFrameView = _coverImageViewFrameView;
@@ -16,6 +17,7 @@
 @synthesize downloadingImageView = _downloadingImageView;
 @synthesize playImageView = _playImageView;
 @synthesize briefUILable = _briefUILable;
+@synthesize changeLocationBriefUILable = _changeLocationBriefUILable;
 @synthesize progressBar = _progressBar;
 
 #pragma mark -init
@@ -37,6 +39,7 @@
         _coverImageViewFrameView.image = [UIImage imageNamed:@"imagelayout.png"];
         
         _coverImageView = [[CoverImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 212, 194)];
+        _coverImageView.clipsToBounds=YES;
         _coverImageView.userInteractionEnabled = YES;
         [_coverImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickExhibition:)]];
         
@@ -49,8 +52,10 @@
         _downloadingImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
         _downloadingImageView.image = [UIImage imageNamed:@"imageview_downloading.png"];
         _downloadingImageView.alpha = 0.0f;
-        _downloadingImageView.userInteractionEnabled = YES;
-        [_downloadingImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCancelDownloadExhibition:)]];
+        if(_progressBar.progress != 1){
+            _downloadingImageView.userInteractionEnabled = YES;
+            [_downloadingImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCancelDownloadExhibition:)]];
+        }
         
         _playImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
         _playImageView.image = [UIImage imageNamed:@"playImageView.png"];
@@ -58,10 +63,16 @@
         _playImageView.userInteractionEnabled = YES;
         [_playImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickPlayExhibition:)]];
         
-        _progressBar = [[MCProgressBar alloc] initWithFrame:CGRectMake(85 + 10, 0 + 4 + 186, 200, 6) backgroundImage:[UIImage imageNamed:@"progressbar_background.png"] foregroundImage:[UIImage imageNamed:@"progressbar_foreground.png"]];
+        _progressBar = [[MCProgressBar alloc] initWithFrame:CGRectMake(85 + 10, 0 + 4 + 186, 200, 6) backgroundImage:[UIImage imageNamed:@"progressbar_background.png"] foregroundImage:[[UIImage imageNamed:@"progressbar_foreground.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]];
         _progressBar.alpha = 0.0f;
         
         _briefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 212, 220, 52)];
+        
+        _changeLocationBriefUILable = [[BriefUILabel alloc] initWithFrame:CGRectMake(85, 0 + 4 + 120, 220, 52)];
+        _changeLocationBriefUILable.titleLabel.textAlignment = UITextAlignmentCenter;
+        _changeLocationBriefUILable.subTitleLabel.textAlignment = UITextAlignmentCenter;
+        _changeLocationBriefUILable.dateLabel.textAlignment = UITextAlignmentCenter;
+        _changeLocationBriefUILable.alpha = 0.0f;
         
         [self addSubview:_coverImageViewFrameView];
         [self addSubview:_coverImageView];
@@ -69,6 +80,7 @@
         [self addSubview:_downloadingImageView];
         [self addSubview:_playImageView];
         [self addSubview:_briefUILable];
+        [self addSubview:_changeLocationBriefUILable];
         [self addSubview:_progressBar];
         
     }
@@ -76,65 +88,55 @@
 }
 
 #pragma mark - ShelfViewControllerClickProtocol
-/**********************************************************
- 函数名称：-(void)clickExhibition:(id)sender
- 函数描述：按钮点击协议方法
- 输入参数：(id)sender：click
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	delegate click
+ *
+ *	@param	sender	sender
+ */
 -(void)clickExhibition:(id)sender
 {
     [_delegate clickExhibition:self];
 }
 
 #pragma mark - ShelfViewControllerClickDownloadExhibitionProtocol
-/**********************************************************
- 函数名称：-(void)clickCancelDownloadExhibition:(id)sender
- 函数描述：按钮点击协议方法
- 输入参数：(id)sender：click
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	delegateDownload click
+ *
+ *	@param	sender	sender
+ */
 -(void)clickDownloadExhibition:(id)sender
 {
     [_delegateDownload clickDownloadExhibition:self];
 }
 
 #pragma mark - ShelfViewControllerClickCancelDownloadExhibitionProtocol
-/**********************************************************
- 函数名称：-(void)clickCancelDownloadExhibition:(id)sender
- 函数描述：按钮点击协议方法
- 输入参数：(id)sender：click
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	delegateCancelDownload click
+ *
+ *	@param	sender	sender
+ */
 -(void)clickCancelDownloadExhibition:(id)sender
 {
     [_delegateCancelDownload clickCancelDownloadExhibition:self];
 }
 
 #pragma mark - ShelfFirstViewControllerClickPlayExhibitionProtocol
-/**********************************************************
- 函数名称：-(void)clickPlayExhibition:(id)sender
- 函数描述：按钮点击协议方法
- 输入参数：(id)sender：click
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	delegatePlay click
+ *
+ *	@param	sender	sender
+ */
 -(void)clickPlayExhibition:(id)sender
 {
     [_delegatePlay clickPlayExhibition:self];
 }
 
 #pragma mark - KVO and Notifications
-/**********************************************************
- 函数名称：-(void)cancelDownloadExhibiton:(NSNotification *)notification
- 函数描述：conceal _downloadImageView
- 输入参数：(NSNotification *)notification
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	conceal download cover image view
+ *
+ *	@param	notification	exhibition
+ */
 -(void)concealDownloadCoverImageViewNotification:(NSNotification *)notification
 {
     _downloadImageView.alpha = 0.0f;
@@ -143,6 +145,11 @@
     Exhibition *exhibition = (Exhibition *)[notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CONCEAL_DOWNLOADCOVERIMAGEVIEW_NOTIFICATION object:exhibition];
 }
+/**
+ *	conceal play cover image view
+ *
+ *	@param	notification	exhibition
+ */
 -(void)concealPlayCoverImageViewNotification:(NSNotification *)notification
 {
     _playImageView.alpha = 0.0f;
@@ -166,24 +173,27 @@
     float value = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
     _progressBar.progress = value;
 }
-/**********************************************************
- 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
- 函数描述：下载完成发送通知
- 输入参数：(NSNotification *)notification
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	exhibition have finished 
+ *
+ *	@param	notification	notification
+ */
 -(void)exhibitionDidEndDownload:(NSNotification *)notification
 {
-    id obj = [notification object];
+    //dismiss
+    _progressBar.alpha = 0.0f;
+    _downloadingImageView.alpha = 0.0f;
+    _changeLocationBriefUILable.alpha = 0.0f;
     
+    //come out
+    _briefUILable.alpha = 1.0f;
+    [_briefUILable changeNormal];
+    
+    id obj = [notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
     [obj removeObserver:self forKeyPath:@"downloadProgress"];
 
-    _progressBar.alpha = 0.0f;
-    _downloadingImageView.alpha = 0.0f;
-    
     if(!transitionLayer){
         transitionLayer = [[CALayer alloc] init];
     }
@@ -221,6 +231,12 @@
     
     [transitionLayer addAnimation:group forKey:@"move"];
 }
+/**
+ *	transitionLayer animation stop
+ *
+ *	@param	anim	CAAnimation
+ *	@param	flag	finished
+ */
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     if ([anim isEqual:[transitionLayer animationForKey:@"move"]]) {
@@ -228,17 +244,22 @@
 		[transitionLayer removeAllAnimations];
 	}
 }
-/**********************************************************
- 函数名称：-(void)exhibitionDidEndDownload:(NSNotification *)notification
- 函数描述：下载失败发送通知
- 输入参数：(NSNotification *)notification
- 输出参数：n/a
- 返回值：void
- **********************************************************/
+/**
+ *	exhibition have failed
+ *
+ *	@param	notification    notification
+ */
 -(void)exhibitionDidFailDownload:(NSNotification *)notification
 {
-    id obj = [notification object];
+    //dismiss
     _progressBar.alpha = 0.0f;
+    _downloadingImageView.alpha = 0.0f;
+    _changeLocationBriefUILable.alpha = 0.0f;
+    //come out
+    _briefUILable.alpha = 1.0f;
+    [_briefUILable changeNormal];
+    
+    id obj = [notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:obj];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:obj];
     [obj removeObserver:self forKeyPath:@"downloadProgress"];
