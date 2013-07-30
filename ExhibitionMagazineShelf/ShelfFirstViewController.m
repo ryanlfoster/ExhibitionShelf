@@ -256,6 +256,9 @@ NSUInteger numberOfPages;
     [_containerView addGestureRecognizer:clickGestureRecognizer];
 }
 
+/**
+ *	left slide & right slide
+ */
 -(void)slide
 {
     NSLog(@"slide !!!");
@@ -493,7 +496,7 @@ NSUInteger numberOfPages;
  *	@param	notification	exhibition
  */
 -(void)exhibitionDidEndDownload:(NSNotification *)notification
-{
+{    
     Exhibition *exhibition = (Exhibition *)notification;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_END_OF_DOWNLOAD_NOTIFICATION object:exhibition];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EXHIBITION_FAILED_DOWNLOAD_NOTIFICATION object:exhibition];

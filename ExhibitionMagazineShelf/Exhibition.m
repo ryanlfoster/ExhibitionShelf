@@ -9,6 +9,7 @@
 #import "Exhibition.h"
 #import "ZipArchive.h"
 #import "SqliteService.h"
+#import "ShelfFirstViewController.h"
 #import "ShelfThirdViewController.h"
 
 static BOOL isDownloading;
@@ -195,31 +196,42 @@ static BOOL isDownloading;
  **********************************************************/
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        NSURL *finalURL = [[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"];
+        [_downloadData writeToURL:finalURL atomically:YES];
+        
+        NSString *zipPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"]path];
+        ZipArchive *zip = [[ZipArchive alloc] init];
+        if([zip UnzipOpenFile:zipPath]){
+            BOOL ret = [zip UnzipFileTo:[self exhibitionFilePath] overWrite:YES];
+            if(ret){
+                NSLog(@"unzip success !!!");
+                //send end of download notification
+                //delete file
+                NSFileManager *fileManger = [NSFileManager defaultManager];
+                NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
+                if([fileManger removeItemAtPath:contentPath error:NULL]){
+                    [self addExhibitionInThirdView];
+                }else return;
+            }
+            else{
+                //delete incomplement UnzipFile
+                [self alertDownloadErrorView];
+            }
+            [zip UnzipCloseFile];
+        }
+    });
 
-    isDownloading = NO;
-    NSURL *finalURL = [[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"];
-    [_downloadData writeToURL:finalURL atomically:YES];
-    
-    NSString *zipPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"]path];
-    ZipArchive *zip = [[ZipArchive alloc] init];
-    if([zip UnzipOpenFile:zipPath]){
-        BOOL ret = [zip UnzipFileTo:[self exhibitionFilePath] overWrite:YES];
-        if(ret){
-            NSLog(@"unzip success !!!");
-            //send end of download notification
-            //delete file
-            NSFileManager *fileManger = [NSFileManager defaultManager];
-            NSString *contentPath = [[[self contentURL] URLByAppendingPathComponent:@"exhibition.zip"] path];
-            [fileManger removeItemAtPath:contentPath error:NULL];
-            ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
-            [stvc addExhibition:self];
-        }
-        else{
-            //delete incomplement UnzipFile
-            [self alertDownloadErrorView];
-        }
-        [zip UnzipCloseFile];
-    }
+}
+
+-(void)addExhibitionInThirdView
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ShelfThirdViewController *stvc = [[ShelfThirdViewController alloc] init];
+        [stvc addExhibition:self];
+        isDownloading = NO;
+    });
 }
 /**********************************************************
  函数名称：-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
