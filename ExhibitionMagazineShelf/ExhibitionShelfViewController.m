@@ -13,7 +13,14 @@
 #import "ShelfThirdViewController.h"
 #import "AboutUsViewController.h"
 
+@interface ExhibitionShelfViewController()
+
+@property(strong, nonatomic) PlaySoundTools *sound;
+
+@end
+
 @implementation ExhibitionShelfViewController
+@synthesize sound = _sound;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,7 +69,25 @@
     titleNavigationItem.titleView = titleLabel;
     [_navigationBar pushNavigationItem:titleNavigationItem animated:NO];
     
+    //link navigation
+    UIImageView *linkNavigation = [[UIImageView alloc] initWithFrame:CGRectMake(450, 0, 200, 40)];
+    linkNavigation.userInteractionEnabled = YES;
+    [linkNavigation addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)]];
+    
     [self.view addSubview:_navigationBar];
+    [self.view addSubview:linkNavigation];
+}
+
+/**
+ *	open page net in safari
+ */
+-(void)openURL
+{
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"applaunch" ofType: @"wav"];
+    _sound = [[PlaySoundTools alloc] initWithContentsOfFile:soundFilePath];
+    [_sound play];
+    NSURL *url = [NSURL URLWithString:OPENSAFARI];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)didReceiveMemoryWarning

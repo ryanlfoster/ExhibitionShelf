@@ -87,10 +87,9 @@
 }
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error {
-	NSString *url = theConnection.currentRequest.URL.absoluteString;
-	NSString *msg = [NSString stringWithFormat:@"Error:\n%@\n\nWith this url:\n%@", [error description], url];
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Image Download Error" message:msg delegate:self cancelButtonTitle:@"Bummer" otherButtonTitles:nil];
-	[alert show];
+	
+    return;
+    
 }
 
 

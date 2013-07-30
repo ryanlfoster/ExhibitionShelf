@@ -35,15 +35,9 @@
     [super viewDidLoad];
 
     //load background
-    UIImage *backgroundImage = [UIImage imageNamed:@"aboutus.png"];
+    UIImage *backgroundImage = [UIImage imageNamed:@"about_us.png"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
-    
-    //link image view
-    UIImageView *linkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(270, 330, 200, 40)];
-    [self.view addSubview:linkImageView];
-    linkImageView.userInteractionEnabled = YES;
-    [linkImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openURL)]];
     
     //logo link image view
     UIImageView *linkLogoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(460, 67, 100, 185)];

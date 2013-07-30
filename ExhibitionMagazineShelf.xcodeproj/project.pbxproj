@@ -41,6 +41,7 @@
 		3C380064179F6644006527E8 /* imageview_ready_download.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C380063179F6644006527E8 /* imageview_ready_download.png */; };
 		3C380069179FCE50006527E8 /* progressbar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C380067179FCE50006527E8 /* progressbar_background.png */; };
 		3C3848F217210F9A00B31758 /* MCProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3848F117210F9A00B31758 /* MCProgressBar.m */; };
+		3C48B8B017A7AF24003E4F87 /* about_us.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C48B8AF17A7AF24003E4F87 /* about_us.png */; };
 		3C4ADF02175F25720011E701 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ADF01175F25720011E701 /* Reachability.m */; };
 		3C584980173276F200C3B7C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C58497F173276F200C3B7C6 /* SystemConfiguration.framework */; };
 		3C69F6D516F9A5F200A8250C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C69F6D416F9A5F200A8250C /* UIKit.framework */; };
@@ -71,7 +72,6 @@
 		3CA0875C1794DB76005EDAB3 /* arrowright.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA0875A1794DB76005EDAB3 /* arrowright.png */; };
 		3CA087631794F35A005EDAB3 /* imagePageStateHighly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA087611794F35A005EDAB3 /* imagePageStateHighly.png */; };
 		3CA087641794F35A005EDAB3 /* imagePageStateNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA087621794F35A005EDAB3 /* imagePageStateNormal.png */; };
-		3CA3E5741799084A00415E1F /* aboutus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA3E5731799084A00415E1F /* aboutus.png */; };
 		3CA3E578179916B600415E1F /* playImageView.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA3E577179916B600415E1F /* playImageView.png */; };
 		3CB1A13B16FC032200AAAF25 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB1A13A16FC032200AAAF25 /* QuickLook.framework */; };
 		3CB9662D17043497002C1840 /* ExhibitionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9662C17043497002C1840 /* ExhibitionStore.m */; };
@@ -148,6 +148,7 @@
 		3C380067179FCE50006527E8 /* progressbar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressbar_background.png; sourceTree = "<group>"; };
 		3C3848F017210F9A00B31758 /* MCProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProgressBar.h; sourceTree = "<group>"; };
 		3C3848F117210F9A00B31758 /* MCProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProgressBar.m; sourceTree = "<group>"; };
+		3C48B8AF17A7AF24003E4F87 /* about_us.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_us.png; sourceTree = "<group>"; };
 		3C4ADF00175F25720011E701 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3C4ADF01175F25720011E701 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3C58497F173276F200C3B7C6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -197,7 +198,6 @@
 		3CA0875A1794DB76005EDAB3 /* arrowright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowright.png; sourceTree = "<group>"; };
 		3CA087611794F35A005EDAB3 /* imagePageStateHighly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagePageStateHighly.png; sourceTree = "<group>"; };
 		3CA087621794F35A005EDAB3 /* imagePageStateNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagePageStateNormal.png; sourceTree = "<group>"; };
-		3CA3E5731799084A00415E1F /* aboutus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutus.png; sourceTree = "<group>"; };
 		3CA3E577179916B600415E1F /* playImageView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playImageView.png; sourceTree = "<group>"; };
 		3CB1A13A16FC032200AAAF25 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		3CB9662B17043497002C1840 /* ExhibitionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExhibitionStore.h; sourceTree = "<group>"; };
@@ -380,13 +380,13 @@
 		3C2D972317A2218900810F3C /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				3C48B8AF17A7AF24003E4F87 /* about_us.png */,
 				3CE0F16A17A128EC006038CC /* btn_back.png */,
 				3C2D974017A27AF800810F3C /* progressbar_foreground.png */,
 				3C380067179FCE50006527E8 /* progressbar_background.png */,
 				3C380061179F661A006527E8 /* imageview_downloading.png */,
 				3C380063179F6644006527E8 /* imageview_ready_download.png */,
 				3CA3E577179916B600415E1F /* playImageView.png */,
-				3CA3E5731799084A00415E1F /* aboutus.png */,
 				3CA087611794F35A005EDAB3 /* imagePageStateHighly.png */,
 				3CA087621794F35A005EDAB3 /* imagePageStateNormal.png */,
 				3CA087591794DB76005EDAB3 /* arrowleft.png */,
@@ -845,7 +845,6 @@
 				3CA087631794F35A005EDAB3 /* imagePageStateHighly.png in Resources */,
 				3CA087641794F35A005EDAB3 /* imagePageStateNormal.png in Resources */,
 				3CDEB10F17968D1D0080897A /* AboutUsViewController.xib in Resources */,
-				3CA3E5741799084A00415E1F /* aboutus.png in Resources */,
 				3CA3E578179916B600415E1F /* playImageView.png in Resources */,
 				3C380062179F661A006527E8 /* imageview_downloading.png in Resources */,
 				3C380064179F6644006527E8 /* imageview_ready_download.png in Resources */,
@@ -858,6 +857,7 @@
 				3C2D973917A25CD600810F3C /* applaunch.wav in Resources */,
 				3C2D973D17A25FEC00810F3C /* actionsheet.wav in Resources */,
 				3C2D974117A27AF800810F3C /* progressbar_foreground.png in Resources */,
+				3C48B8B017A7AF24003E4F87 /* about_us.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

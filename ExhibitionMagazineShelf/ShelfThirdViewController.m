@@ -151,17 +151,22 @@ NSUInteger numberOfPages;
             cover.delegateDelete = self;
             
             CGFloat edge;
+            CGFloat row = i % 3;
+            CGFloat col = 0.0;
+            
+            if (((i / 3) % 2) == 1) {
+                col = 1;
+            }else col = 0;
+            
             if(i >= 6 ){
-                edge = 70.0f;
+                edge = 1024.0f;
             }else edge = 0;
-            CGFloat row = i / 2;
-            CGFloat col = i % 2;
+            
             CGRect coverFrame = cover.frame;
             coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
             cover.frame = coverFrame;
             cover.backgroundColor = [UIColor clearColor];
-            [_containerView addSubview:cover];
-        }
+            [_containerView addSubview:cover];        }
     });
 }
 

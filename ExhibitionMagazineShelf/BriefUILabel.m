@@ -50,9 +50,9 @@
 
 -(void)changeGreen
 {
-    _titleLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:0.5f];
-    _subTitleLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:0.5f];
-    _dateLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:0.5f];
+    _titleLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:1.0f];
+    _subTitleLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:1.0f];
+    _dateLabel.textColor = [UIColor colorWithRed:196.0/255 green:215.0/255 blue:15.0/255 alpha:1.0f];
 }
 
 -(void)changeNormal

@@ -28,6 +28,9 @@ NSUInteger numberOfPages;
 @property (weak, nonatomic) NSTimer *timerReadyDownload;
 @property (weak, nonatomic) NSTimer *timerPlay;
 @property (weak, nonatomic) NSTimer *timerProgressHUD;
+@property (strong, nonatomic) IBOutlet UIButton *leftButton;
+@property (strong, nonatomic) IBOutlet UIButton *rightButton;
+@property (assign, nonatomic) CGPoint point;
 
 -(void)concealProgressHUD;
 -(void)resourceRequest;
@@ -35,6 +38,7 @@ NSUInteger numberOfPages;
 -(void)updateShelf;
 -(void)exhibitionDidEndDownload:(NSNotification *)notification;
 -(void)exhibitionDidFailDownload:(NSNotification *)notification;
+-(void)slide;
 
 @end
 
@@ -48,6 +52,9 @@ NSUInteger numberOfPages;
 @synthesize timerPlay = _timerPlay;
 @synthesize timerProgressHUD = _timerProgressHUD;
 @synthesize readyForDeleteExhibition = _readyForDeleteExhibition;
+@synthesize leftButton = _leftButton;
+@synthesize rightButton = _rightButton;
+@synthesize point = _point;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,6 +69,8 @@ NSUInteger numberOfPages;
 {
     [super viewDidLoad];
     
+    _leftButton.alpha = 0.0f;
+
     /***********************************background***************************************/
     //load background
     UIImage *backgroundImage = [UIImage imageNamed:@"exhibitiondisplay_background.png"];
@@ -99,6 +108,8 @@ NSUInteger numberOfPages;
 {
     [self setContainerView:nil];
     [self setPageControl:nil];
+    [self setLeftButton:nil];
+    [self setRightButton:nil];
     [super viewDidUnload];
 }
 
@@ -209,17 +220,63 @@ NSUInteger numberOfPages;
         cover.delegateCancelDownload = self;
         cover.delegatePlay = self;
         
+//        CGFloat edge;
+//        if(i >= 6 ){
+//            edge = 70.0f;
+//        }else edge = 0;
+//        CGFloat row = i / 2;
+//        CGFloat col = i % 2;
+//        CGRect coverFrame = cover.frame;
+//        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);   
+//        cover.frame = coverFrame;
+//        cover.backgroundColor = [UIColor clearColor];
+//        [_containerView addSubview:cover];
+        
         CGFloat edge;
+        CGFloat row = i % 3;
+        CGFloat col = 0.0;
+        
+        if (((i / 3) % 2) == 1) {
+            col = 1;
+        }else col = 0;
+        
         if(i >= 6 ){
-            edge = 70.0f;
+            edge = 1024.0f;
         }else edge = 0;
-        CGFloat row = i / 2;
-        CGFloat col = i % 2;
+        
         CGRect coverFrame = cover.frame;
-        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);   
+        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
         cover.frame = coverFrame;
         cover.backgroundColor = [UIColor clearColor];
         [_containerView addSubview:cover];
+    }
+    
+    UITapGestureRecognizer *clickGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slide)];
+    clickGestureRecognizer.delegate = self;
+    [_containerView addGestureRecognizer:clickGestureRecognizer];
+}
+
+-(void)slide
+{
+    NSLog(@"slide !!!");
+    int x = _point.x;
+    int y = _point.y;
+    NSLog(@"touch (x, y) is (%d, %d)", x, y);
+    
+    CGFloat pageWidth = _containerView.frame.size.width;
+    int page = floor((_containerView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    
+    if(CGRectContainsPoint(CGRectMake(page * 1024, 220, 100, 100), _point)){
+        NSLog(@"turn left");
+        if(_leftButton.alpha == 1.0f){
+            [_containerView setContentOffset:CGPointMake(1024.0f * (page - 1), 0.0f) animated:YES];
+        }
+        
+    }else if (CGRectContainsPoint(CGRectMake(page * 1024 + 950, 220, 100, 100),_point)){
+        NSLog(@"turn right");
+        if(_rightButton.alpha == 1.0f){
+            [_containerView setContentOffset:CGPointMake(1024.0f * (page + 1), 0.0f) animated:YES];
+        }
     }
 }
 
@@ -378,8 +435,7 @@ NSUInteger numberOfPages;
     [_sound play];
 }
 
-
-#pragma mark -UIScrollView delegate
+#pragma mark -UIScrollViewDelegate
 /**
  *	scrollView delegate
  *
@@ -390,12 +446,31 @@ NSUInteger numberOfPages;
     CGFloat pageWidth = _containerView.frame.size.width;
     int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     _pageControl.currentPage = page;
-    
     NSArray *subView = _pageControl.subviews;
     for(int i = 0; i < [subView count]; i++){
         UIImageView *dot = [subView objectAtIndex:i];
         dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"imagePageStateHighly.png"] : [UIImage imageNamed:@"imagePageStateNormal.png"]);
     }
+    
+    if (_pageControl.currentPage == 0) {
+        _leftButton.alpha = 0.0f;
+    }else if(_pageControl.currentPage == [subView count] - 1){
+        _rightButton.alpha = 0.0f;
+    }else{
+        _leftButton.alpha = 1.0f;
+        _rightButton.alpha = 1.0f;
+    }
+}
+
+#pragma mark -UIGestureRecognizerDelegate
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    UIView *view = [touch view];
+    if([view isKindOfClass:[UIScrollView class]]){
+        _point = [touch locationInView:[touch view]];
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark -MBProgressHUDDelegate methods
