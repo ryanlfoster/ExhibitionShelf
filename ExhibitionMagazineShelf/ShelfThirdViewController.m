@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
+#import "SqliteService.h"
 #import "ShelfThirdViewController.h"
 #import "ThirdCoverView.h"
 #import "Exhibition.h"
@@ -166,7 +167,8 @@ NSUInteger numberOfPages;
             coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * row + 96.0f * row + edge * (i / 6), CGRectGetHeight(coverFrame) * col + col * 36.0f);
             cover.frame = coverFrame;
             cover.backgroundColor = [UIColor clearColor];
-            [_containerView addSubview:cover];        }
+            [_containerView addSubview:cover];
+        }
     });
 }
 

@@ -6,8 +6,6 @@
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 #import "ShelfThirdViewController.h"
 #import "BriefUILabel.h"
 

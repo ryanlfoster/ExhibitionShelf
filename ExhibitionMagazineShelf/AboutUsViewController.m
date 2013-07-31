@@ -35,9 +35,10 @@
     [super viewDidLoad];
 
     //load background
-    UIImage *backgroundImage = [UIImage imageNamed:@"about_us.png"];
-    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-    self.view.backgroundColor = backgroundColor;
+//    UIImage *backgroundImage = [UIImage imageNamed:@"about_us.png"];
+//    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+//    self.view.backgroundColor = backgroundColor;
+    
     
     //logo link image view
     UIImageView *linkLogoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(460, 67, 100, 185)];

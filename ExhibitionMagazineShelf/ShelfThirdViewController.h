@@ -6,12 +6,11 @@
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.
 //
 
-#import "SqliteService.h"
 #import "ExhibitionViewController.h"
 #import "CustomParentsViewController.h"
 
 @class ThirdCoverView;
-
+@class Exhibition;
 /* delegate protocol to pass actions from the CoverView to the Shelf controller */
 @protocol ShelfThirdViewControllerSelectedProtocol
 -(void)coverSelected:(ThirdCoverView *)cover;
@@ -22,11 +21,7 @@
 -(void)coverDeleted:(ThirdCoverView *)cover;
 @end
 
-@interface ShelfThirdViewController : CustomParentsViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate,UIScrollViewDelegate>{
-    
-    sqlite3 *exhibitionDB;
-    
-}
+@interface ShelfThirdViewController : CustomParentsViewController<ShelfThirdViewControllerSelectedProtocol,ShelfThirdViewControllerDeletedProtocol,UIAlertViewDelegate,UIScrollViewDelegate>
 
 -(void)addExhibition:(Exhibition *)addExhibition;
 

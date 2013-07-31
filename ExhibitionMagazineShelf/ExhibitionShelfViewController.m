@@ -12,6 +12,7 @@
 #import "ShelfFirstViewController.h"
 #import "ShelfThirdViewController.h"
 #import "AboutUsViewController.h"
+#import "ShelfShareViewController.h"
 
 @interface ExhibitionShelfViewController()
 
@@ -20,6 +21,8 @@
 @end
 
 @implementation ExhibitionShelfViewController
+@synthesize customTabBar = _customTabBar;
+@synthesize navigationBar = _navigationBar;
 @synthesize sound = _sound;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,7 +53,12 @@
     tabBarButtonAVC.highlightedIcon = [UIImage imageNamed:@"tabbar_aboutus_highly.png"];
     tabBarButtonAVC.viewController = avc;
     
-    NSArray *array = [NSArray arrayWithObjects:tabBarButtonEVC,tabBarButtonMVC,tabBarButtonAVC, nil];
+    ShelfShareViewController *svc = [[ShelfShareViewController alloc] init];
+    CustomTabBarButton *tabBarButtonSVC = [[CustomTabBarButton alloc] initWithIcon:[UIImage imageNamed:@"tabbar_share.png"]];
+    tabBarButtonSVC.highlightedIcon = [UIImage imageNamed:@"tabbar_share_highly.png"];
+    tabBarButtonSVC.viewController = svc;
+    
+    NSArray *array = [NSArray arrayWithObjects:tabBarButtonEVC,tabBarButtonMVC,tabBarButtonSVC,tabBarButtonAVC,nil];
     _customTabBar = [[CustomTabBar alloc] initWithItems:array];
     _customTabBar.delegate = self;
     [self.view addSubview:_customTabBar];
@@ -98,6 +106,7 @@
 
 -(void)switchViewController:(UIViewController *)vc
 {
+    NSLog(@"self.view.bounds.size.width == %f",self.view.bounds.size.width);
     vc.view.frame = CGRectMake(0, 43, self.view.bounds.size.width, self.view.bounds.size.height - _customTabBar.frame.size.height);
     [self.view insertSubview:vc.view belowSubview:_customTabBar];
 }
