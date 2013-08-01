@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3C69F6CF16F9A5F200A8250C"
                BuildableName = "&#20170;&#26085;&#25968;&#23383;&#39302;.app"
-               BlueprintName = "ExhibitionMagazineShelf"
-               ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+               BlueprintName = "ExhibitionShelf"
+               ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "3C0489E51741E1FA00C28540"
                BuildableName = "OCUnit.octest"
                BlueprintName = "OCUnit"
-               ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+               ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3C69F6CF16F9A5F200A8250C"
             BuildableName = "&#20170;&#26085;&#25968;&#23383;&#39302;.app"
-            BlueprintName = "ExhibitionMagazineShelf"
-            ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+            BlueprintName = "ExhibitionShelf"
+            ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3C69F6CF16F9A5F200A8250C"
             BuildableName = "&#20170;&#26085;&#25968;&#23383;&#39302;.app"
-            BlueprintName = "ExhibitionMagazineShelf"
-            ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+            BlueprintName = "ExhibitionShelf"
+            ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -86,8 +86,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3C69F6CF16F9A5F200A8250C"
             BuildableName = "&#20170;&#26085;&#25968;&#23383;&#39302;.app"
-            BlueprintName = "ExhibitionMagazineShelf"
-            ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+            BlueprintName = "ExhibitionShelf"
+            ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

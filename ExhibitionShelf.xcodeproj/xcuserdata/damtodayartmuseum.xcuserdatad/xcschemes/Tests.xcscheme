@@ -17,7 +17,7 @@
                BlueprintIdentifier = "3C04896F1741D8F200C28540"
                BuildableName = "Tests.app"
                BlueprintName = "Tests"
-               ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+               ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "3C04896F1741D8F200C28540"
             BuildableName = "Tests.app"
             BlueprintName = "Tests"
-            ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+            ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -47,7 +47,6 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enableOpenGLFrameCaptureMode = "0"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
@@ -55,7 +54,7 @@
             BlueprintIdentifier = "3C04896F1741D8F200C28540"
             BuildableName = "Tests.app"
             BlueprintName = "Tests"
-            ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+            ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -73,7 +72,7 @@
             BlueprintIdentifier = "3C04896F1741D8F200C28540"
             BuildableName = "Tests.app"
             BlueprintName = "Tests"
-            ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+            ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

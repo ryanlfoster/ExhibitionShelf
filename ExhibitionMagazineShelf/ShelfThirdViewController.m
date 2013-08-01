@@ -1,9 +1,9 @@
 //
 //  ShelfThirdViewController.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦鑫 on 13-4-11.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-4-11.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "SqliteService.h"
@@ -91,8 +91,6 @@ NSUInteger numberOfPages;
  */
 -(void)addExhibition:(Exhibition *)addExhibition
 {
-    [self viewWillAppear:YES];
-    
     SqliteService *sqlService = [[SqliteService alloc] init];
     if ([sqlService insertToDB:addExhibition]) {
         NSString *soundFilePath = [[NSBundle mainBundle] pathForResource: @"download_complete" ofType: @"wav"];

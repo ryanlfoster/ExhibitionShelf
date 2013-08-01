@@ -1,9 +1,9 @@
 //
 //  ShelfFirstViewController.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦鑫 on 13-3-20.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-3-20.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "ShelfFirstViewController.h"
@@ -191,8 +191,8 @@ NSUInteger numberOfPages;
     [self.view addSubview:_containerView];
     //page view
     _pageControl.backgroundColor = [UIColor clearColor];
-    [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"imagePageStateNormal.png"]];
-    [_pageControl setImagePageStateHightlighted:[UIImage imageNamed:@"imagePageStateHighly.png"]];
+    [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"image_page_state_normal.png"]];
+    [_pageControl setImagePageStateHightlighted:[UIImage imageNamed:@"image_page_state_highly.png"]];
     _pageControl.numberOfPages = numberOfPages;
     _pageControl.currentPage = 0;
     _pageControl.userInteractionEnabled = NO;
@@ -452,7 +452,7 @@ NSUInteger numberOfPages;
     NSArray *subView = _pageControl.subviews;
     for(int i = 0; i < [subView count]; i++){
         UIImageView *dot = [subView objectAtIndex:i];
-        dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"imagePageStateHighly.png"] : [UIImage imageNamed:@"imagePageStateNormal.png"]);
+        dot.image = (_pageControl.currentPage == i ? [UIImage imageNamed:@"image_page_state_highly.png"] : [UIImage imageNamed:@"image_page_state_normal.png"]);
     }
     
     if (_pageControl.currentPage == 0) {

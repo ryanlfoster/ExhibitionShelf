@@ -53,9 +53,10 @@
 					<object class="IBUIButton" id="3630884">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 306}, {35, 36}}</string>
+						<string key="NSFrame">{{20, 306}, {35, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="766645861"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -75,7 +76,7 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">arrowleft.png</string>
+							<string key="NSResourceName">arrow_left.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="324518948">
 							<int key="type">2</int>
@@ -93,6 +94,7 @@
 						<string key="NSFrame">{{969, 307}, {35, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="79935467"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -106,7 +108,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="675387135"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">arrowright.png</string>
+							<string key="NSResourceName">arrow_right.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="324518948"/>
 						<reference key="IBUIFont" ref="67886265"/>
@@ -115,7 +117,7 @@
 				<string key="NSFrame">{{0, 20}, {1024, 748}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="79935467"/>
+				<reference key="NSNextKeyView" ref="3630884"/>
 				<reference key="IBUIBackgroundColor" ref="65739430"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>
@@ -223,7 +225,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">68</int>
+			<int key="maxID">72</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -277,8 +279,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="arrowleft.png">{35, 35}</string>
-			<string key="arrowright.png">{35, 35}</string>
+			<string key="arrow_left.png">{70, 70}</string>
+			<string key="arrow_right.png">{70, 70}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

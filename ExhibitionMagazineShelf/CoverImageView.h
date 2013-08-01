@@ -1,6 +1,6 @@
 //
 //  CoverImageView.h
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
 //  Created by Today Cyber on 13-7-12.
 //  Copyright (c) 2013年 TodaySybor. All rights reserved.

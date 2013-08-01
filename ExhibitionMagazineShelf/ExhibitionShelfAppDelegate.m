@@ -1,16 +1,16 @@
 //
-//  ShelfAppDelegate.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelfAppDelegate.m
+//  ExhibitionShelf
 //
-//  Created by Today Sybor on 13-3-20.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-3-20.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
-#import "ShelfAppDelegate.h"
 #import "Reachability.h"
+#import "ExhibitionShelfAppDelegate.h"
 #import "ExhibitionShelfViewController.h"
 
-@implementation ShelfAppDelegate
+@implementation ExhibitionShelfAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

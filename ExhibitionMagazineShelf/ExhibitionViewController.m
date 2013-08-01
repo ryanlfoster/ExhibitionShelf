@@ -1,9 +1,9 @@
 //
 //  ExhibitionViewController.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦鑫 on 13-3-29.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-3-29.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "ExhibitionViewController.h"
@@ -58,7 +58,7 @@
     
     [self.view addSubview:_navigationBar];
     
-    _backButton = [[UIButton alloc] initWithFrame:CGRectMake(45.0f, 10.0f, 29.0f, 29.0f)];
+    _backButton = [[UIButton alloc] initWithFrame:CGRectMake(45.0f, (43 - 20) / 2.0f, 33.0f, 20.0f)];
     [_backButton setImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backOnClick) forControlEvents:UIControlEventAllEvents];
     [_navigationBar addSubview:_backButton];

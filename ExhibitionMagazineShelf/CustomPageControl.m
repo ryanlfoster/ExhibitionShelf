@@ -1,9 +1,9 @@
 //
 //  CustomPageControl.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦鑫 on 13-5-22.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-5-22.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "CustomPageControl.h"

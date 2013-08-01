@@ -1,9 +1,9 @@
 //
 //  ThirdCoverView.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by秦鑫 on 13-4-15.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-4-15.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "ThirdCoverView.h"
@@ -25,12 +25,12 @@
         self.frame = CGRectMake(85, 0, 222, 266);
         
         _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
-        _coverImageViewFrameView.image = [UIImage imageNamed:@"imagelayout.png"];
+        _coverImageViewFrameView.image = [UIImage imageNamed:@"image_layout.png"];
         
         _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 212, 194)];
         
         _playImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
-        _playImageView.image = [UIImage imageNamed:@"playImageView.png"];
+        _playImageView.image = [UIImage imageNamed:@"play_frame.png"];
         _playImageView.userInteractionEnabled = YES;
         [_playImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playExhibition:)]];
         

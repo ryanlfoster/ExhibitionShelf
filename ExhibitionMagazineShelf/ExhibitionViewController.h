@@ -1,9 +1,9 @@
 //
 //  ExhibitionViewController.h
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦鑫 on 13-3-29.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-3-29.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 @interface ExhibitionViewController : UIViewController<UIWebViewDelegate>

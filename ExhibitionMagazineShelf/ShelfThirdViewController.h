@@ -1,9 +1,9 @@
 //
 //  ShelfThirdViewController.h
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦鑫 on 13-4-11.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-4-11.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "ExhibitionViewController.h"

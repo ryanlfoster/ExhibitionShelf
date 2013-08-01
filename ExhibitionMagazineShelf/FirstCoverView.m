@@ -1,9 +1,9 @@
 //
 //  FirstCoverView.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦鑫 on 13-4-3.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-4-3.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "FirstCoverView.h"
@@ -20,14 +20,6 @@
 @synthesize changeLocationBriefUILable = _changeLocationBriefUILable;
 @synthesize progressBar = _progressBar;
 
-#pragma mark -init
-/**********************************************************
- 函数名称：- (id)initWithFrame:(CGRect)frame
- 函数描述：初始化view
- 输入参数：(CGRect)frame ：view 框架
- 输出参数：n/a
- 返回值：void
- **********************************************************/
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -36,7 +28,7 @@
         self.frame = CGRectMake(85, 0, 222, 266);
         
         _coverImageViewFrameView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
-        _coverImageViewFrameView.image = [UIImage imageNamed:@"imagelayout.png"];
+        _coverImageViewFrameView.image = [UIImage imageNamed:@"image_layout.png"];
         
         _coverImageView = [[CoverImageView alloc] initWithFrame:CGRectMake(85 + 4, 0 + 4, 212, 194)];
         _coverImageView.clipsToBounds=YES;
@@ -58,7 +50,7 @@
         }
         
         _playImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85, 0, 220, 202)];
-        _playImageView.image = [UIImage imageNamed:@"playImageView.png"];
+        _playImageView.image = [UIImage imageNamed:@"play_frame.png"];
         _playImageView.alpha = 0.0f;
         _playImageView.userInteractionEnabled = YES;
         [_playImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickPlayExhibition:)]];

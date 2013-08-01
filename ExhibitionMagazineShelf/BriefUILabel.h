@@ -1,9 +1,9 @@
 //
 //  BriefUILabel.h
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by Today Cyber on 13-7-15.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-7-15.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

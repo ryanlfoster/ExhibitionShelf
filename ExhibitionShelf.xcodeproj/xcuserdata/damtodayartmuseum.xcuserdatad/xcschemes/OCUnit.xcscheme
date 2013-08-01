@@ -19,7 +19,7 @@
                BlueprintIdentifier = "3C0489E51741E1FA00C28540"
                BuildableName = "OCUnit.octest"
                BlueprintName = "OCUnit"
-               ReferencedContainer = "container:ExhibitionMagazineShelf.xcodeproj">
+               ReferencedContainer = "container:ExhibitionShelf.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -32,7 +32,6 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enableOpenGLFrameCaptureMode = "0"
       allowLocationSimulation = "YES">
       <AdditionalOptions>
       </AdditionalOptions>

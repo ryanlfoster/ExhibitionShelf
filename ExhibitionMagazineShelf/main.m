@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ShelfAppDelegate.h"
+#import "ExhibitionShelfAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([ShelfAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([ExhibitionShelfAppDelegate class]));
     }
 }

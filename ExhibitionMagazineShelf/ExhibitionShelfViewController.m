@@ -1,9 +1,9 @@
 //
 //  ExhibitionShelfViewController.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by Today Cyber on 13-7-11.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-7-11.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "ExhibitionShelfViewController.h"
@@ -104,6 +104,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+/**
+ *	switch view controller
+ *
+ *	@param	vc	<#vc description#>
+ */
 -(void)switchViewController:(UIViewController *)vc
 {
     NSLog(@"self.view.bounds.size.width == %f",self.view.bounds.size.width);

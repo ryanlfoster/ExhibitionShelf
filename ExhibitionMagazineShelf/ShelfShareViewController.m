@@ -1,9 +1,9 @@
 //
 //  ShelfShareViewController.m
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by Today Cyber on 13-7-31.
-//  Copyright (c) 2013年 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 13-7-31.
+//  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
 #import "ShareView.h"
@@ -58,10 +58,10 @@
     
     NSLog(@"_listData count == %d",[_listData count]);
     
-    if([_listData count] % 6 == 0){
-        numberOfPages = [_listData count] / 6;
+    if([_listData count] % 3 == 0){
+        numberOfPages = [_listData count] / 3;
     }else{
-        numberOfPages = 1 + ([_listData count] / 6);
+        numberOfPages = 1 + ([_listData count] / 3);
     }
     
     [self loadScrollViewData];
@@ -77,7 +77,7 @@
         [_containerView removeFromSuperview];
     }
     
-    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 550)];
+    _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width)];
     _containerView.pagingEnabled = YES;
     _containerView.contentSize = CGSizeMake(_containerView.frame.size.width * numberOfPages, 0);
     _containerView.showsHorizontalScrollIndicator = NO;
@@ -96,9 +96,13 @@
         cover.briefLabel.subTitleLabel.text = anExhibition.subTitle;
         cover.briefLabel.dateLabel.text = anExhibition.date;
         
+        CGFloat edge = 0.0f;
+        if (i >= 3) {
+            edge = 89.5f;
+        }
+        
         CGRect coverFrame = cover.frame;
-        NSLog(@"CGRectGetWidth(coverFrame) == %f",CGRectGetWidth(coverFrame));
-        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * i + 100 * i, CGRectGetHeight(coverFrame));
+        coverFrame.origin = CGPointMake(CGRectGetWidth(coverFrame) * i + 89.5f * i + edge * (i / 3), 0);
         cover.frame = coverFrame;
         cover.backgroundColor = [UIColor clearColor];
         [_containerView addSubview:cover];

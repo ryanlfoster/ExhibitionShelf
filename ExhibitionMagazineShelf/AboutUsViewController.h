@@ -1,9 +1,9 @@
 //
 //  AboutUsViewController.h
-//  ExhibitionMagazineShelf
+//  ExhibitionShelf
 //
-//  Created by 秦 鑫 on 5/26/13.
-//  Copyright (c) 2013 TodaySybor. All rights reserved.
+//  Created by Qin Xin on 5/26/13.
+//  Copyright (c) 2013 Today Cyber. All rights reserved.
 //
 
 #import "CustomParentsViewController.h"
