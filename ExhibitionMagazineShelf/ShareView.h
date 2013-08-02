@@ -16,5 +16,7 @@
 @property (nonatomic, strong) UIImageView *sharePanel;
 @property (nonatomic, strong) UILabel *panelTip;
 @property (nonatomic, strong) UILabel *panelTipExtend;
+@property (nonatomic, strong) UILabel *panelTipAdd;
+@property (nonatomic, strong) UIImageView *shareButton;
 
 @end

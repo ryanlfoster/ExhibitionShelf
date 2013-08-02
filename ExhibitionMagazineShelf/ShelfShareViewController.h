@@ -8,6 +8,6 @@
 
 #import "CustomParentsViewController.h"
 
-@interface ShelfShareViewController : CustomParentsViewController<UIScrollViewDelegate>
+@interface ShelfShareViewController : CustomParentsViewController<UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
 @end

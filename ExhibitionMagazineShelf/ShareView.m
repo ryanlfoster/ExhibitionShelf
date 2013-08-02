@@ -15,6 +15,8 @@
 @synthesize sharePanel = _sharePanel;
 @synthesize panelTip = _panelTip;
 @synthesize panelTipExtend = _panelTipExtend;
+@synthesize panelTipAdd = _panelTipAdd;
+@synthesize shareButton = _shareButton;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -55,12 +57,25 @@
         _panelTipExtend.backgroundColor = [UIColor clearColor];
         _panelTipExtend.text = @"感谢分享您的评论。";
         
+        _panelTipAdd = [[UILabel alloc] initWithFrame:CGRectMake(89.5 + 16, 70 + 202 + 40 + 36 + 4 * 36 - 8, 200, 12)];
+        _panelTipAdd.font = [UIFont fontWithName:@"FZLTHJW--GB1-0" size:12.0f];
+        _panelTipAdd.textColor=[UIColor grayColor];
+        _panelTipAdd.backgroundColor = [UIColor clearColor];
+        _panelTipAdd.textAlignment = UITextAlignmentCenter;
+        _panelTipAdd.text = @"评论请不要超过120字。";
+        
+        _shareButton = [[UIImageView alloc] initWithFrame:CGRectMake(89.5 + ((220 / 2) - (18 / 2)), 70 + 202 + 40 + 36 + 4 * 36 + 18, 36 / 2, 57 / 2)];
+        _shareButton.image = [UIImage imageNamed:@"share_button.png"];
+        
+        
         [self addSubview:_coverImageView];
         [self addSubview:_shareFrame];
         [self addSubview:_briefLabel];
         [self addSubview:_sharePanel];
         [self addSubview:_panelTip];
         [self addSubview:_panelTipExtend];
+        [self addSubview:_panelTipAdd];
+        [self addSubview:_shareButton];
         
     }
     return self;

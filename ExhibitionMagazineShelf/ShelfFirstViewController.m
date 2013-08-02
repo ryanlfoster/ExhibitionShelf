@@ -70,6 +70,7 @@ NSUInteger numberOfPages;
     [super viewDidLoad];
     
     _leftButton.alpha = 0.0f;
+    _rightButton.alpha = 0.0f;
 
     /***********************************background***************************************/
     //load background
@@ -100,7 +101,7 @@ NSUInteger numberOfPages;
     
     /***********************************Register NSTimer********************************/
     //timer progressHUD
-    _timerProgressHUD = [NSTimer scheduledTimerWithTimeInterval:6.0 target:self selector:@selector(concealProgressHUD) userInfo:nil repeats:NO];
+    _timerProgressHUD = [NSTimer scheduledTimerWithTimeInterval:8.0 target:self selector:@selector(concealProgressHUD) userInfo:nil repeats:NO];
 
 }
 
@@ -164,6 +165,10 @@ NSUInteger numberOfPages;
         }
         NSLog(@"numberOfPages == %d",numberOfPages);
         
+        if(numberOfPages > 6){
+            _rightButton.alpha = 1.0f;
+        }
+        
         //back main thread
         [self performSelectorOnMainThread:@selector(updateShelf) withObject:_containerView waitUntilDone:NO];
         
@@ -189,6 +194,7 @@ NSUInteger numberOfPages;
     _containerView.delegate = self;
     _containerView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_containerView];
+    
     //page view
     _pageControl.backgroundColor = [UIColor clearColor];
     [_pageControl setImagePageStateNormal:[UIImage imageNamed:@"image_page_state_normal.png"]];
