@@ -17,6 +17,8 @@ NSUInteger numberOfPages;
 @interface ShelfThirdViewController()
 
 @property (nonatomic, strong) UIScrollView *containerView;
+@property (nonatomic, strong) UIImageView *leftCrossImageView;
+@property (nonatomic, strong) UIImageView *rightCrossImageView;
 @property (nonatomic, strong) NSArray *listData;
 @property (nonatomic, weak) UIView *alertViewThird;
 @property (nonatomic, copy) NSString *alertString;
@@ -28,6 +30,8 @@ NSUInteger numberOfPages;
 
 @implementation ShelfThirdViewController
 @synthesize containerView = _containerView;
+@synthesize leftCrossImageView = _leftCrossImageView;
+@synthesize rightCrossImageView = _rightCrossImageView;
 @synthesize listData = _listData;
 @synthesize alertString = _alertString;
 @synthesize alertViewThird = _alertViewThird;
@@ -55,6 +59,16 @@ NSUInteger numberOfPages;
     UIImage *backgroundImage = [UIImage imageNamed:@"exhibitiondisplay_background.png"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
+    
+    _leftCrossImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 222 + 96 / 2 - 30 / 2, 670 / 2 - 36, 30, 30)];
+    _leftCrossImageView.image = [UIImage imageNamed:@"cross_image.png"];
+    [self.view addSubview:_leftCrossImageView];
+    _leftCrossImageView.alpha = 0.0f;
+    
+    _rightCrossImageView = [[UIImageView alloc] initWithFrame:CGRectMake(85 + 222 + 96 + 222 + 96 / 2 - 30 / 2, 670 / 2 - 36, 30, 30)];
+    _rightCrossImageView.image = [UIImage imageNamed:@"cross_image.png"];
+    [self.view addSubview:_rightCrossImageView];
+    _rightCrossImageView.alpha = 0.0f;
 
 }
 
@@ -70,6 +84,13 @@ NSUInteger numberOfPages;
     }else{
         numberOfPages = 1 + ([_listData count] / 6);
     }
+    
+    if([_listData count] > 1){
+        _leftCrossImageView.alpha = 1.0f;
+    }else _leftCrossImageView.alpha = 0.0f;
+    if([_listData count] > 2){
+        _rightCrossImageView.alpha = 1.0f;
+    }else _rightCrossImageView.alpha = 0.0f;
     
     [self loadScrollViewData];
 }

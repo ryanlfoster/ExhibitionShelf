@@ -22,9 +22,11 @@ NSUInteger numberOfPages;
 @property (strong, nonatomic) ExhibitionStore *exhibitionStore;
 @property (strong, nonatomic) PlaySoundTools *sound;
 @property (weak, nonatomic) Exhibition *readyForDeleteExhibition;
-@property (strong, nonatomic) MBProgressHUD *progressHUD;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (strong, nonatomic) UIScrollView *containerView;
 @property (strong, nonatomic) IBOutlet CustomPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UIImageView *leftCrossImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *rightCrossImageView;
 @property (weak, nonatomic) NSTimer *timerReadyDownload;
 @property (weak, nonatomic) NSTimer *timerPlay;
 @property (weak, nonatomic) NSTimer *timerProgressHUD;
@@ -46,7 +48,7 @@ NSUInteger numberOfPages;
 @synthesize containerView = _containerView;
 @synthesize pageControl = _pageControl;
 @synthesize exhibitionStore = _exhibitionStore;
-@synthesize progressHUD = _progressHUD;
+@synthesize spinner = _spinner;
 @synthesize sound = _sound;
 @synthesize timerReadyDownload = _timerReadyDownload;
 @synthesize timerPlay = _timerPlay;
@@ -71,6 +73,9 @@ NSUInteger numberOfPages;
     
     _leftButton.alpha = 0.0f;
     _rightButton.alpha = 0.0f;
+    
+    _leftCrossImageView.alpha = 0.0f;
+    _rightCrossImageView.alpha = 0.0f;
 
     /***********************************background***************************************/
     //load background
@@ -78,15 +83,7 @@ NSUInteger numberOfPages;
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.view.backgroundColor = backgroundColor;
     
-    /***********************************MBProgressHUD************************************/
-    //load progressHUD
-    _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:_progressHUD];
-    [self.view bringSubviewToFront:_progressHUD];
-    _progressHUD.delegate = self;
-    self.progressHUD.labelText = @"loading...";
-    self.progressHUD.alpha = 0.5f;
-    [_progressHUD show:YES];
+    [_spinner startAnimating];
     
     /******************************Register NSNotificationCenter*************************/
     //register a notificaiton to control show shelf
@@ -111,6 +108,9 @@ NSUInteger numberOfPages;
     [self setPageControl:nil];
     [self setLeftButton:nil];
     [self setRightButton:nil];
+    [self setSpinner:nil];
+    [self setLeftCrossImageView:nil];
+    [self setRightCrossImageView:nil];
     [super viewDidUnload];
 }
 
@@ -138,13 +138,8 @@ NSUInteger numberOfPages;
  */
 -(void)concealProgressHUD
 {
-    if(_progressHUD){
-        [_progressHUD removeFromSuperview];
-        _progressHUD = nil;
-        
-        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Tips" message:@"Ooops!The network connection was slowly..." delegate:nil cancelButtonTitle:@"I Know" otherButtonTitles:nil];
-        [alerView show];
-    }
+    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Tips" message:@"Ooops!The network connection was slowly..." delegate:nil cancelButtonTitle:@"I Know" otherButtonTitles:nil];
+    [alerView show];
 }
 
 /**
@@ -180,10 +175,9 @@ NSUInteger numberOfPages;
  */
 -(void)updateShelf
 {
-    if(_progressHUD){
-        [_progressHUD removeFromSuperview];
-        _progressHUD = nil;
-    }
+    [_spinner stopAnimating];
+    _leftCrossImageView.alpha = 1.0f;
+    _rightCrossImageView.alpha = 1.0f;
     
     //scroll view
     _containerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, 266 * 2 + 36)];
@@ -480,19 +474,6 @@ NSUInteger numberOfPages;
         return YES;
     }
     return NO;
-}
-
-#pragma mark -MBProgressHUDDelegate methods
-/**
- *	progressHUD remove
- *
- *	@param	hud	self.progressHUD
- */
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-    NSLog(@"Hud: %@", hud);
-    // Remove HUD from screen when the HUD was hidded
-    [_progressHUD removeFromSuperview];
-    _progressHUD = nil;
 }
 
 #pragma mark -KVO methods

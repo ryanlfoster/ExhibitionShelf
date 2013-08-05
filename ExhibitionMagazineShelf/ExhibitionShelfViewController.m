@@ -12,7 +12,7 @@
 #import "ShelfFirstViewController.h"
 #import "ShelfThirdViewController.h"
 #import "AboutUsViewController.h"
-#import "ShelfShareViewController.h"
+//#import "ShelfShareViewController.h"
 
 @interface ExhibitionShelfViewController()
 
@@ -53,12 +53,12 @@
     tabBarButtonAVC.highlightedIcon = [UIImage imageNamed:@"tabbar_aboutus_highly.png"];
     tabBarButtonAVC.viewController = avc;
     
-    ShelfShareViewController *svc = [[ShelfShareViewController alloc] init];
-    CustomTabBarButton *tabBarButtonSVC = [[CustomTabBarButton alloc] initWithIcon:[UIImage imageNamed:@"tabbar_share.png"]];
-    tabBarButtonSVC.highlightedIcon = [UIImage imageNamed:@"tabbar_share_highly.png"];
-    tabBarButtonSVC.viewController = svc;
+//    ShelfShareViewController *svc = [[ShelfShareViewController alloc] init];
+//    CustomTabBarButton *tabBarButtonSVC = [[CustomTabBarButton alloc] initWithIcon:[UIImage imageNamed:@"tabbar_share.png"]];
+//    tabBarButtonSVC.highlightedIcon = [UIImage imageNamed:@"tabbar_share_highly.png"];
+//    tabBarButtonSVC.viewController = svc;
     
-    NSArray *array = [NSArray arrayWithObjects:tabBarButtonEVC,tabBarButtonMVC,tabBarButtonSVC,tabBarButtonAVC,nil];
+    NSArray *array = [NSArray arrayWithObjects:tabBarButtonEVC,tabBarButtonMVC,tabBarButtonAVC,nil];//tabBarButtonSVC
     _customTabBar = [[CustomTabBar alloc] initWithItems:array];
     _customTabBar.delegate = self;
     [self.view addSubview:_customTabBar];

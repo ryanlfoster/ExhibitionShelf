@@ -6,7 +6,6 @@
 //  Copyright (c) 2013年 Today Cyber. All rights reserved.
 //
 
-#import "MBProgressHUD.h"
 #import "CustomParentsViewController.h"
 
 @class FirstCoverView;
@@ -41,6 +40,6 @@
 
 @end
 
-@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol,ShelfFirstViewControllerClickPlayExhibitionProtocol,MBProgressHUDDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate>
+@interface ShelfFirstViewController : CustomParentsViewController<ShelfFirstViewControllerClickExhibitionProtocol,ShelfFirstViewControllerClickDownloadExhibitionProtocol,ShelfFirstViewControllerClickCancelDownloadExhibitionProtocol,ShelfFirstViewControllerClickPlayExhibitionProtocol,UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
 @end
